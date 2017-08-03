@@ -1,0 +1,30 @@
+{
+    "name": "Valine",
+    "version": "1.0.0",
+    "description": "A simple comment system based on Leancloud.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rimraf dist && webpack --watch",
+        "dev": "node webpack.dev.server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xcss/Valine.git"
+    },
+    "keywords": [
+        "Comment",
+        "Valine"
+    ],
+    "author": "xCss",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/xcss/Valine/issues"
+    },
+    "homepage": "https://github.com/xcss/Valine#readme",
+    "dependencies": {
+        "rimraf": "^2.6.1",
+        "webpack": "^3.4.1",
+        "webpack-dev-server": "^2.6.1"
+    }
+}
