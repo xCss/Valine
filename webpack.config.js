@@ -1,19 +1,66 @@
-var path = require('path');
 var webpack = require('webpack');
-module.exports = {
-    // 入口文件
-    entry: [
-        './src/js/index.js',
-        'webpack/hot/dev-server', // 调用热重载hot
-        'webpack-dev-server/client?http://localhost:8080' // 添加webpack-dev-server客户端
-    ],
-    output: {
-        path: path.join(__dirname, 'dist'), // 指定打包后的目录
-        publicPath: 'dist', // 指定资源文件引用的目录
-        filename: 'bundle.js' // 指定打包为一个文件 bundle.js
-    },
-    plugins: [
-        // 全局开启热代码替换 
-        new webpack.HotModuleReplacementPlugin()
-    ]
+var path = require('path');
+var autoprefixer = require('autoprefixer');
+
+var libraryName = 'Valine';
+var env = process.env.WEBPACK_ENV;
+var ROOT_PATH = path.resolve(__dirname);
+var APP_PATH = path.resolve(ROOT_PATH, 'src');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
+
+var plugins = [];
+if (env !== 'dev') {
+    plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true
+        })
+    );
 }
+
+module.exports = {
+    entry: './src/' + libraryName + '.js',
+
+    output: {
+        path: BUILD_PATH,
+        filename: libraryName + '.min.js',
+        library: libraryName,
+        libraryTarget: 'umd',
+        umdNamedDefine: true
+    },
+
+    devtool: 'source-map',
+
+    devServer: {
+        publicPath: "/dist/",
+        inline: true,
+        port: 8088
+    },
+
+    module: {
+        rules: [{
+                test: /\.js$/,
+                loader: 'babel-loader',
+                include: APP_PATH,
+                options: {
+                    presets: ['es2015']
+                }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ],
+                include: APP_PATH
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader?limit=40000'
+            }
+        ]
+    },
+
+    plugins: plugins
+};
