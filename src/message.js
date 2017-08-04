@@ -1,1 +1,0 @@
-module.exports = { hi: '你是谁', event: 'HEEEExxEEEEEEEEEEEEEx' };
