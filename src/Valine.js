@@ -1,3 +1,4 @@
+require('./Valine.scss');
 class Valine {
     /**
      * Valine constructor function
