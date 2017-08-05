@@ -76,15 +76,21 @@ class Valine {
         query.find().then(rets => {
             _vlist.innerHTML = '';
             let _temp = [];
-            let ret = rets.results || [];
+            let ret = rets.get('results') || [];
             console.log(rets);
+            console.log(ret);
             if (ret.length) {
                 ret.results.forEach(item => {
                     let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.get("id")}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(item.get("comment"))}</div></li>`;
                     _temp.push(_vcard);
                 });
                 let _vlist = _root.element.querySelector('.vlist');
-                _vlist.insertBefore(_temp.join(''), _vlist);
+                let _vc = _vlist.querySelectorAll('.vcard').length;
+                if (_vc) {
+                    _vlist.insertBefore(_temp.join(''), _vlist);
+                } else {
+                    _vlist.appendChild(_temp.join(''));
+                }
                 console.log(_temp.join(''))
             } else {
                 _root.loading.hide();
@@ -156,7 +162,13 @@ class Valine {
                 _root.loading.hide();
                 let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${ret.get("id")}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div></li>`;
                 let _vlist = _root.element.querySelector('.vlist');
-                _vlist.insertBefore(_vcard, _vlist);
+                let _vc = _vlist.querySelectorAll('.vcard').length;
+                if (_vc) {
+                    _vlist.insertBefore(_vcard, _vlist);
+                } else {
+                    _vlist.appendChild(_vcard);
+                }
+
             }).catch(ex => {
                 console.log(ex)
             })
