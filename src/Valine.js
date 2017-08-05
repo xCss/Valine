@@ -6,7 +6,9 @@ const defaultComment = {
     nick: 'unknow',
     link: '',
     ua: navigator.userAgent,
-    url: location.pathname
+    url: location.pathname,
+    pin: 0,
+    like: 0
 };
 
 class Valine {
@@ -80,7 +82,7 @@ class Valine {
             let _temp = [];
             if (ret.length) {
                 ret.forEach(item => {
-                    let _vcard = `<li class="vcard"><div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div></li>`;
+                    let _vcard = `<li class="vcard" data-id="${item.id}"><div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div></li>`;
                     _temp.push(_vcard);
                 });
                 _root.element.querySelector('.vlist').innerHTML = _temp.join('');
@@ -150,7 +152,8 @@ class Valine {
                 _root.loading.hide();
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
-                _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" id="${ret.id}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div>`;
+                _vcard.setAttribute('data-id', ret.id);
+                _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" data-id="${ret.id}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vli = _vlist.querySelectorAll('li');
                 if (_vli.length) {
