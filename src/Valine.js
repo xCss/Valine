@@ -67,7 +67,7 @@ class Valine {
         let _vlist = _root.element.querySelector('.vlist');
         _root.nodata = {
             show() {
-                _vlist.innerHTML = _nodata;
+                _vlist.appendChild(_nodata);
             },
             hide() {
                 _vlist.removeChild(_nodata);
