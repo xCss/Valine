@@ -76,11 +76,11 @@ class Valine {
         query.find().then(rets => {
             _vlist.innerHTML = '';
             let _temp = [];
-            let ret = rets.get('results') || [];
+            let ret = rets.results || [];
             console.log(rets);
             console.log(ret);
             if (ret.length) {
-                ret.results.forEach(item => {
+                ret.forEach(item => {
                     let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.get("id")}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(item.get("comment"))}</div></li>`;
                     _temp.push(_vcard);
                 });
