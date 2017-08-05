@@ -75,6 +75,7 @@ class Valine {
         query.equalTo('url', location.pathname);
         query.find().then(rets => {
             _vlist.innerHTML = '';
+            rets = JSON.parse(rets);
             let _temp = [];
             let ret = rets.results || [];
             console.log(rets);
