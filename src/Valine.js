@@ -73,12 +73,9 @@ class Valine {
         _root.loading.show();
         let query = new _root._av.Query('Comment');
         query.equalTo('url', location.pathname);
-        query.find().then(rets => {
+        query.find().then(ret => {
             _vlist.innerHTML = '';
-            rets = JSON.parse(rets);
             let _temp = [];
-            let ret = rets.results || [];
-            console.log(rets);
             console.log(ret);
             if (ret.length) {
                 ret.forEach(item => {
