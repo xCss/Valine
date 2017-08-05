@@ -73,17 +73,16 @@ class Valine {
         _root.loading.show();
         let query = new _root._av.Query('Comment');
         query.equalTo('url', location.pathname);
+        query.descending('createdAt');
         query.find().then(ret => {
             _root.loading.hide();
             _vlist.innerHTML = '';
             let _temp = [];
-            console.log(ret);
             if (ret.length) {
                 ret.forEach(item => {
                     let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div></li>`;
                     _temp.push(_vcard);
                 });
-                console.log(_temp.join(''))
                 _root.element.querySelector('.vlist').innerHTML = _temp.join('');
             } else {
                 _root.loading.hide();
@@ -155,9 +154,9 @@ class Valine {
                 _root.loading.hide();
                 let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${ret.get("id")}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div></li>`;
                 let _vlist = _root.element.querySelector('.vlist');
-                let _vc = _vlist.querySelectorAll('.vcard').length;
-                if (_vc) {
-                    _vlist.insertBefore(_vcard, _vlist);
+                let _vli = _vlist.querySelectorAll('li');
+                if (_vli.length) {
+                    _vlist.insertBefore(_vcard, _vli[0]);
                 } else {
                     _vlist.appendChild(_vcard);
                 }
