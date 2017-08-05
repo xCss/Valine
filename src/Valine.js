@@ -82,6 +82,7 @@ class Valine {
                     let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.get("id")}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(item.get("comment"))}</div></li>`;
                     _temp.push(_vcard);
                 });
+                console.log(_temp.join(''))
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vc = _vlist.querySelectorAll('.vcard').length;
                 if (_vc) {
@@ -89,7 +90,6 @@ class Valine {
                 } else {
                     _vlist.appendChild(_temp.join(''));
                 }
-                console.log(_temp.join(''))
             } else {
                 _root.loading.hide();
                 _root.nodata.show();
