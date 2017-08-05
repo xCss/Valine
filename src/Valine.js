@@ -153,7 +153,6 @@ class Valine {
             comment.set('url', defaultComment.url);
             comment.set('pin', defaultComment.pin);
             comment.set('like', defaultComment.like);
-            console.log(defaultComment);
             comment.save().then((ret) => {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
