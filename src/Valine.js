@@ -30,8 +30,8 @@ class Valine {
      * @param {Object} option 
      */
     init(option) {
-        let av = option.av;
         let _root = this;
+        let av = option.av || _root._av;
         if (av && av.version) {
             av.init({
                 appId: option.app_id || option.appId,
@@ -69,22 +69,26 @@ class Valine {
                 vloading.innerHTML = '';
             }
         }
+
         _root.loading.show();
         let query = new _root._av.Query('Comment');
         query.equalTo('url', location.pathname);
-        query.find().then(ret => {
+        query.find().then(rets => {
             _vlist.innerHTML = '';
             let _temp = [];
-            ret.forEach(item => {
-                let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.id}" class="vat">${item.nick}</a><span class="vtime">${item.createdAt}</span></div><div class="vcomment">${HtmlUtil.decode(item.comment)}</div></li>`;
-                _temp.push(_vcard);
-            });
-            let _vlist = _root.element.querySelector('.vlist');
-            _vlist.insertBefore(_temp.join(''), _vlist);
-        }).catch(ex => {
-            _root.loading.hide();
-            _root.nodata.show();
-        })
+            let ret = rets.results || [];
+            if (ret.length) {
+                ret.results.forEach(item => {
+                    let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.id}" class="vat">${item.nick}</a><span class="vtime">${item.createdAt}</span></div><div class="vcomment">${HtmlUtil.decode(item.comment)}</div></li>`;
+                    _temp.push(_vcard);
+                });
+                let _vlist = _root.element.querySelector('.vlist');
+                _vlist.insertBefore(_temp.join(''), _vlist);
+            } else {
+                _root.loading.hide();
+                _root.nodata.show();
+            }
+        }).catch(ex => {})
     }
 
     /**
@@ -144,7 +148,7 @@ class Valine {
                 console.log(ret)
                 _root.reset();
                 _root.loading.hide();
-                let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${ret.id}" class="vat">${ret.nick}</a><span class="vtime">${ret.createdAt}</span></div><div class="vcomment">${HtmlUtil.decode(ret.comment)}</div></li>`;
+                let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${ret.id}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.createdAt}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div></li>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 _vlist.insertBefore(_vcard, _vlist);
             }).catch(ex => {
