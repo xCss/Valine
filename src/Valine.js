@@ -91,7 +91,7 @@ class Valine {
                 _root.nodata.show();
             }
         }).catch(ex => {
-            console.log(ex);
+            // console.log(ex);
             _root.loading.hide();
             _root.nodata.show();
         })
@@ -130,7 +130,7 @@ class Valine {
         let vsubmit = _root.element.querySelector('.vsubmit');
         vsubmit.addEventListener('click', function(e) {
             if (defaultComment.comment == '') {
-                console.log(inputs)
+                // console.log(inputs)
                 inputs['comment'].focus();
                 return;
             }
@@ -163,7 +163,7 @@ class Valine {
                 }
 
             }).catch(ex => {
-                console.log(ex);
+                // console.log(ex);
                 _root.loading.hide();
             })
         }, false)
