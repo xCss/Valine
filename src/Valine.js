@@ -152,7 +152,9 @@ class Valine {
                 console.log(ret)
                 _root.reset();
                 _root.loading.hide();
-                let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${ret.get("id")}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div></li>`;
+                let _vcard = document.createElement('li');
+                _vcard.setAttribute('class', 'vcard');
+                _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" id="${ret.id}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${HtmlUtil.decode(defaultComment.comment)}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vli = _vlist.querySelectorAll('li');
                 if (_vli.length) {
