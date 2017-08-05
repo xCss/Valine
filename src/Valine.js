@@ -80,7 +80,7 @@ class Valine {
             let _temp = [];
             if (ret.length) {
                 ret.forEach(item => {
-                    let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div></li>`;
+                    let _vcard = `<li class="vcard"><div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div></li>`;
                     _temp.push(_vcard);
                 });
                 _root.element.querySelector('.vlist').innerHTML = _temp.join('');
@@ -121,11 +121,8 @@ class Valine {
             for (var i in mapping) {
                 let _v = mapping[i];
                 let _el = _root.element.querySelector(`.${i}`);
-                _el.addEventListener('input', function(e) {
-                    let _temp = this;
-                    _temp.value = "";
-                    defaultComment[_v] = "";
-                }, false);
+                _el.value = "";
+                defaultComment[_v] = "";
             }
         }
         let vsubmit = _root.element.querySelector('.vsubmit');
@@ -149,7 +146,6 @@ class Valine {
             comment.set('ua', defaultComment.ua);
             comment.set('url', defaultComment.url);
             comment.save().then((ret) => {
-                console.log(ret)
                 _root.reset();
                 _root.loading.hide();
                 let _vcard = document.createElement('li');
