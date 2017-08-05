@@ -70,7 +70,9 @@ class Valine {
                 _vlist.appendChild(_nodata);
             },
             hide() {
-                _vlist.removeChild(_nodata);
+                if (_vlist.querySelector('.nodata')) {
+                    _vlist.removeChild(_nodata);
+                }
             }
         }
 
@@ -165,11 +167,9 @@ class Valine {
                 } else {
                     _vlist.appendChild(_vcard);
                 }
-                if (_vnodata) {
-                    _vlist.removeChild(_vnodata);
-                }
                 _root.reset();
                 _root.loading.hide();
+                _root.nodata.hide();
 
             }).catch(ex => {
                 // console.log(ex);
