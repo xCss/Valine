@@ -61,14 +61,16 @@ class Valine {
         };
 
         // nodata
-        let _nodata = `<li class="nodata">还没有评论哦，快来抢沙发吧!</li>`;
+        let _nodata = document.createElement('li');
+        _nodata.setAttribute('class', 'nodata');
+        _nodata.innerText = `还没有评论哦，快来抢沙发吧!`;
         let _vlist = _root.element.querySelector('.vlist');
         _root.nodata = {
             show() {
                 _vlist.innerHTML = _nodata;
             },
             hide() {
-                vloading.innerHTML = '';
+                _vlist.removeChild(_nodata);
             }
         }
 
@@ -147,6 +149,9 @@ class Valine {
             comment.set('rid', defaultComment.rid);
             comment.set('ua', defaultComment.ua);
             comment.set('url', defaultComment.url);
+            comment.set('pin', defaultComment.pin);
+            comment.set('like', defaultComment.like);
+            cnsole.log(defaultComment);
             comment.save().then((ret) => {
                 _root.reset();
                 _root.loading.hide();
@@ -156,10 +161,14 @@ class Valine {
                 _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" data-id="${ret.id}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${defaultComment.comment}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vli = _vlist.querySelectorAll('li');
+                let _vnodata = _vlist.querySelector('.nodata');
                 if (_vli.length) {
                     _vlist.insertBefore(_vcard, _vli[0]);
                 } else {
                     _vlist.appendChild(_vcard);
+                }
+                if (_vnodata) {
+                    _vlist.removeChild(_vnodata);
                 }
 
             }).catch(ex => {
