@@ -74,6 +74,7 @@ class Valine {
         let query = new _root._av.Query('Comment');
         query.equalTo('url', location.pathname);
         query.find().then(ret => {
+            _root.loading.hide();
             _vlist.innerHTML = '';
             let _temp = [];
             console.log(ret);
@@ -83,13 +84,7 @@ class Valine {
                     _temp.push(_vcard);
                 });
                 console.log(_temp.join(''))
-                let _vlist = _root.element.querySelector('.vlist');
-                let _vc = _vlist.querySelectorAll('.vcard').length;
-                if (_vc) {
-                    _vlist.insertBefore(_temp.join(''), _vlist);
-                } else {
-                    _vlist.appendChild(_temp.join(''));
-                }
+                _root.element.querySelector('.vlist').innerHTML = _temp.join('');
             } else {
                 _root.loading.hide();
                 _root.nodata.show();
