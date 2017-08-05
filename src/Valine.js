@@ -153,12 +153,10 @@ class Valine {
             comment.set('like', defaultComment.like);
             console.log(defaultComment);
             comment.save().then((ret) => {
-                _root.reset();
-                _root.loading.hide();
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" data-id="${ret.id}" class="vat">${defaultComment.nick}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${defaultComment.comment}</div>`;
+                _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vli = _vlist.querySelectorAll('li');
                 let _vnodata = _vlist.querySelector('.nodata');
@@ -170,6 +168,8 @@ class Valine {
                 if (_vnodata) {
                     _vlist.removeChild(_vnodata);
                 }
+                _root.reset();
+                _root.loading.hide();
 
             }).catch(ex => {
                 // console.log(ex);
