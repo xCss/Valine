@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: rgb(238, 238, 238);
+        }
+        
+        header {
+            background: #fff;
+        }
+        
+        a {
+            color: #dedede;
+            text-decoration: none;
+        }
+        
+        .logo {
+            display: inline-block;
+            height: 60px;
+            font-size: 24px;
+            line-height: 60px;
+            color: #4285f4;
+            vertical-align: base-line;
+        }
+        
+        .sub {
+            font-size: 12px;
+            color: #9c9c9c;
+            padding: 0 5px;
+        }
+        
+        .market {
+            background-color: #4285f4;
+            height: 398px;
+            position: absolute;
+            top: 60px;
+            width: 100%;
+            outline: none;
+            display: block;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 80%;
+        }
+        
+        .placeholder {
+            height: 76px;
+        }
+        
+        @media screen and (max-width:720px) {
+            header {
+                text-align: center;
+            }
+            .sub {
+                display: block;
+                padding-bottom: 10px;
+            }
+            .container {
+                width: 100%;
+            }
+            .placeholder,
+            .market {
+                display: none;
+            }
+        }
+        
+        .comment {
+            background: #fff;
+            padding: 20px;
+        }
+        
+        .copy {
+            line-height: 60px;
+            text-align: center;
+            font-size: 14px;
+            color: #9c9c9c;
+        }
+    </style>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="./dist/Valine.min.js"></script>
+</head>
+
+<body>
+    <div class="market"></div>
+    <header>
+        <div class="container">
+            <a href="./" class="logo">Valine</a>
+            <span class="sub">A simple comment system based on Leancloud.</span>
+        </div>
+    </header>
+    <div class="container">
+        <div class="placeholder"></div>
+        <div class="comment"></div>
+    </div>
+    <div class="copy">
+        &copy; 2017 云淡风轻
+    </div>
+    <script>
+        window.valine = new Valine({
+            av: AV,
+            app_id: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
+            app_key: 'iuneD4hXPQImdHQSRE0aOcRF',
+            el: document.querySelector('.comment')
+        })
+    </script>
+</body>
+
+</html>
