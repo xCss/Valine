@@ -163,7 +163,8 @@ class Valine {
                 }
 
             }).catch(ex => {
-                console.log(ex)
+                console.log(ex);
+                _root.loading.hide();
             })
         }, false)
     }
