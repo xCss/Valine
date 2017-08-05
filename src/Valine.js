@@ -77,6 +77,7 @@ class Valine {
             _vlist.innerHTML = '';
             let _temp = [];
             let ret = rets.results || [];
+            console.log(ret);
             if (ret.length) {
                 ret.results.forEach(item => {
                     let _vcard = `<li class="vcard"><div class="vhead"><a href="#" target="_blank" id="${item.id}" class="vat">${item.nick}</a><span class="vtime">${item.createdAt}</span></div><div class="vcomment">${HtmlUtil.decode(item.comment)}</div></li>`;
@@ -88,7 +89,9 @@ class Valine {
                 _root.loading.hide();
                 _root.nodata.show();
             }
-        }).catch(ex => {})
+        }).catch(ex => {
+
+        })
     }
 
     /**
