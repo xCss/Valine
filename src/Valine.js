@@ -106,6 +106,7 @@ class Valine {
             _root.loading.hide();
             let _temp = [];
             if (ret.length) {
+                _root.nodata.hide();
                 ret.forEach(item => {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
