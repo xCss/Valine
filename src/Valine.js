@@ -113,8 +113,8 @@ class Valine {
                     _vcard.setAttribute('data-id', ret.id);
                     _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
-                    let _vli = _vlist.querySelectorAll('li');
-                    _vlist.insertBefore(_vcard, _vli[0]);
+                    let _vlis = _vlist.querySelectorAll('li');
+                    _vlist.insertBefore(_vcard, _vlis[0]);
                 });
             } else {
                 _root.nodata.show();
@@ -170,22 +170,26 @@ class Valine {
             let comment = new Ct();
             for (let i in defaultComment) {
                 let _v = defaultComment[i];
+                log(i, _v);
                 comment.set(i, _v);
             }
-
+            log(comment);
+            log(defaultComment);
+            return;
             comment.save().then((ret) => {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
                 _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
-                let _vli = _vlist.querySelectorAll('li');
-                _vlist.insertBefore(_vcard, _vli[0]);
+                let _vlis = _vlist.querySelectorAll('li');
+                _vlist.insertBefore(_vcard, _vlis[0]);
                 _root.reset();
                 _root.loading.hide();
                 _root.nodata.hide();
 
             }).catch(ex => {
+                log(ex)
                 _root.loading.hide();
             })
         }, false)
