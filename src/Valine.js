@@ -218,7 +218,6 @@ const dateFormat = (date) => {
     var vHour = padWithZeros(date.getUTCHours(), 2);
     var vMinute = padWithZeros(date.getUTCMinutes(), 2);
     var vSecond = padWithZeros(date.getUTCSeconds(), 2);
-    log(`${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`);
     return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
 }
 
