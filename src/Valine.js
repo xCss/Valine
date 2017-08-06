@@ -84,6 +84,7 @@ class Valine {
         }
 
         _root.loading.show();
+        _root.nodata.hide();
         let query = new _root._av.Query('Comment');
         query.equalTo('url', location.pathname);
         // query.descending('createdAt');
@@ -211,7 +212,8 @@ const HtmlUtil = {
 };
 
 const dateFormat = (time) => {
-    time = time.toString();
+    log(toString.call(time));
+    return 'xxxxx';
     let datePart = time.substring(0, 10).replace(/\-/g, "/");;
     let timePart = time.substring(11, 19);
     //console.log(datePart + ' ' + timePart);
