@@ -11,6 +11,11 @@ const defaultComment = {
     like: 0
 };
 
+const log = console.log;
+
+const class2type = {};
+const toString = class2type.toString;
+
 class Valine {
     /**
      * Valine constructor function
@@ -41,38 +46,40 @@ class Valine {
             });
             _root._av = av;
         }
-        _root.element = option.el;
+        try {
+            _root.element = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
+        } catch (ex) {
+            log('The target element does not exist');
+            return;
+        }
         _root.element.classList.add('valine');
 
-        let eleHTML = `<div class="row pd5"><div class="col col-100"><textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea></div></div><div class="row pd5"><div class="col col-35"><input placeholder="昵称" class="vnick vinput" type="text"></div><div class="col col-35"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="col col-30 txt-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><div class="vloading pd5"></div><ul class="vlist"></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
+        let eleHTML = `<div class="row pd5"><div class="col col-100"><textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea></div></div><div class="row pd5"><div class="col col-35"><input placeholder="昵称" class="vnick vinput" type="text"></div><div class="col col-35"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="col col-30 txt-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
         let _spinner = `<div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div>`;
         let vloading = _root.element.querySelector('.vloading');
+        vloading.innerHTML = _spinner;
         // loading control
         _root.loading = {
             show() {
-                vloading.innerHTML = _spinner;
+                vloading.setAttribute('style', 'display:block;');
             },
             hide() {
-                vloading.innerHTML = '';
+                vloading.setAttribute('style', 'display:none;');
             }
         };
 
-        // nodata
-        let _nodata = document.createElement('li');
-        _nodata.setAttribute('class', 'nodata');
-        _nodata.innerText = `还没有评论哦，快来抢沙发吧!`;
-        let _vlist = _root.element.querySelector('.vlist');
+        // Empty Data
+        let vempty = _root.element.querySelector('.vempty');
+        vempty.innerText = `还没有评论哦，快来抢沙发吧!`;
         _root.nodata = {
             show() {
-                _vlist.appendChild(_nodata);
+                vempty.setAttribute('style', 'display:block;');
             },
             hide() {
-                if (_vlist.querySelector('.nodata')) {
-                    _vlist.removeChild(_nodata);
-                }
+                vempty.setAttribute('style', 'display:none;');
             }
         }
 
@@ -82,20 +89,21 @@ class Valine {
         query.descending('createdAt');
         query.find().then(ret => {
             _root.loading.hide();
-            _vlist.innerHTML = '';
             let _temp = [];
             if (ret.length) {
                 ret.forEach(item => {
-                    let _vcard = `<li class="vcard" data-id="${item.id}"><div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div></li>`;
-                    _temp.push(_vcard);
+                    let _vcard = document.createElement('li');
+                    _vcard.setAttribute('class', 'vcard');
+                    _vcard.setAttribute('data-id', ret.id);
+                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    let _vlist = _root.element.querySelector('.vlist');
+                    let _vli = _vlist.querySelectorAll('li');
+                    _vlist.insertBefore(_vcard, _vli[0]);
                 });
-                _root.element.querySelector('.vlist').innerHTML = _temp.join('');
             } else {
-                _root.loading.hide();
                 _root.nodata.show();
             }
         }).catch(ex => {
-            // console.log(ex);
             _root.loading.hide();
             _root.nodata.show();
         })
@@ -145,33 +153,24 @@ class Valine {
             let Ct = _root._av.Object.extend('Comment');
             // 新建对象
             let comment = new Ct();
-            comment.set('comment', defaultComment.comment);
-            comment.set('nick', defaultComment.nick);
-            comment.set('link', defaultComment.link);
-            comment.set('rid', defaultComment.rid);
-            comment.set('ua', defaultComment.ua);
-            comment.set('url', defaultComment.url);
-            comment.set('pin', defaultComment.pin);
-            comment.set('like', defaultComment.like);
+            for (let i in defaultComment) {
+                let _v = defaultComment[i];
+                comment.set(i, _v);
+            }
+
             comment.save().then((ret) => {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="#" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vli = _vlist.querySelectorAll('li');
-                let _vnodata = _vlist.querySelector('.nodata');
-                if (_vli.length) {
-                    _vlist.insertBefore(_vcard, _vli[0]);
-                } else {
-                    _vlist.appendChild(_vcard);
-                }
+                _vlist.insertBefore(_vcard, _vli[0]);
                 _root.reset();
                 _root.loading.hide();
                 _root.nodata.hide();
 
             }).catch(ex => {
-                // console.log(ex);
                 _root.loading.hide();
             })
         }, false)
