@@ -212,7 +212,7 @@ const HtmlUtil = {
 };
 
 const dateFormat = (time) => {
-    return toString.call(time);
+    return time.toString();
 }
 
 module.exports = Valine;
