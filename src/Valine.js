@@ -54,22 +54,7 @@ class Valine {
         }
         _root.element.classList.add('valine');
 
-        let eleHTML = `
-        <div class="vwrap">
-            <div class="vedit">
-                <textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea>
-            </div>
-            <div class="vcontrol">
-                <div class='vident'>
-                    <input placeholder="称呼" class="vnick vinput" type="text">
-                    <input placeholder="网址" class="vlink vinput" type="text">
-                </div>
-                <div class="vright">
-                    <button type="button" class="vsubmit vbtn">回复</button>
-                </div>
-            </div>
-        </div>
-        <ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
+        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
@@ -111,7 +96,7 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('data-id', item.id);
-                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     _vlist.insertBefore(_vcard, _vlis[1]);
@@ -176,7 +161,7 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 _vlist.insertBefore(_vcard, _vlis[1]);
@@ -224,5 +209,36 @@ const HtmlUtil = {
         return s;
     }
 };
+
+const dateFormat = (time) => {
+    let datePart = time.substring(0, 10).replace(/\-/g, "/");;
+    let timePart = time.substring(11, 19);
+    //console.log(datePart + ' ' + timePart);
+    let oldTime = (new Date(datePart + ' ' + timePart)).getTime();
+    let currTime = new Date().getTime();
+    let diffValue = currTime - oldTime;
+
+    let days = Math.floor(diffValue / (24 * 3600 * 1000));
+    if (days === 0) {
+        //计算相差小时数
+        let leave1 = diffValue % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+        let hours = Math.floor(leave1 / (3600 * 1000));
+        if (hours === 0) {
+            //计算相差分钟数
+            let leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+            let minutes = Math.floor(leave2 / (60 * 1000));
+            if (minutes === 0) {
+                //计算相差秒数
+                let leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+                let seconds = Math.round(leave3 / 1000);
+                return seconds + '秒前';
+            }
+            return minutes + '分钟前';
+        }
+        return hours + '小时前';
+    }
+
+    return days + '天前';
+}
 
 module.exports = Valine;
