@@ -215,12 +215,12 @@ const HtmlUtil = {
 };
 
 const dateFormat = (date) => {
-    var vDay = padWithZeros(date.getUTCDate(), 2);
-    var vMonth = padWithZeros(date.getUTCMonth() + 1, 2);
-    var vYear = padWithZeros(date.getUTCFullYear(), 2);
-    var vHour = padWithZeros(date.getUTCHours(), 2);
-    var vMinute = padWithZeros(date.getUTCMinutes(), 2);
-    var vSecond = padWithZeros(date.getUTCSeconds(), 2);
+    var vDay = padWithZeros(date.getDate(), 2);
+    var vMonth = padWithZeros(date.getMonth() + 1, 2);
+    var vYear = padWithZeros(date.getFullYear(), 2);
+    var vHour = padWithZeros(date.getHours(), 2);
+    var vMinute = padWithZeros(date.getMinutes(), 2);
+    var vSecond = padWithZeros(date.getSeconds(), 2);
     return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
 }
 
