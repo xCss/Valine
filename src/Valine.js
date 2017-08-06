@@ -211,8 +211,23 @@ const HtmlUtil = {
     }
 };
 
-const dateFormat = (time) => {
-    return time.toString();
+const dateFormat = (date) => {
+    var vDay = padWithZeros(date.getUTCDate(), 2);
+    var vMonth = padWithZeros(date.getUTCMonth() + 1, 2);
+    var vYear = padWithZeros(date.getUTCFullYear(), 2);
+    var vHour = padWithZeros(date.getUTCHours(), 2);
+    var vMinute = padWithZeros(date.getUTCMinutes(), 2);
+    var vSecond = padWithZeros(date.getUTCSeconds(), 2);
+    log(`${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`);
+    return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
+}
+
+const padWithZeros = (vNumber, width) => {
+    var numAsString = vNumber.toString();
+    while (numAsString.length < width) {
+        numAsString = '0' + numAsString;
+    }
+    return numAsString;
 }
 
 module.exports = Valine;
