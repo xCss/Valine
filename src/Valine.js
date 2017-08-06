@@ -176,12 +176,9 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
-                log(1)
+                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
-                log(_vlist)
                 let _vlis = _vlist.querySelectorAll('li');
-                log(_vlis)
                 _vlist.insertBefore(_vcard, _vlis[0]);
                 _root.reset();
                 _root.loading.hide();
