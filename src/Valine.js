@@ -211,6 +211,7 @@ const HtmlUtil = {
 };
 
 const dateFormat = (time) => {
+    time = time.toString();
     let datePart = time.substring(0, 10).replace(/\-/g, "/");;
     let timePart = time.substring(11, 19);
     //console.log(datePart + ' ' + timePart);
