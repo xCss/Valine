@@ -110,7 +110,7 @@ class Valine {
                 ret.forEach(item => {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
-                    _vcard.setAttribute('data-id', ret.id);
+                    _vcard.setAttribute('data-id', item.id);
                     _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
