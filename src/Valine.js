@@ -114,7 +114,7 @@ class Valine {
                     _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${item.get("createdAt")}</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
-                    _vlist.insertBefore(_vcard, _vlis[0]);
+                    _vlist.insertBefore(_vcard, _vlis[1]);
                 });
             } else {
                 _root.nodata.show();
@@ -179,7 +179,7 @@ class Valine {
                 _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${ret.get("createdAt")}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
-                _vlist.insertBefore(_vcard, _vlis[0]);
+                _vlist.insertBefore(_vcard, _vlis[1]);
                 _root.reset();
                 _root.loading.hide();
                 _root.nodata.hide();
