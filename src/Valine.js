@@ -24,11 +24,14 @@ class Valine {
      */
     constructor(option) {
 
+        let root = this;
         // Valine init
-        this.init(option);
+        root.init(option);
 
         // Bind Event
-        this.bind();
+        root.bind();
+
+        root.version = '0.0.1';
 
     }
 
