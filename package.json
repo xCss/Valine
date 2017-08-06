@@ -5,7 +5,8 @@
     "main": "/src/Valine.js",
     "author": {
         "name": "xCss",
-        "url": "https://github.com/xCss"
+        "url": "https://github.com/xCss",
+        "email": "xioveliu@gmail.com"
     },
     "scripts": {
         "test": "webpack",
