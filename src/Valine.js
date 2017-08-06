@@ -170,13 +170,10 @@ class Valine {
             let comment = new Ct();
             for (let i in defaultComment) {
                 let _v = defaultComment[i];
-                log(i, _v);
                 comment.set(i, _v);
             }
-            log(comment);
-            log(defaultComment);
-            return;
             comment.save().then((ret) => {
+                log(ret);
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
@@ -189,7 +186,6 @@ class Valine {
                 _root.nodata.hide();
 
             }).catch(ex => {
-                log(ex)
                 _root.loading.hide();
             })
         }, false)
