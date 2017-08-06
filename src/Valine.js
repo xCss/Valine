@@ -24,14 +24,14 @@ class Valine {
      */
     constructor(option) {
 
-        let root = this;
+        let _root = this;
         // Valine init
-        root.init(option);
+        _root.init(option);
 
         // Bind Event
-        root.bind();
+        _root.bind();
 
-        root.version = '0.0.2';
+        _root.version = '0.0.2';
 
     }
 
@@ -41,13 +41,13 @@ class Valine {
      */
     init(option) {
         let _root = this;
-        let av = option.av || _root._av;
+        let av = option.av || _root.v;
         if (av && av.version) {
             av.init({
                 appId: option.app_id || option.appId,
                 appKey: option.app_key || option.appKey
             });
-            _root._av = av;
+            _root.v = av;
         }
         try {
             _root.element = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
@@ -88,7 +88,7 @@ class Valine {
 
         _root.loading.show();
         _root.nodata.hide();
-        let query = new _root._av.Query('Comment');
+        let query = new _root.v.Query('Comment');
         query.equalTo('url', location.pathname);
         // query.descending('createdAt');
         query.find().then(ret => {
@@ -154,7 +154,7 @@ class Valine {
             _root.loading.show();
 
             // 声明类型
-            let Ct = _root._av.Object.extend('Comment');
+            let Ct = _root.v.Object.extend('Comment');
             // 新建对象
             let comment = new Ct();
             for (let i in defaultComment) {
