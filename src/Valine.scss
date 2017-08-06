@@ -1,28 +1,38 @@
 .valine {
+    padding: 10px;
     * {
         box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-family: -apple-system, BlinkMacSystemFont, 'Mirages Custom', 'Merriweather', 'Open Sans', "Segoe UI", Roboto, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Helvetica, Arial, sans-serif;
         font-size: 14px;
         line-height: 1.42857143;
         color: #555;
         transition: all .3s ease;
     }
-    .row {
-        font-size: 0;
-    }
-    .col {
-        font-size: 14px;
-        display: inline-block;
-        @for $i from 1 through 100 {
-            @if $i==33 {
-                &.col-#{$i} {
-                    width: 33.33%;
-                }
+    .vwrap {
+        border: 1px solid #dedede;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        .vcontrol {
+            background: #fbfbfb;
+            font-size: 0;
+            .vident {
+                font-size: 14px;
+                width: 70%;
+                display: inline-block;
+                padding: 5px;
+                vertical-align: middle;
             }
-            @else {
-                &.col-#{$i} {
-                    width:#{$i*1%};
-                }
+            .vright {
+                font-size: 14px;
+                padding: 5px;
+                display: inline-block;
+                width: 30%;
+                text-align: right;
+                vertical-align: middle;
+            }
+            input {
+                background: transparent;
             }
         }
     }
@@ -54,7 +64,7 @@
         height: 80px;
     }
     .vinput {
-        border: 1px solid #dedede;
+        border: none;
         resize: none;
         outline: none;
         padding: 8px 10px;

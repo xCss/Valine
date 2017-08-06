@@ -54,7 +54,22 @@ class Valine {
         }
         _root.element.classList.add('valine');
 
-        let eleHTML = `<div class="row pd5"><div class="col col-100"><textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea></div></div><div class="row pd5"><div class="col col-35"><input placeholder="昵称" class="vnick vinput" type="text"></div><div class="col col-35"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="col col-30 txt-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
+        let eleHTML = `
+        <div class="vwrap">
+            <div class="vedit">
+                <textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea>
+            </div>
+            <div class="vcontrol">
+                <div class='vident'>
+                    <input placeholder="称呼" class="vnick vinput" type="text">
+                    <input placeholder="网址" class="vlink vinput" type="text">
+                </div>
+                <div class="vright">
+                    <button type="button" class="vsubmit vbtn">回复</button>
+                </div>
+            </div>
+        </div>
+        <ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
@@ -86,7 +101,7 @@ class Valine {
         _root.loading.show();
         let query = new _root._av.Query('Comment');
         query.equalTo('url', location.pathname);
-        query.descending('createdAt');
+        // query.descending('createdAt');
         query.find().then(ret => {
             _root.loading.hide();
             let _temp = [];
@@ -142,7 +157,6 @@ class Valine {
         let vsubmit = _root.element.querySelector('.vsubmit');
         vsubmit.addEventListener('click', function(e) {
             if (defaultComment.comment == '') {
-                // console.log(inputs)
                 inputs['comment'].focus();
                 return;
             }
