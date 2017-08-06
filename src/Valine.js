@@ -31,7 +31,7 @@ class Valine {
         // Bind Event
         root.bind();
 
-        root.version = '0.0.1';
+        root.version = '0.0.2';
 
     }
 
