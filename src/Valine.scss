@@ -131,6 +131,9 @@
                 word-break: break-all;
                 text-align: justify;
                 line-height: 1.8;
+                pre.code {
+                    overflow: auto;
+                }
             }
         }
         .vempty {
