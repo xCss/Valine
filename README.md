@@ -1,4 +1,4 @@
-![](./logo.opacity.png)
+![](./src/imageslogo.opacity.png)
 # Valine
 > A simple comment system based on Leancloud.
 

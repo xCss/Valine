@@ -79,12 +79,14 @@
         cursor: pointer;
         border: 1px solid transparent;
         white-space: nowrap;
-        padding: 8px 20px;
+        padding: 8px 0;
         font-size: 14px;
         line-height: 1.42857143;
         border-radius: 4px;
         user-select: none;
         outline: none;
+        min-width: 60px;
+        max-width: 100%;
     }
     .vbtn:active,
     .vbtn:hover {
