@@ -59,11 +59,11 @@ import Valine from 'valine'
     <script>
         new Valine({
             av: AV, // source from av-min.js
-            el: '.comment' 
+            el: '.comment' ,
             app_id: 'your appid',
             app_key: 'your appkey',
             // [v1.0.7 new]留言框占位提示文字
-            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
         });
     </script>
 </body>
