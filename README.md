@@ -1,4 +1,4 @@
-![](./src/imageslogo.opacity.png)
+![](./src/images/logo.opacity.png)
 # Valine   [![build](https://img.shields.io/circleci/project/xCss/Valine/dev.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)
 > A simple comment system based on Leancloud.
 
