@@ -71,7 +71,6 @@ import Valine from 'valine'
 - [Contributors](https://github.com/xCss/Valine/graphs/contributors)
 
 ## Features
-- Markdown / GFM support
 - Syntax highlighting
 - And more...
 
