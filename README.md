@@ -79,6 +79,9 @@ import Valine from 'valine'
 [GPL-2.0](https://github.com/xCss/Valine/blob/master/LICENSE)
 
 ## Donate
-|:-------------:|:-------------:|  
-| ![](https://ws1.sinaimg.cn/large/006qRazegy1fibbye789vj30qo0nnta1.jpg)  | ![](https://ws1.sinaimg.cn/large/006qRazegy1fibbyef3tvj30m80lu0u4.jpg) |  
-
+<table>
+    <tr>
+        <td>![](https://ws1.sinaimg.cn/large/006qRazegy1fibbye789vj30qo0nnta1.jpg)</td>
+        <td>![](https://ws1.sinaimg.cn/large/006qRazegy1fibbyef3tvj30m80lu0u4.jpg)</td>
+    </tr>
+</table>
