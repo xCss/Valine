@@ -33,8 +33,6 @@ class Valine {
             _root.bind();
         }
 
-        _root.version = '1.0.3';
-
     }
 
     /**
@@ -59,7 +57,7 @@ class Valine {
         }
         _root.element.classList.add('valine');
 
-        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="ヾﾉ≧∀≦)o来啊，快活啊!"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
+        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="ヾﾉ≧∀≦)o来啊，快活啊!"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
