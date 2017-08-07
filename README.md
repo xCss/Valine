@@ -18,7 +18,7 @@
 
 ## Installation
 **1. Installation**   
-> :warning: **You must first reference the package AV in the web page**
+> :warning: **You must first reference the package AV in the web page**  
 > `<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>`
 ```html
 <script src="./dist/Valine.min.js"></script>
