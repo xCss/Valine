@@ -11,7 +11,7 @@
 **Table of content**
 - [Install](#install)
 - [Useage](#useage)
-- [References / Thanks](#references--thanks)
+- [Contributors](#contributors)
 - [Features](#features)
 - [License](#license)
 
@@ -62,7 +62,7 @@ import Valine from 'valine'
 </html>
 ```
 ## Contributors
--[Contributors](https://github.com/xCss/Valine/graphs/contributors)
+- [Contributors](https://github.com/xCss/Valine/graphs/contributors)
 
 ## Features
 - Markdown / GFM support
