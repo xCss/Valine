@@ -81,7 +81,9 @@ import Valine from 'valine'
 ## Donate
 <table>
     <tr>
-        <td><img src='https://ws1.sinaimg.cn/large/006qRazegy1fibbye789vj30qo0nnta1.jpg'></td>
-        <td><img src='https://ws1.sinaimg.cn/large/006qRazegy1fibbyef3tvj30m80lu0u4.jpg'></td>
+        <td><img src="https://ws1.sinaimg.cn/large/006qRazegy1fibc3143urj30ix0io0tt.jpg"/></td>
+        <td><img src="https://ws1.sinaimg.cn/large/006qRazegy1fibc314w56j30es0erabm.jpg"/></td>
+        <td style="text-align:center;">支付宝</td>
+        <td style="text-align:center;">微信</td>
     </tr>
 </table>
