@@ -82,7 +82,7 @@ import Valine from 'valine'
 <table>
     <tr>
         <td><img width=100 src="./src/images/alipay.png"/></td>
-        <td><img width=100 src="./src/images/weichatpay.png"/></td>
+        <td><img width=100 src="./src/images/wechatpay.png"/></td>
     </tr>
     <tr>
         <td style="text-align:center;">支付宝</td>
