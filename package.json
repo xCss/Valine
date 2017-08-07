@@ -1,6 +1,6 @@
 {
-    "name": "Valine",
-    "version": "1.0.2",
+    "name": "valine",
+    "version": "1.0.3",
     "description": "A simple comment system based on Leancloud.",
     "main": "/src/Valine.js",
     "author": {
@@ -16,6 +16,7 @@
     },
     "keywords": [
         "Valine",
+        "Simple Comment",
         "Comment System",
         "Based on Leancloud"
     ],

@@ -12,9 +12,7 @@ const defaultComment = {
 };
 
 const log = console.log;
-
-const class2type = {};
-const toString = class2type.toString;
+const toString = {}.toString;
 
 class Valine {
     /**
@@ -31,7 +29,7 @@ class Valine {
         // Bind Event
         _root.bind();
 
-        _root.version = '1.0.2';
+        _root.version = '1.0.1';
 
     }
 
@@ -100,10 +98,12 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('data-id', item.id);
-                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}" class="vat">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     _vlist.insertBefore(_vcard, _vlis[1]);
+                    let _vat = _vcard.querySelector('.vat');
+                    _root.bindAt(_vat);
                 });
             } else {
                 _root.nodata.show();
@@ -135,15 +135,29 @@ class Valine {
                 defaultComment[_v] = _temp.value.replace(/(^\s*)|(\s*$)/g, "");
             }, false);
         }
+
         // reset form
-        _root.reset = function() {
+        _root.reset = () => {
             for (var i in mapping) {
                 let _v = mapping[i];
                 let _el = _root.element.querySelector(`.${i}`);
                 _el.value = "";
                 defaultComment[_v] = "";
+                defaultComment['rid'] = '';
             }
         }
+
+        // at event
+        _root.bindAt = (el) => {
+            el.addEventListener('click', function(e) {
+                let at = el.getAttribute('at');
+                let rid = el.getAttribute('rid');
+                inputs['comment'].innerText = `@${at} ，`;
+                inputs['comment'].focus();
+            }, false)
+        }
+
+        // submit
         let vsubmit = _root.element.querySelector('.vsubmit');
         vsubmit.addEventListener('click', function(e) {
             if (defaultComment.comment == '') {
@@ -165,10 +179,12 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}" class="vat">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 _vlist.insertBefore(_vcard, _vlis[1]);
+                let _vat = _vcard.querySelector('.vat');
+                _root.bindAt(_vat);
                 _root.reset();
                 _root.loading.hide();
                 _root.nodata.hide();
@@ -178,6 +194,7 @@ class Valine {
             })
         }, false)
     }
+
 }
 const HtmlUtil = {
     /**
