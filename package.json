@@ -2,7 +2,7 @@
     "name": "valine",
     "version": "1.0.3",
     "description": "A simple comment system based on Leancloud.",
-    "main": "/dist/Valine.min.js",
+    "main": "/src/Valine.js",
     "author": {
         "name": "xCss",
         "url": "https://github.com/xCss",
