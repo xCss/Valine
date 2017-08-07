@@ -16,7 +16,7 @@
 - [License](#license)
 
 ## Install
-**1. Install** 
+**1. Install**   
 > :warning: **You must first introduce the package AV in the web page**
 > <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 ```html
@@ -32,8 +32,8 @@ npm install valine --save
 ```js
 import Valine from 'valine'
 ```
-**2. Get `appId`/`appKey` on Leancloud**
-[Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or Login on `leancloud`.
+**2. Get `appId`/`appKey` on Leancloud**  
+[Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or Login on `leancloud`.  
 [Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create New Application in `Leancloud`, and you will get `appId`/`appKey`.
 
 ## Useage
