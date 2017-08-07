@@ -1,5 +1,5 @@
 ![](./src/images/logo.opacity.png)
-# Valine   [![build](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)
+# Valine   [![version](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![downloads](https://img.shields.io/github/downloads/xCss/Valine/total.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![downloads latest](https://img.shields.io/github/downloads/xCss/Valine/latest/total.svg?style=flat-square)](https://github.com/xCss/Valine/releases/latest)[![build](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)
 > A simple comment system based on Leancloud.
 
 ------------------------------
@@ -59,9 +59,11 @@ import Valine from 'valine'
     <script>
         new Valine({
             av: AV, // source from av-min.js
+            el: '.comment' 
             app_id: 'your appid',
             app_key: 'your appkey',
-            el: '.comment' 
+            // [v1.0.7 new]留言框占位提示文字
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
         });
     </script>
 </body>
