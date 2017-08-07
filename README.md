@@ -4,6 +4,9 @@
 
 ------------------------------
 **[Live Demo](https://xcss.github.io/Valine/)**
+
+[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)
+
 - High speed.
 - Safe by default.
 - Easy to customize.
@@ -15,6 +18,7 @@
 - [Contributors](#contributors)
 - [Features](#features)
 - [License](#license)
+- [Donate](#donate)
 
 ## Installation
 **1. Installation**   
@@ -73,3 +77,8 @@ import Valine from 'valine'
 
 ## License
 [GPL-2.0](https://github.com/xCss/Valine/blob/master/LICENSE)
+
+## Donate
+|:-------------:|:-------------:|
+| ![](https://ioliu.cn/images/wechatpay.png)      | ![](https://ioliu.cn/images/alipay.png) |
+| 微信      | 支付宝      |
