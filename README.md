@@ -79,6 +79,6 @@ import Valine from 'valine'
 [GPL-2.0](https://github.com/xCss/Valine/blob/master/LICENSE)
 
 ## Donate
-|:-------------:|:-------------:|
-| ![](https://ioliu.cn/images/wechatpay.png)      | ![](https://ioliu.cn/images/alipay.png) |
-| 微信      | 支付宝      |
+|:-------------:|:-------------:|  
+| ![](https://ws1.sinaimg.cn/large/006qRazegy1fibbye789vj30qo0nnta1.jpg)  | ![](https://ws1.sinaimg.cn/large/006qRazegy1fibbyef3tvj30m80lu0u4.jpg) |  
+
