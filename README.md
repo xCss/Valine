@@ -33,8 +33,8 @@ npm install valine --save
 import Valine from 'valine'
 ```
 **2. Get `appId`/`appKey` on Leancloud**  
-[Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or Login on `leancloud`.  
-[Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create New Application in `Leancloud`, and you will get `appId`/`appKey`.
+[Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or login in `leancloud`.  
+[Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create new application in `Leancloud`, and you will get `appId`/`appKey`.
 
 ## Useage
 ```html
