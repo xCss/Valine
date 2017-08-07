@@ -130,9 +130,8 @@ class Valine {
             let _v = mapping[i];
             let _el = _root.element.querySelector(`.${i}`);
             inputs[_v] = _el;
-            _el.addEventListener('input', function(e) {
-                let _temp = this;
-                defaultComment[_v] = _temp.value.replace(/(^\s*)|(\s*$)/g, "");
+            _el.addEventListener('input', (e) => {
+                defaultComment[_v] = _el.value.replace(/(^\s*)|(\s*$)/g, "");
             });
         }
 
@@ -143,17 +142,17 @@ class Valine {
                 let _el = _root.element.querySelector(`.${i}`);
                 _el.value = "";
                 defaultComment[_v] = "";
-                defaultComment['rid'] = '';
             }
+            defaultComment['nick'] = 'unknow';
+            defaultComment['rid'] = '';
         }
 
         // at event
         _root.bindAt = (el) => {
             el.addEventListener('click', (e) => {
-                console.log(el)
                 let at = el.getAttribute('at');
-                let rid = el.getAttribute('rid');
-                inputs['comment'].innerText = `@${at} ，`;
+                // let rid = el.getAttribute('rid');
+                inputs['comment'].value = `@${at} ，`;
                 inputs['comment'].focus();
             })
         }
@@ -164,6 +163,9 @@ class Valine {
             if (defaultComment.comment == '') {
                 inputs['comment'].focus();
                 return;
+            }
+            if (defaultComment.nick == '') {
+                defaultComment['nick'] = '小调皮';
             }
             defaultComment.comment = HtmlUtil.encode(defaultComment.comment);
             _root.loading.show();
