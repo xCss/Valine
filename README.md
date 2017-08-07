@@ -81,11 +81,11 @@ import Valine from 'valine'
 ## Donate
 <table>
     <tr>
-        <td><img width=100 src="./src/images/alipay.png"/></td>
-        <td><img width=100 src="./src/images/wechatpay.png"/></td>
+        <td><img width=150 src="./src/images/alipay.png"/></td>
+        <td><img width=150 src="./src/images/wechatpay.png"/></td>
     </tr>
     <tr>
-        <td style="text-align:center;">支付宝</td>
-        <td style="text-align:center;">微信</td>
+        <td >支付宝</td>
+        <td >微信</td>
     </tr>
 </table>
