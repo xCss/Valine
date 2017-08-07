@@ -9,19 +9,20 @@
 - No server-side implementation.
 
 **Table of content**
-- [Install](#install)
+- [Installation](#installation)
 - [Useage](#useage)
 - [Contributors](#contributors)
 - [Features](#features)
 - [License](#license)
 
-## Install
-**1. Install**   
-> :warning: **You must first introduce the package AV in the web page**
+## Installation
+**1. Installation**   
+> :warning: **You must first reference the package AV in the web page**
 > <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 ```html
 <script src="./dist/Valine.min.js"></script>
 ```
+or
 ```html
 <script src="https://xcss.github.io/Valine/dist/Valine.min.js"></script>
 ```
@@ -32,7 +33,7 @@ npm install valine --save
 ```js
 import Valine from 'valine'
 ```
-**2. Get `appId`/`appKey` on Leancloud**  
+**2. Get `appId`/`appKey` from Leancloud**  
 [Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or login in `leancloud`.  
 [Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create new application in `Leancloud`, and you will get `appId`/`appKey`.
 
