@@ -23,11 +23,15 @@ class Valine {
     constructor(option) {
 
         let _root = this;
-        // Valine init
-        _root.init(option);
 
-        // Bind Event
-        _root.bind();
+        window.onload = () => {
+
+            // Valine init
+            _root.init(option);
+
+            // Bind Event
+            _root.bind();
+        }
 
         _root.version = '1.0.3';
 
