@@ -1,5 +1,5 @@
 ![](./src/imageslogo.opacity.png)
-# Valine
+# Valine  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)
 > A simple comment system based on Leancloud.
 
 ------------------------------
@@ -17,8 +17,8 @@
 - [Useage](#useage)
 - [Contributors](#contributors)
 - [Features](#features)
-- [License](#license)
 - [Donate](#donate)
+- [License](#license)
 
 ## Installation
 **1. Installation**   
@@ -75,17 +75,13 @@ import Valine from 'valine'
 - Syntax highlighting
 - And more...
 
+## Donate
+If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
+
+- [Donate via Wechat](https://ws1.sinaimg.cn/large/006qRazegy1fibhig0ywqj30es0erabm.jpg)
+- [Donate via Alipay](https://ws1.sinaimg.cn/large/006qRazegy1fibhifhhfnj30ix0io0tt.jpg)
+
+If you are not available for this, simply spreading the word for us would help too!
+
 ## License
 [GPL-2.0](https://github.com/xCss/Valine/blob/master/LICENSE)
-
-## Donate
-<table>
-    <tr>
-        <td><img width=150 src="./src/images/alipay.png"/></td>
-        <td><img width=150 src="./src/images/wechatpay.png"/></td>
-    </tr>
-    <tr>
-        <td >支付宝</td>
-        <td >微信</td>
-    </tr>
-</table>
