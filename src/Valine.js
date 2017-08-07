@@ -29,7 +29,7 @@ class Valine {
         // Bind Event
         _root.bind();
 
-        _root.version = '1.0.1';
+        _root.version = '1.0.3';
 
     }
 
@@ -55,7 +55,7 @@ class Valine {
         }
         _root.element.classList.add('valine');
 
-        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="请开始你的表演Thanks♪(･ω･)ﾉ"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
+        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="ヾﾉ≧∀≦)o来啊，快活啊!"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
@@ -101,9 +101,9 @@ class Valine {
                     _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
-                    _vlist.insertBefore(_vcard, _vlis[1]);
                     let _vat = _vcard.querySelector('.vat');
                     _root.bindAt(_vat);
+                    _vlist.insertBefore(_vcard, _vlis[1]);
                 });
             } else {
                 _root.nodata.show();
@@ -133,7 +133,7 @@ class Valine {
             _el.addEventListener('input', function(e) {
                 let _temp = this;
                 defaultComment[_v] = _temp.value.replace(/(^\s*)|(\s*$)/g, "");
-            }, false);
+            });
         }
 
         // reset form
@@ -149,17 +149,18 @@ class Valine {
 
         // at event
         _root.bindAt = (el) => {
-            el.addEventListener('click', function(e) {
+            el.addEventListener('click', (e) => {
+                console.log(el)
                 let at = el.getAttribute('at');
                 let rid = el.getAttribute('rid');
                 inputs['comment'].innerText = `@${at} ，`;
                 inputs['comment'].focus();
-            }, false)
+            })
         }
 
         // submit
         let vsubmit = _root.element.querySelector('.vsubmit');
-        vsubmit.addEventListener('click', function(e) {
+        vsubmit.addEventListener('click', (e) => {
             if (defaultComment.comment == '') {
                 inputs['comment'].focus();
                 return;
@@ -182,9 +183,9 @@ class Valine {
                 _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
-                _vlist.insertBefore(_vcard, _vlis[1]);
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
+                _vlist.insertBefore(_vcard, _vlis[1]);
                 _root.reset();
                 _root.loading.hide();
                 _root.nodata.hide();
@@ -192,7 +193,7 @@ class Valine {
             }).catch(ex => {
                 _root.loading.hide();
             })
-        }, false)
+        })
     }
 
 }
