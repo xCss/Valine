@@ -1,4 +1,5 @@
 require('./Valine.scss');
+import snarkdown from 'snarkdown';
 
 const defaultComment = {
     comment: '',
@@ -169,7 +170,7 @@ class Valine {
             if (defaultComment.nick == '') {
                 defaultComment['nick'] = '小调皮';
             }
-            defaultComment.comment = HtmlUtil.encode(defaultComment.comment);
+            defaultComment.comment = snarkdown(defaultComment.comment);
             _root.loading.show();
 
             // 声明类型

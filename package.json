@@ -1,49 +1,50 @@
 {
-    "name": "valine",
-    "version": "1.0.6",
-    "description": "A simple comment system based on Leancloud.",
-    "main": "/src/Valine.js",
-    "author": {
-        "name": "xCss",
-        "url": "https://github.com/xCss",
-        "email": "xioveliu@gmail.com"
-    },
-    "scripts": {
-        "test": "webpack",
-        "build": "webpack",
-        "dev": "node_modules/.bin/webpack-dev-server --colors --hot --inline",
-        "clear": "rm -rf dist/* "
-    },
-    "keywords": [
-        "Valine",
-        "Simple Comment",
-        "Comment System",
-        "Based on Leancloud"
-    ],
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/xcss/Valine.git"
-    },
-    "bugs": {
-        "url": "https://github.com/xcss/Valine/issues"
-    },
-    "homepage": "https://github.com/xcss/Valine#readme",
-    "devDependencies": {
-        "autoprefixer": "^7.1.1",
-        "babel-core": "^6.22.1",
-        "babel-loader": "^7.0.0",
-        "babel-preset-es2015": "^6.22.0",
-        "css-loader": "^0.28.4",
-        "exports-loader": "^0.6.3",
-        "file-loader": "^0.11.2",
-        "moonjs": "^0.11.0",
-        "node-sass": "^4.5.0",
-        "postcss-loader": "^2.0.5",
-        "sass-loader": "^6.0.3",
-        "style-loader": "^0.18.2",
-        "url-loader": "^0.5.7",
-        "webpack": "^2.6.1",
-        "webpack-dev-server": "^2.4.5"
-    }
+  "name": "valine",
+  "version": "1.0.6",
+  "description": "A simple comment system based on Leancloud.",
+  "main": "/src/Valine.js",
+  "author": {
+    "name": "xCss",
+    "url": "https://github.com/xCss",
+    "email": "xioveliu@gmail.com"
+  },
+  "scripts": {
+    "test": "webpack",
+    "build": "webpack",
+    "dev": "node_modules/.bin/webpack-dev-server --colors --hot --inline",
+    "clear": "rm -rf dist/* "
+  },
+  "keywords": [
+    "Valine",
+    "Simple Comment",
+    "Comment System",
+    "Based on Leancloud"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xcss/Valine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xcss/Valine/issues"
+  },
+  "homepage": "https://github.com/xcss/Valine#readme",
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.22.0",
+    "css-loader": "^0.28.4",
+    "exports-loader": "^0.6.3",
+    "file-loader": "^0.11.2",
+    "moonjs": "^0.11.0",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^2.0.5",
+    "sass-loader": "^6.0.3",
+    "snarkdown": "^1.2.2",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  }
 }
