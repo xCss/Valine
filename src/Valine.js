@@ -201,7 +201,7 @@ class Valine {
             }
             defaultComment.comment = snarkdown(defaultComment.comment);
             let idx = defaultComment.comment.indexOf(defaultComment.at);
-            if (idx > -1) {
+            if (idx > -1 && defaultComment.at != '') {
                 let at = `<a href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
                 defaultComment.comment = defaultComment.comment.replace(defaultComment.at, at);
             }
