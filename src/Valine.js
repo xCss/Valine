@@ -1,5 +1,5 @@
 require('./Valine.scss');
-const snarkdown = require('snarkdown');
+import snarkdown from 'snarkdown';
 
 const defaultComment = {
     comment: '',
