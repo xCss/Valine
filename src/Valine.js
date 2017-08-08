@@ -91,7 +91,7 @@ class Valine {
         _root.nodata.hide();
         let query = new _root.v.Query('Comment');
         query.equalTo('url', location.pathname);
-        query.ascending('createdAt');
+        query.ascending('updatedAt');
         query.find().then(ret => {
             _root.loading.hide();
             let _temp = [];
