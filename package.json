@@ -18,7 +18,8 @@
         "Valine",
         "Simple Comment",
         "Comment System",
-        "Based on Leancloud"
+        "Based on Leancloud",
+        "Minimalist"
     ],
     "license": "ISC",
     "repository": {
@@ -29,6 +30,7 @@
         "url": "https://github.com/xcss/Valine/issues"
     },
     "homepage": "https://github.com/xcss/Valine#readme",
+
     "devDependencies": {
         "autoprefixer": "^7.1.1",
         "babel-core": "^6.22.1",
