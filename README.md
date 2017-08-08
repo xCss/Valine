@@ -10,6 +10,7 @@
 - Safe by default.
 - Easy to customize.
 - No server-side implementation.
+- Support part of the markdown syntax.
 
 **Table of content**
 - [Installation](#installation)
@@ -72,6 +73,7 @@ import Valine from 'valine'
 - [Contributors](https://github.com/xCss/Valine/graphs/contributors)
 
 ## Features
+- Support for full markdown syntax
 - Syntax highlighting
 - And more...
 
