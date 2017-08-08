@@ -101,7 +101,7 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('data-id', item.id);
-                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("updatedAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead"><a href="${convertUrl(item.get('link'))}" target="_blank" data-id="${item.id}">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("updatedAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -171,7 +171,7 @@ class Valine {
                 defaultComment['nick'] = '小调皮';
             }
             defaultComment.comment = snarkdown(defaultComment.comment);
-            defaultComment.link = /^(http|https)/.test(defaultComment.link) ? defaultComment.link : `http://${defaultComment.link}`;
+            defaultComment.link = convertUrl(defaultComment.link);
             _root.loading.show();
 
             // 声明类型
@@ -186,7 +186,7 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("updatedAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead"><a href="${convertUrl(ret.get('link'))}" target="_blank" data-id="${ret.id}">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("updatedAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _vat = _vcard.querySelector('.vat');
@@ -210,15 +210,8 @@ const HtmlUtil = {
      * @return {String} result
      */
     encode(str) {
-        var s = "";
         if (str.length == 0) return "";
-        s = str.replace(/&/g, "&amp;");
-        s = s.replace(/</g, "&lt;");
-        s = s.replace(/>/g, "&gt;");
-        s = s.replace(/ /g, "&nbsp;");
-        s = s.replace(/\'/g, "&#39;");
-        s = s.replace(/\"/g, "&quot;");
-        return s;
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "&#39;").replace(/\"/g, "&quot;");
     },
     /**
      * HTML解码
@@ -226,17 +219,19 @@ const HtmlUtil = {
      * @return {String} result
      */
     decode(str) {
-        var s = "";
         if (str.length == 0) return "";
-        s = str.replace(/&amp;/g, "&");
-        s = s.replace(/&lt;/g, "<");
-        s = s.replace(/&gt;/g, ">");
-        s = s.replace(/&nbsp;/g, " ");
-        s = s.replace(/&#39;/g, "\'");
-        s = s.replace(/&quot;/g, "\"");
-        return s;
+        return str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"");
     }
 };
+
+const convertUrl = (link) => {
+    if (!!link) {
+        link = /^(http|https)/.test(link) ? link : `http://${link}`
+    } else {
+        link = window.location.href
+    }
+    return link;
+}
 
 const dateFormat = (date) => {
     var vDay = padWithZeros(date.getDate(), 2);
