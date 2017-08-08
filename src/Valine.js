@@ -203,7 +203,7 @@ class Valine {
             let idx = defaultComment.comment.indexOf(defaultComment.at);
             if (idx > -1) {
                 let at = `<a href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
-                defaultComment.comment.replace(defaultComment.at, at);
+                defaultComment.comment = defaultComment.comment.replace(defaultComment.at, at);
             }
             if (!verify.mail(defaultComment.mail) && !verify.link(defaultComment.link)) {
                 _root.alert.show('您的网址和邮箱格式不正确, 是否继续提交?', commit)
