@@ -170,7 +170,7 @@ class Valine {
             if (defaultComment.nick == '') {
                 defaultComment['nick'] = '小调皮';
             }
-            defaultComment.comment = snarkdown(defaultComment.comment);
+            defaultComment.comment = snarkdown(HtmlUtil.encode(defaultComment.comment));
             _root.loading.show();
 
             // 声明类型
