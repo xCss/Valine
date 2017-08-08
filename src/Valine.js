@@ -250,7 +250,7 @@ class Valine {
 
 const verify = {
     mail(m) {
-        return /^[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/i.test(m);
+        return /[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(m);
     },
     link(l) {
         l = /^(http|https)/.test(l) ? l : `http://${l}`;
