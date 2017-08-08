@@ -91,13 +91,15 @@ class Valine {
         _root.nodata.hide();
         let query = new _root.v.Query('Comment');
         query.equalTo('url', location.pathname);
-        query.ascending('updatedAt');
+        query.descending('updatedAt');
+        query.limit('1000');
         query.find().then(ret => {
             _root.loading.hide();
             let _temp = [];
             if (ret.length) {
                 _root.nodata.hide();
-                ret.forEach(item => {
+                for (var i in ret) {
+                    let item = ret[i];
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('data-id', item.id);
@@ -107,7 +109,7 @@ class Valine {
                     let _vat = _vcard.querySelector('.vat');
                     _root.bindAt(_vat);
                     _vlist.insertBefore(_vcard, _vlis[1]);
-                });
+                }
             } else {
                 _root.nodata.show();
             }
