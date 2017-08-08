@@ -101,7 +101,7 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('data-id', item.id);
-                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead"><a href="${item.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${item.id}">${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("updatedAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -171,6 +171,7 @@ class Valine {
                 defaultComment['nick'] = '小调皮';
             }
             defaultComment.comment = snarkdown(defaultComment.comment);
+            defaultComment.link = /^(http|https)/.test(defaultComment.link) ? defaultComment.link : `http://${defaultComment.link}`;
             _root.loading.show();
 
             // 声明类型
@@ -185,7 +186,7 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead"><a href="${ret.get('link') || 'javascript:void(0);'}" target="_blank" data-id="${ret.id}">${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("updatedAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _vat = _vcard.querySelector('.vat');
