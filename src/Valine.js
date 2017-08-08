@@ -5,6 +5,7 @@ const defaultComment = {
     comment: '',
     rid: '',
     nick: 'unknow',
+    mail: '',
     link: '',
     ua: navigator.userAgent,
     url: location.pathname,
@@ -58,7 +59,7 @@ class Valine {
         }
         _root.element.classList.add('valine');
         let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
-        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
+        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
@@ -128,7 +129,8 @@ class Valine {
         let mapping = {
             veditor: "comment",
             vnick: "nick",
-            vlink: "link"
+            vlink: "link",
+            vmail: 'mail'
         };
         let inputs = {};
         for (var i in mapping) {
