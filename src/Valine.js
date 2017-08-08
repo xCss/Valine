@@ -134,7 +134,7 @@ class Valine {
             let _el = _root.element.querySelector(`.${i}`);
             inputs[_v] = _el;
             _el.addEventListener('input', (e) => {
-                defaultComment[_v] = _el.value.replace(/(^\s*)|(\s*$)/g, "");
+                defaultComment[_v] = HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
             });
         }
 
@@ -170,7 +170,7 @@ class Valine {
             if (defaultComment.nick == '') {
                 defaultComment['nick'] = '小调皮';
             }
-            defaultComment.comment = snarkdown(HtmlUtil.encode(defaultComment.comment));
+            defaultComment.comment = snarkdown(defaultComment.comment);
             _root.loading.show();
 
             // 声明类型
