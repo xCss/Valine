@@ -104,8 +104,8 @@ class Valine {
                     let item = ret[i];
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
-                    _vcard.setAttribute('data-id', item.id);
-                    _vcard.innerHTML = `<div class="vhead" id='${item.id}'><a href="${item.get('link') || item.get('mail')}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("updatedAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.setAttribute('id', item.id);
+                    _vcard.innerHTML = `<div class="vhead" ><a href="${item.get('link') || 'mailto:'+item.get('mail')}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("updatedAt"))}</span><span rid='${item.id}' at='${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -200,6 +200,7 @@ class Valine {
             if (idx > -1) {
                 let at = `<a href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
                 defaultComment.comment.replace(defaultComment.at, at);
+                log(at, defaultComment.at)
             }
             if (defaultComment.nick == '') {
                 defaultComment['nick'] = '小调皮';
@@ -229,8 +230,8 @@ class Valine {
             comment.save().then((ret) => {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
-                _vcard.setAttribute('data-id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" id='${ret.id}'><a href="${ret.get('link') || ret.get('mail')}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("updatedAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.setAttribute('id', ret.id);
+                _vcard.innerHTML = `<div class="vhead" ><a href="${ret.get('link') || 'mailto:'+ret.get('mail')}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("updatedAt"))}</span><span rid='${ret.id}' at='${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _vat = _vcard.querySelector('.vat');
