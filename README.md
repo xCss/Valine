@@ -1,5 +1,4 @@
-![](https://ws1.sinaimg.cn/large/006qRazegy1fic1ma6b4jj30b405kt8h.jpg)  
-
+![](./src/images/logo.opacity.png)
 # Valine [![version](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![downloads](https://img.shields.io/github/downloads/xCss/Valine/total.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![downloads latest](https://img.shields.io/github/downloads/xCss/Valine/latest/total.svg?style=flat-square)](https://github.com/xCss/Valine/releases/latest) [![build](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)
 > A simple comment system based on Leancloud.  
 ------------------------------
