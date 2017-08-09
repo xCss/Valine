@@ -8,6 +8,7 @@ const defaultComment = {
     nick: 'unknow',
     mail: '',
     link: '',
+    rmail: '',
     ua: navigator.userAgent,
     url: location.pathname,
     pin: 0,
@@ -105,7 +106,7 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('id', item.id);
-                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='@${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='@${item.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -157,6 +158,7 @@ class Valine {
                 _el.value = "";
                 defaultComment[_v] = "";
             }
+            defaultComment['rmail'] = '';
             defaultComment['nick'] = 'unknow';
             defaultComment['rid'] = '';
             defaultComment['at'] = '';
@@ -236,7 +238,7 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _a = _vcard.querySelectorAll('a');
@@ -266,8 +268,10 @@ class Valine {
             atEvt(el, (e) => {
                 let at = el.getAttribute('at');
                 let rid = el.getAttribute('rid');
+                let rmail = el.getAttribute('mail');
                 defaultComment['at'] = at;
                 defaultComment['rid'] = rid;
+                defaultComment['rmail'] = rmail;
                 inputs['comment'].value = `${at} ，`;
                 inputs['comment'].focus();
             })
@@ -325,7 +329,7 @@ const verify = {
     link(l) {
         l = /^(http|https)/.test(l) ? l : `http://${l}`;
         return {
-            k: /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g.test(l),
+            k: /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/.test(l),
             v: l
         };
     }
