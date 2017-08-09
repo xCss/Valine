@@ -18,30 +18,28 @@
             font-size: 0;
             .vident {
                 font-size: 14px;
-                width: 87%;
+                width: 85%;
                 display: inline-block;
                 padding: 5px;
                 vertical-align: middle;
+                .vinput {
+                    width: 33%;
+                }
             }
             .vright {
                 font-size: 14px;
                 padding: 5px;
                 display: inline-block;
-                width: 13%;
+                width: 15%;
                 text-align: right;
                 vertical-align: middle;
             }
-            @media screen and (min-width:620px) and (max-width:719px) {
-                .vident {
-                    width: 88%;
-                }
-                .vright {
-                    width: 12%;
-                }
-            }
-            @media screen and (max-width:480px) {
+            @media screen and (max-width:500px) {
                 .vident {
                     width: 75%;
+                    .vinput {
+                        width: 80%;
+                    }
                 }
                 .vright {
                     width: 25%;
