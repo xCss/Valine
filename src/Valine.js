@@ -230,7 +230,7 @@ class Valine {
             }
             let acl = new _root.v.ACL();
             acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
+            acl.setPublicWriteAccess(false);
             comment.setACL(acl);
             comment.save().then((ret) => {
                 let _vcard = document.createElement('li');
