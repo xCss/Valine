@@ -325,16 +325,16 @@ const verify = {
 
 const HtmlUtil = {
 
-    /**
-     * 
-     * 将str中的链接转换成a标签形式
-     * @param {String} str 
-     * @returns 
-     */
-    transUrl(str) {
-        let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-        return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
-    },
+    // /**
+    //  * 
+    //  * 将str中的链接转换成a标签形式
+    //  * @param {String} str 
+    //  * @returns 
+    //  */
+    // transUrl(str) {
+    //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+    //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
+    // },
     /**
      * HTML转码
      * @param {String} str 
