@@ -143,7 +143,7 @@ class Valine {
             let _el = _root.element.querySelector(`.${i}`);
             inputs[_v] = _el;
             _el.addEventListener('input', (e) => {
-                defaultComment[_v] = HtmlUtil.transUrl(HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, "")));
+                defaultComment[_v] = HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
             });
         }
 
