@@ -111,7 +111,9 @@ class Valine {
                     let _vat = _vcard.querySelector('.vat');
                     let _a = _vcard.querySelectorAll('a');
                     _a.forEach(item => {
-                        item.setAttribute('target', '_blank');
+                        if (item.getAttribute('class') != 'at') {
+                            item.setAttribute('target', '_blank');
+                        }
                     })
                     _root.bindAt(_vat);
                     _vlist.insertBefore(_vcard, _vlis[1]);
@@ -195,7 +197,7 @@ class Valine {
             defaultComment.comment = snarkdown(defaultComment.comment);
             let idx = defaultComment.comment.indexOf(defaultComment.at);
             if (idx > -1 && defaultComment.at != '') {
-                let at = `<a href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
+                let at = `<a class="at" href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
                 defaultComment.comment = defaultComment.comment.replace(defaultComment.at, at);
             }
             // veirfy
@@ -235,7 +237,9 @@ class Valine {
                 let _vlis = _vlist.querySelectorAll('li');
                 let _a = _vcard.querySelectorAll('a');
                 _a.forEach(item => {
-                    item.setAttribute('target', '_blank');
+                    if (item.getAttribute('class') != 'at') {
+                        item.setAttribute('target', '_blank');
+                    }
                 })
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
