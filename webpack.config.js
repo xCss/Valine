@@ -12,7 +12,7 @@ var plugins = [];
 if (env !== 'dev') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false
+            sourceMap: true
         })
     );
 }
@@ -22,7 +22,7 @@ module.exports = {
 
     output: {
         path: BUILD_PATH,
-        publicPath: BUILD_PATH,
+        publicPath: "/dist/",
         filename: libraryName + '.min.js',
         library: libraryName,
         libraryTarget: 'umd',

@@ -120,13 +120,13 @@
     </script>
 
     <script>
-        var _hmt = _hmt || [];
-        (function() {
+        if (!/^http:\/\/localhost/.test(location.href)) {
+            var _hmt = _hmt || [];
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?fc2301b16d1a46c7899ef2b5afb651cc";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-        })();
+        }
     </script>
 </body>
 

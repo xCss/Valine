@@ -1,6 +1,7 @@
 require('./Valine.scss');
 import snarkdown from 'snarkdown';
 
+const path = location.pathname; ///^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 const defaultComment = {
     at: '',
     comment: '',
@@ -10,7 +11,7 @@ const defaultComment = {
     link: '',
     rmail: '',
     ua: navigator.userAgent,
-    url: location.pathname,
+    url: path,
     pin: 0,
     like: 0
 };
@@ -45,14 +46,12 @@ class Valine {
     init(option) {
         let _root = this;
         let av = option.av || _root.v;
-        if (av && av.version) {
+        try {
             av.init({
                 appId: option.app_id || option.appId,
                 appKey: option.app_key || option.appKey
             });
             _root.v = av;
-        }
-        try {
             let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
             if (toString.call(el) != '[object HTMLDivElement]') {
                 throw `The target element does not exists`;
@@ -60,7 +59,7 @@ class Valine {
             _root.element = el;
             _root.element.classList.add('valine');
         } catch (ex) {
-            err(ex);
+            err(`-------Valine version:${_root.version}-------\n${ex}`);
             return;
         }
         let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
@@ -96,7 +95,7 @@ class Valine {
         _root.loading.show();
         _root.nodata.hide();
         let query = new _root.v.Query('Comment');
-        query.equalTo('url', location.pathname);
+        query.equalTo('url', path);
         query.descending('createdAt');
         query.limit('1000');
         query.find().then(ret => {
@@ -126,6 +125,7 @@ class Valine {
                 _root.nodata.show();
             }
         }).catch(ex => {
+            err(ex)
             _root.loading.hide();
             _root.nodata.show();
         })
@@ -164,34 +164,33 @@ class Valine {
                 _el.value = "";
                 defaultComment[_v] = "";
             }
+            defaultComment['at'] = '';
+            defaultComment['rid'] = '';
             defaultComment['rmail'] = '';
             defaultComment['nick'] = 'unknow';
-            defaultComment['rid'] = '';
-            defaultComment['at'] = '';
         }
 
         let _mark = _root.element.querySelector('.vmark');
         // alert
         _root.alert = {
-            show(txt, cb) {
-                let _confirm = `<div class="valert txt-center"><div class="vtext">${txt}</div><div><button class="vcancel vbtn">我再看看</button><button class="vsure vbtn">继续提交</button></div></div>`;
-                _mark.innerHTML = _confirm;
-                _mark.querySelector('.vcancel').addEventListener('click', function(e) {
-                    _root.alert.hide();
-                });
-                let _ok = _mark.querySelector('.vsure');
-                _mark.setAttribute('style', 'display:block;');
-                Event.on('click', _ok, e => {
-                    cb && cb();
-                    _root.alert.hide();
-                });
-            },
-            hide() {
-                _mark.setAttribute('style', 'display:none;');
+                show(txt, cb) {
+                    let _confirm = `<div class="valert txt-center"><div class="vtext">${txt}</div><div><button class="vcancel vbtn">我再看看</button><button class="vsure vbtn">继续提交</button></div></div>`;
+                    _mark.innerHTML = _confirm;
+                    _mark.querySelector('.vcancel').addEventListener('click', function(e) {
+                        _root.alert.hide();
+                    });
+                    let _ok = _mark.querySelector('.vsure');
+                    _mark.setAttribute('style', 'display:block;');
+                    Event.on('click', _ok, e => {
+                        cb && cb();
+                        _root.alert.hide();
+                    });
+                },
+                hide() {
+                    _mark.setAttribute('style', 'display:none;');
+                }
             }
-        }
-
-        // submit
+            // submit
         let submitBtn = _root.element.querySelector('.vsubmit');
         let submitEvt = (e) => {
             if (defaultComment.comment == '') {
@@ -214,9 +213,11 @@ class Valine {
             if (!mailRet.k && !linkRet.k) {
                 _root.alert.show('您的网址和邮箱格式不正确, 是否继续提交?', commitEvt)
             } else if (!mailRet.k) {
+                defaultComment['mail'] = '';
                 defaultComment['link'] = linkRet.v;
                 _root.alert.show('您的邮箱格式不正确, 是否继续提交?', commitEvt)
             } else if (!linkRet.k) {
+                defaultComment['link'] = '';
                 defaultComment['mail'] = mailRet.v;
                 _root.alert.show('您的网址格式不正确, 是否继续提交?', commitEvt)
             } else {
@@ -256,22 +257,41 @@ class Valine {
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
                 _vlist.insertBefore(_vcard, _vlis[1]);
-                _root.reset();
+                defaultComment['at'] && defaultComment['rmail'] && mailEvt({
+                    username: defaultComment['at'].replace('@', ''),
+                    mail: defaultComment['rmail'],
+                    link: `${location.origin}${location.pathname}#${defaultComment['rid']}`
+                });
                 _root.loading.hide();
                 _root.nodata.hide();
+                _root.reset();
 
             }).catch(ex => {
                 _root.loading.hide();
             })
         }
 
-        // at event
-        let atEvt = (el, cb) => {
-            Event.off('click', el, cb)
-            Event.on('click', el, cb)
+        let mailEvt = (o) => {
+            _root.v.User.requestPasswordReset(o.mail).then(ret => {
+                log(ret)
+            }).catch(ex => {
+                let u = new _root.v.User();
+                u.setUsername(o.username);
+                u.setPassword(o.mail);
+                u.setEmail(o.mail);
+                u.signUp({ link: o.link }).then(ret => {
+                    _root.v.User.requestPasswordReset(o.mail).then(ret => {
+                        log(ret)
+                    })
+                }).catch(e => {
+                    err(e)
+                })
+            })
         }
+
+        // at event
         _root.bindAt = (el) => {
-            atEvt(el, (e) => {
+            Event.on('click', el, (e) => {
                 let at = el.getAttribute('at');
                 let rid = el.getAttribute('rid');
                 let rmail = el.getAttribute('mail');
