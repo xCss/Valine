@@ -16,8 +16,8 @@ const defaultComment = {
 };
 
 const log = console.log;
+const err = console.error;
 const toString = {}.toString;
-
 class Valine {
     /**
      * Valine constructor function
@@ -28,14 +28,13 @@ class Valine {
 
         let _root = this;
 
-        window.onload = () => {
-
+        if (!!option) {
             // Valine init
             _root.init(option);
-
-            // Bind Event
-            _root.bind();
         }
+
+        // version
+        _root.version = '1.1.4';
 
     }
 
@@ -54,12 +53,16 @@ class Valine {
             _root.v = av;
         }
         try {
-            _root.element = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
+            let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
+            if (toString.call(el) != '[object HTMLDivElement]') {
+                throw `The target element does not exists`;
+            }
+            _root.element = el;
+            _root.element.classList.add('valine');
         } catch (ex) {
-            log('The target element does not exist');
+            err(ex);
             return;
         }
-        _root.element.classList.add('valine');
         let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
         let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
         _root.element.innerHTML = eleHTML;
@@ -126,6 +129,9 @@ class Valine {
             _root.loading.hide();
             _root.nodata.show();
         })
+
+        // Bind Event
+        _root.bind();
     }
 
     /**

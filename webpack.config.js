@@ -8,11 +8,13 @@ var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
-var plugins = [];
+var plugins = [
+    new webpack.HotModuleReplacementPlugin()
+];
 if (env !== 'dev') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false
+            sourceMap: true
         })
     );
 }
@@ -21,7 +23,7 @@ module.exports = {
     entry: './src/' + libraryName + '.js',
 
     output: {
-        path: BUILD_PATH,
+        publicPath: BUILD_PATH,
         filename: libraryName + '.min.js',
         library: libraryName,
         libraryTarget: 'umd',
