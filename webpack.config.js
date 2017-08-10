@@ -8,9 +8,7 @@ var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
-var plugins = [
-    new webpack.HotModuleReplacementPlugin()
-];
+var plugins = [];
 if (env !== 'dev') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
@@ -23,6 +21,7 @@ module.exports = {
     entry: './src/' + libraryName + '.js',
 
     output: {
+        path: BUILD_PATH,
         publicPath: BUILD_PATH,
         filename: libraryName + '.min.js',
         library: libraryName,
