@@ -1,7 +1,8 @@
 require('./Valine.scss');
 import snarkdown from 'snarkdown';
 
-const path = location.pathname; ///^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
+//const path = location.pathname; 
+const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 const defaultComment = {
     at: '',
     comment: '',
@@ -15,10 +16,16 @@ const defaultComment = {
     pin: 0,
     like: 0
 };
+const head = {
+    nick: '',
+    link: '',
+    mail: ''
+}
 
 const log = console.log;
 const err = console.error;
 const toString = {}.toString;
+const store = localStorage;
 class Valine {
     /**
      * Valine constructor function
@@ -39,7 +46,7 @@ class Valine {
      */
     init(option) {
         let _root = this;
-        _root.notice = option.notice || false;
+        _root.notify = option.notify || false;
         _root.verify = option.verify || false;
         let av = option.av || _root.v;
         try {
@@ -186,10 +193,23 @@ class Valine {
             let _v = mapping[i];
             let _el = _root.element.querySelector(`.${i}`);
             inputs[_v] = _el;
-            _el.addEventListener('input', (e) => {
+            Event.on('input', _el, (e) => {
                 defaultComment[_v] = HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
             });
         }
+
+        // cache 
+        let getCache = () => {
+            let s = store && store.getItem('ValineCache');
+            if (!!s) {
+                s = JSON.parse(s);
+                let m = ['nick', 'link', 'mail'];
+                m.forEach(i => {
+                    _root.element.querySelector(`.v${i}`).value = s[i];
+                })
+            }
+        }
+        getCache();
 
         // reset form
         _root.reset = () => {
@@ -203,6 +223,7 @@ class Valine {
             defaultComment['rid'] = '';
             defaultComment['rmail'] = '';
             defaultComment['nick'] = 'Guest';
+            getCache();
         }
 
         // submit
@@ -211,7 +232,7 @@ class Valine {
             if (submitBtn.getAttribute('disabled')) {
                 _root.alert.show({
                     type: 0,
-                    text: '不要急，评论正在提交中ヾ(๑╹◡╹)ﾉ"',
+                    text: '再等等，评论正在提交中ヾ(๑╹◡╹)ﾉ"',
                     ctxt: '好的'
                 })
                 return;
@@ -231,8 +252,8 @@ class Valine {
                 defaultComment.comment = defaultComment.comment.replace(defaultComment.at, at);
             }
             // veirfy
-            let mailRet = verify.mail(defaultComment.mail);
-            let linkRet = verify.link(defaultComment.link);
+            let mailRet = check.mail(defaultComment.mail);
+            let linkRet = check.link(defaultComment.link);
             if (!mailRet.k && !linkRet.k) {
                 defaultComment['mail'] = '';
                 defaultComment['link'] = '';
@@ -240,7 +261,7 @@ class Valine {
                     type: 1,
                     text: '您的网址和邮箱格式不正确, 是否继续提交?',
                     cb() {
-                        if (_root.verify) {
+                        if (_root.notify || _root.verify) {
                             verifyEvt(commitEvt)
                         } else {
                             commitEvt();
@@ -254,7 +275,7 @@ class Valine {
                     type: 1,
                     text: '您的邮箱格式不正确, 是否继续提交?',
                     cb() {
-                        if (_root.verify) {
+                        if (_root.notify || _root.verify) {
                             verifyEvt(commitEvt)
                         } else {
                             commitEvt();
@@ -268,7 +289,7 @@ class Valine {
                     type: 1,
                     text: '您的网址格式不正确, 是否继续提交?',
                     cb() {
-                        if (_root.verify) {
+                        if (_root.notify || _root.verify) {
                             verifyEvt(commitEvt)
                         } else {
                             commitEvt();
@@ -278,12 +299,20 @@ class Valine {
             } else {
                 defaultComment['mail'] = mailRet.v;
                 defaultComment['link'] = linkRet.v;
-                if (_root.verify) {
+                if (_root.notify || _root.verify) {
                     verifyEvt(commitEvt)
                 } else {
                     commitEvt();
                 }
             }
+        }
+
+        // setting access
+        let getAcl = () => {
+            let acl = new _root.v.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(false);
+            return acl;
         }
 
         let commitEvt = () => {
@@ -297,11 +326,13 @@ class Valine {
                 let _v = defaultComment[i];
                 comment.set(i, _v);
             }
-            let acl = new _root.v.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(false);
-            comment.setACL(acl);
+            comment.setACL(getAcl());
             comment.save().then((ret) => {
+                store && store.setItem('ValineCache', JSON.stringify({
+                    nick: defaultComment['nick'],
+                    link: defaultComment['link'],
+                    mail: defaultComment['mail']
+                }));
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
@@ -323,11 +354,11 @@ class Valine {
                     mail: defaultComment['mail']
                 });
 
-                defaultComment['at'] && defaultComment['rmail'] && _root.notice && mailEvt({
+                defaultComment['at'] && defaultComment['rmail'] && _root.notify && mailEvt({
                     username: defaultComment['at'].replace('@', ''),
                     mail: defaultComment['rmail']
                 });
-
+                log(3);
                 submitBtn.removeAttribute('disabled');
                 _root.loading.hide();
                 _root.reset();
@@ -372,22 +403,32 @@ class Valine {
         }
 
         let signUp = (o) => {
+            log(1);
             let u = new _root.v.User();
             u.setUsername(o.username);
             u.setPassword(o.mail);
             u.setEmail(o.mail);
+            u.setACL(getAcl());
             return u.signUp();
         }
 
         let mailEvt = (o) => {
-            // _root.v.User.requestPasswordReset(o).then(ret => {
-            //     log(ret)
-            // }).catch(e => {
-            //     log(e)
-            //     signUp(o).then(ret => {
-
-            //     })
-            // })
+            log(2)
+            _root.v.User.requestPasswordReset(o.mail).then(ret => {}).catch(e => {
+                if (e.code == 1) {
+                    _root.alert.show({
+                        type: 0,
+                        text: `ヾ(ｏ･ω･)ﾉ At太频繁啦，等会再试试吧<br>${e.error}`,
+                        ctxt: '好的'
+                    })
+                } else {
+                    signUp(o).then(ret => {
+                        mailEvt(o);
+                    }).catch(x => {
+                        err(x)
+                    })
+                }
+            })
         }
 
         // at event
@@ -446,7 +487,7 @@ const getLink = (target) => {
     return target.link || (target.mail && `mailto:${target.mail}`) || 'javascript:void(0);';
 }
 
-const verify = {
+const check = {
     mail(m) {
         return {
             k: /[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(m),
