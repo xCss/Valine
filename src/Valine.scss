@@ -51,7 +51,7 @@
         }
         .vmark {
             position: absolute;
-            background: rgba(0, 0, 0, .8);
+            background: rgba(0, 0, 0, .65);
             width: 100%;
             height: 100%;
             left: 0;
@@ -61,6 +61,15 @@
                 .vtext {
                     color: #fff;
                     padding: 15px;
+                }
+                .vcode {
+                    width: 75px;
+                    border-radius: 5px;
+                    background: #dedede;
+                    &:focus {
+                        border-color: #3090e4;
+                        background-color: #fff;
+                    }
                 }
             }
             @media screen and(max-width:720px) {

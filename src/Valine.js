@@ -6,7 +6,7 @@ const defaultComment = {
     at: '',
     comment: '',
     rid: '',
-    nick: 'unknow',
+    nick: 'Guest',
     mail: '',
     link: '',
     rmail: '',
@@ -26,17 +26,11 @@ class Valine {
      * @constructor 
      */
     constructor(option) {
-
         let _root = this;
-
-        if (!!option) {
-            // Valine init
-            _root.init(option);
-        }
-
         // version
         _root.version = '1.1.4';
-
+        // Valine init
+        !!option && _root.init(option);
     }
 
     /**
@@ -45,6 +39,8 @@ class Valine {
      */
     init(option) {
         let _root = this;
+        _root.notice = option.notice || false;
+        _root.verify = option.verify || false;
         let av = option.av || _root.v;
         try {
             av.init({
@@ -74,15 +70,18 @@ class Valine {
         _root.loading = {
             show() {
                 vloading.setAttribute('style', 'display:block;');
+                _root.nodata.hide();
             },
             hide() {
                 vloading.setAttribute('style', 'display:none;');
+                _root.element.querySelectorAll('.vcard').length === 0 && _root.nodata.show();
             }
         };
 
         // Empty Data
         let vempty = _root.element.querySelector('.vempty');
         vempty.innerText = `还没有评论哦，快来抢沙发吧!`;
+
         _root.nodata = {
             show() {
                 vempty.setAttribute('style', 'display:block;');
@@ -92,18 +91,56 @@ class Valine {
             }
         }
 
+
+        let _mark = _root.element.querySelector('.vmark');
+        // alert
+        _root.alert = {
+            /**
+             * {
+             *  type:0/1,
+             *  text:'',
+             *  ctxt:'',
+             *  otxt:'',
+             *  cb:fn
+             * }
+             * 
+             * @param {Object} o 
+             */
+            show(o) {
+                _mark.innerHTML = `<div class="valert txt-center"><div class="vtext">${o.text}</div><div class="vbtns"></div></div>`;
+                let _vbtns = _mark.querySelector('.vbtns');
+                let _cBtn = `<button class="vcancel vbtn">${ o && o.ctxt || '我再看看' }</button>`;
+                let _oBtn = `<button class="vsure vbtn">${ o && o.otxt || '继续提交' }</button>`;
+                _vbtns.innerHTML = `${_cBtn}${o.type && _oBtn}`;
+                _mark.querySelector('.vcancel').addEventListener('click', function(e) {
+                    _root.alert.hide();
+                });
+                _mark.setAttribute('style', 'display:block;');
+                let okEvt = (e) => {
+                    _root.alert.hide();
+                    o.cb && o.cb();
+                }
+                if (o && o.type) {
+                    let _ok = _mark.querySelector('.vsure');
+                    Event.off('click', _ok, okEvt);
+                    Event.on('click', _ok, okEvt);
+                }
+            },
+            hide() {
+                _mark.setAttribute('style', 'display:none;');
+            }
+        }
+
         _root.loading.show();
-        _root.nodata.hide();
         let query = new _root.v.Query('Comment');
         query.equalTo('url', path);
         query.descending('createdAt');
         query.limit('1000');
         query.find().then(ret => {
-            _root.loading.hide();
             let _temp = [];
-            if (ret.length) {
-                _root.nodata.hide();
-                for (let i = ret.length - 1; i > -1; i--) {
+            let len = ret.length;
+            if (len) {
+                for (let i = len - 1; i > -1; i--) {
                     let item = ret[i];
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
@@ -121,13 +158,11 @@ class Valine {
                     _root.bindAt(_vat);
                     _vlist.insertBefore(_vcard, _vlis[1]);
                 }
-            } else {
-                _root.nodata.show();
             }
-        }).catch(ex => {
-            err(ex)
             _root.loading.hide();
-            _root.nodata.show();
+        }).catch(ex => {
+            //err(ex)
+            _root.loading.hide();
         })
 
         // Bind Event
@@ -167,32 +202,20 @@ class Valine {
             defaultComment['at'] = '';
             defaultComment['rid'] = '';
             defaultComment['rmail'] = '';
-            defaultComment['nick'] = 'unknow';
+            defaultComment['nick'] = 'Guest';
         }
 
-        let _mark = _root.element.querySelector('.vmark');
-        // alert
-        _root.alert = {
-                show(txt, cb) {
-                    let _confirm = `<div class="valert txt-center"><div class="vtext">${txt}</div><div><button class="vcancel vbtn">我再看看</button><button class="vsure vbtn">继续提交</button></div></div>`;
-                    _mark.innerHTML = _confirm;
-                    _mark.querySelector('.vcancel').addEventListener('click', function(e) {
-                        _root.alert.hide();
-                    });
-                    let _ok = _mark.querySelector('.vsure');
-                    _mark.setAttribute('style', 'display:block;');
-                    Event.on('click', _ok, e => {
-                        cb && cb();
-                        _root.alert.hide();
-                    });
-                },
-                hide() {
-                    _mark.setAttribute('style', 'display:none;');
-                }
-            }
-            // submit
+        // submit
         let submitBtn = _root.element.querySelector('.vsubmit');
         let submitEvt = (e) => {
+            if (submitBtn.getAttribute('disabled')) {
+                _root.alert.show({
+                    type: 0,
+                    text: '不要急，评论正在提交中ヾ(๑╹◡╹)ﾉ"',
+                    ctxt: '好的'
+                })
+                return;
+            }
             if (defaultComment.comment == '') {
                 inputs['comment'].focus();
                 return;
@@ -211,23 +234,60 @@ class Valine {
             let mailRet = verify.mail(defaultComment.mail);
             let linkRet = verify.link(defaultComment.link);
             if (!mailRet.k && !linkRet.k) {
-                _root.alert.show('您的网址和邮箱格式不正确, 是否继续提交?', commitEvt)
+                defaultComment['mail'] = '';
+                defaultComment['link'] = '';
+                _root.alert.show({
+                    type: 1,
+                    text: '您的网址和邮箱格式不正确, 是否继续提交?',
+                    cb() {
+                        if (_root.verify) {
+                            verifyEvt(commitEvt)
+                        } else {
+                            commitEvt();
+                        }
+                    }
+                })
             } else if (!mailRet.k) {
                 defaultComment['mail'] = '';
                 defaultComment['link'] = linkRet.v;
-                _root.alert.show('您的邮箱格式不正确, 是否继续提交?', commitEvt)
+                _root.alert.show({
+                    type: 1,
+                    text: '您的邮箱格式不正确, 是否继续提交?',
+                    cb() {
+                        if (_root.verify) {
+                            verifyEvt(commitEvt)
+                        } else {
+                            commitEvt();
+                        }
+                    }
+                })
             } else if (!linkRet.k) {
                 defaultComment['link'] = '';
                 defaultComment['mail'] = mailRet.v;
-                _root.alert.show('您的网址格式不正确, 是否继续提交?', commitEvt)
+                _root.alert.show({
+                    type: 1,
+                    text: '您的网址格式不正确, 是否继续提交?',
+                    cb() {
+                        if (_root.verify) {
+                            verifyEvt(commitEvt)
+                        } else {
+                            commitEvt();
+                        }
+                    }
+                })
             } else {
                 defaultComment['mail'] = mailRet.v;
                 defaultComment['link'] = linkRet.v;
-                commitEvt()
+                if (_root.verify) {
+                    verifyEvt(commitEvt)
+                } else {
+                    commitEvt();
+                }
             }
         }
 
         let commitEvt = () => {
+            submitBtn.setAttribute('disabled', true);
             _root.loading.show();
             // 声明类型
             let Ct = _root.v.Object.extend('Comment');
@@ -257,36 +317,77 @@ class Valine {
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
                 _vlist.insertBefore(_vcard, _vlis[1]);
-                defaultComment['at'] && defaultComment['rmail'] && mailEvt({
-                    username: defaultComment['at'].replace('@', ''),
-                    mail: defaultComment['rmail'],
-                    link: `${location.origin}${location.pathname}#${defaultComment['rid']}`
-                });
-                _root.loading.hide();
-                _root.nodata.hide();
-                _root.reset();
 
+                defaultComment['mail'] && signUp({
+                    username: defaultComment['nick'],
+                    mail: defaultComment['mail']
+                });
+
+                defaultComment['at'] && defaultComment['rmail'] && _root.notice && mailEvt({
+                    username: defaultComment['at'].replace('@', ''),
+                    mail: defaultComment['rmail']
+                });
+
+                submitBtn.removeAttribute('disabled');
+                _root.loading.hide();
+                _root.reset();
             }).catch(ex => {
                 _root.loading.hide();
             })
         }
 
-        let mailEvt = (o) => {
-            _root.v.User.requestPasswordReset(o.mail).then(ret => {
-                log(ret)
-            }).catch(ex => {
-                let u = new _root.v.User();
-                u.setUsername(o.username);
-                u.setPassword(o.mail);
-                u.setEmail(o.mail);
-                u.signUp({ link: o.link }).then(ret => {
-                    _root.v.User.requestPasswordReset(o.mail).then(ret => {
-                        log(ret)
-                    })
-                }).catch(e => {
-                    err(e)
-                })
+        let verifyEvt = (fn) => {
+            let x = Math.floor((Math.random() * 20) + 1);
+            let y = Math.floor((Math.random() * 20) + 1);
+            let z = Math.floor((Math.random() * 20) + 1);
+            let opt = ['+', '-', 'x'];
+            let o1 = opt[Math.floor(Math.random() * 3)];
+            let o2 = opt[Math.floor(Math.random() * 3)];
+            let expre = `${x}${o1}${y}${o2}${z}`;
+            let subject = `${expre} = <input class='vcode vinput' >`;
+            _root.alert.show({
+                type: 1,
+                text: subject,
+                ctxt: '取消',
+                otxt: '确认',
+                cb() {
+                    let code = +_root.element.querySelector('.vcode').value;
+                    let ret = (new Function(`return ${expre.replace(/x/g, '*')}`))();
+                    if (ret === code) {
+                        fn && fn();
+                    } else {
+                        _root.alert.show({
+                            type: 1,
+                            text: '(T＿T)这么简单都算错，也是没谁了',
+                            ctxt: '伤心了，不回了',
+                            otxt: '再试试?',
+                            cb() {
+                                verifyEvt(fn);
+                                return;
+                            }
+                        })
+                    }
+                }
             })
+        }
+
+        let signUp = (o) => {
+            let u = new _root.v.User();
+            u.setUsername(o.username);
+            u.setPassword(o.mail);
+            u.setEmail(o.mail);
+            return u.signUp();
+        }
+
+        let mailEvt = (o) => {
+            // _root.v.User.requestPasswordReset(o).then(ret => {
+            //     log(ret)
+            // }).catch(e => {
+            //     log(e)
+            //     signUp(o).then(ret => {
+
+            //     })
+            // })
         }
 
         // at event
