@@ -1,8 +1,8 @@
 require('./Valine.scss');
 import snarkdown from 'snarkdown';
 
-//const path = location.pathname; 
-const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
+const path = location.pathname;
+//const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 const defaultComment = {
     at: '',
     comment: '',
@@ -16,11 +16,6 @@ const defaultComment = {
     pin: 0,
     like: 0
 };
-const head = {
-    nick: '',
-    link: '',
-    mail: ''
-}
 
 const log = console.log;
 const err = console.error;
@@ -35,7 +30,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.4';
+        _root.version = '1.1.4-rc';
         // Valine init
         !!option && _root.init(option);
     }
@@ -50,24 +45,26 @@ class Valine {
         _root.verify = option.verify || false;
         let av = option.av || _root.v;
         try {
-            av.init({
-                appId: option.app_id || option.appId,
-                appKey: option.app_key || option.appKey
-            });
-            _root.v = av;
             let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
             if (toString.call(el) != '[object HTMLDivElement]') {
                 throw `The target element does not exists`;
             }
             _root.element = el;
             _root.element.classList.add('valine');
+            let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
+            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
+            _root.element.innerHTML = eleHTML;
+
+            av.init({
+                appId: option.app_id || option.appId,
+                appKey: option.app_key || option.appKey
+            });
+            _root.v = av;
+
         } catch (ex) {
             err(`-------Valine version:${_root.version}-------\n${ex}`);
             return;
         }
-        let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
-        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
-        _root.element.innerHTML = eleHTML;
 
         // loading
         let _spinner = `<div class="spinner"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div></div>`;
@@ -123,14 +120,12 @@ class Valine {
                     _root.alert.hide();
                 });
                 _mark.setAttribute('style', 'display:block;');
-                let okEvt = (e) => {
-                    _root.alert.hide();
-                    o.cb && o.cb();
-                }
                 if (o && o.type) {
                     let _ok = _mark.querySelector('.vsure');
-                    Event.off('click', _ok, okEvt);
-                    Event.on('click', _ok, okEvt);
+                    Event.on('click', _ok, (e) => {
+                        _root.alert.hide();
+                        o.cb && o.cb();
+                    });
                 }
             },
             hide() {
@@ -146,6 +141,7 @@ class Valine {
         query.find().then(ret => {
             let _temp = [];
             let len = ret.length;
+            _root.element.querySelector('.count').innerHTML = `共${len}条评论`;
             if (len) {
                 for (let i = len - 1; i > -1; i--) {
                     let item = ret[i];
@@ -206,6 +202,7 @@ class Valine {
                 let m = ['nick', 'link', 'mail'];
                 m.forEach(i => {
                     _root.element.querySelector(`.v${i}`).value = s[i];
+                    defaultComment[i] = s[i];
                 })
             }
         }
@@ -254,6 +251,7 @@ class Valine {
             // veirfy
             let mailRet = check.mail(defaultComment.mail);
             let linkRet = check.link(defaultComment.link);
+            log(defaultComment);
             if (!mailRet.k && !linkRet.k) {
                 defaultComment['mail'] = '';
                 defaultComment['link'] = '';
@@ -358,7 +356,6 @@ class Valine {
                     username: defaultComment['at'].replace('@', ''),
                     mail: defaultComment['rmail']
                 });
-                log(3);
                 submitBtn.removeAttribute('disabled');
                 _root.loading.hide();
                 _root.reset();
@@ -403,7 +400,6 @@ class Valine {
         }
 
         let signUp = (o) => {
-            log(1);
             let u = new _root.v.User();
             u.setUsername(o.username);
             u.setPassword(o.mail);
@@ -413,19 +409,18 @@ class Valine {
         }
 
         let mailEvt = (o) => {
-            log(2)
             _root.v.User.requestPasswordReset(o.mail).then(ret => {}).catch(e => {
                 if (e.code == 1) {
                     _root.alert.show({
                         type: 0,
-                        text: `ヾ(ｏ･ω･)ﾉ At太频繁啦，等会再试试吧<br>${e.error}`,
+                        text: `ヾ(ｏ･ω･)ﾉ At太频繁啦，提醒功能暂时宕机。<br>${e.error}`,
                         ctxt: '好的'
                     })
                 } else {
                     signUp(o).then(ret => {
                         mailEvt(o);
                     }).catch(x => {
-                        err(x)
+                        //err(x)
                     })
                 }
             })
