@@ -2,7 +2,7 @@
     * {
         box-sizing: border-box;
         font-family: -apple-system, BlinkMacSystemFont, 'Mirages Custom', 'Merriweather', 'Open Sans', "Segoe UI", Roboto, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Helvetica, Arial, sans-serif;
-        font-size: 14px;
+        font-size: 1.5rem;
         line-height: 1.42857143;
         color: #555;
         transition: all .3s ease;
@@ -137,34 +137,41 @@
         background-color: #fff;
     }
     .vlist {
-        border-top: 1px solid #dedede;
-        border-bottom: 1px solid #dedede;
-        padding: 0 10px;
+        // border-top: 1px solid #dedede;
+        // border-bottom: 1px solid #dedede;
+        padding: 0;
         .vcard {
-            padding: 8px 0;
-            &+.vcard {
-                border-top: 1px solid #dedede;
+          display: flex;
+          display: -ms-flexbox;
+          margin-top: 2rem;
+            // padding: 8px 0;
+            // &+.vcard {
+            //     border-top: 1px solid #dedede;
+            // }
+            .vavatar {
+              margin-right: 1.5rem;
+              margin-top: 0.1em;
+              display: inline-block;
+              height: 4rem;
+              width: 4rem;
+              position: relative;
+              border-radius:50%;
             }
             .vhead {
+                line-height: 1;
                 a {
-                    font-size: 18px;
-                    font-weight: 300;
+                    font-weight: bolder;
+                    font-size: 1.5rem;
+                }
+                .spacer {
+                    color: #ccc;
+                    margin-left: 1rem;
+                    margin-right: 1rem;
                 }
                 .vtime {
-                    font-size: 12px;
                     color: #a9a4a4;
                     display: inline-block;
                     padding: 0 5px;
-                }
-                .vat {
-                    font-size: 14px;
-                    color: #999;
-                    display: inline-block;
-                    padding: 0 5px;
-                    cursor: pointer;
-                }
-                .vat:hover {
-                    color: #111;
                 }
             }
             .vcomment {
@@ -173,9 +180,19 @@
                 word-break: break-all;
                 text-align: justify;
                 line-height: 1.8;
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
                 pre.code {
                     overflow: auto;
                 }
+            }
+            .vat {
+                color: #33b1ff;
+                margin-top: 1rem;
+                cursor: pointer;
+            }
+            .vat:hover {
+                color: #005e99;
             }
         }
         .vempty {
