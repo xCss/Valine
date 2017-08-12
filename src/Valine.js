@@ -28,7 +28,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.4-rc1';
+        _root.version = '1.1.4-rc2';
         // Valine init
         !!option && _root.init(option);
     }
@@ -143,7 +143,7 @@ class Valine {
         query.find().then(rets => {
             let _temp = [];
             let len = rets.length;
-            _root.el.querySelector('.count').innerHTML = `共${len}条评论`;
+            _root.el.querySelector('.count').innerHTML = `共<span class="num">${len}</span>条评论`;
             if (len) {
                 for (let i = len - 1; i > -1; i--) {
                     let ret = rets[i];
@@ -208,10 +208,9 @@ class Valine {
                 s = JSON.parse(s);
                 let m = ['nick', 'link', 'mail'];
                 for (let i in m) {
-                    if (m.hasOwnProperty(i)) {
-                        _root.el.querySelector(`.v${i}`).value = s[i];
-                        defaultComment[i] = s[i];
-                    }
+                    let k = m[i];
+                    _root.el.querySelector(`.v${k}`).value = s[k];
+                    defaultComment[k] = s[k];
                 }
             }
         }
@@ -343,11 +342,12 @@ class Valine {
                     link: defaultComment['link'],
                     mail: defaultComment['mail']
                 }));
-                ret = JSON.parse(JSON.stringify(ret));
+                let _count = _root.el.querySelector('.num');
+                _count.innerText = Number(_count.innerText) + 1;
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret['link'] ,mail:ret['mail']})}" target="_blank" >${ret['nick']}</a><span class="vtime">${dateFormat(ret["createdAt"])}</span><span rid='${ret.id}' at='@${ret['nick']}' mail='${ret['mail']}' class="vat">回复</span></div><div class="vcomment">${ret['comment']}</div>`;
+                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get('createdAt'))}</span><span rid='${ret.id}' at='@${ret.get('nick')}  mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.el.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _as = _vcard.querySelectorAll('a');
