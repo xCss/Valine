@@ -28,7 +28,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.4-rc2';
+        _root.version = '1.1.4';
         // Valine init
         !!option && _root.init(option);
     }
@@ -508,7 +508,7 @@ const check = {
     link(l) {
         l = /^(http|https)/.test(l) ? l : `http://${l}`;
         return {
-            k: /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/.test(l),
+            k: /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(l),
             v: l
         };
     }
