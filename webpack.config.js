@@ -22,6 +22,7 @@ module.exports = {
 
     output: {
         path: BUILD_PATH,
+        publicPath: BUILD_PATH,
         filename: libraryName + '.min.js',
         library: libraryName,
         libraryTarget: 'umd',

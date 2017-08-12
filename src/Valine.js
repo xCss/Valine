@@ -8,6 +8,7 @@ const defaultComment = {
     nick: 'unknow',
     mail: '',
     link: '',
+    rmail: '',
     ua: navigator.userAgent,
     url: location.pathname,
     pin: 0,
@@ -15,8 +16,8 @@ const defaultComment = {
 };
 
 const log = console.log;
+const err = console.error;
 const toString = {}.toString;
-
 class Valine {
     /**
      * Valine constructor function
@@ -27,14 +28,13 @@ class Valine {
 
         let _root = this;
 
-        window.onload = () => {
-
+        if (!!option) {
             // Valine init
             _root.init(option);
-
-            // Bind Event
-            _root.bind();
         }
+
+        // version
+        _root.version = '1.1.4';
 
     }
 
@@ -53,14 +53,18 @@ class Valine {
             _root.v = av;
         }
         try {
-            _root.element = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
+            let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
+            if (toString.call(el) != '[object HTMLDivElement]') {
+                throw `The target element does not exists`;
+            }
+            _root.element = el;
+            _root.element.classList.add('valine');
         } catch (ex) {
-            log('The target element does not exist');
+            err(ex);
             return;
         }
-        _root.element.classList.add('valine');
         let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
-        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"><div class="valert txt-center"><div class="vtext"></div><div><button class="vcancel vbtn">我再看看</button><button class="vsure vbtn">继续提交</button></div></div></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
+        let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="pd5 txt-right power">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
         _root.element.innerHTML = eleHTML;
 
         // loading
@@ -93,22 +97,28 @@ class Valine {
         _root.nodata.hide();
         let query = new _root.v.Query('Comment');
         query.equalTo('url', location.pathname);
-        query.ascending('updatedAt');
+        query.descending('createdAt');
         query.limit('1000');
         query.find().then(ret => {
             _root.loading.hide();
             let _temp = [];
             if (ret.length) {
                 _root.nodata.hide();
-                for (var i in ret) {
+                for (let i = ret.length - 1; i > -1; i--) {
                     let item = ret[i];
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('id', item.id);
-                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("updatedAt"))}</span><span rid='${item.id}' at='@${item.get('nick')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='@${item.get('nick')}' mail='${item.get('mail')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
+                    let _a = _vcard.querySelectorAll('a');
+                    _a.forEach(item => {
+                        if (item.getAttribute('class') != 'at') {
+                            item.setAttribute('target', '_blank');
+                        }
+                    })
                     _root.bindAt(_vat);
                     _vlist.insertBefore(_vcard, _vlis[1]);
                 }
@@ -119,6 +129,9 @@ class Valine {
             _root.loading.hide();
             _root.nodata.show();
         })
+
+        // Bind Event
+        _root.bind();
     }
 
     /**
@@ -151,38 +164,27 @@ class Valine {
                 _el.value = "";
                 defaultComment[_v] = "";
             }
+            defaultComment['rmail'] = '';
             defaultComment['nick'] = 'unknow';
             defaultComment['rid'] = '';
             defaultComment['at'] = '';
         }
 
-        // at event
-        _root.bindAt = (el) => {
-            el.addEventListener('click', (e) => {
-                let at = el.getAttribute('at');
-                let rid = el.getAttribute('rid');
-                defaultComment['at'] = at;
-                defaultComment['rid'] = rid;
-                inputs['comment'].value = `${at} ，`;
-                inputs['comment'].focus();
-            })
-        }
-
-        // alert
         let _mark = _root.element.querySelector('.vmark');
-        let _atx = _mark.querySelector('.vtext');
-        let _vok = _mark.querySelector('.vsure');
-        _mark.querySelector('.vcancel').addEventListener('click', function(e) {
-            _root.alert.hide();
-        });
+        // alert
         _root.alert = {
             show(txt, cb) {
-                _atx.innerHTML = txt;
-                _mark.setAttribute('style', 'display:block;');
-                _vok.addEventListener('click', function(e) {
-                    cb && cb()
+                let _confirm = `<div class="valert txt-center"><div class="vtext">${txt}</div><div><button class="vcancel vbtn">我再看看</button><button class="vsure vbtn">继续提交</button></div></div>`;
+                _mark.innerHTML = _confirm;
+                _mark.querySelector('.vcancel').addEventListener('click', function(e) {
                     _root.alert.hide();
-                })
+                });
+                let _ok = _mark.querySelector('.vsure');
+                _mark.setAttribute('style', 'display:block;');
+                Event.on('click', _ok, e => {
+                    cb && cb();
+                    _root.alert.hide();
+                });
             },
             hide() {
                 _mark.setAttribute('style', 'display:none;');
@@ -190,8 +192,8 @@ class Valine {
         }
 
         // submit
-        let vsubmit = _root.element.querySelector('.vsubmit');
-        vsubmit.addEventListener('click', (e) => {
+        let submitBtn = _root.element.querySelector('.vsubmit');
+        let submitEvt = (e) => {
             if (defaultComment.comment == '') {
                 inputs['comment'].focus();
                 return;
@@ -199,24 +201,32 @@ class Valine {
             if (defaultComment.nick == '') {
                 defaultComment['nick'] = '小调皮';
             }
+
             defaultComment.comment = snarkdown(defaultComment.comment);
             let idx = defaultComment.comment.indexOf(defaultComment.at);
             if (idx > -1 && defaultComment.at != '') {
-                let at = `<a href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
+                let at = `<a class="at" href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
                 defaultComment.comment = defaultComment.comment.replace(defaultComment.at, at);
             }
-            if (!verify.mail(defaultComment.mail) && !verify.link(defaultComment.link)) {
-                _root.alert.show('您的网址和邮箱格式不正确, 是否继续提交?', commit)
-            } else if (!verify.mail(defaultComment.mail)) {
-                _root.alert.show('您的邮箱格式不正确, 是否继续提交?', commit)
-            } else if (!verify.link(defaultComment.link)) {
-                _root.alert.show('您的网址格式不正确, 是否继续提交?', commit)
+            // veirfy
+            let mailRet = verify.mail(defaultComment.mail);
+            let linkRet = verify.link(defaultComment.link);
+            if (!mailRet.k && !linkRet.k) {
+                _root.alert.show('您的网址和邮箱格式不正确, 是否继续提交?', commitEvt)
+            } else if (!mailRet.k) {
+                defaultComment['link'] = linkRet.v;
+                _root.alert.show('您的邮箱格式不正确, 是否继续提交?', commitEvt)
+            } else if (!linkRet.k) {
+                defaultComment['mail'] = mailRet.v;
+                _root.alert.show('您的网址格式不正确, 是否继续提交?', commitEvt)
             } else {
-                commit()
+                defaultComment['mail'] = mailRet.v;
+                defaultComment['link'] = linkRet.v;
+                commitEvt()
             }
-        })
+        }
 
-        let commit = () => {
+        let commitEvt = () => {
             _root.loading.show();
             // 声明类型
             let Ct = _root.v.Object.extend('Comment');
@@ -226,13 +236,23 @@ class Valine {
                 let _v = defaultComment[i];
                 comment.set(i, _v);
             }
+            let acl = new _root.v.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(false);
+            comment.setACL(acl);
             comment.save().then((ret) => {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("updatedAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
+                let _a = _vcard.querySelectorAll('a');
+                _a.forEach(item => {
+                    if (item.getAttribute('class') != 'at') {
+                        item.setAttribute('target', '_blank');
+                    }
+                })
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
                 _vlist.insertBefore(_vcard, _vlis[1]);
@@ -244,9 +264,62 @@ class Valine {
                 _root.loading.hide();
             })
         }
+
+        // at event
+        let atEvt = (el, cb) => {
+            Event.off('click', el, cb)
+            Event.on('click', el, cb)
+        }
+        _root.bindAt = (el) => {
+            atEvt(el, (e) => {
+                let at = el.getAttribute('at');
+                let rid = el.getAttribute('rid');
+                let rmail = el.getAttribute('mail');
+                defaultComment['at'] = at;
+                defaultComment['rid'] = rid;
+                defaultComment['rmail'] = rmail;
+                inputs['comment'].value = `${at} ，`;
+                inputs['comment'].focus();
+            })
+        }
+
+        Event.off('click', submitBtn, submitEvt);
+        Event.on('click', submitBtn, submitEvt);
+
+
     }
 
 }
+
+const Event = {
+    on(type, el, handler, capture) {
+        if (el.addEventListener) el.addEventListener(type, handler, capture || false);
+        else if (el.attachEvent) el.attachEvent(`on${type}`, handler);
+        else el[`on${type}`] = handler;
+    },
+    off(type, el, handler, capture) {
+        if (el.removeEventListener) el.removeEventListener(type, handler, capture || false);
+        else if (el.detachEvent) el.detachEvent(`on${type}`, handler);
+        else el[`on${type}`] = null;
+    },
+    // getEvent(e) {
+    //     return e || window.event;
+    // },
+    // getTarget(e) {
+    //     return e.target || e.srcElement;
+    // },
+    // preventDefault(e) {
+    //     e = e || window.event;
+    //     e.preventDefault && e.preventDefault() || (e.returnValue = false);
+    // },
+    // stopPropagation(e) {
+    //     e = e || window.event;
+    //     e.stopPropagation && e.stopPropagation() || (e.cancelBubble = true);
+    // }
+}
+
+
+
 
 const getLink = (target) => {
     return target.link || (target.mail && `mailto:${target.mail}`) || 'javascript:void(0);';
@@ -254,15 +327,32 @@ const getLink = (target) => {
 
 const verify = {
     mail(m) {
-        return /[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(m);
+        return {
+            k: /[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(m),
+            v: m
+        };
     },
     link(l) {
         l = /^(http|https)/.test(l) ? l : `http://${l}`;
-        return /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g.test(l);
+        return {
+            k: /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/.test(l),
+            v: l
+        };
     }
 }
 
 const HtmlUtil = {
+
+    // /**
+    //  * 
+    //  * 将str中的链接转换成a标签形式
+    //  * @param {String} str 
+    //  * @returns 
+    //  */
+    // transUrl(str) {
+    //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+    //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
+    // },
     /**
      * HTML转码
      * @param {String} str 
@@ -280,15 +370,6 @@ const HtmlUtil = {
         return !!str ? str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"") : '';
     }
 };
-
-const convertUrl = (link) => {
-    if (!!link) {
-        link = /^(http|https)/.test(link) ? link : `http://${link}`
-    } else {
-        link = window.location.href
-    }
-    return link;
-}
 
 const dateFormat = (date) => {
     var vDay = padWithZeros(date.getDate(), 2);
