@@ -196,7 +196,8 @@
                 word-break: break-all;
                 text-align: justify;
                 line-height: 1.8;
-                pre.code {
+                pre,
+                .code {
                     overflow: auto;
                 }
             }

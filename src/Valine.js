@@ -17,8 +17,6 @@ const defaultComment = {
     like: 0
 };
 
-const log = console.log;
-const err = console.error;
 const toString = {}.toString;
 const store = localStorage;
 class Valine {
@@ -30,7 +28,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.4-rc';
+        _root.version = '1.1.4-rc1';
         // Valine init
         !!option && _root.init(option);
     }
@@ -41,19 +39,33 @@ class Valine {
      */
     init(option) {
         let _root = this;
-        _root.notify = option.notify || false;
-        _root.verify = option.verify || false;
+        _root.notify = option.notify || !1;
+        _root.verify = option.verify || !1;
         let av = option.av || _root.v;
         try {
             let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
             if (toString.call(el) != '[object HTMLDivElement]') {
-                throw `The target element does not exists`;
+                throw `The target element was not found.`;
             }
-            _root.element = el;
-            _root.element.classList.add('valine');
+            _root.el = el;
+            _root.el.classList.add('valine');
             let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
             let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
-            _root.element.innerHTML = eleHTML;
+            _root.el.innerHTML = eleHTML;
+
+
+            // Empty Data
+            let vempty = _root.el.querySelector('.vempty');
+            _root.nodata = {
+                show(txt) {
+                    vempty.innerHTML = txt || `还没有评论哦，快来抢沙发吧!`;
+                    vempty.setAttribute('style', 'display:block;');
+                },
+                hide() {
+                    vempty.setAttribute('style', 'display:none;');
+                }
+            }
+            _root.nodata.show();
 
             av.init({
                 appId: option.app_id || option.appId,
@@ -62,13 +74,15 @@ class Valine {
             _root.v = av;
 
         } catch (ex) {
-            err(`-------Valine version:${_root.version}-------\n${ex}`);
+            let issue = 'https://github.com/xCss/Valine/issues';
+            if (_root.el) _root.nodata.show(`<pre style="color:red;text-align:left;">${ex}<br>Valine:<b>${_root.version}</b><br>反馈：${issue}</pre>`);
+            else console && console.log(`%c${ex}\n%cValine%c${_root.version} ${issue}`, 'color:red;', 'background:#000;padding:5px;line-height:30px;color:#fff;', 'background:#456;line-height:30px;padding:5px;color:#fff;');
             return;
         }
 
         // loading
         let _spinner = `<div class="spinner"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div></div>`;
-        let vloading = _root.element.querySelector('.vloading');
+        let vloading = _root.el.querySelector('.vloading');
         vloading.innerHTML = _spinner;
         // loading control
         _root.loading = {
@@ -78,25 +92,13 @@ class Valine {
             },
             hide() {
                 vloading.setAttribute('style', 'display:none;');
-                _root.element.querySelectorAll('.vcard').length === 0 && _root.nodata.show();
+                _root.el.querySelectorAll('.vcard').length === 0 && _root.nodata.show();
             }
         };
 
-        // Empty Data
-        let vempty = _root.element.querySelector('.vempty');
-        vempty.innerText = `还没有评论哦，快来抢沙发吧!`;
-
-        _root.nodata = {
-            show() {
-                vempty.setAttribute('style', 'display:block;');
-            },
-            hide() {
-                vempty.setAttribute('style', 'display:none;');
-            }
-        }
 
 
-        let _mark = _root.element.querySelector('.vmark');
+        let _mark = _root.el.querySelector('.vmark');
         // alert
         _root.alert = {
             /**
@@ -138,26 +140,29 @@ class Valine {
         query.equalTo('url', path);
         query.descending('createdAt');
         query.limit('1000');
-        query.find().then(ret => {
+        query.find().then(rets => {
             let _temp = [];
-            let len = ret.length;
-            _root.element.querySelector('.count').innerHTML = `共${len}条评论`;
+            let len = rets.length;
+            _root.el.querySelector('.count').innerHTML = `共${len}条评论`;
             if (len) {
                 for (let i = len - 1; i > -1; i--) {
-                    let item = ret[i];
+                    let ret = rets[i];
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
-                    _vcard.setAttribute('id', item.id);
-                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='@${item.get('nick')}' mail='${item.get('mail')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
-                    let _vlist = _root.element.querySelector('.vlist');
+                    _vcard.setAttribute('id', ret.id);
+                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get("comment")}</div>`;
+                    let _vlist = _root.el.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
-                    let _a = _vcard.querySelectorAll('a');
-                    _a.forEach(item => {
-                        if (item.getAttribute('class') != 'at') {
-                            item.setAttribute('target', '_blank');
+                    let _as = _vcard.querySelectorAll('a');
+                    for (let k in _as) {
+                        if (_as.hasOwnProperty(k)) {
+                            let item = _as[k];
+                            if (item.getAttribute('class') != 'at') {
+                                item.setAttribute('target', '_blank');
+                            }
                         }
-                    })
+                    }
                     _root.bindAt(_vat);
                     _vlist.insertBefore(_vcard, _vlis[1]);
                 }
@@ -185,13 +190,15 @@ class Valine {
             vmail: 'mail'
         };
         let inputs = {};
-        for (var i in mapping) {
-            let _v = mapping[i];
-            let _el = _root.element.querySelector(`.${i}`);
-            inputs[_v] = _el;
-            Event.on('input', _el, (e) => {
-                defaultComment[_v] = HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
-            });
+        for (let i in mapping) {
+            if (mapping.hasOwnProperty(i)) {
+                let _v = mapping[i];
+                let _el = _root.el.querySelector(`.${i}`);
+                inputs[_v] = _el;
+                Event.on('input', _el, (e) => {
+                    defaultComment[_v] = HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
+                });
+            }
         }
 
         // cache 
@@ -200,21 +207,25 @@ class Valine {
             if (!!s) {
                 s = JSON.parse(s);
                 let m = ['nick', 'link', 'mail'];
-                m.forEach(i => {
-                    _root.element.querySelector(`.v${i}`).value = s[i];
-                    defaultComment[i] = s[i];
-                })
+                for (let i in m) {
+                    if (m.hasOwnProperty(i)) {
+                        _root.el.querySelector(`.v${i}`).value = s[i];
+                        defaultComment[i] = s[i];
+                    }
+                }
             }
         }
         getCache();
 
         // reset form
         _root.reset = () => {
-            for (var i in mapping) {
-                let _v = mapping[i];
-                let _el = _root.element.querySelector(`.${i}`);
-                _el.value = "";
-                defaultComment[_v] = "";
+            for (let i in mapping) {
+                if (mapping.hasOwnProperty(i)) {
+                    let _v = mapping[i];
+                    let _el = _root.el.querySelector(`.${i}`);
+                    _el.value = "";
+                    defaultComment[_v] = "";
+                }
             }
             defaultComment['at'] = '';
             defaultComment['rid'] = '';
@@ -224,7 +235,7 @@ class Valine {
         }
 
         // submit
-        let submitBtn = _root.element.querySelector('.vsubmit');
+        let submitBtn = _root.el.querySelector('.vsubmit');
         let submitEvt = (e) => {
             if (submitBtn.getAttribute('disabled')) {
                 _root.alert.show({
@@ -251,7 +262,6 @@ class Valine {
             // veirfy
             let mailRet = check.mail(defaultComment.mail);
             let linkRet = check.link(defaultComment.link);
-            log(defaultComment);
             if (!mailRet.k && !linkRet.k) {
                 defaultComment['mail'] = '';
                 defaultComment['link'] = '';
@@ -321,8 +331,10 @@ class Valine {
             // 新建对象
             let comment = new Ct();
             for (let i in defaultComment) {
-                let _v = defaultComment[i];
-                comment.set(i, _v);
+                if (defaultComment.hasOwnProperty(i)) {
+                    let _v = defaultComment[i];
+                    comment.set(i, _v);
+                }
             }
             comment.setACL(getAcl());
             comment.save().then((ret) => {
@@ -331,18 +343,22 @@ class Valine {
                     link: defaultComment['link'],
                     mail: defaultComment['mail']
                 }));
+                ret = JSON.parse(JSON.stringify(ret));
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
-                let _vlist = _root.element.querySelector('.vlist');
+                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret['link'] ,mail:ret['mail']})}" target="_blank" >${ret['nick']}</a><span class="vtime">${dateFormat(ret["createdAt"])}</span><span rid='${ret.id}' at='@${ret['nick']}' mail='${ret['mail']}' class="vat">回复</span></div><div class="vcomment">${ret['comment']}</div>`;
+                let _vlist = _root.el.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
-                let _a = _vcard.querySelectorAll('a');
-                _a.forEach(item => {
-                    if (item.getAttribute('class') != 'at') {
-                        item.setAttribute('target', '_blank');
+                let _as = _vcard.querySelectorAll('a');
+                for (let k in _as) {
+                    if (_as.hasOwnProperty(k)) {
+                        let item = _as[k];
+                        if (item.getAttribute('class') != 'at') {
+                            item.setAttribute('target', '_blank');
+                        }
                     }
-                })
+                }
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
                 _vlist.insertBefore(_vcard, _vlis[1]);
@@ -379,7 +395,7 @@ class Valine {
                 ctxt: '取消',
                 otxt: '确认',
                 cb() {
-                    let code = +_root.element.querySelector('.vcode').value;
+                    let code = +_root.el.querySelector('.vcode').value;
                     let ret = (new Function(`return ${expre.replace(/x/g, '*')}`))();
                     if (ret === code) {
                         fn && fn();
