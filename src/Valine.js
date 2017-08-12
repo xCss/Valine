@@ -1,6 +1,9 @@
 require('./Valine.scss');
 import snarkdown from 'snarkdown';
 
+// By Deserts: gravatar image
+var gravatar = require('gravatar-api');
+
 const defaultComment = {
     at: '',
     comment: '',
@@ -21,8 +24,8 @@ const toString = {}.toString;
 class Valine {
     /**
      * Valine constructor function
-     * @param {Object} option 
-     * @constructor 
+     * @param {Object} option
+     * @constructor
      */
     constructor(option) {
 
@@ -40,7 +43,7 @@ class Valine {
 
     /**
      * Valine Init
-     * @param {Object} option 
+     * @param {Object} option
      */
     init(option) {
         let _root = this;
@@ -109,7 +112,12 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('id', item.id);
-                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" >${item.get("nick")}</a><span class="vtime">${dateFormat(item.get("createdAt"))}</span><span rid='${item.id}' at='@${item.get('nick')}' mail='${item.get('mail')}' class="vat">回复</span></div><div class="vcomment">${item.get("comment")}</div>`;
+                    var gravatar_options = {
+                        email: item.get('mail'),
+                        parameters: { "size": "80" },
+                        secure: true
+                    }
+                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" rel="nofollow" >${item.get("nick")}</a><span class="spacer">•</span><span class="vtime">${dateFormat(item.get("createdAt"))}</span></div><div class="vcomment">${item.get("comment")}</div><a rid='${item.id}' at='@${item.get('nick')}' mail='${item.get('mail')}' class="vat">回复</a></div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -117,6 +125,7 @@ class Valine {
                     _a.forEach(item => {
                         if (item.getAttribute('class') != 'at') {
                             item.setAttribute('target', '_blank');
+                            item.setAttribute('rel', 'nofollow');
                         }
                     })
                     _root.bindAt(_vat);
@@ -244,13 +253,19 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                var gravatar_options = {
+                    email: ret.get('mail'),
+                    parameters: { "size": "80" },
+                    secure: true
+                }
+                _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" rel="nofollow" >${ret.get('nick')}</a><span class="spacer">•</span><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get('comment')}</div><a rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</a></div>`;
                 let _vlist = _root.element.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _a = _vcard.querySelectorAll('a');
                 _a.forEach(item => {
                     if (item.getAttribute('class') != 'at') {
                         item.setAttribute('target', '_blank');
+                        item.setAttribute('rel', 'nofollow');
                     }
                 })
                 let _vat = _vcard.querySelector('.vat');
@@ -344,10 +359,10 @@ const verify = {
 const HtmlUtil = {
 
     // /**
-    //  * 
+    //  *
     //  * 将str中的链接转换成a标签形式
-    //  * @param {String} str 
-    //  * @returns 
+    //  * @param {String} str
+    //  * @returns
     //  */
     // transUrl(str) {
     //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
@@ -355,7 +370,7 @@ const HtmlUtil = {
     // },
     /**
      * HTML转码
-     * @param {String} str 
+     * @param {String} str
      * @return {String} result
      */
     encode(str) {
@@ -363,7 +378,7 @@ const HtmlUtil = {
     },
     /**
      * HTML解码
-     * @param {String} str 
+     * @param {String} str
      * @return {String} result
      */
     decode(str) {
@@ -375,10 +390,11 @@ const dateFormat = (date) => {
     var vDay = padWithZeros(date.getDate(), 2);
     var vMonth = padWithZeros(date.getMonth() + 1, 2);
     var vYear = padWithZeros(date.getFullYear(), 2);
-    var vHour = padWithZeros(date.getHours(), 2);
-    var vMinute = padWithZeros(date.getMinutes(), 2);
-    var vSecond = padWithZeros(date.getSeconds(), 2);
-    return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
+    // var vHour = padWithZeros(date.getHours(), 2);
+    // var vMinute = padWithZeros(date.getMinutes(), 2);
+    // var vSecond = padWithZeros(date.getSeconds(), 2);
+    return `${vYear}-${vMonth}-${vDay}`;
+    // return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
 }
 
 const padWithZeros = (vNumber, width) => {
