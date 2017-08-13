@@ -46,6 +46,8 @@ class Valine {
         let _root = this;
         _root.notify = option.notify || !1;
         _root.verify = option.verify || !1;
+        // ip addr
+        _root.ip = option.ip || '127.0.0.1';
         let av = option.av || _root.v;
         try {
             let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
@@ -55,9 +57,8 @@ class Valine {
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
-            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="author" placeholder="称呼" class="vnick vinput" type="text"><input name="email" placeholder="邮箱" class="vmail vinput" type="email"><input name="url" placeholder="网址(可选)" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank" rel="nofollow">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
+            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="author" placeholder="称呼" class="vnick vinput" type="text"><input name="email" placeholder="邮箱" class="vmail vinput" type="email"><input name="url" placeholder="网址(可选)" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">提交</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank" rel="nofollow">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
             _root.el.innerHTML = eleHTML;
-
 
             // Empty Data
             let vempty = _root.el.querySelector('.vempty');
@@ -146,22 +147,27 @@ class Valine {
         query.descending('createdAt');
         query.limit('1000');
         query.find().then(rets => {
-            let _temp = [];
+            // let _temp = [];
             let len = rets.length;
             _root.el.querySelector('.count').innerHTML = `共<span class="num">${len}</span>条评论`;
             if (len) {
                 for (let i = len - 1; i > -1; i--) {
-                    let ret = rets[i];
+                    let commentItem = rets[i];
+                    if (commentItem.get('spam')) {
+                      continue;
+                    }
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
-                    _vcard.setAttribute('id', ret.id);
+                    _vcard.setAttribute('id', commentItem.id);
                     var gravatar_options = {
-                        email: ret.get('mail'),
-                        parameters: { "size": "80" },
+                        email: commentItem.get('mail'),
+                        parameters: { 'size': '80' },
                         secure: true
                     }
-                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" rel="nofollow" >${ret.get("nick")}</a><span class="spacer">•</span><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get("comment")}</div><a rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</a></div>`;
-                    let _vlist = _root.element.querySelector('.vlist');
+                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:commentItem.get('link'),mail:commentItem.get('mail')})}" target="_blank" rel="nofollow" >${commentItem.get("nick")}</a><span class="spacer">•</span><span class="vtime">${dateFormat(commentItem.get("createdAt"))}</span></div><div class="vcomment">${commentItem.get("comment")}</div><a rid='${commentItem.id}' at='@${commentItem.get('nick')}' mail='${commentItem.get('mail')}' class="vat">回复</a></div>`;
+                    // _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get("comment")}</div>`;
+
+                    let _vlist = _root.el.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
                     let _as = _vcard.querySelectorAll('a');
@@ -172,7 +178,6 @@ class Valine {
                                 item.setAttribute('target', '_blank');
                                 item.setAttribute('rel', 'nofollow');
                             }
-
                         }
                     }
                     _root.bindAt(_vat);
@@ -347,6 +352,7 @@ class Valine {
                     comment.set(i, _v);
                 }
             }
+            comment.set('ip', _root.ip);
             comment.setACL(getAcl());
             comment.save().then((ret) => {
                 store && store.setItem('ValineCache', JSON.stringify({
@@ -365,7 +371,8 @@ class Valine {
                     secure: true
                 }
                 _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" rel="nofollow" >${ret.get('nick')}</a><span class="spacer">•</span><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get('comment')}</div><a rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</a></div>`;
-                let _vlist = _root.element.querySelector('.vlist');
+
+                let _vlist = _root.el.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _as = _vcard.querySelectorAll('a');
                 for (let k in _as) {

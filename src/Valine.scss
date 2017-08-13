@@ -99,9 +99,9 @@
     }
     a {
         text-decoration: none;
-        color: #555;
+        color: #3eb0ef;
         &:hover {
-            color: #222;
+            // color: #3eb0ef;
         }
     }
     ul,
@@ -133,18 +133,16 @@
     }
     .vbtn {
         display: inline-block;
-        margin-bottom: 0;
-        font-weight: 400;
-        text-align: center;
-        vertical-align: middle;
-        touch-action: manipulation;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: #33b1ff;
+        border: .1rem solid #33b1ff;
+        border-radius: .2rem;
+        color: #fff;
+        padding: .6rem 3rem;
         cursor: pointer;
-        border: 1px solid transparent;
         white-space: nowrap;
-        padding: 8px 10px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        border-radius: 4px;
         user-select: none;
         outline: none;
         min-width: 60px;
@@ -156,7 +154,7 @@
     .vbtn:active,
     .vbtn:hover {
         color: #3090e4;
-        border-color: #3090e4;
+        border-color: #33b1ff;
         background-color: #fff;
     }
     .vlist {
@@ -185,6 +183,7 @@
                 a {
                     font-weight: bolder;
                     font-size: 1.5rem;
+                    color: rgba(0,0,0,.7);
                 }
                 .spacer {
                     color: #ccc;
