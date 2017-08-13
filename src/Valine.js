@@ -28,11 +28,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-<<<<<<< HEAD
-        _root.version = '1.1.4';
-=======
         _root.version = '1.1.5-beta';
->>>>>>> dev
         // Valine init
         !!option && _root.init(option);
     }
