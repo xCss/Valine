@@ -1,8 +1,8 @@
 require('./Valine.scss');
 import snarkdown from 'snarkdown';
 
-//const path = location.pathname;
-const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
+const path = location.pathname;
+//const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 const defaultComment = {
     at: '',
     comment: '',
