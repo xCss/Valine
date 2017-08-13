@@ -62,11 +62,15 @@ import Valine from 'valine'
         new Valine({
             av: AV, // source from av-min.js
             el: '.comment' ,
+<<<<<<< HEAD
             notify:true, // 邮件提醒 v1.1.4新增
             verify:true, // 验证码 v1.1.4新增
+=======
+            notify: true, // 邮件提醒 v1.1.4新增
+            verify: true, // 验证码 v1.1.4新增
+>>>>>>> dev
             app_id: 'your appid',
             app_key: 'your appkey',
-            // [v1.0.7 new]留言框占位提示文字
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
         });
     </script>
