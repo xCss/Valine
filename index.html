@@ -3,8 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Valine,极简风,评论系统,极简风评论系统,comment system">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1">
     <title>Valine - A simple comment system based on Leancloud.</title>
     <style>
         * {
@@ -24,6 +29,7 @@
         a {
             color: #999;
             text-decoration: none;
+            border-bottom: 1px dotted #dedede;
         }
         
         .logo {
@@ -57,7 +63,7 @@
         }
         
         .placeholder {
-            height: 76px;
+            height: 56px;
         }
         
         @media screen and (max-width:720px) {
@@ -77,9 +83,29 @@
             }
         }
         
-        .comment {
+        .content {
             background: #fff;
             padding: 10px;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        .prolist {
+            padding: 10px 20px 20px 20px;
+            font-weight: 400;
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Mirages Custom', 'Merriweather', 'Open Sans', "Segoe UI", Roboto, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+        }
+        
+        blockquote {
+            margin: 10px 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
         }
         
         .copy {
@@ -89,7 +115,6 @@
             color: #9c9c9c;
         }
     </style>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
     <script src="./dist/Valine.min.js"></script>
 </head>
 
@@ -103,7 +128,23 @@
     </header>
     <div class="container">
         <div class="placeholder"></div>
-        <div class="comment"></div>
+        <div class="content">
+            <img src="https://ws1.sinaimg.cn/large/006qRazegy1fii7l4y8zoj30b405kt8h.jpg" alt="">
+            <ul class="prolist">
+                <li>- High speed.</li>
+                <li>- Safe by default.</li>
+                <li>- Easy to customize.</li>
+                <li>- Support <a target="_blank" href='https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE'>mail notifier</a>.</li>
+                <li>- Support validation code.</li>
+                <li>- No server-side implementation.</li>
+                <li>- Support part of the markdown syntax.</li>
+            </ul>
+            <div id="github">
+                <iframe allowtransparency="true" frameborder="0" scrolling="0" width="98" height="20"></iframe>
+                <iframe allowtransparency="true" frameborder="0" scrolling="0" width="156" height="20"></iframe>
+            </div>
+            <div class="comment"></div>
+        </div>
     </div>
     <div class="copy">
         &copy; 2017 <a href="https://github.com/xCss" target="_blank">云淡风轻</a>
@@ -111,7 +152,6 @@
     <script>
         var valine = new Valine();
         valine.init({
-            av: AV,
             //notify: true,
             verify: true,
             el: '.comment',
@@ -128,6 +168,12 @@
             hm.src = "https://hm.baidu.com/hm.js?fc2301b16d1a46c7899ef2b5afb651cc";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
+        }
+
+        window.onload = function() {
+            var iframes = document.querySelectorAll('iframe');
+            iframes[0].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&repo=valine&type=watch&count=true');
+            iframes[1].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&type=follow&count=true');
         }
     </script>
 </body>

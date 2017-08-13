@@ -9,6 +9,8 @@
 - High speed.
 - Safe by default.
 - Easy to customize.
+- Support [mail notifier](https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE).
+- Support validation code.
 - No server-side implementation.
 - Support part of the markdown syntax.
 
@@ -60,9 +62,10 @@ import Valine from 'valine'
         new Valine({
             av: AV, // source from av-min.js
             el: '.comment' ,
+            notify: true, // 邮件提醒 v1.1.4新增
+            verify: true, // 验证码 v1.1.4新增
             app_id: 'your appid',
             app_key: 'your appkey',
-            // [v1.0.7 new]留言框占位提示文字
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
         });
     </script>
