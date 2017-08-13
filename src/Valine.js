@@ -156,11 +156,11 @@ class Valine {
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('id', ret.id);
                     var gravatar_options = {
-                        email: item.get('mail'),
+                        email: ret.get('mail'),
                         parameters: { "size": "80" },
                         secure: true
                     }
-                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:item.get('link') ,mail:item.get('mail')})}" target="_blank" rel="nofollow" >${item.get("nick")}</a><span class="spacer">•</span><span class="vtime">${dateFormat(item.get("createdAt"))}</span></div><div class="vcomment">${item.get("comment")}</div><a rid='${item.id}' at='@${item.get('nick')}' mail='${item.get('mail')}' class="vat">回复</a></div>`;
+                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" rel="nofollow" >${ret.get("nick")}</a><span class="spacer">•</span><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get("comment")}</div><a rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</a></div>`;
                     let _vlist = _root.element.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
