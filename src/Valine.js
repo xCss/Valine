@@ -8,7 +8,7 @@ const defaultComment = {
     at: '',
     comment: '',
     rid: '',
-    nick: 'unknow',
+    nick: '小可爱',
     mail: '',
     link: '',
     rmail: '',
@@ -174,7 +174,7 @@ class Valine {
                 defaultComment[_v] = "";
             }
             defaultComment['rmail'] = '';
-            defaultComment['nick'] = 'unknow';
+            defaultComment['nick'] = '小可爱';
             defaultComment['rid'] = '';
             defaultComment['at'] = '';
         }
