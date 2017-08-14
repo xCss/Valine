@@ -4,18 +4,20 @@ import snarkdown from 'snarkdown';
 
 // By Deserts: gravatar image
 var gravatar = require('gravatar-api');
+var gravatar_options = {
+    email: '',
+    parameters: {'size': '80'},
+    secure: true
+}
 
 const path = location.pathname;
-//const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 
 const defaultComment = {
-    at: '',
     comment: '',
     rid: '',
     nick: '小可爱',
     mail: '',
     link: '',
-    rmail: '',
     ua: navigator.userAgent,
     url: path,
     pin: 0,
@@ -24,6 +26,7 @@ const defaultComment = {
 
 const toString = {}.toString;
 const store = localStorage;
+
 class Valine {
     /**
      * Valine constructor function
@@ -57,7 +60,19 @@ class Valine {
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
-            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="author" placeholder="称呼" class="vnick vinput" type="text"><input name="email" placeholder="邮箱" class="vmail vinput" type="email"><input name="url" placeholder="网址(可选)" class="vlink vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">提交</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank" rel="nofollow">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
+            let eleHTML = `<div class="vwrap">
+                                <div class="textarea-wrapper">
+                                    <textarea class="veditor" placeholder="${placeholder}"></textarea>
+                                </div>
+                                <section class="auth-section">
+                                    <div class="input-wrapper"><input type="text" name="author" class="vnick" placeholder="名字" value=""></div>
+                                    <div class="input-wrapper"><input type="email" name="email" class="vmail" placeholder="E-mail" value=""></div>
+                                    <div class="input-wrapper"><input type="text" name="website" class="vlink" placeholder="网站 (可选)" value=""></div>
+                                    <div class="post-action"><button type="button" class="vsubmit vbtn">提交</button></div>
+                                </section>
+                                <div style="display:none;" class="vmark"></div>
+                           </div>
+                           <div class="info"><div class="count col"></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty"></li></ul>`;
             _root.el.innerHTML = eleHTML;
 
             // Empty Data
@@ -103,7 +118,6 @@ class Valine {
         };
 
 
-
         let _mark = _root.el.querySelector('.vmark');
         // alert
         _root.alert = {
@@ -124,7 +138,7 @@ class Valine {
                 let _cBtn = `<button class="vcancel vbtn">${ o && o.ctxt || '我再看看' }</button>`;
                 let _oBtn = `<button class="vsure vbtn">${ o && o.otxt || '继续提交' }</button>`;
                 _vbtns.innerHTML = `${_cBtn}${o.type && _oBtn}`;
-                _mark.querySelector('.vcancel').addEventListener('click', function(e) {
+                _mark.querySelector('.vcancel').addEventListener('click', function (e) {
                     _root.alert.hide();
                 });
                 _mark.setAttribute('style', 'display:block;');
@@ -142,6 +156,7 @@ class Valine {
         }
 
         _root.loading.show();
+        // Build Query
         let query = new _root.v.Query('Comment');
         query.equalTo('url', path);
         query.descending('createdAt');
@@ -153,19 +168,22 @@ class Valine {
             if (len) {
                 for (let i = len - 1; i > -1; i--) {
                     let commentItem = rets[i];
-                    if (commentItem.get('spam')) {
-                      continue;
+                    if (commentItem.get('isSpam')) {
+                        continue;
                     }
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
-                    _vcard.setAttribute('id', commentItem.id);
-                    var gravatar_options = {
-                        email: commentItem.get('mail'),
-                        parameters: { 'size': '80' },
-                        secure: true
-                    }
-                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:commentItem.get('link'),mail:commentItem.get('mail')})}" target="_blank" rel="nofollow" >${commentItem.get("nick")}</a><span class="spacer">•</span><span class="vtime">${dateFormat(commentItem.get("createdAt"))}</span></div><div class="vcomment">${commentItem.get("comment")}</div><a rid='${commentItem.id}' at='@${commentItem.get('nick')}' mail='${commentItem.get('mail')}' class="vat">回复</a></div>`;
-                    // _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get("comment")}</div>`;
+                    gravatar_options['email'] = commentItem.get('mail');
+                    // language=HTML
+                    _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/>
+                                        <div class="text-wrapper">
+                                            <div class="vhead" >
+                                                <a href="${getLink({link: commentItem.get('link'), mail: commentItem.get('mail') })}" target="_blank" rel="nofollow" > ${commentItem.get("nick")}</a>
+                                                <span class="spacer">•</span><span class="vtime">${dateFormat(commentItem.get("createdAt"))}</span>
+                                            </div>
+                                            <div class="vcomment">${commentItem.get("comment")}</div>
+                                            <a rid='${commentItem.id}' at='@${commentItem.get('nick')}' class="vat">回复</a>
+                                        </div>`;
 
                     let _vlist = _root.el.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
@@ -243,10 +261,8 @@ class Valine {
                     defaultComment[_v] = "";
                 }
             }
-            defaultComment['at'] = '';
             defaultComment['rid'] = '';
-            defaultComment['rmail'] = '';
-            defaultComment['nick'] = 'Guest';
+            defaultComment['nick'] = '小可爱';
             getCache();
         }
 
@@ -278,7 +294,7 @@ class Valine {
             // veirfy
             let mailRet = check.mail(defaultComment.mail);
             let linkRet = check.link(defaultComment.link);
-            if (!mailRet.k && !linkRet.k) {
+            if (!mailRet.k && defaultComment.link.length !== 0 && !linkRet.k) {
                 defaultComment['mail'] = '';
                 defaultComment['link'] = '';
                 _root.alert.show({
@@ -306,7 +322,7 @@ class Valine {
                         }
                     }
                 })
-            } else if (!linkRet.k) {
+            } else if (defaultComment.link.length !== 0 && !linkRet.k) {
                 defaultComment['link'] = '';
                 defaultComment['mail'] = mailRet.v;
                 _root.alert.show({
@@ -354,7 +370,7 @@ class Valine {
             }
             comment.set('ip', _root.ip);
             comment.setACL(getAcl());
-            comment.save().then((ret) => {
+            comment.save().then((commentItem) => {
                 store && store.setItem('ValineCache', JSON.stringify({
                     nick: defaultComment['nick'],
                     link: defaultComment['link'],
@@ -364,13 +380,17 @@ class Valine {
                 _count.innerText = Number(_count.innerText) + 1;
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
-                _vcard.setAttribute('id', ret.id);
-                var gravatar_options = {
-                    email: ret.get('mail'),
-                    parameters: { "size": "80" },
-                    secure: true
-                }
-                _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/><div class="text-wrapper"><div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" rel="nofollow" >${ret.get('nick')}</a><span class="spacer">•</span><span class="vtime">${dateFormat(ret.get("createdAt"))}</span></div><div class="vcomment">${ret.get('comment')}</div><a rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</a></div>`;
+                gravatar_options['email'] = commentItem.get('mail');
+                // language=HTML
+                _vcard.innerHTML = `<img class="vavatar" src="${gravatar.imageUrl(gravatar_options)}"/>
+                                    <div class="text-wrapper">
+                                    <div class="vhead" >
+                                    <a href="${getLink({link: commentItem.get('link'), mail: commentItem.get('mail')})}" target="_blank" rel="nofollow" >${commentItem.get('nick')}</a>
+                                    <span class="spacer">•</span><span class="vtime">${dateFormat(commentItem.get("createdAt"))}</span>
+                                    </div>
+                                    <div class="vcomment">${commentItem.get('comment')}</div>
+                                    <a rid='${commentItem.id}' at='@${commentItem.get('nick')}' class="vat">回复</a>
+                                    </div>`;
 
                 let _vlist = _root.el.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
@@ -378,7 +398,7 @@ class Valine {
                 for (let k in _as) {
                     if (_as.hasOwnProperty(k)) {
                         let item = _as[k];
-                        if (item.getAttribute('class') != 'at') {
+                        if (item.getAttribute('class') !== 'at') {
                             item.setAttribute('target', '_blank');
                             item.setAttribute('rel', 'nofollow');
                         }
@@ -388,15 +408,6 @@ class Valine {
                 _root.bindAt(_vat);
                 _vlist.insertBefore(_vcard, _vlis[1]);
 
-                defaultComment['mail'] && signUp({
-                    username: defaultComment['nick'],
-                    mail: defaultComment['mail']
-                });
-
-                defaultComment['at'] && defaultComment['rmail'] && _root.notify && mailEvt({
-                    username: defaultComment['at'].replace('@', ''),
-                    mail: defaultComment['rmail']
-                });
                 submitBtn.removeAttribute('disabled');
                 _root.loading.hide();
                 _root.reset();
@@ -440,53 +451,20 @@ class Valine {
             })
         }
 
-        let signUp = (o) => {
-            let u = new _root.v.User();
-            u.setUsername(o.username);
-            u.setPassword(o.mail);
-            u.setEmail(o.mail);
-            u.setACL(getAcl());
-            return u.signUp();
-        }
-
-        let mailEvt = (o) => {
-            _root.v.User.requestPasswordReset(o.mail).then(ret => {}).catch(e => {
-                if (e.code == 1) {
-                    _root.alert.show({
-                        type: 0,
-                        text: `ヾ(ｏ･ω･)ﾉ At太频繁啦，提醒功能暂时宕机。<br>${e.error}`,
-                        ctxt: '好的'
-                    })
-                } else {
-                    signUp(o).then(ret => {
-                        mailEvt(o);
-                    }).catch(x => {
-                        //err(x)
-                    })
-                }
-            })
-        }
-
         // at event
         _root.bindAt = (el) => {
             Event.on('click', el, (e) => {
                 let at = el.getAttribute('at');
                 let rid = el.getAttribute('rid');
-                let rmail = el.getAttribute('mail');
-                defaultComment['at'] = at;
                 defaultComment['rid'] = rid;
-                defaultComment['rmail'] = rmail;
-                inputs['comment'].value = `${at} ，`;
+                inputs['comment'].value += `${at} ，`;
                 inputs['comment'].focus();
             })
         }
 
         Event.off('click', submitBtn, submitEvt);
         Event.on('click', submitBtn, submitEvt);
-
-
     }
-
 }
 
 const Event = {
@@ -499,24 +477,8 @@ const Event = {
         if (el.removeEventListener) el.removeEventListener(type, handler, capture || false);
         else if (el.detachEvent) el.detachEvent(`on${type}`, handler);
         else el[`on${type}`] = null;
-    },
-    // getEvent(e) {
-    //     return e || window.event;
-    // },
-    // getTarget(e) {
-    //     return e.target || e.srcElement;
-    // },
-    // preventDefault(e) {
-    //     e = e || window.event;
-    //     e.preventDefault && e.preventDefault() || (e.returnValue = false);
-    // },
-    // stopPropagation(e) {
-    //     e = e || window.event;
-    //     e.stopPropagation && e.stopPropagation() || (e.cancelBubble = true);
-    // }
+    }
 }
-
-
 
 
 const getLink = (target) => {
@@ -531,7 +493,9 @@ const check = {
         };
     },
     link(l) {
-        l = /^(http|https)/.test(l) ? l : `http://${l}`;
+        if (l.length > 0) {
+            l = /^(http|https)/.test(l) ? l : `http://${l}`;
+        }
         return {
             k: /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(l),
             v: l
