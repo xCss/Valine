@@ -1,23 +1,22 @@
 require('./Valine.scss');
+const md5 = require('blueimp-md5');
 import snarkdown from 'snarkdown';
-
+const v2cdn = 'https://cdn.v2ex.com/gravatar/';
+const cat = '//gravatar.cat.net/avatar/';
 const path = location.pathname;
 //const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 const defaultComment = {
-    at: '',
     comment: '',
     rid: '',
     nick: 'Guest',
     mail: '',
     link: '',
-    rmail: '',
     ua: navigator.userAgent,
     url: path,
     pin: 0,
     like: 0
 };
 
-const toString = {}.toString;
 const store = localStorage;
 class Valine {
     /**
@@ -40,14 +39,14 @@ class Valine {
     init(option) {
         let _root = this;
         try {
-            let el = toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
-            if (toString.call(el) != '[object HTMLDivElement]') {
+            let el = ({}).toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
+            if (({}).toString.call(el) != '[object HTMLDivElement]') {
                 throw `The target element was not found.`;
             }
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
-            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input placeholder="称呼" class="vnick vinput" type="text"><input placeholder="网址(http://)" class="vlink vinput" type="text"><input placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty" style="display:none;"></li></ul>`;
+            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty" style="display:none;"></li></ul>`;
             _root.el.innerHTML = eleHTML;
 
 
@@ -93,15 +92,9 @@ class Valine {
             _root.v = av;
 
         } catch (ex) {
-            if (ex.toString().toLowerCase().indexOf('av is not defined') > -1) {
-                loadAV(() => {
-                    _root.init(option)
-                })
-            } else {
-                let issue = 'https://github.com/xCss/Valine/issues';
-                if (_root.el) _root.nodata.show(`<pre style="color:red;text-align:left;">${ex}<br>Valine:<b>${_root.version}</b><br>反馈：${issue}</pre>`);
-                else console && console.log(`%c${ex}\n%cValine%c${_root.version} ${issue}`, 'color:red;', 'background:#000;padding:5px;line-height:30px;color:#fff;', 'background:#456;line-height:30px;padding:5px;color:#fff;');
-            }
+            let issue = 'https://github.com/xCss/Valine/issues';
+            if (_root.el) _root.nodata.show(`<pre style="color:red;text-align:left;">${ex}<br>Valine:<b>${_root.version}</b><br>反馈：${issue}</pre>`);
+            else console && console.log(`%c${ex}\n%cValine%c${_root.version} ${issue}`, 'color:red;', 'background:#000;padding:5px;line-height:30px;color:#fff;', 'background:#456;line-height:30px;padding:5px;color:#fff;');
             return;
         }
 
@@ -151,13 +144,23 @@ class Valine {
             let _temp = [];
             let len = rets.length;
             if (len) {
-                _root.el.querySelector('.count').innerHTML = `共<span class="num">${len}</span>条评论`;
+                _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${len}</span>)`;
                 for (let i = len - 1; i > -1; i--) {
                     let ret = rets[i];
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('id', ret.id);
-                    _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a><span class="vtime">${dateFormat(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get("comment")}</div>`;
+                    _vcard.innerHTML = `<div class="vhead" >
+                    <img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'>
+                    <section >
+                    <h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5>
+                    <div class="vcomment">${ret.get("comment")}</div>
+                    <div class="vfooter">
+                    <span class="vtime">${timeAgo(ret.get("createdAt"))}</span>
+                    <span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span>
+                    <div>
+                    </section>
+                    </div>`;
                     let _vlist = _root.el.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -223,6 +226,11 @@ class Valine {
         }
         getCache();
 
+        let atData = {
+            rmail: '',
+            at: ''
+        }
+
         // reset form
         _root.reset = () => {
             for (let i in mapping) {
@@ -233,9 +241,9 @@ class Valine {
                     defaultComment[_v] = "";
                 }
             }
-            defaultComment['at'] = '';
+            atData['at'] = '';
+            atData['rmail'] = '';
             defaultComment['rid'] = '';
-            defaultComment['rmail'] = '';
             defaultComment['nick'] = 'Guest';
             getCache();
         }
@@ -260,10 +268,10 @@ class Valine {
             }
 
             defaultComment.comment = snarkdown(defaultComment.comment);
-            let idx = defaultComment.comment.indexOf(defaultComment.at);
-            if (idx > -1 && defaultComment.at != '') {
-                let at = `<a class="at" href='#${defaultComment.rid}'>${defaultComment.at}</a>`;
-                defaultComment.comment = defaultComment.comment.replace(defaultComment.at, at);
+            let idx = defaultComment.comment.indexOf(atData.at);
+            if (idx > -1 && atData.at != '') {
+                let at = `<a class="at" href='#${defaultComment.rid}'>${atData.at}</a>`;
+                defaultComment.comment = defaultComment.comment.replace(atData.at, at);
             }
             // veirfy
             let mailRet = check.mail(defaultComment.mail);
@@ -354,7 +362,7 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get('createdAt'))}</span><span rid='${ret.id}' at='@${ret.get('nick')}  mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead" ><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get('createdAt'))}</span><span rid='${ret.id}' at='@${ret.get('nick')}  mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
                 let _vlist = _root.el.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _as = _vcard.querySelectorAll('a');
@@ -375,9 +383,9 @@ class Valine {
                     mail: defaultComment['mail']
                 });
 
-                defaultComment['at'] && defaultComment['rmail'] && _root.notify && mailEvt({
-                    username: defaultComment['at'].replace('@', ''),
-                    mail: defaultComment['rmail']
+                atData['at'] && atData['rmail'] && _root.notify && mailEvt({
+                    username: atData['at'].replace('@', ''),
+                    mail: atData['rmail']
                 });
                 submitBtn.removeAttribute('disabled');
                 _root.loading.hide();
@@ -455,9 +463,9 @@ class Valine {
                 let at = el.getAttribute('at');
                 let rid = el.getAttribute('rid');
                 let rmail = el.getAttribute('mail');
-                defaultComment['at'] = at;
+                atData['at'] = at;
+                atData['rmail'] = rmail;
                 defaultComment['rid'] = rid;
-                defaultComment['rmail'] = rmail;
                 inputs['comment'].value = `${at} ，`;
                 inputs['comment'].focus();
             })
@@ -531,7 +539,7 @@ const check = {
         };
     },
     link(l) {
-        l = /^(http|https)/.test(l) ? l : `http://${l}`;
+        l = l.length > 0 && /^(http|https)/.test(l) ? l : `http://${l}`;
         return {
             k: /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(l),
             v: l
@@ -577,6 +585,45 @@ const dateFormat = (date) => {
     var vMinute = padWithZeros(date.getMinutes(), 2);
     var vSecond = padWithZeros(date.getSeconds(), 2);
     return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
+}
+
+const timeAgo = (date) => {
+    try {
+
+        var oldTime = date.getTime();
+        var currTime = new Date().getTime();
+        var diffValue = currTime - oldTime;
+
+        var days = Math.floor(diffValue / (24 * 3600 * 1000));
+        if (days === 0) {
+            //计算相差小时数
+            var leave1 = diffValue % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+            var hours = Math.floor(leave1 / (3600 * 1000));
+            if (hours === 0) {
+                //计算相差分钟数
+                var leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+                var minutes = Math.floor(leave2 / (60 * 1000));
+                if (minutes === 0) {
+                    //计算相差秒数
+                    var leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+                    var seconds = Math.round(leave3 / 1000);
+                    return seconds + ' 秒前';
+                }
+                return minutes + ' 分钟前';
+            }
+            return hours + ' 小时前';
+        }
+
+        if (days < 4) {
+            return days + ' 天前';
+        } else {
+            return dateFormat(date)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+
 }
 
 const padWithZeros = (vNumber, width) => {

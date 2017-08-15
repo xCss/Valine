@@ -1,8 +1,8 @@
 .valine {
     * {
         box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, 'Mirages Custom', 'Merriweather', 'Open Sans', "Segoe UI", Roboto, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Helvetica, Arial, sans-serif;
-        font-size: 14px;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", Arial, sans-serif;
+        font-size: 16px;
         line-height: 1.42857143;
         color: #555;
         transition: all .3s ease;
@@ -87,15 +87,24 @@
         font-size: 0;
         padding: 5px;
         .col {
-            font-size: 14px;
+            font-size: .875rem;
             display: inline-block;
             width: 50%;
             vertical-align: middle;
+            &.power {
+                color: #999;
+                font-size: .75rem;
+                a {
+                    font-size: .75rem;
+                }
+            }
         }
-        .count {}
-    }
-    .power {
-        color: #999;
+        .count {
+            font-size: 1rem;
+            .num {
+                font-weight: 600;
+            }
+        }
     }
     a {
         text-decoration: none;
@@ -160,42 +169,51 @@
         background-color: #fff;
     }
     .vlist {
-        border-top: 1px solid #dedede;
-        border-bottom: 1px solid #dedede;
         padding: 0 10px;
         .vcard {
-            padding: 8px 0;
-            &+.vcard {
-                border-top: 1px solid #dedede;
-            }
+            padding: 1rem 0 .8rem 0;
             .vhead {
-                a {
-                    font-size: 18px;
-                    font-weight: 300;
+                .vimg {
+                    width: 50px;
+                    height: 50px;
+                    float: left;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+                h5 {
+                    font-size: 1rem;
+                    font-weight: 700;
+                    color: #666;
+                    margin-bottom: 6px;
                 }
                 .vtime {
+                    color: #b3b3b3;
                     font-size: 12px;
-                    color: #a9a4a4;
-                    display: inline-block;
-                    padding: 0 5px;
+                    line-height: 1;
                 }
                 .vat {
                     font-size: 14px;
                     color: #999;
-                    display: inline-block;
                     padding: 0 5px;
                     cursor: pointer;
+                    float: right;
                 }
                 .vat:hover {
                     color: #111;
                 }
+            }
+            section {
+                overflow: hidden;
             }
             .vcomment {
                 word-wrap: break-word;
                 white-space: pre-wrap;
                 word-break: break-all;
                 text-align: justify;
-                line-height: 1.8;
+                margin-bottom: 1rem;
+                color: #333;
+                font-size: 1rem;
+                line-height: 1.5;
                 pre,
                 .code {
                     overflow: auto;
@@ -207,6 +225,11 @@
             text-align: center;
             color: #999;
         }
+    }
+    .clear {
+        content: '';
+        display: block;
+        clear: both;
     }
     /************ Loading ************/
     .spinner {
