@@ -159,7 +159,7 @@
         min-width: 60px;
         max-width: 100%;
         &+.vbtn {
-            margin-left: 20px;
+            margin-left: 1.25rem;
         }
     }
     .vbtn:active,
@@ -168,34 +168,23 @@
         border-color: #3090e4;
         background-color: #fff;
     }
+    .vempty {
+        padding: 1.25px;
+        text-align: center;
+        color: #999;
+    }
     .vlist {
-        padding: 0 10px;
-        counter-reset: floor;
+        padding: 0 .625rem;
         .vcard {
             padding: 1rem 0 .875rem 0;
             position: relative;
-            &:before {
-                content: "#" counter(floor);
-                counter-increment: floor;
-                position: absolute;
-                right: 0;
-                top: 1.15rem;
-                font-size: 9px;
-                line-height: 9px;
-                font-weight: 500;
-                border-radius: 10px;
-                display: inline-block;
-                background-color: #f0f0f0;
-                color: #ccc;
-                padding: 3px 5px;
-            }
             .vhead {
                 .vimg {
-                    width: 50px;
-                    height: 50px;
+                    width: 3.125rem;
+                    height: 3.125rem;
                     float: left;
                     border-radius: 50%;
-                    margin-right: 10px;
+                    margin-right: .625rem;
                 }
                 h5 {
                     font-size: 1rem;
@@ -207,6 +196,20 @@
                         &:hover {
                             color: #D7191A;
                         }
+                    }
+                    .floor {
+                        position: absolute;
+                        right: 0;
+                        top: 1.25rem;
+                        font-size: .565rem;
+                        line-height: .565rem;
+                        font-weight: 500;
+                        border-radius: .625rem;
+                        display: inline-block;
+                        background-color: #f0f0f0;
+                        color: #ccc;
+                        padding: 3px 5px;
+                        font-style: normal;
                     }
                 }
                 .vtime {
@@ -220,9 +223,9 @@
                     padding: 0 5px;
                     cursor: pointer;
                     float: right;
-                }
-                .vat:hover {
-                    color: #686868;
+                    &:hover {
+                        color: #D7191A;
+                    }
                 }
             }
             section {
@@ -273,11 +276,6 @@
                     }
                 }
             }
-        }
-        .vempty {
-            padding: 1.25px;
-            text-align: center;
-            color: #999;
         }
     }
     .clear {
