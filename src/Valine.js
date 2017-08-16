@@ -138,7 +138,7 @@ class Valine {
 
         _root.loading.show();
         let query = new _root.v.Query('Comment');
-        query.equalTo('url', path);
+        query.equalTo('url', defaultComment['url']);
         query.descending('createdAt');
         query.limit('1000');
         query.find().then(rets => {
