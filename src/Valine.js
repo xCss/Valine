@@ -2,9 +2,6 @@ require('./Valine.scss');
 const md5 = require('blueimp-md5');
 import snarkdown from 'snarkdown';
 const v2cdn = 'https://cdn.v2ex.com/gravatar/';
-const cat = '//gravatar.cat.net/avatar/';
-const path = location.pathname;
-//const path = /^http:\/\/localhost/.test(location.href) ? '/Valine/' : location.pathname;
 const defaultComment = {
     comment: '',
     rid: '',
@@ -12,7 +9,7 @@ const defaultComment = {
     mail: '',
     link: '',
     ua: navigator.userAgent,
-    url: path,
+    url: '',
     pin: 0,
     like: 0
 };
@@ -28,6 +25,8 @@ class Valine {
         let _root = this;
         // version
         _root.version = '1.1.5-beta';
+
+        _root.md5 = md5;
         // Valine init
         !!option && _root.init(option);
     }
@@ -45,7 +44,7 @@ class Valine {
             }
             _root.el = el;
             _root.el.classList.add('valine');
-            let placeholder = option.placeholder || 'ヾﾉ≧∀≦)o来啊，快活啊!';
+            let placeholder = option.placeholder || '';
             let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="text"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><ul class="vlist"><li class="vloading"></li><li class="vempty" style="display:none;"></li></ul>`;
             _root.el.innerHTML = eleHTML;
 
@@ -90,6 +89,8 @@ class Valine {
                 appKey: option.app_key || option.appKey
             });
             _root.v = av;
+            defaultComment.url = option.path || location.pathname;
+            console.log(defaultComment)
 
         } catch (ex) {
             let issue = 'https://github.com/xCss/Valine/issues';
@@ -150,17 +151,7 @@ class Valine {
                     let _vcard = document.createElement('li');
                     _vcard.setAttribute('class', 'vcard');
                     _vcard.setAttribute('id', ret.id);
-                    _vcard.innerHTML = `<div class="vhead" >
-                    <img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'>
-                    <section >
-                    <h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5>
-                    <div class="vcomment">${ret.get("comment")}</div>
-                    <div class="vfooter">
-                    <span class="vtime">${timeAgo(ret.get("createdAt"))}</span>
-                    <span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span>
-                    <div>
-                    </section>
-                    </div>`;
+                    _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcomment">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
                     let _vlist = _root.el.querySelector('.vlist');
                     let _vlis = _vlist.querySelectorAll('li');
                     let _vat = _vcard.querySelector('.vat');
@@ -170,11 +161,14 @@ class Valine {
                             let item = _as[k];
                             if (item.getAttribute('class') != 'at') {
                                 item.setAttribute('target', '_blank');
+                                item.setAttribute('rel', 'nofollow');
                             }
                         }
                     }
                     _root.bindAt(_vat);
                     _vlist.insertBefore(_vcard, _vlis[1]);
+                    let _vcomment = _vcard.querySelector('.vcomment');
+                    _root.expand(_vcomment);
                 }
             }
             _root.loading.hide();
@@ -185,6 +179,18 @@ class Valine {
 
         // Bind Event
         _root.bind();
+    }
+
+    /**
+     * Expand Event
+     */
+    expand(el) {
+        if (el.offsetHeight > 180) {
+            el.classList.add('expand');
+            Event.on('click', el, (e) => {
+                el.setAttribute('class', 'vcomment');
+            })
+        }
     }
 
     /**
@@ -351,6 +357,7 @@ class Valine {
                 }
             }
             comment.setACL(getAcl());
+
             comment.save().then((ret) => {
                 defaultComment['nick'] != 'Guest' && store && store.setItem('ValineCache', JSON.stringify({
                     nick: defaultComment['nick'],
@@ -362,7 +369,7 @@ class Valine {
                 let _vcard = document.createElement('li');
                 _vcard.setAttribute('class', 'vcard');
                 _vcard.setAttribute('id', ret.id);
-                _vcard.innerHTML = `<div class="vhead" ><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get('nick')}</a><span class="vtime">${dateFormat(ret.get('createdAt'))}</span><span rid='${ret.id}' at='@${ret.get('nick')}  mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcomment">${ret.get('comment')}</div>`;
+                _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcomment">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
                 let _vlist = _root.el.querySelector('.vlist');
                 let _vlis = _vlist.querySelectorAll('li');
                 let _as = _vcard.querySelectorAll('a');
@@ -371,12 +378,15 @@ class Valine {
                         let item = _as[k];
                         if (item.getAttribute('class') != 'at') {
                             item.setAttribute('target', '_blank');
+                            item.setAttribute('rel', 'nofollow');
                         }
                     }
                 }
                 let _vat = _vcard.querySelector('.vat');
                 _root.bindAt(_vat);
                 _vlist.insertBefore(_vcard, _vlis[1]);
+                let _vcomment = _vcard.querySelector('.vcomment');
+                _root.expand(_vcomment);
 
                 defaultComment['mail'] && signUp({
                     username: defaultComment['nick'],
@@ -539,7 +549,7 @@ const check = {
         };
     },
     link(l) {
-        l = l.length > 0 && /^(http|https)/.test(l) ? l : `http://${l}`;
+        l = l.length > 0 && (/^(http|https)/.test(l) ? l : `http://${l}`);
         return {
             k: /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(l),
             v: l
@@ -613,6 +623,7 @@ const timeAgo = (date) => {
             }
             return hours + ' 小时前';
         }
+        if (days < 0) return '刚刚';
 
         if (days < 4) {
             return days + ' 天前';
