@@ -2,9 +2,9 @@
 # Valine [![version](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![npm downloads](https://img.shields.io/npm/dt/valine.svg?style=flat-square)](https://www.npmjs.com/package/valine) [![build](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)  
 > A simple comment system based on Leancloud.  
 ------------------------------
-**[Live Demo](https://xcss.github.io/Valine/)**
+**[Live Demo](https://valine.js.org)**
 
-[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)
+**[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)**
 
 - High speed.
 - Safe by default.
