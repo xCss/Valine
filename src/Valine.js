@@ -14,6 +14,12 @@ const defaultComment = {
     like: 0
 };
 
+
+let defaultPage = {
+    pageNo: 1,
+    pageSize: 15
+}
+
 const store = localStorage;
 class Valine {
     /**
@@ -45,7 +51,7 @@ class Valine {
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || '';
-            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul>`;
+            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div>`;
             _root.el.innerHTML = eleHTML;
 
 
@@ -90,6 +96,7 @@ class Valine {
             });
             _root.v = av;
             defaultComment.url = option.path || location.pathname;
+            defaultPage.pageSize = option.pageSize || 15;
 
         } catch (ex) {
             let issue = 'https://github.com/xCss/Valine/issues';
@@ -158,33 +165,54 @@ class Valine {
                 })
             }
         }
-
-        _root.loading.show();
-        let query = new _root.v.Query('Comment');
-        query.equalTo('url', defaultComment['url']);
-        query.descending('createdAt');
-        query.limit('1000');
-        query.find().then(rets => {
-            let _temp = [];
-            let len = rets.length;
-            if (len) {
-                _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${len}</span>)`;
-                for (let i = 0; i < len; i++) {
-                    insertDom(rets[i], len - i, !0)
+        let commonQuery = (cb) => {
+            let query = new _root.v.Query('Comment');
+            query.equalTo('url', defaultComment['url']);
+            query.descending('createdAt');
+            return query;
+        }
+        let initPages = (cb) => {
+            commonQuery().count().then(count => {
+                if(count>0){
+                    let _vpage = _root.el.querySelector('.vpage');
+                    _vpage.innerHTML = '';
+                    _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
+                    let sumPage = Math.ceil(count/defaultPage['pageSize']);
+                    _vpage.innerHTML = `第 <input class="page" value="${defaultPage['pageNo']}">/${sumPage} 页`
                 }
-            }
-            _root.loading.hide();
-        }).catch(ex => {
-            //err(ex)
-            _root.loading.hide();
-        })
+            }).catch(ex => {
+                console.log(ex);
+            })
+        }
+        let query = (pageNo = 1) => {
+            defaultPage['pageNo'] = pageNo;
+            _root.loading.show();
+            let cq = commonQuery();
+            cq.limit(defaultPage['pageSize']);
+            cq.skip((pageNo - 1) * defaultPage['pageSize']);
+            cq.find().then(rets => {
+                let len = rets.length;
+                if (len) {
+                    _root.el.querySelector('.vlist').innerHTML = '';
+                    for (let i = 0; i < len; i++) {
+                        insertDom(rets[i], !0)
+                    }
+                }
+                _root.loading.hide();
+                initPages();
+            }).catch(ex => {
+                //err(ex)
+                _root.loading.hide();
+            })
+        }
+        query();
 
-        let insertDom = (ret, floor, mt) => {
+        let insertDom = (ret, mt) => {
 
             let _vcard = document.createElement('li');
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
-            _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'><section ><h5><i class="floor">#${floor}</i><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcomment">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
+            _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcomment">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');
             let _vat = _vcard.querySelector('.vat');
@@ -382,7 +410,7 @@ class Valine {
                     } else {
                         _root.el.querySelector('.count').innerHTML = '评论(<span class="num">1</span>)'
                     }
-                    insertDom(ret, num);
+                    insertDom(ret);
 
                     defaultComment['mail'] && signUp({
                         username: defaultComment['nick'],
@@ -593,7 +621,7 @@ const dateFormat = (date) => {
     var vHour = padWithZeros(date.getHours(), 2);
     var vMinute = padWithZeros(date.getMinutes(), 2);
     var vSecond = padWithZeros(date.getSeconds(), 2);
-    return `${vYear}-${vMonth}-${vDay} ${vHour}:${vMinute}:${vSecond}`;
+    return `${vYear}-${vMonth}-${vDay}`;
 }
 
 const timeAgo = (date) => {

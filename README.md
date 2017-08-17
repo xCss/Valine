@@ -31,7 +31,7 @@
 ```
 or
 ```html
-<script src="https://xcss.github.io/Valine/dist/Valine.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
 ```
 or via `npm`
 ```bash
