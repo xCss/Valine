@@ -83,9 +83,8 @@ import Valine from 'valine'
 ## Donate
 If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
 
-|:-------------:|:-----------:|  
-| [![Donate via Wechat](./src/assets/alipay.png)](https://ws1.sinaimg.cn/large/006qRazegy1fibhig0ywqj30es0erabm.jpg) | [![Donate via Wechat](./src/assets/wechat.png)](https://ws1.sinaimg.cn/large/006qRazegy1fibhifhhfnj30ix0io0tt.jpg) |  
-| Alipay      |   Wechat |
+- [Donate via Wechat](https://ws1.sinaimg.cn/large/006qRazegy1fibhig0ywqj30es0erabm.jpg)
+- [Donate via Alipay](https://ws1.sinaimg.cn/large/006qRazegy1fibhifhhfnj30ix0io0tt.jpg)
 
 If you are not available for this, simply spreading the word for us would help too!
 
