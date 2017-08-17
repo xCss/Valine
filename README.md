@@ -78,16 +78,16 @@ or via [npm](https://www.npmjs.com/package/valine)
 ```
 
 ## Options
-|      name     |   require   |     note    |  
-| ------------- | ----------- | ----------- |  
-|      `av`     |     true    | Leancloud Operation library |  
-|      `el`     |     true    | Base element (`unique`) |  
-|   `notify`    |    false    | mail notifier |
-|   `verify`    |    false    | validation code |
-|   `app_id`    |     true    | your leancloud `appid`  |
-|   `app_key`   |     true    | your leancloud `appkey` |
-| `placeholder` |    false    | Comment box placeholder |
-|    `path`     |    false    | Article path(just like duoshuo `thread`) |
+|      name     |   require   | support version |     note    |  
+| ------------- | ----------- | --------------- | ----------- |  
+|      `av`     |     true    | 1.0.0           | Leancloud Operation library |  
+|      `el`     |     true    | 1.0.0           | Base element (`unique`) |  
+|   `app_id`    |     true    | 1.0.0           | your leancloud `appid`  |
+|   `app_key`   |     true    | 1.0.0           | your leancloud `appkey` |
+| `placeholder` |    false    | 1.0.7           | Comment box placeholder |
+|   `notify`    |    false    | 1.1.4           | mail notifier |
+|   `verify`    |    false    | 1.1.4           | validation code |
+|    `path`     |    false    | 1.1.5           | Article path(just like duoshuo `thread`) |
 
 
 
