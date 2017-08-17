@@ -17,7 +17,8 @@ const defaultComment = {
 
 let defaultPage = {
     pageNo: 1,
-    pageSize: 15
+    pageSize: 15,
+    pagination: false
 }
 
 const store = localStorage;
@@ -96,7 +97,8 @@ class Valine {
             });
             _root.v = av;
             defaultComment.url = option.path || location.pathname;
-            defaultPage.pageSize = option.pageSize || 15;
+            defaultPage.pagination = ({}).toString.call(option.pagination) == "[object Boolean]" ? option.pagination : !1;
+            defaultPage.pageSize = isNaN(option.pageSize) ? 15 : option.pageSize;
 
         } catch (ex) {
             let issue = 'https://github.com/xCss/Valine/issues';
@@ -173,12 +175,9 @@ class Valine {
         }
         let initPages = (cb) => {
             commonQuery().count().then(count => {
-                if(count>0){
+                if (count > 0) {
                     let _vpage = _root.el.querySelector('.vpage');
-                    _vpage.innerHTML = '';
                     _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
-                    let sumPage = Math.ceil(count/defaultPage['pageSize']);
-                    _vpage.innerHTML = `第 <input class="page" value="${defaultPage['pageNo']}">/${sumPage} 页`
                 }
             }).catch(ex => {
                 console.log(ex);
@@ -188,8 +187,12 @@ class Valine {
             defaultPage['pageNo'] = pageNo;
             _root.loading.show();
             let cq = commonQuery();
-            cq.limit(defaultPage['pageSize']);
-            cq.skip((pageNo - 1) * defaultPage['pageSize']);
+            if (defaultPage['pagination']) {
+                cq.limit(defaultPage['pageSize']);
+                cq.skip((pageNo - 1) * defaultPage['pageSize']);
+            } else {
+                cq.limit('1000');
+            }
             cq.find().then(rets => {
                 let len = rets.length;
                 if (len) {
@@ -197,9 +200,9 @@ class Valine {
                     for (let i = 0; i < len; i++) {
                         insertDom(rets[i], !0)
                     }
+                    if (defaultPage['pagination']) initPages();
                 }
                 _root.loading.hide();
-                initPages();
             }).catch(ex => {
                 //err(ex)
                 _root.loading.hide();

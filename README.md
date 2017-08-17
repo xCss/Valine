@@ -1,4 +1,4 @@
-![](./src/images/logo.opacity.png)
+![](./src/assets/logo.opacity.png)
 # Valine [![version](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![npm downloads](https://img.shields.io/npm/dt/valine.svg?style=flat-square)](https://www.npmjs.com/package/valine) [![build](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)  
 > A simple comment system based on Leancloud.  
 ------------------------------
@@ -82,9 +82,9 @@ import Valine from 'valine'
 
 ## Donate
 If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
-
-- [Donate via Wechat](https://ws1.sinaimg.cn/large/006qRazegy1fibhig0ywqj30es0erabm.jpg)
-- [Donate via Alipay](https://ws1.sinaimg.cn/large/006qRazegy1fibhifhhfnj30ix0io0tt.jpg)
+|:-------------:| -----:|
+| [![Donate via Wechat](./src/assets/alipay.png)](https://ws1.sinaimg.cn/large/006qRazegy1fibhig0ywqj30es0erabm.jpg) | [![Donate via Wechat](./src/assets/wechat.png)](https://ws1.sinaimg.cn/large/006qRazegy1fibhifhhfnj30ix0io0tt.jpg) |
+| Alipay      |   Wechat |
 
 If you are not available for this, simply spreading the word for us would help too!
 
