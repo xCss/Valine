@@ -85,7 +85,7 @@ or via [npm](https://www.npmjs.com/package/valine)
 |   `app_id`    |     true    | 1.0.0           | your leancloud `appid`  |
 |   `app_key`   |     true    | 1.0.0           | your leancloud `appkey` |
 | `placeholder` |    false    | 1.0.7           | Comment box placeholder |
-|   `notify`    |    false    | 1.1.4           | mail notifier |
+|   `notify`    |    false    | 1.1.4           | [mail notifier](https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE) |
 |   `verify`    |    false    | 1.1.4           | validation code |
 |    `path`     |    false    | 1.1.5           | Article path(just like duoshuo `thread`) |
 
