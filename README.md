@@ -34,12 +34,12 @@
 or
 ```html
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/valine@1.1.5/dist/Valine.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
 ```
 or
 ```html
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine@1.1.5/dist/Valine.min.js'></script>
+<script src='//unpkg.com/valine@1.1.6/dist/Valine.min.js'></script>
 ```
 or via [npm](https://www.npmjs.com/package/valine)
 
