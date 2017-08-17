@@ -24,22 +24,24 @@
 
 ## Installation
 **1. Installation**   
-> :warning: **You must first reference the package AV in the web page**  
-> `<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>`
+> :warning: **You must first reference the package `av-min.js` in the web page**  
+
 ```html
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 <script src="./dist/Valine.min.js"></script>
 ```
 or
 ```html
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
 ```
-or via `npm`
-```bash
-npm install valine --save
+or
+```html
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.1.4/dist/Valine.min.js'></script>
 ```
-```js
-import Valine from 'valine'
-```
+or via [npm](https://www.npmjs.com/package/valine)
+
 **2. Get `appId`/`appKey` from Leancloud**  
 [Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or login in `leancloud`.  
 [Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create new application in `Leancloud`, and you will get `appId`/`appKey`.
@@ -62,11 +64,12 @@ import Valine from 'valine'
         new Valine({
             av: AV, // source from av-min.js
             el: '.comment' ,
-            notify:true, // 邮件提醒 v1.1.4新增
-            verify:true, // 验证码 v1.1.4新增
+            notify:false, // 邮件提醒 v1.1.4新增
+            verify:false, // 验证码 v1.1.4新增
             app_id: 'your appid',
             app_key: 'your appkey',
-            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            path:window.location.pathname // 配置路径 v1.1.5新增
         });
     </script>
 </body>
