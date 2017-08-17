@@ -116,6 +116,8 @@
     ul,
     li {
         list-style: none;
+        margin: 0 auto;
+        padding: 0;
     }
     .txt-center {
         text-align: center;
@@ -142,6 +144,7 @@
     }
     .vbtn {
         display: inline-block;
+        background: #ededed;
         margin-bottom: 0;
         font-weight: 400;
         text-align: center;
