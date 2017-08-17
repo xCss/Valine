@@ -31,7 +31,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.5-beta';
+        _root.version = '1.1.5';
 
         _root.md5 = md5;
         // Valine init
@@ -168,31 +168,25 @@ class Valine {
             }
         }
         let commonQuery = (cb) => {
-            let query = new _root.v.Query('Comment');
-            query.equalTo('url', defaultComment['url']);
-            query.descending('createdAt');
-            return query;
-        }
-        let initPages = (cb) => {
-            commonQuery().count().then(count => {
-                if (count > 0) {
-                    let _vpage = _root.el.querySelector('.vpage');
-                    _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
-                }
-            }).catch(ex => {
-                console.log(ex);
-            })
-        }
+                let query = new _root.v.Query('Comment');
+                query.equalTo('url', defaultComment['url']);
+                query.descending('createdAt');
+                return query;
+            }
+            // let initPages = (cb) => {
+            //     commonQuery().count().then(count => {
+            //         if (count > 0) {
+            //             let _vpage = _root.el.querySelector('.vpage');
+            //             _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
+            //         }
+            //     }).catch(ex => {
+            //         console.log(ex);
+            //     })
+            // }
         let query = (pageNo = 1) => {
-            defaultPage['pageNo'] = pageNo;
             _root.loading.show();
             let cq = commonQuery();
-            if (defaultPage['pagination']) {
-                cq.limit(defaultPage['pageSize']);
-                cq.skip((pageNo - 1) * defaultPage['pageSize']);
-            } else {
-                cq.limit('1000');
-            }
+            cq.limit('1000');
             cq.find().then(rets => {
                 let len = rets.length;
                 if (len) {
@@ -200,7 +194,10 @@ class Valine {
                     for (let i = 0; i < len; i++) {
                         insertDom(rets[i], !0)
                     }
-                    if (defaultPage['pagination']) initPages();
+                    // if (defaultPage['pagination']) initPages();
+                    // else {
+                    _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${len}</span>)`;
+                    // }
                 }
                 _root.loading.hide();
             }).catch(ex => {
