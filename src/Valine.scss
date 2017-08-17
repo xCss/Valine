@@ -194,6 +194,7 @@
                     font-weight: 700;
                     color: #666;
                     margin-bottom: 6px;
+                    margin-top: 0;
                     a {
                         color: #4A4A4A;
                         &:hover {
@@ -281,22 +282,22 @@
             }
         }
     }
-    .vpage{
-        padding:.35rem;
-        i{
-            display:inline-block;
-            padding:.05rem .65rem;
-            font-size:.785rem;
-            border:1px solid #f0f0f0;
-            font-style:normal;
-            cursor:pointer;
-            &+i{
-                margin-left:.35rem;
+    .vpage {
+        padding: .35rem;
+        i {
+            display: inline-block;
+            padding: .05rem .65rem;
+            font-size: .785rem;
+            border: 1px solid #f0f0f0;
+            font-style: normal;
+            cursor: pointer;
+            &+i {
+                margin-left: .35rem;
             }
-            &.active{
-                border:none;
-                color:#ccc;
-                cursor:default;
+            &.active {
+                border: none;
+                color: #ccc;
+                cursor: default;
             }
         }
     }
