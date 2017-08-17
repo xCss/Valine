@@ -17,6 +17,7 @@
 **Table of content**
 - [Installation](#installation)
 - [Useage](#useage)
+- [Options](#options)
 - [Contributors](#contributors)
 - [Features](#features)
 - [Donate](#donate)
@@ -33,12 +34,12 @@
 or
 ```html
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine@1.1.5/dist/Valine.min.js"></script>
 ```
 or
 ```html
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine@1.1.4/dist/Valine.min.js'></script>
+<script src='//unpkg.com/valine@1.1.5/dist/Valine.min.js'></script>
 ```
 or via [npm](https://www.npmjs.com/package/valine)
 
@@ -69,12 +70,27 @@ or via [npm](https://www.npmjs.com/package/valine)
             app_id: 'your appid',
             app_key: 'your appkey',
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
-            path:window.location.pathname // 配置路径 v1.1.5新增
+            path:window.location.pathname // 路径配置 v1.1.5新增，可填window.location.href
         });
     </script>
 </body>
 </html>
 ```
+
+## Options
+|      name     |   require   |     note    |  
+| ------------- | ----------- | ----------- |  
+|      `av`     |     true    | Leancloud Operation library |  
+|      `el`     |     true    | Base element (`unique`) |  
+|   `notify`    |    false    | mail notifier |
+|   `verify`    |    false    | validation code |
+|   `app_id`    |     true    | your leancloud `appid`  |
+|   `app_key`   |     true    | your leancloud `appkey` |
+| `placeholder` |    false    | Comment box placeholder |
+|    `path`     |    false    | Article path(just like duoshuo `thread`) |
+
+
+
 ## Contributors
 - [Contributors](https://github.com/xCss/Valine/graphs/contributors)
 
