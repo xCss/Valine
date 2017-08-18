@@ -16,7 +16,7 @@
 
 **Table of content**
 - [Installation](#installation)
-- [Useage](#useage)
+- [Usage](#usage)
 - [Options](#options)
 - [Contributors](#contributors)
 - [Features](#features)
@@ -47,7 +47,7 @@ or via [npm](https://www.npmjs.com/package/valine)
 [Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or login in `leancloud`.  
 [Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create new application in `Leancloud`, and you will get `appId`/`appKey`.
 
-## Useage
+## Usage
 ```html
 <!DOCTYPE html>
 <html lang="en">
