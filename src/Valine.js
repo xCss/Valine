@@ -163,7 +163,7 @@ class Valine {
             if (el.offsetHeight > 180) {
                 el.classList.add('expand');
                 Event.on('click', el, (e) => {
-                    el.setAttribute('class', 'vcomment');
+                    el.setAttribute('class', 'vcontent');
                 })
             }
         }
@@ -212,7 +212,8 @@ class Valine {
             let _vcard = document.createElement('li');
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
-            _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcomment">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
+            let _img = `${v2cdn}${md5(ret.get('mail') || Math.random().toString(32).substring(2))}?d=identicon&s=50`;
+            _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${_img}'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');
             let _vat = _vcard.querySelector('.vat');
@@ -226,11 +227,11 @@ class Valine {
                     }
                 }
             }
-            bindAtEvt(_vat);
             if (mt) _vlist.appendChild(_vcard);
             else _vlist.insertBefore(_vcard, _vlis[0]);
-            let _vcomment = _vcard.querySelector('.vcomment');
-            expandEvt(_vcomment);
+            let _vcontent = _vcard.querySelector('.vcontent');
+            expandEvt(_vcontent);
+            bindAtEvt(_vat);
 
         }
 
@@ -618,15 +619,14 @@ const dateFormat = (date) => {
     var vDay = padWithZeros(date.getDate(), 2);
     var vMonth = padWithZeros(date.getMonth() + 1, 2);
     var vYear = padWithZeros(date.getFullYear(), 2);
-    var vHour = padWithZeros(date.getHours(), 2);
-    var vMinute = padWithZeros(date.getMinutes(), 2);
-    var vSecond = padWithZeros(date.getSeconds(), 2);
+    // var vHour = padWithZeros(date.getHours(), 2);
+    // var vMinute = padWithZeros(date.getMinutes(), 2);
+    // var vSecond = padWithZeros(date.getSeconds(), 2);
     return `${vYear}-${vMonth}-${vDay}`;
 }
 
 const timeAgo = (date) => {
     try {
-
         var oldTime = date.getTime();
         var currTime = new Date().getTime();
         var diffValue = currTime - oldTime;
@@ -652,7 +652,7 @@ const timeAgo = (date) => {
         }
         if (days < 0) return '刚刚';
 
-        if (days < 4) {
+        if (days < 8) {
             return days + ' 天前';
         } else {
             return dateFormat(date)
