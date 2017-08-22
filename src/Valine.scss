@@ -248,9 +248,25 @@
                 font-size: .875rem;
                 line-height: 2;
                 position: relative;
+                a {
+                    font-size: .875rem;
+                }
                 pre,
                 .code {
                     overflow: auto;
+                    padding: 2px 6px;
+                    word-wrap: break-word;
+                    color: #555;
+                    background: #f5f2f2;
+                    border-radius: 3px;
+                    font-size: .875rem;
+                    margin: 5px 0;
+                }
+                code {
+                    @extend .code;
+                    display: inline-block;
+                    vertical-align: middle;
+                    font-style: normal;
                 }
                 &.expand {
                     cursor: pointer;
