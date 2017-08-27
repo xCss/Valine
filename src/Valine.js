@@ -52,7 +52,7 @@ class Valine {
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || '';
-            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div><div class="col power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div>`;
+            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div>`;
             _root.el.innerHTML = eleHTML;
 
 
@@ -150,10 +150,6 @@ class Valine {
     }
 
     /**
-     * Expand Event
-     */
-
-    /**
      * Bind Event
      */
     bind() {
@@ -212,7 +208,7 @@ class Valine {
             let _vcard = document.createElement('li');
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
-            let _img = `${v2cdn}${md5(ret.get('mail') || Math.random().toString(32).substring(2))}?d=identicon&s=50`;
+            let _img = `${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50`;
             _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${_img}'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');
