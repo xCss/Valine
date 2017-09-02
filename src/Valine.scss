@@ -83,6 +83,13 @@
             }
         }
     }
+    .power {
+        color: #999;
+        font-size: .75rem;
+        a {
+            font-size: .75rem;
+        }
+    }
     .info {
         font-size: 0;
         padding: 5px;
@@ -91,13 +98,7 @@
             display: inline-block;
             width: 50%;
             vertical-align: middle;
-            &.power {
-                color: #999;
-                font-size: .75rem;
-                a {
-                    font-size: .75rem;
-                }
-            }
+            
         }
         .count {
             .num {
