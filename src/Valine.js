@@ -98,8 +98,8 @@ class Valine {
                 return;
             }
             av.init({
-                appId: option.app_id || option.appId,
-                appKey: option.app_key || option.appKey
+                appId: appId,
+                appKey: appKey
             });
             _root.v = av;
             defaultComment.url = option.path || location.pathname;
@@ -170,21 +170,21 @@ class Valine {
             }
         }
         let commonQuery = (cb) => {
-                let query = new _root.v.Query('Comment');
-                query.equalTo('url', defaultComment['url']);
-                query.descending('createdAt');
-                return query;
-            }
-            // let initPages = (cb) => {
-            //     commonQuery().count().then(count => {
-            //         if (count > 0) {
-            //             let _vpage = _root.el.querySelector('.vpage');
-            //             _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
-            //         }
-            //     }).catch(ex => {
-            //         console.log(ex);
-            //     })
-            // }
+            let query = new _root.v.Query('Comment');
+            query.equalTo('url', defaultComment['url']);
+            query.descending('createdAt');
+            return query;
+        }
+        // let initPages = (cb) => {
+        //     commonQuery().count().then(count => {
+        //         if (count > 0) {
+        //             let _vpage = _root.el.querySelector('.vpage');
+        //             _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
+        //         }
+        //     }).catch(ex => {
+        //         console.log(ex);
+        //     })
+        // }
         let query = (pageNo = 1) => {
             _root.loading.show();
             let cq = commonQuery();
@@ -518,24 +518,24 @@ class Valine {
     }
 
 }
-const loadAV = (cb) => {
-    let avjs = document.createElement('script');　　　
-    let _doc = document.querySelector('head');　
-    avjs.type = 'text/javascript';　　　　
-    avjs.async = 'async';　　　　
-    avjs.src = '//cdn1.lncld.net/static/js/3.0.4/av-min.js';　　　　
-    _doc.appendChild(avjs);　　　　
-    if (avjs.readyState) { //IE　　　　　　
-        avjs.onreadystatechange = function() {　　　　　　　　
-            if (avjs.readyState == 'complete' || avjs.readyState == 'loaded') {　　　　　　　　　　
-                avjs.onreadystatechange = null;　　　　　　　　　　
-                cb && cb();　　　　　　　　
-            }　　　　　　
-        }　　　　
-    } else { //非IE　　　　　　
-        avjs.onload = function() { cb && cb(); }　　　　
-    }
-}
+// const loadAV = (cb) => {
+//     let avjs = document.createElement('script');　　　
+//     let _doc = document.querySelector('head');　
+//     avjs.type = 'text/javascript';　　　　
+//     avjs.async = 'async';　　　　
+//     avjs.src = '//cdn1.lncld.net/static/js/3.0.4/av-min.js';　　　　
+//     _doc.appendChild(avjs);　　　　
+//     if (avjs.readyState) { //IE　　　　　　
+//         avjs.onreadystatechange = function() {　　　　　　　　
+//             if (avjs.readyState == 'complete' || avjs.readyState == 'loaded') {　　　　　　　　　　
+//                 avjs.onreadystatechange = null;　　　　　　　　　　
+//                 cb && cb();　　　　　　　　
+//             }　　　　　　
+//         }　　　　
+//     } else { //非IE　　　　　　
+//         avjs.onload = function() { cb && cb(); }　　　　
+//     }
+// }
 
 const Event = {
     on(type, el, handler, capture) {
