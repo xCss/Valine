@@ -90,7 +90,13 @@ class Valine {
             _root.verify = option.verify || !1;
 
             let av = option.av || AV;
-
+            let appId= option.app_id || option.appId;
+            let appKey= option.app_key || option.appKey;
+            if(!appId || !appKey){
+                _root.loading.hide();
+                throw '初始化失败，请检查你的appid或者appkey.';
+                return;
+            }
             av.init({
                 appId: option.app_id || option.appId,
                 appKey: option.app_key || option.appKey
