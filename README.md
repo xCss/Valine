@@ -104,7 +104,7 @@ If you are enjoying this app, please consider making a donation to keep it alive
 
 | 支付宝 | 微信 | 
 | :------: | :------: | 
-| <img width="150" src="./static/assets/alipay.png"> | <img width="135" src="./static/assets/wechat.png"> | 
+| <img width="150" src="./src/assets/alipay.png"> | <img width="135" src="./src/assets/wechat.png"> | 
 
 If you are not available for this, simply spreading the word for us would help too!
 
