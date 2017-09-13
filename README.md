@@ -102,8 +102,9 @@ or via [npm](https://www.npmjs.com/package/valine)
 ## Donate
 If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
 
-- [Donate via Wechat](https://ws1.sinaimg.cn/large/006qRazegy1fibhig0ywqj30es0erabm.jpg)
-- [Donate via Alipay](https://ws1.sinaimg.cn/large/006qRazegy1fibhifhhfnj30ix0io0tt.jpg)
+| 支付宝 | 微信 | 
+| :------: | :------: | 
+| <img width="150" src="./static/assets/alipay.png"> | <img width="135" src="./static/assets/wechat.png"> | 
 
 If you are not available for this, simply spreading the word for us would help too!
 
