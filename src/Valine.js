@@ -1,6 +1,6 @@
 require('./Valine.scss');
 const md5 = require('blueimp-md5');
-import snarkdown from 'snarkdown';
+import marked from 'marked';
 const v2cdn = 'https://cdn.v2ex.com/gravatar/';
 const defaultComment = {
     comment: '',
@@ -14,12 +14,6 @@ const defaultComment = {
     like: 0
 };
 
-
-let defaultPage = {
-    pageNo: 1,
-    pageSize: 15,
-    pagination: false
-}
 
 const store = localStorage;
 class Valine {
@@ -103,8 +97,6 @@ class Valine {
             });
             _root.v = av;
             defaultComment.url = option.path || location.pathname;
-            defaultPage.pagination = ({}).toString.call(option.pagination) == "[object Boolean]" ? option.pagination : !1;
-            defaultPage.pageSize = isNaN(option.pageSize) ? 15 : option.pageSize;
 
         } catch (ex) {
             let issue = 'https://github.com/xCss/Valine/issues';
@@ -196,10 +188,7 @@ class Valine {
                     for (let i = 0; i < len; i++) {
                         insertDom(rets[i], !0)
                     }
-                    // if (defaultPage['pagination']) initPages();
-                    // else {
                     _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${len}</span>)`;
-                    // }
                 }
                 _root.loading.hide();
             }).catch(ex => {
@@ -250,15 +239,15 @@ class Valine {
                 let _el = _root.el.querySelector(`.${i}`);
                 inputs[_v] = _el;
                 Event.on('input', _el, (e) => {
-                    defaultComment[_v] = HtmlUtil.encode(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
+                    defaultComment[_v] = marked(_el.value,{sanitize:true})
                 });
             }
         }
 
         // cache 
         let getCache = () => {
-            let s = store && store.getItem('ValineCache');
-            if (!!s) {
+            let s = store && store.ValineCache;
+            if (s) {
                 s = JSON.parse(s);
                 let m = ['nick', 'link', 'mail'];
                 for (let i in m) {
@@ -312,8 +301,6 @@ class Valine {
             if (defaultComment.nick == '') {
                 defaultComment['nick'] = '小调皮';
             }
-
-            defaultComment.comment = snarkdown(defaultComment.comment);
             let idx = defaultComment.comment.indexOf(atData.at);
             if (idx > -1 && atData.at != '') {
                 let at = `<a class="at" href='#${defaultComment.rid}'>${atData.at}</a>`;
@@ -587,35 +574,35 @@ const check = {
     }
 }
 
-const HtmlUtil = {
+// const HtmlUtil = {
 
-    // /**
-    //  * 
-    //  * 将str中的链接转换成a标签形式
-    //  * @param {String} str 
-    //  * @returns 
-    //  */
-    // transUrl(str) {
-    //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-    //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
-    // },
-    /**
-     * HTML转码
-     * @param {String} str 
-     * @return {String} result
-     */
-    encode(str) {
-        return !!str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "&#39;").replace(/\"/g, "&quot;") : '';
-    },
-    /**
-     * HTML解码
-     * @param {String} str 
-     * @return {String} result
-     */
-    decode(str) {
-        return !!str ? str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"") : '';
-    }
-};
+//     // /**
+//     //  * 
+//     //  * 将str中的链接转换成a标签形式
+//     //  * @param {String} str 
+//     //  * @returns 
+//     //  */
+//     // transUrl(str) {
+//     //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+//     //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
+//     // },
+//     /**
+//      * HTML转码
+//      * @param {String} str 
+//      * @return {String} result
+//      */
+//     encode(str) {
+//         return !!str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "&#39;").replace(/\"/g, "&quot;") : '';
+//     },
+//     /**
+//      * HTML解码
+//      * @param {String} str 
+//      * @return {String} result
+//      */
+//     decode(str) {
+//         return !!str ? str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"") : '';
+//     }
+// };
 
 const dateFormat = (date) => {
     var vDay = padWithZeros(date.getDate(), 2);

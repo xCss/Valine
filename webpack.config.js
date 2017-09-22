@@ -45,8 +45,7 @@ module.exports = {
                 options: {
                     presets: ['es2015']
                 }
-            },
-            {
+            },{
                 test: /\.scss$/,
                 use: [
                     'style-loader',
@@ -55,8 +54,11 @@ module.exports = {
                     'sass-loader'
                 ],
                 include: APP_PATH
-            },
-            {
+            },{ test: /\.css$/, use: [
+                'style-loader',
+                'css-loader',
+                'postcss-loader'
+            ]},{
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader?limit=40000'
             }
