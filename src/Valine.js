@@ -25,7 +25,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.7-beta1';
+        _root.version = '1.1.7-beta2';
 
         _root.md5 = md5;
         // Valine init
@@ -239,7 +239,7 @@ class Valine {
                 let _el = _root.el.querySelector(`.${i}`);
                 inputs[_v] = _el;
                 Event.on('input', _el, (e) => {
-                    defaultComment[_v] = marked(_el.value,{sanitize:true})
+                    defaultComment[_v] = _v==='comment' ? marked(_el.value,{sanitize:true}) : HtmlUtil.encode(_el.value); 
                 });
             }
         }
@@ -574,35 +574,35 @@ const check = {
     }
 }
 
-// const HtmlUtil = {
+const HtmlUtil = {
 
-//     // /**
-//     //  * 
-//     //  * 将str中的链接转换成a标签形式
-//     //  * @param {String} str 
-//     //  * @returns 
-//     //  */
-//     // transUrl(str) {
-//     //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-//     //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
-//     // },
-//     /**
-//      * HTML转码
-//      * @param {String} str 
-//      * @return {String} result
-//      */
-//     encode(str) {
-//         return !!str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "&#39;").replace(/\"/g, "&quot;") : '';
-//     },
-//     /**
-//      * HTML解码
-//      * @param {String} str 
-//      * @return {String} result
-//      */
-//     decode(str) {
-//         return !!str ? str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"") : '';
-//     }
-// };
+    // /**
+    //  * 
+    //  * 将str中的链接转换成a标签形式
+    //  * @param {String} str 
+    //  * @returns 
+    //  */
+    // transUrl(str) {
+    //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+    //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
+    // },
+    /**
+     * HTML转码
+     * @param {String} str 
+     * @return {String} result
+     */
+    encode(str) {
+        return !!str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "&#39;").replace(/\"/g, "&quot;") : '';
+    },
+    /**
+     * HTML解码
+     * @param {String} str 
+     * @return {String} result
+     */
+    decode(str) {
+        return !!str ? str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"") : '';
+    }
+};
 
 const dateFormat = (date) => {
     var vDay = padWithZeros(date.getDate(), 2);
