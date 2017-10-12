@@ -49,7 +49,6 @@ class Valine {
             let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div>`;
             _root.el.innerHTML = eleHTML;
 
-
             // Empty Data
             let vempty = _root.el.querySelector('.vempty');
             _root.nodata = {
