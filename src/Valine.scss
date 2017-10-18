@@ -195,7 +195,7 @@
     .vlist {
         padding: 0 .625rem;
         .vcard {
-            padding: 1.15rem 0;
+            padding-bottom: 2.5rem;
             position: relative;
             display:block;
             &+.vcard {
@@ -205,6 +205,11 @@
                 content:'';
                 clear:both;
                 display:block;
+            }
+            &:hover{
+                .vhead a{
+                    color:#D7191A;
+                }
             }
             .vimg {
                 width:2.5rem;
@@ -222,21 +227,17 @@
                     font-weight: 700;
                     color: rgb(44, 32, 32);
                     margin-right:.875rem;
-                    &:hover {
-                        color: #D7191A;
-                    }
                 }
                 .vtime {
                     color: #b3b3b3;
                     font-size: .75rem;
-                    line-height: 1;
+                    margin-right:.875rem;
                 }
                 .vat {
                     font-size: .875rem;
                     color: #999;
                     padding: 0 5px;
                     cursor: pointer;
-                    float: right;
                     &:hover {
                         color: #D7191A;
                     }
