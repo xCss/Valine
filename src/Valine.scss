@@ -1,3 +1,9 @@
+/**
+ * @Valine
+ * Author: xCss
+ * Github: https://github.com/xCss/Valine
+ * Website: https://valine.js.org
+ */
 .valine {
     * {
         box-sizing: border-box;
@@ -223,23 +229,22 @@
                         color: #D7191A;
                     }
                 }
-                .vtime {
-                    color: #b3b3b3;
-                    font-size: .75rem;
-                    margin-right:.875rem;
-                }
-                .vat {
-                    font-size: .875rem;
-                    color: #999;
-                    padding: 0 5px;
-                    cursor: pointer;
-                    &:hover {
-                        color: #D7191A;
-                    }
-                }
             }
             section {
                 overflow: hidden;
+                .vfooter{
+                    position:relative;
+                    .vtime {
+                        color: #b3b3b3;
+                        font-size: .75rem;
+                        margin-right:.875rem;
+                    }
+                    .vat {
+                        font-size: .8125rem;
+                        color: #ef2f11;
+                        cursor: pointer;
+                    }
+                }
             }
             .vcontent {
                 word-wrap: break-word;
@@ -249,6 +254,7 @@
                 font-size: .875rem;
                 line-height: 2;
                 position: relative;
+                margin-bottom:.75rem;
                 a {
                     font-size: .875rem;
                     color:#708090;

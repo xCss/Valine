@@ -1,3 +1,9 @@
+/**
+ * @Valine
+ * Author: xCss
+ * Github: https://github.com/xCss/Valine
+ * Website: https://valine.js.org
+ */
 require('./Valine.scss');
 const md5 = require('blueimp-md5');
 import marked from 'marked';
@@ -202,7 +208,7 @@ class Valine {
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
             let _img = `${v2cdn}${md5(ret.get('mail'))}?s=40`;
-            _vcard.innerHTML = `<img class="vimg" src='${_img}'><section><div class="vhead"><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><div></section>`;
+            _vcard.innerHTML = `<img class="vimg" src='${_img}'><section><div class="vhead"><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');
             let _vat = _vcard.querySelector('.vat');
