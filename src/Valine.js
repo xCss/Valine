@@ -1,7 +1,7 @@
 require('./Valine.scss');
 const md5 = require('blueimp-md5');
 import marked from 'marked';
-const v2cdn = 'https://cdn.v2ex.com/gravatar/';
+const v2cdn = 'https://gravatar.cat.net/avatar/';
 const defaultComment = {
     comment: '',
     rid: '',
@@ -25,7 +25,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.7-beta2';
+        _root.version = '1.1.7-rc1';
 
         _root.md5 = md5;
         // Valine init
@@ -46,7 +46,7 @@ class Valine {
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || '';
-            let eleHTML = `<div class="vwrap"><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class='vident'><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"></div><div class="vright"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div>`;
+            let eleHTML = `<div class="vwrap"><div class="vheader"><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"></div><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class="col col-60" title="MarkDown is Support"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg> MarkDown is Support</div><div class="col col-40 text-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div>`;
             _root.el.innerHTML = eleHTML;
 
             // Empty Data
@@ -60,7 +60,6 @@ class Valine {
                     vempty.setAttribute('style', 'display:none;');
                 }
             }
-
 
             // loading
             let _spinner = `<div class="spinner"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div></div>`;
@@ -95,7 +94,7 @@ class Valine {
                 appKey: appKey
             });
             _root.v = av;
-            defaultComment.url = option.path || location.pathname;
+            defaultComment.url = (option.path || location.pathname).replace(/index\.(html|htm)/,'');
 
         } catch (ex) {
             let issue = 'https://github.com/xCss/Valine/issues';
@@ -202,8 +201,8 @@ class Valine {
             let _vcard = document.createElement('li');
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
-            let _img = `${v2cdn}${md5(ret.get('mail'))}?d=identicon&s=50`;
-            _vcard.innerHTML = `<div class="vhead" ><img class="vimg" src='${_img}'><section ><h5><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></h5><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section></div>`;
+            let _img = `${v2cdn}${md5(ret.get('mail'))}?s=40`;
+            _vcard.innerHTML = `<img class="vimg" src='${_img}'><section><div class="vhead"><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><div></section>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');
             let _vat = _vcard.querySelector('.vat');
@@ -285,6 +284,8 @@ class Valine {
         // submit
         let submitBtn = _root.el.querySelector('.vsubmit');
         let submitEvt = (e) => {
+            // console.log(defaultComment)
+            // return;
             if (submitBtn.getAttribute('disabled')) {
                 _root.alert.show({
                     type: 0,
@@ -422,9 +423,9 @@ class Valine {
         }
 
         let verifyEvt = (fn) => {
-            let x = Math.floor((Math.random() * 20) + 1);
-            let y = Math.floor((Math.random() * 20) + 1);
-            let z = Math.floor((Math.random() * 20) + 1);
+            let x = Math.floor((Math.random() * 10) + 1);
+            let y = Math.floor((Math.random() * 10) + 1);
+            let z = Math.floor((Math.random() * 10) + 1);
             let opt = ['+', '-', 'x'];
             let o1 = opt[Math.floor(Math.random() * 3)];
             let o2 = opt[Math.floor(Math.random() * 3)];
