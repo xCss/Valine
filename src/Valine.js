@@ -31,7 +31,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.7-rc1';
+        _root.version = '1.1.7-rc2';
 
         _root.md5 = md5;
         // Valine init
