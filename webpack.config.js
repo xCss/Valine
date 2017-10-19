@@ -32,6 +32,7 @@ module.exports = {
     devtool: 'source-map',
 
     devServer: {
+        host:'192.168.1.48',
         publicPath: "/dist/",
         inline: true,
         port: 8088
@@ -41,10 +42,7 @@ module.exports = {
         rules: [{
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: APP_PATH,
-                options: {
-                    presets: ['es2015']
-                }
+                include: APP_PATH
             },{
                 test: /\.scss$/,
                 use: [

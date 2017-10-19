@@ -201,7 +201,7 @@
     .vlist {
         padding: 0 .625rem;
         .vcard {
-            padding-bottom: 2.5rem;
+            padding-top: 1.5rem;
             position: relative;
             display:block;
             &:after{
@@ -232,6 +232,8 @@
             }
             section {
                 overflow: hidden;
+                padding-bottom:1.5rem;
+                border-bottom:1px solid #f5f5f5;
                 .vfooter{
                     position:relative;
                     .vtime {

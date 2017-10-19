@@ -146,7 +146,6 @@ class Valine {
             }
         }
 
-
         // Bind Event
         _root.bind();
     }
@@ -165,6 +164,7 @@ class Valine {
                 })
             }
         }
+
         let commonQuery = (cb) => {
             let query = new _root.v.Query('Comment');
             query.equalTo('url', defaultComment['url']);
@@ -213,16 +213,14 @@ class Valine {
             let _vlis = _vlist.querySelectorAll('li');
             let _vat = _vcard.querySelector('.vat');
             let _as = _vcard.querySelectorAll('a');
-            for (let k in _as) {
-                if (_as.hasOwnProperty(k)) {
-                    let item = _as[k];
-                    if (item.getAttribute('class') != 'at') {
-                        item.setAttribute('target', '_blank');
-                        item.setAttribute('rel', 'nofollow');
-                    }
+            for (let i=0,len=_as.length;i<len;i++) {
+                let item = _as[i];
+                if (item && item.getAttribute('class') != 'at') {
+                    item.setAttribute('target', '_blank');
+                    item.setAttribute('rel', 'nofollow');
                 }
             }
-            if (mt) _vlist.appendChild(_vcard);
+            if(mt) _vlist.appendChild(_vcard);
             else _vlist.insertBefore(_vcard, _vlis[0]);
             let _vcontent = _vcard.querySelector('.vcontent');
             expandEvt(_vcontent);
