@@ -1,0 +1,3 @@
+- [Quick start](quickstart.md)
+- [Customization](configuration.md)
+- [Try](https://valine.js.org/try.html)

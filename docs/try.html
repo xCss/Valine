@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Valine,极简风,评论系统,极简风评论系统,comment system">
+    <meta name="description" content="Valine - 一款基于Leancloud的极简风评论系统">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1">
+    <title>Valine - A simple comment system based on Leancloud.</title>
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+</head>
+
+<body>
+        <main>
+            <button class="sidebar-toggle">
+                <div class="sidebar-toggle-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <aside class="sidebar">
+                <div class="search">
+                    <input type="search" value="" placeholder="Search">
+                    <div class="results-panel"></div>
+                </div>
+                <h1>
+                    <a class="app-name-link" data-nosearch="" href="/">Valine</a>
+                </h1>
+                <div class="sidebar-nav">
+                    <ul>
+                        <li class="active"><a href="/#/quickstart">Quick start</a>
+                            <ul class="app-sub-sidebar">
+                                <li>
+                                    <a class="section-link" href="/#/quickstart?id=manual-initialization">Manual initialization</a>
+                                </li>
+                                <li>
+                                    <a class="section-link" href="/#/quickstart?id=get-appidappkey-from-leancloud">Get appID/appKey from leancloud</a>
+                                </li>
+                                <li><a class="section-link" href="/#/quickstart?id=cdn">CDN</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/#/configuration">Customization</a></li>
+                        <li><a href="https://valine.js.org/try.html" target="_blank">Try</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <section class="content">
+                <article class="markdown-section" id="main">
+                    <h1 id="quick-start"><span>Try</span></h1>
+                    <div class="comment"></div>
+                </article>
+            </section>
+        </main>
+    <script>
+        var valine = new Valine();
+        valine.init({
+            // notify: true,
+            // verify: true,
+            el: '.comment',
+            app_id: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
+            app_key: 'iuneD4hXPQImdHQSRE0aOcRF',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            path: '/',
+            avatar:'mm' // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
+        })
+
+        if (!/^http:\/\/localhost/.test(location.href)) {
+            var _hmt = _hmt || [];
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?fc2301b16d1a46c7899ef2b5afb651cc";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        }
+    </script>
+</body>
+</html>

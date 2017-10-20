@@ -3,15 +3,11 @@
   "version": "1.1.7",
   "description": "A simple comment system based on Leancloud.",
   "main": "/src/Valine.js",
-  "author": {
-    "name": "xCss",
-    "url": "https://github.com/xCss",
-    "email": "xioveliu@gmail.com"
-  },
+  "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
   "scripts": {
     "test": "webpack",
     "build": "webpack",
-    "dev": "node_modules/.bin/webpack-dev-server --colors --hot --inline",
+    "dev": "webpack-dev-server --colors --hot --inline",
     "clear": "rm -rf dist/* "
   },
   "keywords": [
@@ -51,5 +47,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }
