@@ -6,7 +6,6 @@
 > A simple comment system based on Leancloud.  
 
 ------------------------------
-**[Live Demo](https://valine.js.org)**
 
 **[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)**
 
