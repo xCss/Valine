@@ -1,3 +1,4 @@
 - [Quick start](quickstart.md)
 - [Customization](configuration.md)
+- [Github](https://github.com/xcss/valine)
 - [Try](https://valine.js.org/try.html)
