@@ -7,7 +7,11 @@
 require('./Valine.scss');
 const md5 = require('blueimp-md5');
 import marked from 'marked';
-const v2cdn = 'https://gravatar.cat.net/avatar/';
+const gravatar = {
+    cdn:'https://gravatar.cat.net/avatar/',
+    ds:['mm','identicon','monsterid','wavatar','retro',''],
+    params:'?s=40'
+};
 const defaultComment = {
     comment: '',
     rid: '',
@@ -31,7 +35,7 @@ class Valine {
     constructor(option) {
         let _root = this;
         // version
-        _root.version = '1.1.7-rc3';
+        _root.version = '1.1.7';
 
         _root.md5 = md5;
         // Valine init
@@ -75,7 +79,7 @@ class Valine {
             _root.loading = {
                 show() {
                     vloading.setAttribute('style', 'display:block;');
-                    _root.nodata.hide();
+                    _root.nodata.hide();    
                 },
                 hide() {
                     vloading.setAttribute('style', 'display:none;');
@@ -86,6 +90,8 @@ class Valine {
 
             _root.notify = option.notify || !1;
             _root.verify = option.verify || !1;
+
+            gravatar['params']=gravatar['params']+'&d='+(gravatar['ds'].indexOf(option.avatar)>-1?option.avatar:'mm');
 
             let av = option.av || AV;
             let appId= option.app_id || option.appId;
@@ -207,7 +213,7 @@ class Valine {
             let _vcard = document.createElement('li');
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
-            let _img = `${v2cdn}${md5(ret.get('mail'))}?s=40`;
+            let _img = `${gravatar.cdn+md5(ret.get('mail')||ret.get('nick'))+gravatar.params}`;
             _vcard.innerHTML = `<img class="vimg" src='${_img}'><section><div class="vhead"><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');

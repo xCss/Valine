@@ -74,6 +74,7 @@ or via [npm](https://www.npmjs.com/package/valine)
             app_key: 'your appkey',
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
             path:window.location.pathname // 路径配置 v1.1.5新增，可填window.location.href
+            avatar:'mm' // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro/'') https://github.com/xCss/Valine/wiki/avatar-setting-for-valine
         });
     </script>
 </body>
