@@ -1,5 +1,5 @@
 
-# Valine<small>v1.1.7</small>
+# Valine <small>[![version](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases)</small>
 
 > A simple comment system based on Leancloud.
 

@@ -7,7 +7,7 @@
   "scripts": {
     "test": "webpack",
     "build": "webpack",
-    "dev": "webpack-dev-server --colors --hot --inline",
+    "dev": "webpack-dev-server --env dev --hot --progress --inline --host 0.0.0.0",
     "clear": "rm -rf dist/* "
   },
   "keywords": [
@@ -32,13 +32,10 @@
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-0": "^6.24.1",
     "blueimp-md5": "^2.8.0",
     "css-loader": "^0.28.4",
     "exports-loader": "^0.6.3",
     "file-loader": "^0.11.2",
-    "highlight.js": "^9.12.0",
     "marked": "^0.3.6",
     "node-sass": "^4.5.0",
     "postcss-loader": "^2.0.5",

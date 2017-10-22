@@ -12,9 +12,14 @@ var plugins = [];
 if (env !== 'dev') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true
+            },
             sourceMap: false
         })
     );
+    plugins.push(new webpack.LoaderOptionsPlugin({minimize:true}));
 }
 
 module.exports = {
@@ -22,7 +27,6 @@ module.exports = {
 
     output: {
         path: BUILD_PATH,
-        publicPath: "/dist/",
         filename: libraryName + '.min.js',
         library: libraryName,
         libraryTarget: 'umd',
@@ -32,9 +36,7 @@ module.exports = {
     devtool: 'source-map',
 
     devServer: {
-        host:'192.168.1.48',
         publicPath: "/dist/",
-        inline: true,
         port: 8088
     },
 

@@ -9,6 +9,7 @@
 
 **[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)**
 
+## Features
 - High speed.
 - Safe by default.
 - Easy to customize.
@@ -21,10 +22,6 @@ See the [Quick start](/quickstart) for more details.
 
 ## Contributors
 - [Contributors](https://github.com/xCss/Valine/graphs/contributors)
-
-## Features
-- Syntax highlighting
-- And more...
 
 ## Donate
 If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
