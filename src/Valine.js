@@ -57,7 +57,7 @@ class Valine {
             _root.el = el;
             _root.el.classList.add('valine');
             let placeholder = option.placeholder || '';
-            let eleHTML = `<div class="vwrap"><div class="vheader"><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"></div><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class="col col-60" title="MarkDown is Support"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg> MarkDown is Support</div><div class="col col-40 text-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://github.com/xCss/Valine" target="_blank">Valine</a></div></div>`;
+            let eleHTML = `<div class="vwrap"><div class="vheader"><input name="nick" placeholder="称呼" class="vnick vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"></div><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class="col col-60" title="MarkDown is Support"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg> MarkDown is Support</div><div class="col col-40 text-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="http://valine.js.org" target="_blank">Valine</a></div></div>`;
             _root.el.innerHTML = eleHTML;
 
             // Empty Data
@@ -249,7 +249,7 @@ class Valine {
                 let _el = _root.el.querySelector(`.${i}`);
                 inputs[_v] = _el;
                 Event.on('input', _el, (e) => {
-                    defaultComment[_v] = _v==='comment' ? marked(_el.value,{sanitize:true}) : HtmlUtil.encode(_el.value); 
+                    defaultComment[_v] = _v==='comment' ? marked(_el.value,{sanitize:!0}) : HtmlUtil.encode(_el.value); 
                 });
             }
         }
@@ -377,13 +377,13 @@ class Valine {
         // setting access
         let getAcl = () => {
             let acl = new _root.v.ACL();
-            acl.setPublicReadAccess(true);
+            acl.setPublicReadAccess(!0);
             acl.setPublicWriteAccess(false);
             return acl;
         }
 
         let commitEvt = () => {
-            submitBtn.setAttribute('disabled', true);
+            submitBtn.setAttribute('disabled', !0);
             _root.loading.show();
             // 声明类型
             let Ct = _root.v.Object.extend('Comment');
@@ -559,7 +559,7 @@ const Event = {
     // },
     // stopPropagation(e) {
     //     e = e || window.event;
-    //     e.stopPropagation && e.stopPropagation() || (e.cancelBubble = true);
+    //     e.stopPropagation && e.stopPropagation() || (e.cancelBubble = !0);
     // }
 }
 
