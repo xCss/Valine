@@ -2,4 +2,4 @@
 - [Customization](configuration.md)
 - [For Hexo Theme](hexo.md)
 - [Github](https://github.com/xcss/valine)
-- [Try](https://valine.js.org/try.html)
+- [Try](/try.html ":ignore")

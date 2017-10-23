@@ -5,7 +5,7 @@ In fact, most hexo themes have built-in valine review systems.
 ## hexo-theme-next
 
 You just need to modify the [_config.yml](https://github.com/iissnan/hexo-theme-next/blob/master/_config.yml#369) file in the theme directory.
-```yml
+```yaml
 # Valine.
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://github.com/xCss/Valine
@@ -22,7 +22,7 @@ Path:`next/layout/_third-party/comments/valine.swig`
 
 ## hexo-theme-material
 You just need to modify the [_config.yml](https://github.com/viosey/hexo-theme-material/blob/canary/_config.template.yml#L222) file in the theme directory.
-```yml
+```yaml
 # Comment Systems
 # Available value of "use":
 #     disqus | disqus_click | changyan | livere | gitment | gitalk | valine
@@ -44,7 +44,7 @@ Path:`material/layout/_widget/comment/valine/common.ejs`
 ## hexo-theme-hueman
 
 You just need to modify the [_config.yml](https://github.com/ppoffice/hexo-theme-hueman/blob/master/_config.yml.example#L42) file in the theme directory.
-```yml
+```yaml
 # Comment
 comment:
     ...
@@ -61,14 +61,14 @@ Path:`hueman/blob/master/layout/comment/valine.ejs`
 
 ## maupassant-hexo
 You just need to modify the [_config.yml](https://github.com/tufu9441/maupassant-hexo/pull/331/files) file in the theme directory.
-```yml
+```yaml
 ...
 valine:
   enable: false ## if you want to use Valine comment system, please set the value to true
   appid: ## your leancloud application appid
   appkey: ## your leancloud application appkey
-  notify:  ## mail notifier , https://github.com/xCss/Valine/wiki
-  verify:  ## Verification code
+  notify: ## mail notifier , https://github.com/xCss/Valine/wiki
+  verify: ## Verification code
   placeholder: Just go go ## enter the comment box placeholder
   avatar: 'mm' ## header image style(v1.1.7+) https://github.com/xCss/Valine/wiki
 ...

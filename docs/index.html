@@ -36,6 +36,21 @@
       }
     },
     formatUpdated: '{MM}/{DD} {HH}:{mm}',
+    plugins:[function(hook){
+      var since = 2017
+      var now = new Date().getFullYear()
+      
+      var footer = [
+        '<hr/>',
+        '<footer>',
+        '<span><a href="https://github.com/xCss">xCss</a> &copy; '+(now>since?(since+' - '+now):now)+'.</span>',
+        '</footer>'
+      ].join('')
+
+      hook.afterEach(function (html) {
+        return html + footer
+      })
+    }]
   }
 </script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
@@ -44,6 +59,7 @@
 <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script>
+<script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
 <script>
 if (!/^http:\/\/localhost/.test(location.href)) {
     var _hmt = _hmt || [];

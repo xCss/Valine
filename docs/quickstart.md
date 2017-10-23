@@ -35,6 +35,8 @@ new Valine({
     avatar:'mm' // v1.1.7 新增(mm/identicon/monsterid/wavatar/retro/'') https://github.com/xCss/Valine/wiki/avatar-setting-for-valine
 });
 ```
+See the [Configuration](configuration) for more details.
+
 ## Get appID/appKey from leancloud
 [Click here](https://leancloud.cn/dashboard/login.html#/signup) to register or login in `leancloud`.  
 [Click here](https://leancloud.cn/dashboard/applist.html#/newapp) Create new application in `Leancloud`, and you will get `appId`/`appKey`.

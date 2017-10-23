@@ -44,7 +44,11 @@ module.exports = {
         rules: [{
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: APP_PATH
+                include: [APP_PATH],
+                exclude: /node_modules/,
+                query: {
+                    presets: ['env']
+                }
             },{
                 test: /\.scss$/,
                 use: [
@@ -54,11 +58,14 @@ module.exports = {
                     'sass-loader'
                 ],
                 include: APP_PATH
-            },{ test: /\.css$/, use: [
-                'style-loader',
-                'css-loader',
-                'postcss-loader'
-            ]},{
+            },{ 
+                test: /\.css$/, 
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader'
+                ]
+            },{
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader?limit=40000'
             }
