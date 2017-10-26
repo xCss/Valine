@@ -1,5 +1,7 @@
 - [Quick start](quickstart.md)
 - [Customization](configuration.md)
+- [Mail Notify](notify.md)
+- [Avatar Setting](avatar.md)
 - [For Hexo Theme](hexo.md)
 - [Github](https://github.com/xcss/valine)
 - [Try](/try.html ":ignore")

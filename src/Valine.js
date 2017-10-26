@@ -378,7 +378,7 @@ class Valine {
         let getAcl = () => {
             let acl = new _root.v.ACL();
             acl.setPublicReadAccess(!0);
-            acl.setPublicWriteAccess(false);
+            acl.setPublicWriteAccess(!1);
             return acl;
         }
 
