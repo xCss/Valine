@@ -9,6 +9,7 @@ node_modules
 
 src
 test
+docs
 index.html
 webpack.config.js
 webpack.dev.config.js
