@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
 </head>
 <body>
-  <div data-app id="main">加载中...</div>
+  <div data-app id="main">Loading...</div>
 </body>
 <script>
   window.$docsify = {
@@ -17,22 +17,21 @@
     name: 'Valine',
     repo: 'xcss/Valine',
     auto2top: true,
-    coverpage:true,
     loadSidebar:true,
+    loadNavbar: true,
+    mergeNavbar: true,
     executeScript:true,
     maxLevel: 4,
     subMaxLevel: 3,
     search: {
       noData: {
-        '/de-de/': 'Keine Ergebnisse!',
-        '/zh-cn/': '没有结果!',
-        '/': '没有结果!'
+        '/': '没有结果!',
+        '/en/': 'No results!'
       },
       paths: 'auto',
       placeholder: {
-        '/de-de/': 'Suche',
-        '/zh-cn/': '搜索',
-        '/': 'Search'
+        '/': '搜索',
+        '/en/': 'Search'
       }
     },
     formatUpdated: '{MM}/{DD} {HH}:{mm}',

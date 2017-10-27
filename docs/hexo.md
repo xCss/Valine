@@ -1,6 +1,6 @@
-# Use valine in hexo
+# 在Hexo 中使用Valine
 
-In fact, most hexo themes have built-in valine review systems.
+目前，已有部分`Hexo`主题内置了Valine 评论系统，更多的主题正在逐步增加中。
 
 ## maupassant-hexo
 > [Open](https://github.com/tufu9441/maupassant-hexo/pull/331) `v1.1.7`

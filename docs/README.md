@@ -1,36 +1,32 @@
 <img src='./assets/logo.opacity.png' align="right" />
 
-# Valine
+## Valine
 
 [![version](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![npm downloads](https://img.shields.io/npm/dt/valine.svg?style=flat-square)](https://www.npmjs.com/package/valine) [![build](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat-square)](#donate)  
-> A simple comment system based on Leancloud.  
 
-------------------------------
+> 一款极简风评论系统
 
-**[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)**
+-------------------------------
 
-## Features
-- High speed.
-- Safe by default.
-- Easy to customize.
-- Support [mail notifier](https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE).
-- Support validation code.
-- No server-side implementation.
-- Support for full markdown syntax.
+## 是什么
 
-See the [Quick start](/quickstart) for more details.
+Valine 是一款基于[Leancloud](http://leancloud.cn)的无后端评论系统，简单、易用、快速、安全。
 
-## Contributors
-- [Contributors](https://github.com/xCss/Valine/graphs/contributors)
+查看[快速开始](quickstart.md)了解详情。
 
-## Donate
-If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
+## 特性
+- 快速
+- 安全
+- 无后端实现
+- MarkDown 全语法支持
+- 轻量易用(~17kb gzipped)
+
+## 例子
+
+## 捐赠
+
+如果你觉得 Valine 对你有帮助，或者想对我微小的工作一点资瓷，欢迎给我捐赠。
 
 | 支付宝 | 微信 | 
 | :------: | :------: | 
-| <img width="150" src="./assets/alipay.png"> | <img width="135" src="./assets/wechat.png"> | 
-
-If you are not available for this, simply spreading the word for us would help too!
-
-## License
-[GPL-2.0](https://github.com/xCss/Valine/blob/master/LICENSE)
+| <img width="150" src="./assets/alipay.png"> | <img width="135" src="./assets/wechat.png"> |
