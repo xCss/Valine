@@ -21,8 +21,6 @@ Valine 是一款基于[Leancloud](http://leancloud.cn)的无后端评论系统�
 - MarkDown 全语法支持
 - 轻量易用(~17kb gzipped)
 
-## 例子
-
 ## 捐赠
 
 如果你觉得 Valine 对你有帮助，或者想对我微小的工作一点资瓷，欢迎给我捐赠。
