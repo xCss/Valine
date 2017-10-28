@@ -27,6 +27,9 @@
 
 ![](https://ws1.sinaimg.cn/large/006qRazegy1fkwo6w2b6uj30xe0etjt4.jpg)
 
+!> 请注意设置自己的`安全域名`
+![设置安全域名](https://ws1.sinaimg.cn/large/006qRazegy1fkxqmddfh1j30qd0go40h.jpg)
+
 ## 配置
 
 修改初始化对象中的`app_id`和`app_key`的值为上面刚刚获取到的值即可(其他可以默认)。
