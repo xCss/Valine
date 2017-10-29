@@ -8,22 +8,17 @@
 ------------------------------
 **[View Documentation](https://valine.js.org)**
 
-**[中文教程](https://ioliu.cn/2017/add-valine-comments-to-your-blog/)**
-
+## Features
 - High speed.
 - Safe by default.
-- Easy to customize.
-- Support [mail notifier](https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE).
-- Support validation code.
 - No server-side implementation.
 - Support for full markdown syntax.
+- Simple and lightweight (~17kB gzipped).
+
+See the [Quick start](https://valine.js.org) for more details.
 
 ## Contributors
 - [Contributors](https://github.com/xCss/Valine/graphs/contributors)
-
-## Features
-- Syntax highlighting
-- And more...
 
 ## Donate
 If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
