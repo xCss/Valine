@@ -182,7 +182,7 @@ class Valine {
      */
     bind(option) {
         let _root = this;
-        let guest_info = option.guest_info || GUEST_INFO
+        let guest_info = (option.guest_info || GUEST_INFO).filter(item => GUEST_INFO.indexOf(item) > -1);
 
         let expandEvt = (el) => {
             if (el.offsetHeight > 180) {
