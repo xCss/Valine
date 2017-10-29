@@ -2,7 +2,7 @@
 
 ## HTML 片段
 
-请在需要评论框的文章页面内相应位置引入下面的HTML代码：
+请在需要评论框的`文章页`内相应位置引入下面的HTML代码：
 
 ```html
 <head>
@@ -27,7 +27,8 @@
 
 ![](https://ws1.sinaimg.cn/large/006qRazegy1fkwo6w2b6uj30xe0etjt4.jpg)
 
-!> 请注意设置自己的`安全域名`
+!> 为了您的数据安全，请注意设置自己的`安全域名`：
+
 ![设置安全域名](https://ws1.sinaimg.cn/large/006qRazegy1fkxqmddfh1j30qd0go40h.jpg)
 
 ## 配置
