@@ -25,7 +25,7 @@
 ## el
 - Type:`String`
 - Default:`#comment`
-- Require:`true`
+- Required:`true`
 
 The DOM element to be mounted on initialization. It can be a CSS selector string or an actual HTMLElement.
 ```js
@@ -38,7 +38,7 @@ new Valine({
 ## app_id
 - Type:`String`
 - Default:`null`
-- Require:`true`
+- Required:`true`
 
 Application `appId` from `Leancloud`.
 ```js
@@ -50,7 +50,7 @@ new Valine({
 ## app_key
 - Type:`String`
 - Default:`null`
-- Require:`true`
+- Required:`true`
 
 Application `appKey` from `Leancloud`.
 ```js
@@ -62,7 +62,7 @@ new Valine({
 ## placeholder
 - Type:`String`
 - Default:`null`
-- Require:`false`
+- Required:`false`
 
 Comment box placeholders.
 ```js
@@ -74,7 +74,7 @@ new Valine({
 ## notify
 - Type:`Boolean`
 - Default:`false`
-- Require:`false`
+- Required:`false`
 
 Mail notifier, Please refer to the [configuration](https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE).
 ```js
@@ -86,7 +86,7 @@ new Valine({
 ## verify
 - Type:`Boolean`
 - Default:`false`
-- Require:`false`
+- Required:`false`
 
 Validation code.
 ```js
@@ -98,7 +98,7 @@ new Valine({
 ## path
 - Type:`String`
 - Default:`window.location.path`
-- Require:`false`
+- Required:`false`
 
 Article path(just like duoshuo `thread`), Optional value:
 - `window.location.path` (recommend)
@@ -115,7 +115,7 @@ new Valine({
 ## avatar
 - Type:`String`
 - Default:`mm`
-- Require:`false`
+- Required:`false`
 
 `Gravatar` type, Optional value:
 - `mm`
@@ -131,3 +131,18 @@ new Valine({
 })
 ```
 !> `v1.1.7+` is support
+
+
+## guest_info
+- Type:`Array`
+- Default:`['nick','mail','link']`
+- Required:`false`
+
+Reviewer attributes.
+
+```js
+new Valine({
+    guest_info:['nick'] // Just want nickname
+})
+```
+!> `v1.1.8-beta+` is support

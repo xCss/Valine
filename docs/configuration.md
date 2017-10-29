@@ -163,4 +163,4 @@ new Valine({
     guest_info:['nick'] // 只想要昵称
 })
 ```
-!> `v1.1.8-beta`开始支持
+!> `v1.1.8-beta+`开始支持
