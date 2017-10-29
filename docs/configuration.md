@@ -150,3 +150,17 @@ new Valine({
 })
 ```
 !> `v1.1.7+` 开始支持
+
+## guest_info
+- 类型:`Array`
+- 默认值:`['nick','mail','link']`
+- 必要性:`false`
+
+评论者相关属性。
+
+```js
+new Valine({
+    guest_info:['nick'] // 只想要昵称
+})
+```
+!> `v1.1.8-beta`开始支持
