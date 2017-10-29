@@ -2,6 +2,9 @@
 
 There are a number of hexo theme built-in valine comment system, more themes are gradually increasing.
 
+## hexo-theme-yilia
+> [Open](https://github.com/litten/hexo-theme-yilia/pull/646) `latest`
+
 ## maupassant-hexo
 > [Open](https://github.com/tufu9441/maupassant-hexo/pull/331) `v1.1.7`
 

@@ -4,6 +4,9 @@
 
 !> 如果如下列表中没有你当前使用的主题，请在[此处留言](/try.html ":ignore")。我会尽快提交PR。
 
+## hexo-theme-yilia
+> [Open](https://github.com/litten/hexo-theme-yilia/pull/646) `latest`
+
 ## maupassant-hexo
 > [Open](https://github.com/tufu9441/maupassant-hexo/pull/331) `v1.1.7`
 
