@@ -19,21 +19,21 @@
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", Arial, sans-serif;
         }
-        
+
         body {
             background-color: rgb(238, 238, 238);
         }
-        
+
         header {
             background: #fff;
         }
-        
+
         a {
             color: #999;
             text-decoration: none;
             border-bottom: 1px dotted #dedede;
         }
-        
+
         .logo {
             display: inline-block;
             height: 60px;
@@ -42,13 +42,13 @@
             color: #4285f4;
             vertical-align: base-line;
         }
-        
+
         .sub {
             font-size: 12px;
             color: #9c9c9c;
             padding: 0 5px;
         }
-        
+
         .market {
             background-color: #4285f4;
             height: 398px;
@@ -59,15 +59,15 @@
             display: block;
             z-index: -1;
         }
-        
+
         .container {
             width: 80%;
         }
-        
+
         .placeholder {
             height: 56px;
         }
-        
+
         @media screen and (max-width:720px) {
             header {
                 text-align: center;
@@ -84,17 +84,17 @@
                 display: none;
             }
         }
-        
+
         .content {
             background: #fff;
             padding: 10px;
         }
-        
+
         ul,
         li {
             list-style: none;
         }
-        
+
         .prolist {
             padding: 10px 20px 20px 20px;
             font-weight: 400;
@@ -102,18 +102,18 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Mirages Custom', 'Merriweather', 'Open Sans', "Segoe UI", Roboto, "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Helvetica, Arial, sans-serif;
             line-height: 1.5;
         }
-        
+
         blockquote {
             margin: 10px 0;
             padding: 0 1em;
             color: #6a737d;
             border-left: 0.25em solid #dfe2e5;
         }
-        
+
         #github {
             padding: 20px 0;
         }
-        
+
         .copy {
             line-height: 60px;
             text-align: center;
@@ -154,7 +154,8 @@
             app_key: 'iuneD4hXPQImdHQSRE0aOcRF',
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
             path: window.location.pathname,
-            avatar:'mm' // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
+            avatar:'mm', // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
+            // guest_info: ['nick'] // 默认 ['nick', 'mail', 'link']
         })
 
         if (!/^http:\/\/localhost/.test(location.href)) {
