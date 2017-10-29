@@ -36,12 +36,21 @@
                 width:33.33%;
                 border-bottom:1px #dedede dashed;
             }
+            &.item2 .vinput {
+              width: 50%;
+            }
+            &.item1 .vinput {
+              width: 100%;
+            }
             .vinput:focus{
                 border-bottom-color:#eb5055;
             }
             @media screen and (max-width:520px) {
                 .vinput {
                     width: 100%;
+                }
+                &.item2 .vinput {
+                  width: 100%;
                 }
             }
         }
@@ -123,7 +132,7 @@
             display: inline-block;
             width: 50%;
             vertical-align: middle;
-            
+
         }
         .count {
             .num {
