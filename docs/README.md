@@ -4,7 +4,7 @@
 
 [![](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![](https://img.shields.io/npm/dt/valine.svg?style=flat-square)](https://www.npmjs.com/package/valine) [![](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine) 
 
-> 一款极简风评论系统
+> 一款无后端的极简风评论系统。
 
 -------------------------------
 
