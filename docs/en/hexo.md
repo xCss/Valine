@@ -14,6 +14,9 @@ There are a number of hexo theme built-in valine comment system, more themes are
 ## hexo-theme-Anatole
 > [Open](https://github.com/Ben02/hexo-theme-Anatole/pull/25) `v1.1.7`
 
+## hexo-theme-mdui
+> [Merged](https://github.com/Halyul/hexo-theme-mdui/pull/74) `latest`
+
 ## hexo-theme-next
 > [Merged](https://github.com/iissnan/hexo-theme-next/pull/1959) `v1.1.7-rc3`
 
