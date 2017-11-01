@@ -1,4 +1,4 @@
-<img src='./src/assets/logo.opacity.png' align="right" />
+<img src='./docs/assets/logo.opacity.png' align="right" />
 
 # Valine
 
@@ -25,7 +25,7 @@ If you are enjoying this app, please consider making a donation to keep it alive
 
 | 支付宝 | 微信 | 
 | :------: | :------: | 
-| <img width="150" src="./src/assets/alipay.png"> | <img width="135" src="./src/assets/wechat.png"> | 
+| <img width="150" src="./docs/assets/alipay.png"> | <img width="135" src="./docs/assets/wechat.png"> | 
 
 If you are not available for this, simply spreading the word for us would help too!
 
