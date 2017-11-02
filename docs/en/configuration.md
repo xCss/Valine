@@ -97,17 +97,17 @@ new Valine({
 
 ## path
 - Type:`String`
-- Default:`window.location.path`
+- Default:`window.location.pathname`
 - Required:`false`
 
 Article path(just like duoshuo `thread`), Optional value:
-- `window.location.path` (recommend)
+- `window.location.pathname` (recommend)
 - `window.location.href`
 - customize (Please ensure uniqueness)
 
 ```js
 new Valine({
-    path:window.location.path
+    path:window.location.pathname
 })
 ```
 !> `v1.1.5+` is support

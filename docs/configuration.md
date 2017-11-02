@@ -123,7 +123,7 @@ II. 如果值为`window.location.href`，可能会出现随便加`不同参数`�
 
 ```js
 new Valine({
-    path:window.location.path
+    path:window.location.pathname
 })
 ```
 !> `v1.1.5+` 开始支持
