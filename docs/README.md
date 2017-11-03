@@ -10,7 +10,7 @@
 
 ## 是什么
 
-Valine 是一款基于[Leancloud](http://leancloud.cn)的快速、简洁且高效无后端评论系统。
+Valine 是一款基于[Leancloud](http://leancloud.cn)的快速、简洁且高效的无后端评论系统。
 
 查看[快速开始](quickstart.md)了解详情。
 
