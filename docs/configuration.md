@@ -164,3 +164,17 @@ new Valine({
 })
 ```
 !> `v1.1.8-beta+`开始支持
+
+## pageSize
+- 类型:`Number`
+- 默认值:`10`
+- 必要性:`false`
+
+评论列表分页，每页条数。
+
+```js
+new Valine({
+    pageSize:10
+})
+```
+!> `v1.1.8-beta2+`开始支持

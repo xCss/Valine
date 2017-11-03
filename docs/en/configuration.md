@@ -146,3 +146,18 @@ new Valine({
 })
 ```
 !> `v1.1.8-beta+` is support
+
+
+## pageSize
+- Type:`Number`
+- Default:`10`
+- Required:`false`
+
+Number of pages per page.
+
+```js
+new Valine({
+    pageSize:10
+})
+```
+!> `v1.1.8-beta2+` is support
