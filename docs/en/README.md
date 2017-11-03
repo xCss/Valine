@@ -3,19 +3,19 @@
 # Valine
 
 [![](https://img.shields.io/github/release/xCss/Valine.svg?style=flat-square)](https://github.com/xCss/Valine/releases) [![](https://img.shields.io/npm/dt/valine.svg?style=flat-square)](https://www.npmjs.com/package/valine) [![](https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=flat-square)](https://circleci.com/gh/xCss/Valine)  
-> A simple comment system.  
+> A fast, simple & powerful comment system.  
 
 ------------------------------
 ## What is it
 
-A simple comment system based on [Leancloud](https://leancloud.cn).
+A fast, simple & powerful comment system based on [Leancloud](https://leancloud.cn).
 
 ## Features
 - High speed.
 - Safe by default.
 - No server-side implementation.
 - Support for full markdown syntax.
-- Simple and lightweight (~17kB gzipped).
+- Simple and lightweight (~15kB gzipped).
 
 See the [Quick start](en/quickstart.md) for more details.
 
