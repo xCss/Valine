@@ -6,8 +6,8 @@
 <script>
     new Valine({
         el:'#comment',
-        app_id:'your appid',
-        app_key:'your appkey'
+        appId:'your appid',
+        appKey:'your appkey'
     })
 </script>
 
@@ -16,8 +16,8 @@
     var valine = new Valine();
     valine.init({
         el:'#comment',
-        app_id:'your appid',
-        app_key:'your appkey'
+        appId:'your appid',
+        appKey:'your appkey'
     })
 </script>
 ```
@@ -35,7 +35,7 @@ new Valine({
 ```
 !> Please ensure that the element is unique.
 
-## app_id
+## appId
 - Type:`String`
 - Default:`null`
 - Required:`true`
@@ -43,11 +43,11 @@ new Valine({
 Application `appId` from `Leancloud`.
 ```js
 new Valine({
-    app_id:'your leancloud appid'
+    appId:'your leancloud appid'
 })
 ```
 
-## app_key
+## appKey
 - Type:`String`
 - Default:`null`
 - Required:`true`
@@ -55,7 +55,7 @@ new Valine({
 Application `appKey` from `Leancloud`.
 ```js
 new Valine({
-    app_key:'your leancloud appkey'
+    appKey:'your leancloud appkey'
 })
 ```
 

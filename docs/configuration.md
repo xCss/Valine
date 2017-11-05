@@ -6,8 +6,8 @@ Valine 支持两种不同的初始化方式。一种是构造方法初始化对�
 <script>
     new Valine({
         el:'#comment',
-        app_id:'your appid',
-        app_key:'your appkey'
+        appId:'your appid',
+        appKey:'your appkey'
     })
 </script>
 
@@ -16,8 +16,8 @@ Valine 支持两种不同的初始化方式。一种是构造方法初始化对�
     var valine = new Valine();
     valine.init({
         el:'#comment',
-        app_id:'your appid',
-        app_key:'your appkey'
+        appId:'your appid',
+        appKey:'your appkey'
     })
 </script>
 ```
@@ -40,7 +40,7 @@ new Valine({
 ```
 !> 在使用时，请保证该元素的唯一性。
 
-## app_id
+## appId
 - 类型:`String`
 - 默认值:`null`
 - 必要性:`true`
@@ -50,11 +50,11 @@ new Valine({
 
 ```js
 new Valine({
-    app_id:'your leancloud appid'
+    appId:'your leancloud appid'
 })
 ```
 
-## app_key
+## appKey
 - 类型:`String`
 - 默认值:`null`
 - 必要性:`true`
@@ -64,7 +64,7 @@ new Valine({
 
 ```js
 new Valine({
-    app_key:'your leancloud appkey'
+    appKey:'your leancloud appkey'
 })
 ```
 

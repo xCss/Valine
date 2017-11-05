@@ -8,7 +8,7 @@ Please include the following HTML code in the appropriate location on the articl
 <head>
     ...
     <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine@1.1.7/dist/Valine.min.js'></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     ...
 </head>
 <body>
@@ -27,8 +27,8 @@ new Valine({
     el: '#comment' ,
     notify:false, 
     verify:false, 
-    app_id: 'your leancloud appid',
-    app_key: 'your leancloud appkey',
+    appKd: 'your leancloud appid',
+    appKey: 'your leancloud appkey',
     placeholder: 'Just go go',
     path:window.location.pathname,
     avatar:'mm' 
