@@ -9,7 +9,7 @@ There are a number of hexo theme built-in valine comment system, more themes are
 > [Open](https://github.com/litten/hexo-theme-yilia/pull/646) `latest`
 
 ## maupassant-hexo
-> [Open](https://github.com/tufu9441/maupassant-hexo/pull/331) `v1.1.7`
+> [Open](https://github.com/tufu9441/maupassant-hexo/pull/331) `latest`
 
 ## hexo-theme-even
 > [Open](https://github.com/ahonn/hexo-theme-even/pull/179) `v1.1.7`
