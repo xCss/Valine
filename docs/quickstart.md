@@ -8,7 +8,7 @@
 <head>
     ...
     <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script src='//unpkg.com/valine@1.1.7/dist/Valine.min.js'></script>
     ...
 </head>
 <body>
@@ -33,20 +33,18 @@
 
 ## 配置
 
-修改初始化对象中的`appId`和`appKey`的值为上面刚刚获取到的值即可(其他可以默认)。
+修改初始化对象中的`app_id`和`app_key`的值为上面刚刚获取到的值即可(其他可以默认)。
 
 ```js
 new Valine({
     el: '#comment' ,
     notify:false, 
     verify:false, 
-    appId: '这里填上面获得的appid',
-    appKey: '这里填上面获得的appkey',
+    app_id: '这里填上面获得的appid',
+    app_key: '这里填上面获得的appkey',
     placeholder: 'just go go',
     path:window.location.pathname, 
-    avatar:'mm',
-    pageSize:10,
-    guest_info:['nick','mail','link'] 
+    avatar:'mm' 
 });
 ```
 更多信息请查看[配置项](configuration.md)。

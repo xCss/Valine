@@ -2,6 +2,9 @@
 
 There are a number of hexo theme built-in valine comment system, more themes are gradually increasing.
 
+## fexo
+> [Open](https://github.com/forsigner/fexo/pull/102) `latest`
+
 ## hexo-theme-yilia
 > [Open](https://github.com/litten/hexo-theme-yilia/pull/646) `latest`
 
@@ -18,7 +21,7 @@ There are a number of hexo theme built-in valine comment system, more themes are
 > [Merged](https://github.com/Halyul/hexo-theme-mdui/pull/74) `latest`
 
 ## hexo-theme-next
-> [Merged](https://github.com/iissnan/hexo-theme-next/pull/1983) `latest`
+> [Merged](https://github.com/iissnan/hexo-theme-next/pull/1959) `v1.1.7-rc3`
 
 ## hexo-theme-material
 > [Merged](https://github.com/viosey/hexo-theme-material/pull/558) `v1.1.7-rc3`
