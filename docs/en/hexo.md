@@ -21,7 +21,7 @@ There are a number of hexo theme built-in valine comment system, more themes are
 > [Merged](https://github.com/Halyul/hexo-theme-mdui/pull/74) `latest`
 
 ## hexo-theme-next
-> [Merged](https://github.com/iissnan/hexo-theme-next/pull/1959) `v1.1.7-rc3`
+> [Merged](https://github.com/iissnan/hexo-theme-next/pull/1983) `latest`
 
 ## hexo-theme-material
 > [Merged](https://github.com/viosey/hexo-theme-material/pull/558) `v1.1.7-rc3`
