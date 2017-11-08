@@ -8,14 +8,14 @@ There are a number of hexo theme built-in valine comment system, more themes are
 ## hexo-theme-yilia
 > [Open](https://github.com/litten/hexo-theme-yilia/pull/646) `latest`
 
-## maupassant-hexo
-> [Open](https://github.com/tufu9441/maupassant-hexo/pull/331) `latest`
-
 ## hexo-theme-even
 > [Open](https://github.com/ahonn/hexo-theme-even/pull/179) `v1.1.7`
 
 ## hexo-theme-Anatole
 > [Open](https://github.com/Ben02/hexo-theme-Anatole/pull/25) `v1.1.7`
+
+## maupassant-hexo
+> [Merged](https://github.com/tufu9441/maupassant-hexo/pull/331) `latest`
 
 ## hexo-theme-mdui
 > [Merged](https://github.com/Halyul/hexo-theme-mdui/pull/74) `latest`
