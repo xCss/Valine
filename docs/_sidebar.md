@@ -9,5 +9,6 @@
 - 指南
  - [Hexo中的使用](hexo.md)
  - [CDN](cdn.md)
+ - [联系方式](contact.md)
  - [FAQ](faq.md)
  - [* 试一试](/try.html ":ignore")
