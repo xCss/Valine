@@ -4,6 +4,9 @@
 
 !> 如果如下列表中没有你当前使用的主题，请在[此处留言](/try.html ":ignore")。我会尽快提交PR。
 
+## cactus-dark
+> [Open](https://github.com/probberechts/cactus-dark/pull/54) `latest`
+
 ## fexo
 > [Open](https://github.com/forsigner/fexo/pull/102) `latest`
 
