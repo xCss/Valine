@@ -6,8 +6,8 @@
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
   "scripts": {
     "test": "webpack",
-    "build": "rm -rf dist/* && webpack",
-    "dev": "webpack-dev-server --env dev --hot --progress --inline --host 0.0.0.0",
+    "build": "webpack",
+    "dev": "webpack-dev-server --env.dev",
     "clear": "rm -rf dist/* "
   },
   "keywords": [
@@ -30,8 +30,8 @@
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.24.1",
     "blueimp-md5": "^2.8.0",
     "css-loader": "^0.28.4",
     "exports-loader": "^0.6.3",
@@ -41,7 +41,8 @@
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.18.2",
-    "url-loader": "^0.5.7",
+    "url-loader": "^0.6.2",
+    "vconsole": "^3.0.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   }
