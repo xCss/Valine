@@ -35,8 +35,8 @@ module.exports = env => {
     return {
         entry: {
             Valine:'./src/Valine.js',
-            detect:'./src/detect.js',
-            escape:'./src/escape.js'
+            //detect:'./src/detect.js',
+            //escape:'./src/escape.js'
         },
         output: {
             path: BUILD_PATH,
