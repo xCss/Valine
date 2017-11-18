@@ -10,9 +10,8 @@ var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 var plugins = [];
 
 module.exports = env => {
-    let dev = env && env.dev || false
+    var dev = env && env.dev || false
     if (!dev) {
-        console.log(1)
         plugins.push(
             new webpack.optimize.UglifyJsPlugin({
                 // 最紧凑的输出
@@ -29,20 +28,25 @@ module.exports = env => {
             })
         );
         plugins.push(new webpack.LoaderOptionsPlugin({minimize:true}));
+    }else{
+        plugins.push(new webpack.NamedModulesPlugin())
+        plugins.push(new webpack.HotModuleReplacementPlugin())
     }
-    plugins.push(new webpack.NamedModulesPlugin())
-    plugins.push(new webpack.HotModuleReplacementPlugin())
     return {
-        entry: './src/' + libraryName + '.js',
+        entry: {
+            Valine:'./src/Valine.js',
+            detect:'./src/detect.js',
+            escape:'./src/escape.js'
+        },
         output: {
             path: BUILD_PATH,
-            filename: libraryName + '.min.js',
-            library: libraryName,
+            filename: '[name].min.js',
+            library: '[name]',
             libraryTarget: 'umd',
             umdNamedDefine: true
         },
     
-        devtool: 'source-map',
+        devtool: 'cheap-module-source-map',
     
         devServer: {
             hot:true,
@@ -50,7 +54,13 @@ module.exports = env => {
             inline:true,
             progress:true,
             host:'0.0.0.0',
-            publicPath: "/dist/"
+            publicPath: "/dist/",
+            historyApiFallback:true, 
+            stats:'errors-only', //只在发生错误时输出
+            overlay:{ //当有编译错误或者警告的时候显示一个全屏overlay
+              errors:true,
+              warnings:true,
+            }
         },
     
         module: {

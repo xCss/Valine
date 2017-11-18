@@ -17,7 +17,7 @@
 > [Open](https://github.com/ahonn/hexo-theme-even/pull/179) `v1.1.7`
 
 ## hexo-theme-Anatole
-> [Open](https://github.com/Ben02/hexo-theme-Anatole/pull/25) `v1.1.7`
+> [Merged](https://github.com/Ben02/hexo-theme-Anatole/pull/25) `v1.1.7`
 
 ## maupassant-hexo
 > [Merged](https://github.com/tufu9441/maupassant-hexo/pull/331) `latest`
