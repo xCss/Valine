@@ -2,6 +2,9 @@
 
 There are a number of hexo theme built-in valine comment system, more themes are gradually increasing.
 
+## hexo-theme-indigo
+> [Open](https://github.com/yscoder/hexo-theme-indigo/pull/337) `latest`
+
 ## cactus-dark
 > [Open](https://github.com/probberechts/cactus-dark/pull/54) `latest`
 
