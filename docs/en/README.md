@@ -1,4 +1,4 @@
-<img src='./assets/logo.opacity.png' align="right" />
+<img src='./assets/valine.png' align="right" width="200" />
 
 # Valine
 

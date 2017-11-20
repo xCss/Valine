@@ -1,6 +1,6 @@
 {
   "name": "valine",
-  "version": "1.1.8-beta7",
+  "version": "1.1.8-beta8",
   "description": "A simple comment system based on Leancloud.",
   "main": "/src/Valine.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
@@ -31,7 +31,6 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
     "blueimp-md5": "^2.8.0",
     "css-loader": "^0.28.4",
     "exports-loader": "^0.6.3",
