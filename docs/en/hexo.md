@@ -5,14 +5,14 @@ There are a number of hexo theme built-in valine comment system, more themes are
 ## cactus-dark
 > [Open](https://github.com/probberechts/cactus-dark/pull/54) `latest`
 
-## fexo
-> [Open](https://github.com/forsigner/fexo/pull/102) `latest`
-
 ## hexo-theme-yilia
 > [Open](https://github.com/litten/hexo-theme-yilia/pull/646) `latest`
 
 ## hexo-theme-even
 > [Open](https://github.com/ahonn/hexo-theme-even/pull/179) `v1.1.7`
+
+## fexo
+> [Merge](https://github.com/forsigner/fexo/pull/102) `latest`
 
 ## hexo-theme-indigo
 > [Merge](https://github.com/yscoder/hexo-theme-indigo/pull/337) `latest`
