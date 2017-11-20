@@ -1,17 +1,16 @@
-/**
+﻿/**
  * @Valine
  * Author: xCss
  * Github: https://github.com/xCss/Valine
  * Website: https://valine.js.org
  */
-require('./Valine.scss');
-const md5 = require('blueimp-md5');
+import md5 from 'blueimp-md5';
 import marked from 'marked';
 const gravatar = {
-    cdn:'https://gravatar.cat.net/avatar/',
-    ds:['mm','identicon','monsterid','wavatar','retro',''],
-    params:'?s=40',
-    hide:!1
+    cdn: 'https://gravatar.cat.net/avatar/',
+    ds: ['mm', 'identicon', 'monsterid', 'wavatar', 'retro', ''],
+    params: '?s=40',
+    hide: !1
 };
 const defaultComment = {
     comment: '',
@@ -59,20 +58,20 @@ class Valine {
 
             const guest_info = option.guest_info || GUEST_INFO;
             const inputEl = guest_info.map(item => {
-              switch (item) {
-                case 'nick':
-                  return '<input name="nick" placeholder="称呼" class="vnick vinput" type="text">';
-                  break;
-                case 'mail':
-                  return '<input name="mail" placeholder="邮箱" class="vmail vinput" type="email">';
-                  break;
-                case 'link':
-                  return '<input name="link" placeholder="网址(http://)" class="vlink vinput" type="text">';
-                  break;
-                default:
-                  return '';
-                  break;
-              }
+                switch (item) {
+                    case 'nick':
+                        return '<input name="nick" placeholder="称呼" class="vnick vinput" type="text">';
+                        break;
+                    case 'mail':
+                        return '<input name="mail" placeholder="邮箱" class="vmail vinput" type="email">';
+                        break;
+                    case 'link':
+                        return '<input name="link" placeholder="网址(http://)" class="vlink vinput" type="text">';
+                        break;
+                    default:
+                        return '';
+                        break;
+                }
             });
 
             let placeholder = option.placeholder || '';
@@ -111,13 +110,13 @@ class Valine {
             _root.notify = option.notify || !1;
             _root.verify = option.verify || !1;
 
-            gravatar['params']=gravatar['params']+'&d='+(gravatar['ds'].indexOf(option.avatar)>-1?option.avatar:'mm');
+            gravatar['params'] = gravatar['params'] + '&d=' + (gravatar['ds'].indexOf(option.avatar) > -1 ? option.avatar : 'mm');
             gravatar['hide'] = option.avatar === 'hide' ? !0 : !1;
 
             let av = option.av || AV;
-            let appId= option.app_id || option.appId;
-            let appKey= option.app_key || option.appKey;
-            if(!appId || !appKey){
+            let appId = option.app_id || option.appId;
+            let appKey = option.app_key || option.appKey;
+            if (!appId || !appKey) {
                 _root.loading.hide();
                 throw '初始化失败，请检查你的appid或者appkey.';
                 return;
@@ -127,7 +126,7 @@ class Valine {
                 appKey: appKey
             });
             _root.v = av;
-            defaultComment.url = (option.path || location.pathname).replace(/index\.(html|htm)/,'');
+            defaultComment.url = (option.path || location.pathname).replace(/index\.(html|htm)/, '');
 
         } catch (ex) {
             let issue = 'https://github.com/xCss/Valine/issues';
@@ -153,10 +152,10 @@ class Valine {
             show(o) {
                 _mark.innerHTML = `<div class="valert txt-center"><div class="vtext">${o.text}</div><div class="vbtns"></div></div>`;
                 let _vbtns = _mark.querySelector('.vbtns');
-                let _cBtn = `<button class="vcancel vbtn">${ o && o.ctxt || '我再看看' }</button>`;
-                let _oBtn = `<button class="vsure vbtn">${ o && o.otxt || '继续提交' }</button>`;
+                let _cBtn = `<button class="vcancel vbtn">${o && o.ctxt || '我再看看'}</button>`;
+                let _oBtn = `<button class="vsure vbtn">${o && o.otxt || '继续提交'}</button>`;
                 _vbtns.innerHTML = `${_cBtn}${o.type && _oBtn}`;
-                _mark.querySelector('.vcancel').addEventListener('click', function(e) {
+                _mark.querySelector('.vcancel').addEventListener('click', function (e) {
                     _root.alert.hide();
                 });
                 _mark.setAttribute('style', 'display:block;');
@@ -235,20 +234,20 @@ class Valine {
             let _vcard = document.createElement('li');
             _vcard.setAttribute('class', 'vcard');
             _vcard.setAttribute('id', ret.id);
-            let _img = gravatar['hide']?'':`<img class="vimg" src='${gravatar.cdn+md5(ret.get('mail')||ret.get('nick'))+gravatar.params}'>`;
-            _vcard.innerHTML = `${_img}<section><div class="vhead"><a rel="nofollow" href="${getLink({link:ret.get('link') ,mail:ret.get('mail')})}" target="_blank" >${ret.get("nick")}</a></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section>`;
+            let _img = gravatar['hide'] ? '' : `<img class="vimg" src='${gravatar.cdn + md5(ret.get('mail') || ret.get('nick')) + gravatar.params}'>`;
+            _vcard.innerHTML = `${_img}<section><div class="vhead"><a rel="nofollow" href="${getLink({ link: ret.get('link'), mail: ret.get('mail') })}" target="_blank" >${ret.get("nick")}</a></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section>`;
             let _vlist = _root.el.querySelector('.vlist');
             let _vlis = _vlist.querySelectorAll('li');
             let _vat = _vcard.querySelector('.vat');
             let _as = _vcard.querySelectorAll('a');
-            for (let i=0,len=_as.length;i<len;i++) {
+            for (let i = 0, len = _as.length; i < len; i++) {
                 let item = _as[i];
                 if (item && item.getAttribute('class') != 'at') {
                     item.setAttribute('target', '_blank');
                     item.setAttribute('rel', 'nofollow');
                 }
             }
-            if(mt) _vlist.appendChild(_vcard);
+            if (mt) _vlist.appendChild(_vcard);
             else _vlist.insertBefore(_vcard, _vlis[0]);
             let _vcontent = _vcard.querySelector('.vcontent');
             expandEvt(_vcontent);
@@ -257,10 +256,10 @@ class Valine {
         }
 
         let mapping = {
-          veditor: "comment"
+            veditor: "comment"
         }
         for (let i = 0, length = guest_info.length; i < length; i++) {
-          mapping[`v${guest_info[i]}`] = guest_info[i];
+            mapping[`v${guest_info[i]}`] = guest_info[i];
         }
 
         let inputs = {};
@@ -270,7 +269,7 @@ class Valine {
                 let _el = _root.el.querySelector(`.${i}`);
                 inputs[_v] = _el;
                 Event.on('input', _el, (e) => {
-                    defaultComment[_v] = _v==='comment' ? marked(_el.value,{sanitize:!0}) : HtmlUtil.encode(_el.value);
+                    defaultComment[_v] = _v === 'comment' ? marked(_el.value, { sanitize: !0 }) : HtmlUtil.encode(_el.value);
                 });
             }
         }
@@ -494,7 +493,7 @@ class Valine {
         }
 
         let mailEvt = (o) => {
-            _root.v.User.requestPasswordReset(o.mail).then(ret => {}).catch(e => {
+            _root.v.User.requestPasswordReset(o.mail).then(ret => { }).catch(e => {
                 if (e.code == 1) {
                     _root.alert.show({
                         type: 0,
