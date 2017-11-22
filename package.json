@@ -1,6 +1,10 @@
 {
   "name": "valine",
+<<<<<<< HEAD
   "version": "1.1.8-rc2",
+=======
+  "version": "1.1.8-rc",
+>>>>>>> bfff5d5b4a17af8b5161cbdc604d57076db9a47f
   "description": "A simple comment system based on Leancloud.",
   "main": "/src/Valine.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
