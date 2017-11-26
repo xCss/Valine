@@ -4,6 +4,9 @@
 
 !> 如果如下列表中没有你当前使用的主题，请在[此处留言](/try.html ":ignore")。我会尽快提交PR。
 
+## hexo-theme-landscape
+> [Open](https://github.com/hexojs/hexo-theme-landscape/pull/98) `latest`
+
 ## cactus-dark
 > [Open](https://github.com/probberechts/cactus-dark/pull/54) `latest`
 
@@ -32,7 +35,7 @@
 > [Merged](https://github.com/iissnan/hexo-theme-next/pull/1983) `latest`
 
 ## hexo-theme-material
-> [Merged](https://github.com/viosey/hexo-theme-material/pull/558) `v1.1.7-rc3`
+> [Merged](https://github.com/viosey/hexo-theme-material/pull/558) `latest`
 
 ## hexo-theme-hueman
 > [Merged](https://github.com/ppoffice/hexo-theme-hueman/pull/186) `v1.1.7-rc3`

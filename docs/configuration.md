@@ -178,3 +178,20 @@ new Valine({
 })
 ```
 !> `v1.1.8-beta2+`开始支持
+
+## lang
+- 类型:`String`
+- 默认值:`zh-cn`
+- 必要性:`false`
+
+多语言支持，目前可选：
+- `zh-cn`
+- `en`
+
+如需自定义语言，请参考[i18n](i18n.md)。
+```js
+new Valine({
+    lang:'zh-cn'
+})
+```
+!> `v1.1.8-beta9+`开始支持
