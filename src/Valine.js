@@ -110,7 +110,7 @@ class Valine {
             _root.notify = option.notify || !1;
             _root.verify = option.verify || !1;
 
-            gravatar['_params'] = gravatar['params'] + '&d=' + (gravatar['ds'].indexOf(option.avatar) > -1 ? option.avatar : 'mm');
+            gravatar['_params'] = '?d=' + (gravatar['ds'].indexOf(option.avatar) > -1 ? option.avatar : 'mm');
             gravatar['hide'] = option.avatar === 'hide' ? !0 : !1;
 
             let av = option.av || AV;
@@ -121,12 +121,12 @@ class Valine {
                 throw '初始化失败，请检查你的appid或者appkey.';
                 return;
             }
-            
-            av.applicationId = null;
-            av.init({
-                appId: appId,
-                appKey: appKey
-            });
+            if(!av.applicationId){
+                av.init({
+                    appId: appId,
+                    appKey: appKey
+                });
+            }
             _root.v = av;
             defaultComment.url = (option.path || location.pathname).replace(/index\.(html|htm)/, '');
 

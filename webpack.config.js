@@ -20,14 +20,16 @@ module.exports = env => {
                 comments: false,
                 sourceMap: false,
                 compress: {
-                    // 在UglifyJs删除没有用到的代码时不输出警告
+                    // 在UglifyJs删除没有用到的代码时不输出警告  
                     warnings: false,
                     // 删除所有的 `console` 语句
                     drop_console: true,
                 }
             })
         );
-        plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
+        plugins.push(new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }));
     } else {
         plugins.push(new webpack.NamedModulesPlugin())
         plugins.push(new webpack.HotModuleReplacementPlugin())
@@ -36,8 +38,9 @@ module.exports = env => {
         entry: {
             Valine: ['./src/Valine.scss', './src/Valine.js'],
             'Valine.pure': './src/Valine.js',
-            //detect:'./src/detect.js',
-            //escape:'./src/escape.js'
+            //'Valine.locales': './src/Valine.locales.js',
+            // detect: './src/detect.js',
+            // escape: './src/escape.js'
         },
         output: {
             path: BUILD_PATH,
@@ -90,8 +93,7 @@ module.exports = env => {
                 test: /\.(png|jpg|gif)$/,
                 use: ['url-loader?limit=8192']
                 //loader: 'url-loader?limit=40000'
-            }
-            ]
+            }]
         },
 
         plugins: plugins
