@@ -121,12 +121,11 @@ class Valine {
                 throw '初始化失败，请检查你的appid或者appkey.';
                 return;
             }
-            if(!av.applicationId){
-                av.init({
-                    appId: appId,
-                    appKey: appKey
-                });
-            }
+            av.applicationId = null;
+            av.init({
+                appId: appId,
+                appKey: appKey
+            });
             _root.v = av;
             defaultComment.url = (option.path || location.pathname).replace(/index\.(html|htm)/, '');
 
