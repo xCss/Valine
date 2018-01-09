@@ -10,7 +10,7 @@ const gravatar = {
     cdn: 'https://gravatar.cat.net/avatar/',
     ds: ['mm', 'identicon', 'monsterid', 'wavatar', 'retro', ''],
     params: '?s=40',
-    hide: !1
+    hide: !1 
 };
 const defaultComment = {
     comment: '',

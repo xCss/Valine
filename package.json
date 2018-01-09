@@ -1,8 +1,8 @@
 {
   "name": "valine",
-  "version": "1.1.8",
+  "version": "1.1.9-beta",
   "description": "A simple comment system based on Leancloud.",
-  "main": "/src/Valine.js",
+  "main": "/dist/Valine.min.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
   "scripts": {
     "test": "webpack",
