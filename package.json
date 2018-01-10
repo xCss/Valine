@@ -1,6 +1,6 @@
 {
   "name": "valine",
-  "version": "1.1.9-beta",
+  "version": "1.1.9-beta1",
   "description": "A simple comment system based on Leancloud.",
   "main": "/dist/Valine.min.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
