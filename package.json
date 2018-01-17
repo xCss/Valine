@@ -34,7 +34,7 @@
       {
         "basePath": "src",
         "files": [
-          "*.js"
+          "*.+(js|map|css|scss)"
         ]
       }
     ]
