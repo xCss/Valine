@@ -11,16 +11,33 @@
     "clear": "rm -rf dist/* "
   },
   "keywords": [
-    "Valine",
-    "Simple Comment",
-    "Comment System",
-    "Based on Leancloud",
-    "Minimalist"
+    "simple",
+    "easy-to-use",
+    "fast-and-safe",
+    "comment-system"
   ],
-  "license": "ISC",
+  "license": "GPL-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xcss/Valine.git"
+  },
+  "autoupdate":{
+    "source": "git",
+    "target": "git://github.com/xcss/Valine.git",
+    "fileMap": [
+      {
+        "basePath": "dist",
+        "files": [
+          "Valine*.+(js|map|css)"
+        ]
+      },
+      {
+        "basePath": "src",
+        "files": [
+          "*.js"
+        ]
+      }
+    ]
   },
   "bugs": {
     "url": "https://github.com/xcss/Valine/issues"
