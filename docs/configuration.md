@@ -68,6 +68,25 @@ new Valine({
 })
 ```
 
+## region
+- 类型:`String`
+- 默认值:`cn`
+- 必要性:`false`
+
+存储节点：在`Valine`中初始化时默认遵循`Leancloud SDK`的节点规则(`默认中国大陆节点`)，可选值：
+- `cn` - 中国大陆节点
+- `us` - 海外节点
+
+```js
+new Valine({
+    region:'cn'
+})
+```
+
+> 可以先确认本地网络环境是否可以访问Leancloud服务器：`ping "oip6cvm7.api.lncld.net"`
+
+!> `v1.1.9-beta4` 开始支持
+
 ## placeholder
 - 类型:`String`
 - 默认值:`null`

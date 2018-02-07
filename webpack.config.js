@@ -24,6 +24,9 @@ module.exports = env => {
                     warnings: false,
                     // 删除所有的 `console` 语句
                     drop_console: true,
+                },
+                mangle:{
+                    safari10:true
                 }
             })
         );

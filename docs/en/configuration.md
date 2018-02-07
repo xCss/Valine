@@ -59,6 +59,25 @@ new Valine({
 })
 ```
 
+## region
+- Type:`String`
+- Default:`cn`
+- Required:`false`
+
+Storage node，Optional value：
+- `cn` - Chinese mainland node
+- `us` - Overseas node
+
+```js
+new Valine({
+    region:'cn'
+})
+```
+
+!> `v1.1.9-beta4` is supported
+
+
+
 ## placeholder
 - Type:`String`
 - Default:`null`
@@ -110,7 +129,7 @@ new Valine({
     path:window.location.pathname
 })
 ```
-!> `v1.1.5+` is support
+!> `v1.1.5+` is supported
 
 ## avatar
 - Type:`String`
@@ -130,7 +149,7 @@ new Valine({
     avatar:`mm`
 })
 ```
-!> `v1.1.7+` is support
+!> `v1.1.7+` is supported
 
 
 ## guest_info
@@ -145,7 +164,7 @@ new Valine({
     guest_info:['nick'] // Just want nickname
 })
 ```
-!> `v1.1.8-beta+` is support
+!> `v1.1.8-beta+` is supported
 
 
 ## pageSize
@@ -160,4 +179,4 @@ new Valine({
     pageSize:10
 })
 ```
-!> `v1.1.8-beta2+` is support
+!> `v1.1.8-beta2+` is supported
