@@ -178,6 +178,51 @@ class Valine {
     }
 
     /**
+     * Valine recentComments
+     * @param {Object} option
+     * @param {Number} num
+     */
+    static recentComments(option, num) {
+        let _root = this;
+        return new Promise(function(resolve, reject) {
+            if(num < 0 || num > 100)
+                throw `The num is wrong`;
+            let av = option.av || AV;
+            let appId = option.app_id || option.appId;
+            let appKey = option.app_key || option.appKey;
+            if (!appId || !appKey) {
+                throw '初始化失败，请检查你的appid或者appkey.';
+                return;
+            }
+            av.applicationId = null;
+            av.init({
+                appId: appId,
+                appKey: appKey
+            });
+            _root.v = av;
+            _root.results = [];
+            let query = new _root.v.Query('Comment');
+            query.descending('updateAt')
+                .limit(num)
+                .find()
+                .then(rets => {
+                    rets.map(r => {
+                        let result = {};
+                        result.comment = r.attributes.nick + ":";
+                        result.comment += r.attributes.comment.replace(/<[^>]+>/g,"");
+                        result.url = r.attributes.url;
+                        _root.results.push(result);
+                    })
+                })
+                .then(_ => {
+                    resolve(_root.results);
+                })
+                .catch(e => {
+                    reject(e)
+                })
+        })
+    }
+    /**
      * Bind Event
      */
     bind(option) {
