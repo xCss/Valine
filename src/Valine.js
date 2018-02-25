@@ -186,13 +186,12 @@ class Valine {
         let _root = this;
         return new Promise(function(resolve, reject) {
             if(num < 0 || num > 100)
-                throw `The num is wrong`;
+                throw 'The num is wrong';
             let av = option.av || AV;
             let appId = option.app_id || option.appId;
             let appKey = option.app_key || option.appKey;
             if (!appId || !appKey) {
                 throw '初始化失败，请检查你的appid或者appkey.';
-                return;
             }
             av.applicationId = null;
             av.init({
@@ -218,7 +217,7 @@ class Valine {
                     resolve(_root.results);
                 })
                 .catch(e => {
-                    reject(e)
+                    throw e;
                 })
         })
     }
