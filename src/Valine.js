@@ -7,7 +7,7 @@
 import md5 from 'blueimp-md5';
 import marked from 'marked';
 const gravatar = {
-    cdn: 'https://gravatar.cat.net/avatar/',
+    cdn: 'https://gravatar.loli.net/avatar/',
     ds: ['mm', 'identicon', 'monsterid', 'wavatar', 'retro', ''],
     params: '?s=40',
     hide: !1 
