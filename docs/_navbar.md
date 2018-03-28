@@ -1,3 +1,0 @@
-- :globe_with_meridians: Language
-  - [:cn: 中文](/)
-  - [:us: English](/en/)
