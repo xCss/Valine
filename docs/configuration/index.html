@@ -883,14 +883,16 @@
 <li>默认值:<code>mm</code></li>
 <li>必要性:<code>false</code></li>
 </ul>
-<p><code>Gravatar</code> 头像展示方式。可选值:
-- <code>''</code>(空字符串)
-- <code>mm</code>
-- <code>identicon</code>
-- <code>monsterid</code>
-- <code>wavatar</code>
-- <code>retro</code>
-- <code>hide</code> (<code>v1.1.8-beta+</code> 开始支持)</p>
+<p><code>Gravatar</code> 头像展示方式。可选值:</p>
+<ul>
+<li><code>''</code>(空字符串)</li>
+<li><code>mm</code></li>
+<li><code>identicon</code></li>
+<li><code>monsterid</code></li>
+<li><code>wavatar</code></li>
+<li><code>retro</code></li>
+<li><code>hide</code> (<code>v1.1.8-beta+</code> 开始支持)</li>
+</ul>
 <p>更多信息，请查看<a href="../avatar/">头像配置</a>。</p>
 <div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
     <span class="nx">avatar</span><span class="o">:</span><span class="sb">`mm`</span>
@@ -905,12 +907,12 @@
 <h2 id="avatar_cdn">avatar_cdn<a class="headerlink" href="#avatar_cdn" title="Permanent link">&para;</a></h2>
 <ul>
 <li>类型:<code>String</code></li>
-<li>默认值:<code>https://cdn.v2ex.com/gravatar/</code></li>
+<li>默认值:<code>https://gravatar.loli.net/avatar/</code></li>
 <li>必要性:<code>false</code></li>
 </ul>
-<p>Gravatar头像镜像，默认用的v2ex</p>
+<p>Gravatar头像镜像，默认用的<code>gravatar.loli.net</code></p>
 <div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">avatar_cdn</span><span class="o">:</span><span class="s1">&#39;https://cdn.v2ex.com/gravatar/&#39;</span>
+    <span class="nx">avatar_cdn</span><span class="o">:</span><span class="s1">&#39;https://gravatar.loli.net/avatar/&#39;</span>
 <span class="p">})</span>
 </pre></div>
 
