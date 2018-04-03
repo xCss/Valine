@@ -177,7 +177,7 @@
         }, 
         {
             "location": "/hexo/", 
-            "text": "\u5728Hexo \u4e2d\u4f7f\u7528Valine\n\n\n\u76ee\u524d\uff0c\u5df2\u6709\u90e8\u5206\nHexo\n\u4e3b\u9898\u5185\u7f6e\u4e86Valine \u8bc4\u8bba\u7cfb\u7edf\uff0c\u66f4\u591a\u7684\u4e3b\u9898\u6b63\u5728\u9010\u6b65\u589e\u52a0\u4e2d(\u7531\u4e8e\u4e2a\u4eba\u7cbe\u529b\u6709\u9650\uff0c\u5185\u7f6eValine\u7684PR\u5c06\u4e0d\u5b9a\u65f6\u63d0\u4ea4)\u3002\n\n\n\n\nInfo\n\n\n\u5982\u679c\u5982\u4e0b\u5217\u8868\u4e2d\u6ca1\u6709\u4f60\u5f53\u524d\u4f7f\u7528\u7684\u4e3b\u9898\uff0c\u8bf7\u5728\u672c\u9875\u5e95\u90e8\u7559\u8a00\u3002\u6211\u4f1a\u5c3d\u5feb\u63d0\u4ea4PR\u3002\n\n\n\n\nhexo-theme-pln\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-landscape\n\n\n\n\nOpen\n \nlatest\n\n\n\n\ncactus-dark\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-yilia\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-even\n\n\n\n\nOpen\n \nv1.1.7\n\n\n\n\nfexo\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-indigo\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-Anatole\n\n\n\n\nMerged\n \nv1.1.7\n\n\n\n\nmaupassant-hexo\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-mdui\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-next\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-material\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-hueman\n\n\n\n\nMerged\n \nv1.1.7-rc3\n\n\n\n\nhexo-theme-magnetic\n\n\n\n\nMerged\n \nv1.1.7", 
+            "text": "\u5728Hexo \u4e2d\u4f7f\u7528Valine\n\n\n\u76ee\u524d\uff0c\u5df2\u6709\u90e8\u5206\nHexo\n\u4e3b\u9898\u5185\u7f6e\u4e86Valine \u8bc4\u8bba\u7cfb\u7edf\uff0c\u66f4\u591a\u7684\u4e3b\u9898\u6b63\u5728\u9010\u6b65\u589e\u52a0\u4e2d(\u7531\u4e8e\u4e2a\u4eba\u7cbe\u529b\u6709\u9650\uff0c\u5185\u7f6eValine\u7684PR\u5c06\u4e0d\u5b9a\u65f6\u63d0\u4ea4)\u3002\n\n\n\n\nInfo\n\n\n\u5982\u679c\u5982\u4e0b\u5217\u8868\u4e2d\u6ca1\u6709\u4f60\u5f53\u524d\u4f7f\u7528\u7684\u4e3b\u9898\uff0c\u8bf7\u5728\u672c\u9875\u5e95\u90e8\u7559\u8a00\u3002\u6211\u4f1a\u5c3d\u5feb\u63d0\u4ea4PR\u3002\n\n\n\n\nhexo-theme-typing\n\n\n\n\nOpen\n \nlatest\n\n\n\n\ncactus-dark\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-yilia\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-even\n\n\n\n\nOpen\n \nv1.1.7\n\n\n\n\nhexo-theme-pln\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-landscape\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nfexo\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-indigo\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-Anatole\n\n\n\n\nMerged\n \nv1.1.7\n\n\n\n\nmaupassant-hexo\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-mdui\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-next\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-material\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-hueman\n\n\n\n\nMerged\n \nv1.1.7-rc3\n\n\n\n\nhexo-theme-magnetic\n\n\n\n\nMerged\n \nv1.1.7", 
             "title": "Hexo\u4e2d\u7684\u4f7f\u7528"
         }, 
         {
@@ -186,14 +186,9 @@
             "title": "\u5728Hexo \u4e2d\u4f7f\u7528Valine"
         }, 
         {
-            "location": "/hexo/#hexo-theme-pln", 
+            "location": "/hexo/#hexo-theme-typing", 
             "text": "Open   latest", 
-            "title": "hexo-theme-pln"
-        }, 
-        {
-            "location": "/hexo/#hexo-theme-landscape", 
-            "text": "Open   latest", 
-            "title": "hexo-theme-landscape"
+            "title": "hexo-theme-typing"
         }, 
         {
             "location": "/hexo/#cactus-dark", 
@@ -209,6 +204,16 @@
             "location": "/hexo/#hexo-theme-even", 
             "text": "Open   v1.1.7", 
             "title": "hexo-theme-even"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-pln", 
+            "text": "Merge   latest", 
+            "title": "hexo-theme-pln"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-landscape", 
+            "text": "Merge   latest", 
+            "title": "hexo-theme-landscape"
         }, 
         {
             "location": "/hexo/#fexo", 
