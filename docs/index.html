@@ -602,7 +602,23 @@
               
               
                 
+	<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+	<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
 
+  <h2 id="comments">评论</h2>
+  <div id="valine_thread"></div>
+  <script>
+  
+        var valine = new Valine();
+        valine.init({
+            el: '#valine_thread',
+            appId: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
+            appKey: 'iuneD4hXPQImdHQSRE0aOcRF',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            avatar:'mm' // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
+        })
+
+  </script>
               
             </article>
           </div>
