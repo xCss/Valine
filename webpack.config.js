@@ -42,8 +42,8 @@ module.exports = env => {
             Valine: ['./src/Valine.scss', './src/Valine.js'],
             'ValinePure': './src/Valine.js',
             //'Valine.locales': './src/Valine.locales.js',
-            // detect: './src/detect.js',
-            // escape: './src/escape.js'
+            detect: './src/detect.js',
+            escape: './src/escape.js'
         },
         output: {
             path: BUILD_PATH,
