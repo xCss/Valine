@@ -9,6 +9,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
+	  <meta name="keywords" content="极简风评论系统,社会化评论系统,无后端评论系统,评论系统,comment system,valine comment system,simple &amp; fast,Minimalist style">
       
         <meta name="description" content="A fast, simple & powerful comment system.">
       
@@ -131,7 +132,7 @@
           
         </div>
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
+      <!-- <div class="md-flex__cell md-flex__cell--shrink">
         
           
             <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
@@ -160,7 +161,7 @@
 </div>
           
         
-      </div>
+      </div> -->
       
         <div class="md-flex__cell md-flex__cell--shrink">
           <div class="md-header-nav__source">
@@ -554,63 +555,10 @@
 <span class="p">})</span>
 </pre></div>
 
-
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>如果有需要支持<code>其他语言</code>，请严格按照下面的<code>localeMode</code>格式书写内容:</p>
 </div>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">localeName</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="nx">localeMode</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">head</span><span class="o">:</span><span class="p">{</span>
-            <span class="nx">nick</span><span class="o">:</span><span class="s1">&#39;NickName&#39;</span><span class="p">,</span>
-            <span class="nx">mail</span><span class="o">:</span><span class="s1">&#39;E-Mail&#39;</span><span class="p">,</span>
-            <span class="nx">link</span><span class="o">:</span><span class="s1">&#39;Website(http://)&#39;</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="nx">tips</span><span class="o">:</span><span class="p">{</span>
-            <span class="nx">comments</span><span class="o">:</span><span class="s1">&#39;Comments&#39;</span><span class="p">,</span>
-            <span class="nx">sofa</span><span class="o">:</span><span class="s1">&#39;No comments yet.&#39;</span><span class="p">,</span>
-            <span class="nx">busy</span><span class="o">:</span><span class="s1">&#39;Submit is busy, please wait...&#39;</span><span class="p">,</span>
-            <span class="nx">again</span><span class="o">:</span><span class="s1">&#39;Sorry, this is a wrong calculation.&#39;</span><span class="p">,</span>
-            <span class="nx">limit</span><span class="o">:</span><span class="s1">&#39;The largest number of words %d&#39;</span>
-        <span class="p">},</span>
-        <span class="nx">ctrl</span><span class="o">:</span><span class="p">{</span>
-            <span class="nx">reply</span><span class="o">:</span><span class="s1">&#39;Reply&#39;</span><span class="p">,</span>
-            <span class="nx">ok</span><span class="o">:</span><span class="s1">&#39;Ok&#39;</span><span class="p">,</span>
-            <span class="nx">sure</span><span class="o">:</span><span class="s1">&#39;Sure&#39;</span><span class="p">,</span>
-            <span class="nx">cancel</span><span class="o">:</span><span class="s1">&#39;Cancel&#39;</span><span class="p">,</span>
-            <span class="nx">confirm</span><span class="o">:</span><span class="s1">&#39;Confirm&#39;</span><span class="p">,</span>
-            <span class="k">continue</span><span class="o">:</span><span class="s1">&#39;Continue&#39;</span><span class="p">,</span>
-            <span class="nx">more</span><span class="o">:</span><span class="s1">&#39;Load More...&#39;</span><span class="p">,</span>
-            <span class="k">try</span><span class="o">:</span><span class="s1">&#39;Once More?&#39;</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="nx">error</span><span class="o">:</span><span class="p">{</span>
-            <span class="mi">99</span><span class="o">:</span><span class="s1">&#39;Initialization failed, Please check the `el` element in the init method.&#39;</span><span class="p">,</span>
-            <span class="mi">100</span><span class="o">:</span><span class="s1">&#39;Initialization failed, Please check your appId and appKey.&#39;</span><span class="p">,</span>
-            <span class="mi">401</span><span class="o">:</span><span class="s1">&#39;Unauthorized operation, Please check your appId and appKey.&#39;</span><span class="p">,</span>
-            <span class="mi">403</span><span class="o">:</span><span class="s1">&#39;Access denied by api domain white list, Please check your security domain.&#39;</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="nx">timeago</span><span class="o">:</span><span class="p">{</span>
-            <span class="nx">seconds</span><span class="o">:</span><span class="s1">&#39;seconds ago&#39;</span><span class="p">,</span>
-            <span class="nx">minutes</span><span class="o">:</span><span class="s1">&#39;minutes ago&#39;</span><span class="p">,</span>
-            <span class="nx">hours</span><span class="o">:</span><span class="s1">&#39;hours ago&#39;</span><span class="p">,</span>
-            <span class="nx">days</span><span class="o">:</span><span class="s1">&#39;days ago&#39;</span><span class="p">,</span>
-            <span class="nx">now</span><span class="o">:</span><span class="s1">&#39;just now&#39;</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
-
-<span class="kd">var</span> <span class="nx">valine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Valine</span><span class="p">();</span>
-<span class="c1">// 1.安装语言</span>
-<span class="nx">valine</span><span class="p">.</span><span class="nx">installLocale</span><span class="p">(</span><span class="nx">localeName</span><span class="p">,</span><span class="nx">localeMode</span><span class="p">)</span>
-<span class="c1">// 2.初始化Valine</span>
-<span class="nx">valine</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
-    <span class="nx">el</span><span class="o">:</span><span class="s1">&#39;.comment&#39;</span><span class="p">,</span>
-    <span class="nx">appId</span><span class="o">:</span><span class="s1">&#39;your leancloud appid&#39;</span><span class="p">,</span>
-    <span class="nx">appKey</span><span class="o">:</span><span class="s1">&#39;your leancloud appkey&#39;</span><span class="p">,</span>
-    <span class="nx">lang</span><span class="o">:</span><span class="nx">localeName</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.8-beta9</code>开始支持。</p>

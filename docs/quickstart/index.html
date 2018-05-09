@@ -9,6 +9,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
+	  <meta name="keywords" content="极简风评论系统,社会化评论系统,无后端评论系统,评论系统,comment system,valine comment system,simple &amp; fast,Minimalist style">
       
         <meta name="description" content="A fast, simple & powerful comment system.">
       
@@ -131,7 +132,7 @@
           
         </div>
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
+      <!-- <div class="md-flex__cell md-flex__cell--shrink">
         
           
             <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
@@ -160,7 +161,7 @@
 </div>
           
         
-      </div>
+      </div> -->
       
         <div class="md-flex__cell md-flex__cell--shrink">
           <div class="md-header-nav__source">
@@ -609,7 +610,6 @@
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </pre></div>
 
-
 <h2 id="appidappkey">获取appid和appkey<a class="headerlink" href="#appidappkey" title="Permanent link">&para;</a></h2>
 <p>请先<a href="https://leancloud.cn/dashboard/login.html#/signin">登录</a>或<a href="https://leancloud.cn/dashboard/login.html#/signup">注册</a> <code>LeanCloud</code>, 进入<a href="https://leancloud.cn/dashboard/applist.html#/apps">控制台</a>后点击左下角<a href="https://leancloud.cn/dashboard/applist.html#/newapp">创建应用</a>：</p>
 <p><img alt="" src="https://ws1.sinaimg.cn/large/006qRazegy1fkwo2fpoetj30h40coaak.jpg" /></p>
@@ -622,7 +622,7 @@
 <p><img alt="设置安全域名" src="https://ws1.sinaimg.cn/large/006qRazegy1fkxqmddfh1j30qd0go40h.jpg" /></p>
 <h2 id="_2">配置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>修改初始化对象中的<code>appId</code>和<code>appKey</code>的值为上面刚刚获取到的值即可(其他可以默认)。</p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
+<p><div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
     <span class="nx">el</span><span class="o">:</span> <span class="s1">&#39;#comment&#39;</span> <span class="p">,</span>
     <span class="nx">notify</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span> 
     <span class="nx">verify</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span> 
@@ -633,14 +633,11 @@
     <span class="nx">avatar</span><span class="o">:</span><span class="s1">&#39;mm&#39;</span> 
 <span class="p">});</span>
 </pre></div>
-
-
-<p>更多信息请查看<a href="../configuration/">配置项</a>。</p>
+更多信息请查看<a href="../configuration/">配置项</a>。</p>
 <h2 id="npm">npm安装<a class="headerlink" href="#npm" title="Permanent link">&para;</a></h2>
 <p>Valine 现已发布到<a href="https://www.npmjs.com/package/valine">npm</a>，可以直接用命令安装：</p>
 <div class="codehilite"><pre><span></span>npm install valine --save
 </pre></div>
-
 
 <h2 id="_3">评论数据管理<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>插播一下，关于<code>评论数据管理</code>，请自行登录Leancloud应用管理。<br />

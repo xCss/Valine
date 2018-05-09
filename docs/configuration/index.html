@@ -9,6 +9,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
+	  <meta name="keywords" content="极简风评论系统,社会化评论系统,无后端评论系统,评论系统,comment system,valine comment system,simple &amp; fast,Minimalist style">
       
         <meta name="description" content="A fast, simple & powerful comment system.">
       
@@ -131,7 +132,7 @@
           
         </div>
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
+      <!-- <div class="md-flex__cell md-flex__cell--shrink">
         
           
             <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
@@ -160,7 +161,7 @@
 </div>
           
         
-      </div>
+      </div> -->
       
         <div class="md-flex__cell md-flex__cell--shrink">
           <div class="md-header-nav__source">
@@ -707,7 +708,7 @@
                 
                 
                 <h1 id="_1">配置项<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>Valine 支持两种不同的初始化方式。一种是构造方法初始化对象，另一种是调用<code>init</code>方法：</p>
+<p>Valine 支持两种不同的初始化方式。一种是构造方法初始化对象，另一种是调用<code>init</code>方法：
 <div class="codehilite"><pre><span></span><span class="c">&lt;!-- 方法 1 --&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
@@ -726,27 +727,13 @@
         <span class="nx">appKey</span><span class="o">:</span><span class="s1">&#39;your appkey&#39;</span>
     <span class="p">})</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</pre></div>
-
-
+</pre></div></p>
 <h2 id="el">el<a class="headerlink" href="#el" title="Permanent link">&para;</a></h2>
 <ul>
 <li>类型:<code>String</code></li>
 <li>默认值:<code>#comment</code></li>
 <li>必要性:<code>true</code></li>
 </ul>
-<p>Valine 的初始化挂载器。可以是一个<code>CSS 选择器</code>，也可以是一个实际的<code>HTML元素</code>。</p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">el</span><span class="o">:</span><span class="s1">&#39;#comment&#39;</span>
-<span class="p">})</span>
-
-<span class="c1">// or </span>
-<span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">el</span><span class="o">:</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">)</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>在使用时，请保证该元素的唯一性。</p>
@@ -766,7 +753,6 @@
 <span class="p">})</span>
 </pre></div>
 
-
 <h2 id="appkey">appKey<a class="headerlink" href="#appkey" title="Permanent link">&para;</a></h2>
 <ul>
 <li>类型:<code>String</code></li>
@@ -781,7 +767,6 @@
     <span class="nx">appKey</span><span class="o">:</span><span class="s1">&#39;your leancloud appkey&#39;</span>
 <span class="p">})</span>
 </pre></div>
-
 
 <h2 id="region">region<a class="headerlink" href="#region" title="Permanent link">&para;</a></h2>
 <ul>
@@ -799,10 +784,9 @@
 <span class="p">})</span>
 </pre></div>
 
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>可以先确认本地网络环境是否可以访问Leancloud服务器：<code>ping "oip6cvm7.api.lncld.net"</code></p>
+<p>可以先确认本地网络环境是否可以访问Leancloud服务器：<code>ping &quot;oip6cvm7.api.lncld.net&quot;</code></p>
 <p>该配置从<code>v1.1.9-beta4</code> 开始支持</p>
 </div>
 <h2 id="placeholder">placeholder<a class="headerlink" href="#placeholder" title="Permanent link">&para;</a></h2>
@@ -811,13 +795,11 @@
 <li>默认值:<code>null</code></li>
 <li>必要性:<code>false</code></li>
 </ul>
-<p>评论框<code>占位提示符</code>。</p>
+<p>评论框<code>占位提示符</code>。
 <div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
     <span class="nx">placeholder</span><span class="o">:</span><span class="s1">&#39;Just so so&#39;</span>
 <span class="p">})</span>
-</pre></div>
-
-
+</pre></div></p>
 <h2 id="notify">notify<a class="headerlink" href="#notify" title="Permanent link">&para;</a></h2>
 <ul>
 <li>类型:<code>Boolean</code></li>
@@ -829,7 +811,6 @@
     <span class="nx">notify</span><span class="o">:</span><span class="kc">false</span>
 <span class="p">})</span>
 </pre></div>
-
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -846,7 +827,6 @@
     <span class="nx">verify</span><span class="o">:</span><span class="kc">false</span>
 <span class="p">})</span>
 </pre></div>
-
 
 <h2 id="path">path<a class="headerlink" href="#path" title="Permanent link">&para;</a></h2>
 <ul>
@@ -867,12 +847,6 @@
 <li>II. 如果值为<code>window.location.href</code>，可能会出现随便加<code>不同参数</code>进入该页面，而被判断成新页面的情况。</li>
 </ul>
 </div>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">path</span><span class="o">:</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.5+</code> 开始支持</p>
@@ -894,12 +868,6 @@
 <li><code>hide</code> (<code>v1.1.8-beta+</code> 开始支持)</li>
 </ul>
 <p>更多信息，请查看<a href="../avatar/">头像配置</a>。</p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">avatar</span><span class="o">:</span><span class="sb">`mm`</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.7+</code> 开始支持</p>
@@ -911,12 +879,6 @@
 <li>必要性:<code>false</code></li>
 </ul>
 <p>Gravatar头像镜像，默认用的<code>gravatar.loli.net</code></p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">avatar_cdn</span><span class="o">:</span><span class="s1">&#39;https://gravatar.loli.net/avatar/&#39;</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.9-beta5+</code> 开始支持</p>
@@ -928,12 +890,6 @@
 <li>必要性:<code>false</code></li>
 </ul>
 <p>评论者相关属性。</p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">guest_info</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;nick&#39;</span><span class="p">]</span> <span class="c1">// 只想要昵称</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.8-beta+</code> 开始支持</p>
@@ -945,12 +901,6 @@
 <li>必要性:<code>false</code></li>
 </ul>
 <p>评论列表分页，每页条数。</p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">pageSize</span><span class="o">:</span><span class="mi">10</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.8-beta2+</code>开始支持</p>
@@ -966,13 +916,6 @@
 <li><code>zh-cn</code></li>
 <li><code>en</code></li>
 </ul>
-<p>如需自定义语言，请参考<a href="../i18n/">i18n</a>。</p>
-<div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">Valine</span><span class="p">({</span>
-    <span class="nx">lang</span><span class="o">:</span><span class="s1">&#39;zh-cn&#39;</span>
-<span class="p">})</span>
-</pre></div>
-
-
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>该配置从<code>v1.1.8-beta9+</code>开始支持</p>
