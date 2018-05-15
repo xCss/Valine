@@ -25,8 +25,8 @@ module.exports = env => {
                     // 删除所有的 `console` 语句
                     drop_console: true,
                 },
-                mangle:{
-                    safari10:true
+                mangle: {
+                    safari10: true
                 }
             })
         );
@@ -39,11 +39,12 @@ module.exports = env => {
     }
     return {
         entry: {
-            Valine: ['./src/Valine.scss', './src/Valine.js'],
+            //Valine: ['./src/Valine.scss', './src/index.js'],
+            Valine:'./src/index.js',
             'ValinePure': './src/Valine.js',
             //'Valine.locales': './src/Valine.locales.js',
-            detect: './src/detect.js',
-            escape: './src/escape.js'
+            detect: './src/utils/detect.js',
+            escape: './src/utils/escape.js'
         },
         output: {
             path: BUILD_PATH,
@@ -67,6 +68,13 @@ module.exports = env => {
             overlay: { //当有编译错误或者警告的时候显示一个全屏overlay
                 errors: true,
                 warnings: true,
+            }
+        },
+        resolve: {
+            extensions: ['.jsx', '.js', '.json'],
+            alias: {
+                'react': 'preact-compat',
+                'react-dom': 'preact-compat'
             }
         },
 

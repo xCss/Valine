@@ -1,5 +1,6 @@
 {
     "presets": ["env"],
-    "plugins":[]//,["transform-runtime"]
-    //"comments": true
+    "plugins": [
+      ["transform-react-jsx", { "pragma":"preact.h" }]
+    ]
   }
