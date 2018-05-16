@@ -1,24 +1,17 @@
-// const h = require('preact').h
-// const render = require('preact').render
-// const Component = require('preact').Component
-// const Core = require('./core')
-
-import {h,render} from 'preact'
-
+const {h,render} = require('preact')
+// import {h,render} from 'preact'
+const Clock = require('./valine')
 class ValineFactory {
-    constructor(options = {}) {
+    constructor(options) {
         let root = this
         //root.Core = Core
         root.options = options
-        if(options && options.appId){
-            root.ready(()=>root.init(options))
-        }
+        options && root.init(options)
         return root
     }
 
     ready(callback) {
         let win = window, doc = document
-        // don't use "interactive" on IE <= 10 (it can fired premature)
         if (doc.readyState === "complete" || (doc.readyState !== "loading" && !doc.documentElement.doScroll))
             setTimeout(() => callback && callback() , 0)
         else {
@@ -33,14 +26,26 @@ class ValineFactory {
         return this
     }
 
-    init(options = {}){
-        console.log(options)
-        // return render()
+    init(options){
+        let root = this
+        root.ready(()=>{
+            console.log(Clock)
+            let el = options.el || null
+            let _el = document.querySelectorAll(el)
+            el = el instanceof HTMLElement ? el : (_el[_el.length-1] || null)
+            if(!el) throw 'Init failed. `el` not found.'
+            console.log(h,render)
+            return render(<Clock />,document.body)
+        })
+
+        return root
     }
+
+    counter(){}
 }
 
 class Valine{
-    constructor(options = {}){
+    constructor(options){
         return new ValineFactory(options)
     }
 }

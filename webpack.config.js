@@ -27,6 +27,7 @@ module.exports = env => {
             minimize: true
         }));
     } else {
+        plugins.push(new webpack.LoaderOptionsPlugin())
         plugins.push(new webpack.NamedModulesPlugin())
         plugins.push(new webpack.HotModuleReplacementPlugin())
     }
@@ -47,6 +48,9 @@ module.exports = env => {
             umdNamedDefine: true
         },
 
+        resolve: {
+            extensions: ['.js', '.jsx']
+        },
         devtool: 'cheap-module-source-map',
 
         devServer: {
@@ -65,9 +69,8 @@ module.exports = env => {
 
         module: {
             rules: [{
-                test: /\.js[x]$/,
-                use: ['babel-loader'],
-                include: [APP_PATH],
+                test: /\.jsx?$/,
+                use: 'babel-loader',
                 exclude: /node_modules/
             }, {
                 test: /\.scss$/,
