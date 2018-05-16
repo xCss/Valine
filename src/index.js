@@ -1,7 +1,19 @@
+// const h = require('preact').h
+// const render = require('preact').render
+// const Component = require('preact').Component
+// const Core = require('./core')
+
+import {h,render} from 'preact'
+
 class ValineFactory {
     constructor(options = {}) {
-        this.options = options
-        return this
+        let root = this
+        //root.Core = Core
+        root.options = options
+        if(options && options.appId){
+            root.ready(()=>root.init(options))
+        }
+        return root
     }
 
     ready(callback) {
@@ -20,19 +32,19 @@ class ValineFactory {
         }
         return this
     }
+
+    init(options = {}){
+        console.log(options)
+        // return render()
+    }
 }
 
-function Valine(options){
-    // console.log(window)
-    // console.log(12)
-    // if(this instanceof ValineFactory){
-    //     return this
-    // }
-    // else return new ValineFactory(options)
-    return ValineFactory
+class Valine{
+    constructor(options = {}){
+        return new ValineFactory(options)
+    }
 }
 
-// window.Valine = ValineFactory
+module.exports = Valine
 
-exports.Valine = Valine
-exports.VF = ValineFactory
+module.exports.default = Valine

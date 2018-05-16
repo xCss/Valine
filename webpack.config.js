@@ -1,11 +1,11 @@
-var webpack = require('webpack');
-var path = require('path');
-var autoprefixer = require('autoprefixer');
-
-var libraryName = 'Valine';
-var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(ROOT_PATH, 'src');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
+const webpack = require('webpack');
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const libraryName = 'Valine';
+const ROOT_PATH = path.resolve(__dirname);
+const APP_PATH = path.resolve(ROOT_PATH, 'src');
+const BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
 var plugins = [];
 
@@ -13,20 +13,13 @@ module.exports = env => {
     var dev = env && env.dev || false
     if (!dev) {
         plugins.push(
-            new webpack.optimize.UglifyJsPlugin({
-                // 最紧凑的输出
-                beautify: false,
-                // 删除所有的注释
-                comments: false,
-                sourceMap: false,
-                compress: {
-                    // 在UglifyJs删除没有用到的代码时不输出警告  
-                    warnings: false,
-                    // 删除所有的 `console` 语句
-                    drop_console: true,
-                },
-                mangle: {
-                    safari10: true
+            new UglifyJsPlugin({
+                sourceMap:false,
+                uglifyOptions:{
+                    output:{
+                        beautify:false
+                    },
+                    safari10:true
                 }
             })
         );
@@ -41,10 +34,10 @@ module.exports = env => {
         entry: {
             //Valine: ['./src/Valine.scss', './src/index.js'],
             Valine:'./src/index.js',
-            'ValinePure': './src/Valine.js',
+            // 'ValinePure': './src/Valine.js',
             //'Valine.locales': './src/Valine.locales.js',
-            detect: './src/utils/detect.js',
-            escape: './src/utils/escape.js'
+            // detect: './src/utils/detect.js',
+            // escape: './src/utils/escape.js'
         },
         output: {
             path: BUILD_PATH,
@@ -60,28 +53,20 @@ module.exports = env => {
             hot: true,
             port: 8088,
             inline: true,
-            progress: true,
             host: '0.0.0.0',
-            publicPath: "/dist/",
-            historyApiFallback: true,
+            publicPath:'/dist/',
+            compress: true,
             stats: 'errors-only', //只在发生错误时输出
             overlay: { //当有编译错误或者警告的时候显示一个全屏overlay
                 errors: true,
                 warnings: true,
             }
         },
-        resolve: {
-            extensions: ['.jsx', '.js', '.json'],
-            alias: {
-                'react': 'preact-compat',
-                'react-dom': 'preact-compat'
-            }
-        },
 
         module: {
             rules: [{
-                test: /\.js$/,
-                loader: 'babel-loader',
+                test: /\.js[x]$/,
+                use: ['babel-loader'],
                 include: [APP_PATH],
                 exclude: /node_modules/
             }, {
@@ -101,8 +86,8 @@ module.exports = env => {
                     'postcss-loader'
                 ]
             }, {
-                test: /\.(png|jpg|gif)$/,
-                use: ['url-loader?limit=8192']
+                test: /\.(png|jpg|gif|svg)$/,
+                use: ['url-loader?limit=1024*10']
                 //loader: 'url-loader?limit=40000'
             }]
         },
