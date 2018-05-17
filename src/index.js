@@ -1,6 +1,5 @@
 const {h,render} = require('preact')
-// import {h,render} from 'preact'
-const Clock = require('./valine')
+const {ValineComponent} = require('./components')
 class ValineFactory {
     constructor(options) {
         let root = this
@@ -29,13 +28,11 @@ class ValineFactory {
     init(options){
         let root = this
         root.ready(()=>{
-            console.log(Clock)
             let el = options.el || null
             let _el = document.querySelectorAll(el)
             el = el instanceof HTMLElement ? el : (_el[_el.length-1] || null)
             if(!el) throw 'Init failed. `el` not found.'
-            console.log(h,render)
-            return render(<Clock />,document.body)
+            return render(<ValineComponent />,el)
         })
 
         return root
