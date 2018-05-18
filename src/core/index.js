@@ -12,6 +12,7 @@ function vCoreFactory(options){
 }
 
 vCoreFactory.prototype.Init = function(options){
+
     let root = this
 
     let appId = options && (options.appId || options.app_id) || '',
@@ -41,7 +42,6 @@ vCoreFactory.prototype.Init = function(options){
  */
 vCoreFactory.prototype.createACL = function(read,write){
     let root = this
-    root.isInit()
     let acl = new root.v.ACL()
     read = typeof read == 'boolean' ? read : true
     write = typeof write == 'boolean' ? write : true
@@ -55,7 +55,7 @@ vCoreFactory.prototype.createACL = function(read,write){
  * @param {Object} comment Comment Content Object
  * @returns {Object} Promise Object 
  */
-vCoreFactory.prototype.InsertComment = function(comment){
+vCoreFactory.prototype.Insert = function(comment){
     let root = this
     root.isInit()
     
@@ -74,14 +74,19 @@ vCoreFactory.prototype.InsertComment = function(comment){
 
 /**
  * LeanCloud SDK Query Util
- * @param {Object} Q Query Object: {key:'url',val:'path/to/name',clazz:'Comment'}
+ * @param {String} key Query key: 'url'
+ * @param {String|Array} val Query val: 'path/to/name' or ['path1','path2',...]
+ * @param {String} clazz Query Class: Comment
+ * @param {Boolean} isAll Query All: true or false
  * @returns {Object} Promise：Query result 
  */
-vCoreFactory.prototype.Query = function(Q){
+vCoreFactory.prototype.Query = function(key,val,clazz,isAll){
     let root = this
     root.isInit()
     let rs = new root.v.Query(clazz)
-    rs.equalTo(key,val)
+    
+    !!isAll && rs.containsAll(key,val) || rs.equalTo(key,val)
+
     if(calzz == 'Comment'){
         rs.addDescending('createdAt');
         rs.addDescending('insertedAt');
@@ -89,21 +94,17 @@ vCoreFactory.prototype.Query = function(Q){
     return rs
 }
 
-vCoreFactory.prototype.QueryAll = function(){
-
-}
-
 /**
  * Counter Increment
  * @param {Object} counter Counter Object  {url:'path/to/name',title:'just test title',clazz:'Counter'}
  * @returns {Object} Promise: Current Counter Object
  */
-vCoreFactory.prototype.Increment = function(counter){
+vCoreFactory.prototype.Increment = function(newCounter){
     let root = this
     root.isInit()
-    let url = counter.url || '',
-        title = counter.title || '',
-        clazz = counter.clazz || 'Counter'
+    let url = newCounter.url || '',
+        title = newCounter.title || '',
+        clazz = newCounter.clazz || 'Counter'
     if(!url) throw 'Counter identification can not be empty.'
     return root.Query('url',url,clazz).then(ret=>{
         let Counter = null

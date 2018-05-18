@@ -28,5 +28,5 @@ vUtils.domReady = (callback)=>{
  * @param {Function} callback 
  */
 vUtils.oReady = (o,callback)=>{
-    !o && setTimeout(()=>vUtils.oReady(o),10) || (callback && callback())
+    !!o && (callback && callback()) || setTimeout(()=>vUtils.oReady(o),10) 
 }
