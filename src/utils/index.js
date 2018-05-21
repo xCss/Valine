@@ -4,7 +4,7 @@
  * https://github.com/xCss/Valine
  */
 
-let vUtils = {}, win = window, doc = document
+const vUtils = {}, win = window, doc = document
 
 /**
  * Detection DOM 
@@ -40,12 +40,13 @@ vUtils.domReady(() => {
     if (!String.fromCodePoint) {
         var defineProperty = (function () {
             // IE 8 only supports `Object.defineProperty` on DOM elements
+            var ret;
             try {
                 var object = {};
-                var $defineProperty = Object.defineProperty;
-                var result = $defineProperty(object, object, object) && $defineProperty;
-            } catch (error) { }
-            return result;
+                var _ = Object.defineProperty;
+                ret = _(object, object, object) && _;
+            } catch (e) { }
+            return ret;
         }());
         var stringFromCharCode = String.fromCharCode;
         var floor = Math.floor;

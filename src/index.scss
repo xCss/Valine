@@ -4,12 +4,12 @@
  * Github: https://github.com/xCss/Valine
  * Website: https://valine.js.org
  */
-.valine {
+ .v {
     * {
         box-sizing: border-box;
         //font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", Arial, sans-serif;
         //font-size: 16px;
-        line-height: 1.42857143;
+        line-height: 1.8;
         color: #555;
         transition: all .3s ease;
     }
@@ -31,6 +31,12 @@
         input {
             background: transparent;
         }
+        .vedit{position: relative;}
+        .vedit .vctrl{text-align:right;font-size:12px;}
+        .vedit .vctrl span{padding:10px;display:inline-block;vertical-align: middle;cursor: pointer;}
+        .vedit .vemojis{display:none;font-size:18px;text-align: justify;max-height:145px;overflow: auto;margin-bottom:10px;box-shadow: 0px 0 1px #f0f0f0;}
+        .vedit .vemojis i{font-style: normal;padding:7px 0; width:38px;cursor:pointer;text-align:center;display: inline-block;vertical-align: middle;}
+        .vedit .vpreview{padding:7px;box-shadow: 0px 0 1px #f0f0f0;}
         .vheader{
             .vinput{
                 width:33.33%;
@@ -57,6 +63,7 @@
         .vcontrol {
             //background: #fdfdfd;
             font-size: 0;
+            padding-top:15px;
             .col{
                 display:inline-block;
                 font-size:.725rem;
@@ -124,7 +131,7 @@
             font-size: .75rem;
         }
     }
-    .info {
+    .vinfo {
         font-size: 0;
         padding: 5px;
         .col {
@@ -134,8 +141,8 @@
             vertical-align: middle;
 
         }
-        .count {
-            .num {
+        .vcount {
+            .vnum {
                 font-weight: 600;
                 font-size: 1.25rem;
             }
@@ -168,17 +175,17 @@
     }
     .veditor {
         width: 100%;
-        height: 8.75rem;
+        min-height: 8.75rem;
         font-size:.875rem;
         background:transparent;
+        resize: vertical;
     }
     .vbtn {
         transition-duration: .4s;
         text-align: center;
         color: #313131;
-        border: 1px solid #f7f7f7;
+        border: 1px solid #ededed;
         border-radius: 1.9rem;
-        background-color: #f7f7f7;
         display: inline-block;
         background: #ededed;
         margin-bottom: 0;
@@ -203,7 +210,7 @@
         background-color: #fff;
     }
     .vempty {
-        padding: 1.25px;
+        padding: 1.25rem;
         text-align: center;
         color: #999;
     }
@@ -226,23 +233,38 @@
                 margin-right: .7525rem;
             }
             .vhead {
-                line-height: 1;
+                line-height: 1.5;
                 margin-bottom: .625rem;
                 margin-top: 0;
-                a {
-                    font-size: .8135rem;
+                .vname {
+                    font-size: .875rem;
                     font-weight: 700;
-                    color: rgb(44, 32, 32);
                     margin-right:.875rem;
+                    cursor:pointer;
                     &:hover {
                         color: #D7191A;
+                    }
+                }
+                .vsys{
+                    display:inline-block;
+                    padding:.2rem .5rem;
+                    background:#ededed;
+                    color:#b3b1b1;
+                    font-size:.75rem;
+                    border-radius:.2rem;
+                    margin-right:.3rem;
+                }
+
+                @media screen and (max-width:520px) {
+                    .vsys{
+                        display:none;
                     }
                 }
             }
             section {
                 overflow: hidden;
                 padding-bottom:1.5rem;
-                border-bottom:1px solid #f5f5f5;
+                border-bottom:1px dashed #f5f5f5;
                 .vfooter{
                     position:relative;
                     .vtime {
@@ -266,6 +288,7 @@
                 line-height: 2;
                 position: relative;
                 margin-bottom:.75rem;
+                img{max-width:100%;}
                 a {
                     font-size: .875rem;
                     color:#708090;
@@ -320,7 +343,7 @@
         }
     }
     .vpage {
-        padding: .35rem;
+        padding: 1rem 0;
         i {
             display: inline-block;
             padding: .05rem .65rem;
@@ -344,58 +367,42 @@
         clear: both;
     }
     /************ Loading ************/
-    .spinner {
-        margin: 0.625rem auto;
-        width: 3.15rem;
-        height: 1.875rem;
-        text-align: center;
-        font-size: 10px;
+    $base-line-height: 2rem;
+    $white: rgb(220, 220, 220);
+    $off-white: rgb(160, 160, 160);
+    $spin-duration: 1s;
+    $pulse-duration: 750ms;
+    
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
-    .spinner>div {
-        background-color: #9c9c9c;
-        height: 100%;
-        width: .375rem;
-        margin-right: 0.19rem;
-        display: inline-block;
-        -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-        animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    
+    @keyframes pulse {	
+      50% { 
+        background: $white;
+      } 
     }
-    .spinner .r2 {
-        -webkit-animation-delay: -1.1s;
-        animation-delay: -1.1s;
+    .vloading{
+        text-align:center;
+        padding-top:.875rem;
     }
-    .spinner .r3 {
-        -webkit-animation-delay: -1.0s;
-        animation-delay: -1.0s;
+    .loading {
+        display:inline-block;
+        border-radius: 50%;
+        width: $base-line-height;
+        height: $base-line-height;
+        border: .25rem solid $off-white;
+        border-top-color: $white;
+        animation: spin $spin-duration infinite linear;
+      &--double {
+        border-style: double;
+        border-width: .5rem;
+      }
     }
-    .spinner .r4 {
-        -webkit-animation-delay: -0.9s;
-        animation-delay: -0.9s;
-    }
-    .spinner .r5 {
-        -webkit-animation-delay: -0.8s;
-        animation-delay: -0.8s;
-    }
-    @-webkit-keyframes sk-stretchdelay {
-        0%,
-        40%,
-        100% {
-            -webkit-transform: scaleY(0.4)
-        }
-        20% {
-            -webkit-transform: scaleY(1.0)
-        }
-    }
-    @keyframes sk-stretchdelay {
-        0%,
-        40%,
-        100% {
-            transform: scaleY(0.4);
-            -webkit-transform: scaleY(0.4);
-        }
-        20% {
-            transform: scaleY(1.0);
-            -webkit-transform: scaleY(1.0);
-        }
-    }
+      
 }

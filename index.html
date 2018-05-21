@@ -21,7 +21,7 @@
         }
 
         body {
-            background-color: rgb(238, 238, 238);
+            background-color:#F5F5F5;
         }
 
         header {
@@ -49,40 +49,12 @@
             padding: 0 5px;
         }
 
-        .market {
-            background-color: #4285f4;
-            height: 398px;
-            position: absolute;
-            top: 60px;
-            width: 100%;
-            outline: none;
-            display: block;
-            z-index: -1;
-        }
-
         .container {
-            width: 80%;
+            width: 90%;
         }
 
         .placeholder {
             height: 56px;
-        }
-
-        @media screen and (max-width:720px) {
-            header {
-                text-align: center;
-            }
-            .sub {
-                display: block;
-                padding-bottom: 10px;
-            }
-            .container {
-                width: 100%;
-            }
-            .placeholder,
-            .market {
-                display: none;
-            }
         }
 
         .content {
@@ -127,12 +99,6 @@
 
 <body>
     <div class="market"></div>
-    <header>
-        <div class="container">
-            <a href="./" class="logo">Valine</a>
-            <span class="sub">A simple comment system based on Leancloud.</span>
-        </div>
-    </header>
     <div class="container">
         <div class="placeholder"></div>
         <div class="content">

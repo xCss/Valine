@@ -7,22 +7,21 @@
 function vCoreFactory(options){
     let root = this
     root.initialized = false
-    root.Init(options)
+    options && root.Init(options)
     return root
 }
 
 vCoreFactory.prototype.Init = function(options){
-
-    let root = this
-
-    let appId = options && (options.appId || options.app_id) || '',
+    
+    let root = this,
+        appId = options && (options.appId || options.app_id) || '',
         appKey = options && (options.appKey || options.app_key) || '',
-        regions = ['cn','us']
-        region = (option.region || 'cn').toLowerCase(),
+        regions = ['cn','us'],
+        region = (options && options.region || 'cn').toLowerCase()
         region = regions.indexOf(region) > -1 ? region : regions[0]
     
-    if(!appId || !appKey) throw 'AV init failed. appId or appKey is null.'
-    if(root.initialized) throw 'AV has been initialized.'
+    if(!appId || !appKey) throw new Error('AV init failed. appId or appKey is null.')
+    if(root.initialized) throw new Error('AV has been initialized.')
     AV.init({
         appId,
         appKey,
@@ -76,8 +75,8 @@ vCoreFactory.prototype.Insert = function(comment){
  * LeanCloud SDK Query Util
  * @param {String} key Query key: 'url'
  * @param {String|Array} val Query val: 'path/to/name' or ['path1','path2',...]
- * @param {String} clazz Query Class: Comment
- * @param {Boolean} isAll Query All: true or false
+ * @param {String} [clazz] Query Class: default 'Comment'
+ * @param {Boolean} [isAll] Query All: true or false
  * @returns {Object} Promise：Query result 
  */
 vCoreFactory.prototype.Query = function(key,val,clazz,isAll){
@@ -105,7 +104,7 @@ vCoreFactory.prototype.Increment = function(newCounter){
     let url = newCounter.url || '',
         title = newCounter.title || '',
         clazz = newCounter.clazz || 'Counter'
-    if(!url) throw 'Counter identification can not be empty.'
+    if(!url) throw new Error('Counter identification can not be empty.')
     return root.Query('url',url,clazz).then(ret=>{
         let Counter = null
         if(ret.length){
@@ -130,7 +129,8 @@ vCoreFactory.prototype.Increment = function(newCounter){
  */
 vCoreFactory.prototype.isInit = function(){
     let root = this
-    if(!root.initialized) throw 'AV has not been initialized yet.'
+    if(!root.initialized) throw new Error('AV has not been initialized yet.')
+    return true
 }
 
 function vCore(options){
