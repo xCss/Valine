@@ -1,6 +1,6 @@
-import {h,render,Component} from 'preact'
+import {h,Component} from 'preact'
 
-export class ValineComponent extends Component{
+export class App extends Component{
     state = {
         loading:false,
         initing:true,
@@ -14,6 +14,8 @@ export class ValineComponent extends Component{
     }
     constructor(props){
         super(props)
+        let vCore =new props.vCore(props.options)
+        console.log(props.options)
     }
     componentDidMount(){
         
@@ -22,7 +24,7 @@ export class ValineComponent extends Component{
     }
     render(props,state){
         let time = new Date(state.time).toLocaleTimeString()
-        return <div class='v' onClick={this.con}></div>
+        return <div class='v' ></div>
     }
 
 }
