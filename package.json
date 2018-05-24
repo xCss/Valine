@@ -1,6 +1,6 @@
 {
   "name": "valine",
-  "version": "1.1.9-beta9",
+  "version": "2.0.0",
   "description": "A simple comment system based on Leancloud.",
   "main": "/dist/Valine.min.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
@@ -8,7 +8,9 @@
     "test": "webpack",
     "build": "webpack",
     "dev": "webpack-dev-server --env.dev",
-    "clear": "rm -rf dist/* "
+    "clear": "rm -rf dist/* ",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "keywords": [
     "simple",
@@ -42,8 +44,9 @@
     "uglifyjs-webpack-plugin": "1.1.2",
     "url-loader": "^0.6.2",
     "vconsole": "^3.0.0",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1",
+    "vuepress": "^0.9.0",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5",
     "xss": "^0.3.7"
   },
   "dependencies": {

@@ -17,13 +17,9 @@ export class App extends Component{
         let vCore =new props.vCore(props.options)
         console.log(props.options)
     }
-    componentDidMount(){
-        
-    }
-    componentWillUnmount(){
-    }
+    componentDidMount(){    }
+    componentWillUnmount(){    }
     render(props,state){
-        let time = new Date(state.time).toLocaleTimeString()
         return <div class='v' ></div>
     }
 
