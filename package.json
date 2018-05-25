@@ -8,9 +8,7 @@
     "test": "webpack",
     "build": "webpack",
     "dev": "webpack-dev-server --env.dev",
-    "clear": "rm -rf dist/* ",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "clear": "rm -rf dist/* "
   },
   "keywords": [
     "simple",
@@ -44,7 +42,6 @@
     "uglifyjs-webpack-plugin": "1.1.2",
     "url-loader": "^0.6.2",
     "vconsole": "^3.0.0",
-    "vuepress": "^0.9.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
     "xss": "^0.3.7"
