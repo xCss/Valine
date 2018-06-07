@@ -22,6 +22,7 @@ vCoreFactory.prototype.Init = function(options){
     
     if(!appId || !appKey) throw new Error('AV init failed. appId or appKey is null.')
     if(root.initialized) throw new Error('AV has been initialized.')
+    root.options = options
     root.v = AV
     root.v.init({
         appId,

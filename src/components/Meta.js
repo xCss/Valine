@@ -1,14 +1,16 @@
 import {h} from 'preact'
 
-export default ({meta,onChange}) => {
-    <div class={`vheader item${meta.length}`}>
-        {
-            meta.map((k)=>{
-                {
-                    let n = k.split(',')
-                }
-                <input name={n[0]} onChange={onChange} placeholder={n[1]} class="vnick vinput" type={k[0] == 'mail' ? 'email' : k[0]}/>
-            })
-        }
-    </div>
+export default ({meta,onInput}) => {
+    let content = []
+    meta.map((m)=>{
+        let n = m.split('_')
+        content.push(
+            <input name={n[0]} onInput={onInput} placeholder={n[1]} class="vnick vinput" type={n[0] == 'mail' ? 'email' : 'text'}/>
+        )
+    })
+    return (
+        <div class={`vheader item${meta.length}`}>
+            { content }
+        </div>
+    )
 }
