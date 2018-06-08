@@ -12,5 +12,5 @@ export default ({meta,onInput}) => {
         <div class={`vheader item${meta.length}`}>
             { content }
         </div>
-    )
+    )                                                   
 }

@@ -33,8 +33,8 @@ module.exports = env => {
     }
     return {
         entry: {
-            //Valine: ['./src/Valine.scss', './src/index.js'],
-            Valine:'./src/index.js',
+            Valine: ['./src/index.scss', './src/index.js'],
+            // Valine:'./src/index.js',
             // 'ValinePure': './src/Valine.js',
             //'Valine.locales': './src/Valine.locales.js',
             // detect: './src/utils/detect.js',

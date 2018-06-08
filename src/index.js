@@ -2,7 +2,7 @@ const {h,render} = require('preact')
 const {App} = require('./components')
 const vUtils = require('./utils')
 const vCore = require('./core')
-require('./index.scss')
+// require('./index.scss')
 
 function ValineFactory(options){
     let root = this
