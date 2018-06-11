@@ -1,5 +1,5 @@
 const {h,render} = require('preact')
-const {App} = require('./components')
+const {App} = require('./app')
 const vUtils = require('./utils')
 const vCore = require('./core')
 // require('./index.scss')
@@ -34,4 +34,4 @@ function Valine(options){
 
 module.exports = Valine
 
-module.exports.default = Valine
+module.exports.default = module.exports
