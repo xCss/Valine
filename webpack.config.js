@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const libraryName = 'Valine';
 const version = require('./package.json').version
 const ROOT_PATH = path.resolve(__dirname);
