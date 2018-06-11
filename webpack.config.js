@@ -3,17 +3,26 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const libraryName = 'Valine';
+const version = require('./package.json').version
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src');
 const BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
-var plugins = [];
+const plugins = [];
+const banner =
+  'Valine v' + version + '\n' +
+  '(c) 2017-' + new Date().getFullYear() + ' xCss\n' +
+  'Released under the GPL-2.0 License.\n' 
 
 module.exports = env => {
     var dev = env && env.dev || false
     if (!dev) {
+        plugins.push(new webpack.BannerPlugin(banner))
+        plugins.push(new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }));
         plugins.push(
-            new UglifyJsPlugin({
+            new webpack.optimize.UglifyJsPlugin({
                 sourceMap:false,
                 uglifyOptions:{
                     output:{
@@ -23,9 +32,6 @@ module.exports = env => {
                 }
             })
         );
-        plugins.push(new webpack.LoaderOptionsPlugin({
-            minimize: true
-        }));
     } else {
         plugins.push(new webpack.LoaderOptionsPlugin())
         plugins.push(new webpack.NamedModulesPlugin())
@@ -34,8 +40,7 @@ module.exports = env => {
     return {
         entry: {
             Valine: ['./src/index.scss', './src/index.js'],
-            // Valine:'./src/index.js',
-            // 'ValinePure': './src/Valine.js',
+            'Valine.Pure': './src/index.js',
             //'Valine.locales': './src/Valine.locales.js',
             // detect: './src/utils/detect.js',
             // escape: './src/utils/escape.js'
@@ -43,11 +48,9 @@ module.exports = env => {
         output: {
             path: BUILD_PATH,
             filename: '[name].min.js',
-            library: '[name]',
-            libraryTarget: 'umd',
-            umdNamedDefine: true
+            library: libraryName,
+            libraryTarget: 'umd'
         },
-
         resolve: {
             extensions: ['.js', '.jsx']
         },

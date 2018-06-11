@@ -6,7 +6,7 @@
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
   "scripts": {
     "test": "webpack",
-    "build": "webpack",
+    "build":"webpack",
     "dev": "webpack-dev-server --env.dev",
     "clear": "rm -rf dist/* "
   },
