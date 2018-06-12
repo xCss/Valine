@@ -1,6 +1,6 @@
 var win = window||{};
 var nav = navigator||{};
-function Detect(userAgent) {
+function detectFactory(userAgent) {
     var u = userAgent || nav.userAgent;
     var _this = this;
 
@@ -244,7 +244,7 @@ function Detect(userAgent) {
     }
 };
 
-function detectFactory(u){
-    return new Detect(u);
+function detect(u){
+    return new detectFactory(u);
 }
-module.exports = detectFactory
+module.exports = detect

@@ -11,7 +11,7 @@ const plugins = [];
 const banner =
   'Valine v' + version + '\n' +
   '(c) 2017-' + new Date().getFullYear() + ' xCss\n' +
-  'Released under the GPL-2.0 License.\n' 
+  'Released under the GPL-2.0 License.' 
 
 module.exports = env => {
     var dev = env && env.dev || false
@@ -40,6 +40,7 @@ module.exports = env => {
         entry: {
             Valine: ['./src/index.scss', './src/index.js'],
             'Valine.Pure': './src/index.js',
+            'Valine.Core':'./src/core'
             //'Valine.locales': './src/Valine.locales.js',
             // detect: './src/utils/detect.js',
             // escape: './src/utils/escape.js'

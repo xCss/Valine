@@ -6,7 +6,7 @@
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
   "scripts": {
     "test": "webpack",
-    "build":"webpack",
+    "build": "webpack",
     "dev": "webpack-dev-server --env.dev",
     "clear": "rm -rf dist/* "
   },
@@ -35,11 +35,11 @@
     "exports-loader": "^0.6.3",
     "file-loader": "^0.11.2",
     "marked": "^0.3.6",
+    "mocha": "^5.2.0",
     "node-sass": "^4.5.0",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.18.2",
-    "uglifyjs-webpack-plugin": "1.1.2",
     "url-loader": "^0.6.2",
     "vconsole": "^3.0.0",
     "webpack": "^2.6.1",
