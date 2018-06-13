@@ -4,10 +4,7 @@
  * https://github.com/xCss/Valine
  */
 
-const deepClone = require('../utils/deepClone')
-
 function vCoreFactory(options) {
-    console.log(options)
     let root = this
     root.initialized = false
     options && root.Init(options)
@@ -22,16 +19,15 @@ vCoreFactory.prototype.Init = function(options) {
     region = regions.indexOf(region) > -1 ? region : regions[0]
 
     if (!appId || !appKey) throw new Error('AV init failed. appId or appKey is null.')
-    if (root.initialized) throw new Error('AV has been initialized.')
-    root.options = options
-    root.v = deepClone(AV)
-    root.v.init({
-        appId,
-        appKey,
-        region
-    })
-
-    root.initialized = true
+    if (!root.initialized){
+        root.v = AV
+        root.v.init({
+            appId,
+            appKey,
+            region
+        })
+        root.initialized = true
+    }
     return root
 }
 
