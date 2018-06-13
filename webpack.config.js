@@ -40,7 +40,7 @@ module.exports = env => {
         entry: {
             Valine: ['./src/index.scss', './src/index.js'],
             'Valine.Pure': './src/index.js',
-            'Valine.Core':'./src/core'
+            'Valine.Core':'./src/core/leancloud.js'
             //'Valine.locales': './src/Valine.locales.js',
             // detect: './src/utils/detect.js',
             // escape: './src/utils/escape.js'
