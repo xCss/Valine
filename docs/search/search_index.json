@@ -1,0 +1,344 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Valine\n\n\n \n \n \n\n\n\n\n\u4e00\u6b3e\u5feb\u901f\u3001\u7b80\u6d01\u4e14\u9ad8\u6548\u7684\u65e0\u540e\u7aef\u8bc4\u8bba\u7cfb\u7edf\u3002\n\n\n\n\n\n\n\u662f\u4ec0\u4e48\n\n\nValine \u662f\u4e00\u6b3e\u57fa\u4e8e\nLeancloud\n\u7684\u5feb\u901f\u3001\u7b80\u6d01\u4e14\u9ad8\u6548\u7684\u65e0\u540e\u7aef\u8bc4\u8bba\u7cfb\u7edf\u3002\n\n\n\u67e5\u770b\n\u5feb\u901f\u5f00\u59cb\n\u4e86\u89e3\u8be6\u60c5\u3002\n\n\n\u7279\u6027\n\n\n\n\n\u5feb\u901f\n\n\n\u5b89\u5168\n\n\n\u65e0\u540e\u7aef\u5b9e\u73b0\n\n\nMarkDown \u5168\u8bed\u6cd5\u652f\u6301\n\n\n\u8f7b\u91cf\u6613\u7528(~15kb gzipped)\n\n\n\n\n\u6350\u8d60\n\n\n\u5982\u679c\u4f60\u89c9\u5f97 Valine \u5bf9\u4f60\u6709\u5e2e\u52a9\uff0c\u6216\u8005\u60f3\u5bf9\u6211\u5fae\u5c0f\u7684\u5de5\u4f5c\u4e00\u70b9\u8d44\u74f7\uff0c\u6b22\u8fce\u7ed9\u6211\u6350\u8d60\u3002\n\n\n\n\n\n\n\n\n\u652f\u4ed8\u5b9d\n\n\n\u5fae\u4fe1", 
+            "title": "\u9996\u9875"
+        }, 
+        {
+            "location": "/#valine", 
+            "text": "\u4e00\u6b3e\u5feb\u901f\u3001\u7b80\u6d01\u4e14\u9ad8\u6548\u7684\u65e0\u540e\u7aef\u8bc4\u8bba\u7cfb\u7edf\u3002", 
+            "title": "Valine"
+        }, 
+        {
+            "location": "/#_1", 
+            "text": "Valine \u662f\u4e00\u6b3e\u57fa\u4e8e Leancloud \u7684\u5feb\u901f\u3001\u7b80\u6d01\u4e14\u9ad8\u6548\u7684\u65e0\u540e\u7aef\u8bc4\u8bba\u7cfb\u7edf\u3002  \u67e5\u770b \u5feb\u901f\u5f00\u59cb \u4e86\u89e3\u8be6\u60c5\u3002", 
+            "title": "\u662f\u4ec0\u4e48"
+        }, 
+        {
+            "location": "/#_2", 
+            "text": "\u5feb\u901f  \u5b89\u5168  \u65e0\u540e\u7aef\u5b9e\u73b0  MarkDown \u5168\u8bed\u6cd5\u652f\u6301  \u8f7b\u91cf\u6613\u7528(~15kb gzipped)", 
+            "title": "\u7279\u6027"
+        }, 
+        {
+            "location": "/#_3", 
+            "text": "\u5982\u679c\u4f60\u89c9\u5f97 Valine \u5bf9\u4f60\u6709\u5e2e\u52a9\uff0c\u6216\u8005\u60f3\u5bf9\u6211\u5fae\u5c0f\u7684\u5de5\u4f5c\u4e00\u70b9\u8d44\u74f7\uff0c\u6b22\u8fce\u7ed9\u6211\u6350\u8d60\u3002     \u652f\u4ed8\u5b9d  \u5fae\u4fe1", 
+            "title": "\u6350\u8d60"
+        }, 
+        {
+            "location": "/quickstart/", 
+            "text": "\u5feb\u901f\u5f00\u59cb\n\n\nHTML \u7247\u6bb5\n\n\n\u8bf7\u5728\u9700\u8981\u8bc4\u8bba\u6846\u7684\n\u6587\u7ae0\u9875\n\u5185\u76f8\u5e94\u4f4d\u7f6e\u5f15\u5165\u4e0b\u9762\u7684HTML\u4ee3\u7801\uff1a\n\n\nhead\n\n    ...\n    \nscript\n \nsrc\n=\n//cdn1.lncld.net/static/js/3.0.4/av-min.js\n/\nscript\n\n    \nscript\n \nsrc\n=\n//unpkg.com/valine/dist/Valine.min.js\n/\nscript\n\n    ...\n\n/\nhead\n\n\nbody\n\n    ...\n    \ndiv\n \nid\n=\ncomment\n/\ndiv\n\n\n/\nbody\n\n\n\n\n\n\u83b7\u53d6appid\u548cappkey\n\n\n\u8bf7\u5148\n\u767b\u5f55\n\u6216\n\u6ce8\u518c\n \nLeanCloud\n, \u8fdb\u5165\n\u63a7\u5236\u53f0\n\u540e\u70b9\u51fb\u5de6\u4e0b\u89d2\n\u521b\u5efa\u5e94\u7528\n\uff1a\n\n\n\n\n\u5e94\u7528\u521b\u5efa\u597d\u4ee5\u540e\uff0c\u8fdb\u5165\u521a\u521a\u521b\u5efa\u7684\u5e94\u7528\uff0c\u9009\u62e9\u5de6\u4e0b\u89d2\u7684\n\u8bbe\u7f6e\n\u5e94\u7528Key\n\uff0c\u7136\u540e\u5c31\u80fd\u770b\u5230\u4f60\u7684\nappid\n\u548c\nappkey\n\u4e86\uff1a\n\n\n\n\n\n\nWarning\n\n\n\u4e3a\u4e86\u60a8\u7684\u6570\u636e\u5b89\u5168\uff0c\u8bf7\u6ce8\u610f\u8bbe\u7f6e\u81ea\u5df1\u7684\n\u5b89\u5168\u57df\u540d\n\uff1a\n\n\n\n\n\n\n\u914d\u7f6e\n\n\n\u4fee\u6539\u521d\u59cb\u5316\u5bf9\u8c61\u4e2d\u7684\nappId\n\u548c\nappKey\n\u7684\u503c\u4e3a\u4e0a\u9762\u521a\u521a\u83b7\u53d6\u5230\u7684\u503c\u5373\u53ef(\u5176\u4ed6\u53ef\u4ee5\u9ed8\u8ba4)\u3002\n\n\nnew\n \nValine\n({\n\n    \nel\n:\n \n#comment\n \n,\n\n    \nnotify\n:\nfalse\n,\n \n    \nverify\n:\nfalse\n,\n \n    \nappId\n:\n \n\u8fd9\u91cc\u586b\u4e0a\u9762\u83b7\u5f97\u7684appid\n,\n\n    \nappKey\n:\n \n\u8fd9\u91cc\u586b\u4e0a\u9762\u83b7\u5f97\u7684appkey\n,\n\n    \nplaceholder\n:\n \njust go go\n,\n\n    \npath\n:\nwindow\n.\nlocation\n.\npathname\n,\n \n    \navatar\n:\nmm\n \n\n});\n\n\n\n\u66f4\u591a\u4fe1\u606f\u8bf7\u67e5\u770b\n\u914d\u7f6e\u9879\n\u3002\n\n\nnpm\u5b89\u88c5\n\n\nValine \u73b0\u5df2\u53d1\u5e03\u5230\nnpm\n\uff0c\u53ef\u4ee5\u76f4\u63a5\u7528\u547d\u4ee4\u5b89\u88c5\uff1a\n\n\nnpm install valine --save\n\n\n\n\n\u8bc4\u8bba\u6570\u636e\u7ba1\u7406\n\n\n\u63d2\u64ad\u4e00\u4e0b\uff0c\u5173\u4e8e\n\u8bc4\u8bba\u6570\u636e\u7ba1\u7406\n\uff0c\u8bf7\u81ea\u884c\u767b\u5f55Leancloud\u5e94\u7528\u7ba1\u7406\u3002\n\n\u5177\u4f53\u6b65\u9aa4\uff1a\n\u767b\u5f55\n\u9009\u62e9\u4f60\u521b\u5efa\u7684\n\u5e94\u7528\n\u5b58\u50a8\n\u9009\u62e9Class\nComment\n\n\u7136\u540e\u5c31\u53ef\u4ee5\u5c3d\u60c5\u7684\u53d1\u6325\u4f60\u7684\u6743\u5229\u5566(\uff5e\uffe3\u25bd\uffe3)\uff5e", 
+            "title": "\u5feb\u901f\u5f00\u59cb"
+        }, 
+        {
+            "location": "/quickstart/#_1", 
+            "text": "", 
+            "title": "\u5feb\u901f\u5f00\u59cb"
+        }, 
+        {
+            "location": "/quickstart/#html", 
+            "text": "\u8bf7\u5728\u9700\u8981\u8bc4\u8bba\u6846\u7684 \u6587\u7ae0\u9875 \u5185\u76f8\u5e94\u4f4d\u7f6e\u5f15\u5165\u4e0b\u9762\u7684HTML\u4ee3\u7801\uff1a  head \n    ...\n     script   src = //cdn1.lncld.net/static/js/3.0.4/av-min.js / script \n     script   src = //unpkg.com/valine/dist/Valine.min.js / script \n    ... / head  body \n    ...\n     div   id = comment / div  / body", 
+            "title": "HTML \u7247\u6bb5"
+        }, 
+        {
+            "location": "/quickstart/#appidappkey", 
+            "text": "\u8bf7\u5148 \u767b\u5f55 \u6216 \u6ce8\u518c   LeanCloud , \u8fdb\u5165 \u63a7\u5236\u53f0 \u540e\u70b9\u51fb\u5de6\u4e0b\u89d2 \u521b\u5efa\u5e94\u7528 \uff1a   \u5e94\u7528\u521b\u5efa\u597d\u4ee5\u540e\uff0c\u8fdb\u5165\u521a\u521a\u521b\u5efa\u7684\u5e94\u7528\uff0c\u9009\u62e9\u5de6\u4e0b\u89d2\u7684 \u8bbe\u7f6e \u5e94\u7528Key \uff0c\u7136\u540e\u5c31\u80fd\u770b\u5230\u4f60\u7684 appid \u548c appkey \u4e86\uff1a    Warning  \u4e3a\u4e86\u60a8\u7684\u6570\u636e\u5b89\u5168\uff0c\u8bf7\u6ce8\u610f\u8bbe\u7f6e\u81ea\u5df1\u7684 \u5b89\u5168\u57df\u540d \uff1a", 
+            "title": "\u83b7\u53d6appid\u548cappkey"
+        }, 
+        {
+            "location": "/quickstart/#_2", 
+            "text": "\u4fee\u6539\u521d\u59cb\u5316\u5bf9\u8c61\u4e2d\u7684 appId \u548c appKey \u7684\u503c\u4e3a\u4e0a\u9762\u521a\u521a\u83b7\u53d6\u5230\u7684\u503c\u5373\u53ef(\u5176\u4ed6\u53ef\u4ee5\u9ed8\u8ba4)\u3002  new   Valine ({ \n     el :   #comment   , \n     notify : false ,  \n     verify : false ,  \n     appId :   \u8fd9\u91cc\u586b\u4e0a\u9762\u83b7\u5f97\u7684appid , \n     appKey :   \u8fd9\u91cc\u586b\u4e0a\u9762\u83b7\u5f97\u7684appkey , \n     placeholder :   just go go , \n     path : window . location . pathname ,  \n     avatar : mm   });  \n\u66f4\u591a\u4fe1\u606f\u8bf7\u67e5\u770b \u914d\u7f6e\u9879 \u3002", 
+            "title": "\u914d\u7f6e"
+        }, 
+        {
+            "location": "/quickstart/#npm", 
+            "text": "Valine \u73b0\u5df2\u53d1\u5e03\u5230 npm \uff0c\u53ef\u4ee5\u76f4\u63a5\u7528\u547d\u4ee4\u5b89\u88c5\uff1a  npm install valine --save", 
+            "title": "npm\u5b89\u88c5"
+        }, 
+        {
+            "location": "/quickstart/#_3", 
+            "text": "\u63d2\u64ad\u4e00\u4e0b\uff0c\u5173\u4e8e \u8bc4\u8bba\u6570\u636e\u7ba1\u7406 \uff0c\u8bf7\u81ea\u884c\u767b\u5f55Leancloud\u5e94\u7528\u7ba1\u7406\u3002 \n\u5177\u4f53\u6b65\u9aa4\uff1a \u767b\u5f55 \u9009\u62e9\u4f60\u521b\u5efa\u7684 \u5e94\u7528 \u5b58\u50a8 \u9009\u62e9Class Comment \n\u7136\u540e\u5c31\u53ef\u4ee5\u5c3d\u60c5\u7684\u53d1\u6325\u4f60\u7684\u6743\u5229\u5566(\uff5e\uffe3\u25bd\uffe3)\uff5e", 
+            "title": "\u8bc4\u8bba\u6570\u636e\u7ba1\u7406"
+        }, 
+        {
+            "location": "/configuration/", 
+            "text": "\u914d\u7f6e\u9879\n\n\nValine \u652f\u6301\u4e24\u79cd\u4e0d\u540c\u7684\u521d\u59cb\u5316\u65b9\u5f0f\u3002\u4e00\u79cd\u662f\u6784\u9020\u65b9\u6cd5\u521d\u59cb\u5316\u5bf9\u8c61\uff0c\u53e6\u4e00\u79cd\u662f\u8c03\u7528\ninit\n\u65b9\u6cd5\uff1a\n\n!-- \u65b9\u6cd5 1 --\n\n\nscript\n\n    \nnew\n \nValine\n({\n\n        \nel\n:\n#comment\n,\n\n        \nappId\n:\nyour appid\n,\n\n        \nappKey\n:\nyour appkey\n\n    \n})\n\n\n/\nscript\n\n\n\n!-- \u65b9\u6cd5 2 --\n\n\nscript\n\n    \nvar\n \nvaline\n \n=\n \nnew\n \nValine\n();\n\n    \nvaline\n.\ninit\n({\n\n        \nel\n:\n#comment\n,\n\n        \nappId\n:\nyour appid\n,\n\n        \nappKey\n:\nyour appkey\n\n    \n})\n\n\n/\nscript\n\n\n\n\nel\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\n#comment\n\n\n\u5fc5\u8981\u6027:\ntrue\n\n\n\n\n\n\nWarning\n\n\n\u5728\u4f7f\u7528\u65f6\uff0c\u8bf7\u4fdd\u8bc1\u8be5\u5143\u7d20\u7684\u552f\u4e00\u6027\u3002\n\n\n\n\nappId\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nnull\n\n\n\u5fc5\u8981\u6027:\ntrue\n\n\n\n\n\u4ece\nLeanCloud\n\u7684\u5e94\u7528\u4e2d\u5f97\u5230\u7684\nappId\n.\n\n\n\n\n\u53c2\u8003\n\u83b7\u53d6appid\u548cappkey\n\u3002\n\n\n\n\nnew\n \nValine\n({\n\n    \nappId\n:\nyour leancloud appid\n\n\n})\n\n\n\n\n\nappKey\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nnull\n\n\n\u5fc5\u8981\u6027:\ntrue\n\n\n\n\n\u4ece\nLeanCloud\n\u7684\u5e94\u7528\u4e2d\u5f97\u5230\u7684\nappKey\n.\n\n\n\n\n\u53c2\u8003\n\u83b7\u53d6appid\u548cappkey\n\u3002\n\n\n\n\nnew\n \nValine\n({\n\n    \nappKey\n:\nyour leancloud appkey\n\n\n})\n\n\n\n\n\nregion\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\ncn\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u5b58\u50a8\u8282\u70b9\uff1a\u5728\nValine\n\u4e2d\u521d\u59cb\u5316\u65f6\u9ed8\u8ba4\u9075\u5faa\nLeancloud SDK\n\u7684\u8282\u70b9\u89c4\u5219(\n\u9ed8\u8ba4\u4e2d\u56fd\u5927\u9646\u8282\u70b9\n)\uff0c\u53ef\u9009\u503c\uff1a\n\n\n\n\ncn\n - \u4e2d\u56fd\u5927\u9646\u8282\u70b9\n\n\nus\n - \u6d77\u5916\u8282\u70b9\n\n\n\n\nnew\n \nValine\n({\n\n    \nregion\n:\ncn\n\n\n})\n\n\n\n\n\n\n\nInfo\n\n\n\u53ef\u4ee5\u5148\u786e\u8ba4\u672c\u5730\u7f51\u7edc\u73af\u5883\u662f\u5426\u53ef\u4ee5\u8bbf\u95eeLeancloud\u670d\u52a1\u5668\uff1a\nping \noip6cvm7.api.lncld.net\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.9-beta4\n \u5f00\u59cb\u652f\u6301\n\n\n\n\nplaceholder\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nnull\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u8bc4\u8bba\u6846\n\u5360\u4f4d\u63d0\u793a\u7b26\n\u3002\n\nnew\n \nValine\n({\n\n    \nplaceholder\n:\nJust so so\n\n\n})\n\n\n\n\nnotify\n\n\n\n\n\u7c7b\u578b:\nBoolean\n\n\n\u9ed8\u8ba4\u503c:\nfalse\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u8bc4\u8bba\u56de\u590d\u90ae\u4ef6\u63d0\u9192\uff0c\u8bf7\u53c2\u8003\n\u90ae\u4ef6\u63d0\u9192\u914d\u7f6e\n\u3002\n\n\nnew\n \nValine\n({\n\n    \nnotify\n:\nfalse\n\n\n})\n\n\n\n\n\n\n\nWarning\n\n\n\u8be5\u529f\u80fd\u76ee\u524d\u5904\u4e8e\u6d4b\u8bd5\u9636\u6bb5\uff0c\u8bf7\u8c28\u614e\u4f7f\u7528\u3002\n\n\n\n\nverify\n\n\n\n\n\u7c7b\u578b:\nBoolean\n\n\n\u9ed8\u8ba4\u503c:\nfalse\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u9a8c\u8bc1\u7801\u670d\u52a1\u3002\n\n\nnew\n \nValine\n({\n\n    \nverify\n:\nfalse\n\n\n})\n\n\n\n\n\npath\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nwindow.location.pathname\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u5f53\u524d\n\u6587\u7ae0\u9875\n\u8def\u5f84\uff0c\u7528\u4e8e\u533a\u5206\u4e0d\u540c\u7684\n\u6587\u7ae0\u9875\n\uff0c\u4ee5\u4fdd\u8bc1\u6b63\u786e\u8bfb\u53d6\u8be5\n\u6587\u7ae0\u9875\n\u4e0b\u7684\u8bc4\u8bba\u5217\u8868\u3002\u53ef\u9009\u503c\uff1a\n\n\n\n\nwindow.location.pathname\n (\u9ed8\u8ba4\u503c\uff0c\u63a8\u8350)\n\n\nwindow.location.href\n\n\n\u81ea\u5b9a\u4e49\n \n\n\n\n\n\n\nInfo\n\n\n\n\nI. \u8bf7\u4fdd\u8bc1\u6bcf\u4e2a\n\u6587\u7ae0\u9875\n\u8def\u5f84\u7684\u552f\u4e00\u6027\uff0c\u5426\u5219\u53ef\u80fd\u4f1a\u51fa\u73b0\u4e0d\u540c\n\u6587\u7ae0\u9875\n\u4e0b\u52a0\u8f7d\u76f8\u540c\u8bc4\u8bba\u5217\u8868\u7684\u60c5\u51b5\u3002  \n\n\nII. \u5982\u679c\u503c\u4e3a\nwindow.location.href\n\uff0c\u53ef\u80fd\u4f1a\u51fa\u73b0\u968f\u4fbf\u52a0\n\u4e0d\u540c\u53c2\u6570\n\u8fdb\u5165\u8be5\u9875\u9762\uff0c\u800c\u88ab\u5224\u65ad\u6210\u65b0\u9875\u9762\u7684\u60c5\u51b5\u3002\n\n\n\n\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.5+\n \u5f00\u59cb\u652f\u6301\n\n\n\n\navatar\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nmm\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\nGravatar\n \u5934\u50cf\u5c55\u793a\u65b9\u5f0f\u3002\u53ef\u9009\u503c:\n\n\n\n\n''\n(\u7a7a\u5b57\u7b26\u4e32)\n\n\nmm\n\n\nidenticon\n\n\nmonsterid\n\n\nwavatar\n\n\nretro\n\n\nhide\n (\nv1.1.8-beta+\n \u5f00\u59cb\u652f\u6301)\n\n\n\n\n\u66f4\u591a\u4fe1\u606f\uff0c\u8bf7\u67e5\u770b\n\u5934\u50cf\u914d\u7f6e\n\u3002\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.7+\n \u5f00\u59cb\u652f\u6301\n\n\n\n\navatar_cdn\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nhttps://gravatar.loli.net/avatar/\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\nGravatar\u5934\u50cf\u955c\u50cf\uff0c\u9ed8\u8ba4\u7528\u7684\ngravatar.loli.net\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.9-beta5+\n \u5f00\u59cb\u652f\u6301\n\n\n\n\nguest_info\n\n\n\n\n\u7c7b\u578b:\nArray\n\n\n\u9ed8\u8ba4\u503c:\n['nick','mail','link']\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u8bc4\u8bba\u8005\u76f8\u5173\u5c5e\u6027\u3002\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.8-beta+\n \u5f00\u59cb\u652f\u6301\n\n\n\n\npageSize\n\n\n\n\n\u7c7b\u578b:\nNumber\n\n\n\u9ed8\u8ba4\u503c:\n10\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u8bc4\u8bba\u5217\u8868\u5206\u9875\uff0c\u6bcf\u9875\u6761\u6570\u3002\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.8-beta2+\n\u5f00\u59cb\u652f\u6301\n\n\n\n\nlang\n\n\n\n\n\u7c7b\u578b:\nString\n\n\n\u9ed8\u8ba4\u503c:\nzh-cn\n\n\n\u5fc5\u8981\u6027:\nfalse\n\n\n\n\n\u591a\u8bed\u8a00\u652f\u6301\uff0c\u76ee\u524d\u53ef\u9009\uff1a\n\n\n\n\nzh-cn\n\n\nen\n\n\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.8-beta9+\n\u5f00\u59cb\u652f\u6301", 
+            "title": "\u914d\u7f6e\u9879"
+        }, 
+        {
+            "location": "/configuration/#_1", 
+            "text": "Valine \u652f\u6301\u4e24\u79cd\u4e0d\u540c\u7684\u521d\u59cb\u5316\u65b9\u5f0f\u3002\u4e00\u79cd\u662f\u6784\u9020\u65b9\u6cd5\u521d\u59cb\u5316\u5bf9\u8c61\uff0c\u53e6\u4e00\u79cd\u662f\u8c03\u7528 init \u65b9\u6cd5\uff1a !-- \u65b9\u6cd5 1 --  script \n     new   Valine ({ \n         el : #comment , \n         appId : your appid , \n         appKey : your appkey \n     })  / script  !-- \u65b9\u6cd5 2 --  script \n     var   valine   =   new   Valine (); \n     valine . init ({ \n         el : #comment , \n         appId : your appid , \n         appKey : your appkey \n     })  / script", 
+            "title": "\u914d\u7f6e\u9879"
+        }, 
+        {
+            "location": "/configuration/#el", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: #comment  \u5fc5\u8981\u6027: true    Warning  \u5728\u4f7f\u7528\u65f6\uff0c\u8bf7\u4fdd\u8bc1\u8be5\u5143\u7d20\u7684\u552f\u4e00\u6027\u3002", 
+            "title": "el"
+        }, 
+        {
+            "location": "/configuration/#appid", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: null  \u5fc5\u8981\u6027: true   \u4ece LeanCloud \u7684\u5e94\u7528\u4e2d\u5f97\u5230\u7684 appId .   \u53c2\u8003 \u83b7\u53d6appid\u548cappkey \u3002   new   Valine ({ \n     appId : your leancloud appid  })", 
+            "title": "appId"
+        }, 
+        {
+            "location": "/configuration/#appkey", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: null  \u5fc5\u8981\u6027: true   \u4ece LeanCloud \u7684\u5e94\u7528\u4e2d\u5f97\u5230\u7684 appKey .   \u53c2\u8003 \u83b7\u53d6appid\u548cappkey \u3002   new   Valine ({ \n     appKey : your leancloud appkey  })", 
+            "title": "appKey"
+        }, 
+        {
+            "location": "/configuration/#region", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: cn  \u5fc5\u8981\u6027: false   \u5b58\u50a8\u8282\u70b9\uff1a\u5728 Valine \u4e2d\u521d\u59cb\u5316\u65f6\u9ed8\u8ba4\u9075\u5faa Leancloud SDK \u7684\u8282\u70b9\u89c4\u5219( \u9ed8\u8ba4\u4e2d\u56fd\u5927\u9646\u8282\u70b9 )\uff0c\u53ef\u9009\u503c\uff1a   cn  - \u4e2d\u56fd\u5927\u9646\u8282\u70b9  us  - \u6d77\u5916\u8282\u70b9   new   Valine ({ \n     region : cn  })    Info  \u53ef\u4ee5\u5148\u786e\u8ba4\u672c\u5730\u7f51\u7edc\u73af\u5883\u662f\u5426\u53ef\u4ee5\u8bbf\u95eeLeancloud\u670d\u52a1\u5668\uff1a ping  oip6cvm7.api.lncld.net  \u8be5\u914d\u7f6e\u4ece v1.1.9-beta4  \u5f00\u59cb\u652f\u6301", 
+            "title": "region"
+        }, 
+        {
+            "location": "/configuration/#placeholder", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: null  \u5fc5\u8981\u6027: false   \u8bc4\u8bba\u6846 \u5360\u4f4d\u63d0\u793a\u7b26 \u3002 new   Valine ({ \n     placeholder : Just so so  })", 
+            "title": "placeholder"
+        }, 
+        {
+            "location": "/configuration/#notify", 
+            "text": "\u7c7b\u578b: Boolean  \u9ed8\u8ba4\u503c: false  \u5fc5\u8981\u6027: false   \u8bc4\u8bba\u56de\u590d\u90ae\u4ef6\u63d0\u9192\uff0c\u8bf7\u53c2\u8003 \u90ae\u4ef6\u63d0\u9192\u914d\u7f6e \u3002  new   Valine ({ \n     notify : false  })    Warning  \u8be5\u529f\u80fd\u76ee\u524d\u5904\u4e8e\u6d4b\u8bd5\u9636\u6bb5\uff0c\u8bf7\u8c28\u614e\u4f7f\u7528\u3002", 
+            "title": "notify"
+        }, 
+        {
+            "location": "/configuration/#verify", 
+            "text": "\u7c7b\u578b: Boolean  \u9ed8\u8ba4\u503c: false  \u5fc5\u8981\u6027: false   \u9a8c\u8bc1\u7801\u670d\u52a1\u3002  new   Valine ({ \n     verify : false  })", 
+            "title": "verify"
+        }, 
+        {
+            "location": "/configuration/#path", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: window.location.pathname  \u5fc5\u8981\u6027: false   \u5f53\u524d \u6587\u7ae0\u9875 \u8def\u5f84\uff0c\u7528\u4e8e\u533a\u5206\u4e0d\u540c\u7684 \u6587\u7ae0\u9875 \uff0c\u4ee5\u4fdd\u8bc1\u6b63\u786e\u8bfb\u53d6\u8be5 \u6587\u7ae0\u9875 \u4e0b\u7684\u8bc4\u8bba\u5217\u8868\u3002\u53ef\u9009\u503c\uff1a   window.location.pathname  (\u9ed8\u8ba4\u503c\uff0c\u63a8\u8350)  window.location.href  \u81ea\u5b9a\u4e49      Info   I. \u8bf7\u4fdd\u8bc1\u6bcf\u4e2a \u6587\u7ae0\u9875 \u8def\u5f84\u7684\u552f\u4e00\u6027\uff0c\u5426\u5219\u53ef\u80fd\u4f1a\u51fa\u73b0\u4e0d\u540c \u6587\u7ae0\u9875 \u4e0b\u52a0\u8f7d\u76f8\u540c\u8bc4\u8bba\u5217\u8868\u7684\u60c5\u51b5\u3002    II. \u5982\u679c\u503c\u4e3a window.location.href \uff0c\u53ef\u80fd\u4f1a\u51fa\u73b0\u968f\u4fbf\u52a0 \u4e0d\u540c\u53c2\u6570 \u8fdb\u5165\u8be5\u9875\u9762\uff0c\u800c\u88ab\u5224\u65ad\u6210\u65b0\u9875\u9762\u7684\u60c5\u51b5\u3002     Info  \u8be5\u914d\u7f6e\u4ece v1.1.5+  \u5f00\u59cb\u652f\u6301", 
+            "title": "path"
+        }, 
+        {
+            "location": "/configuration/#avatar", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: mm  \u5fc5\u8981\u6027: false   Gravatar  \u5934\u50cf\u5c55\u793a\u65b9\u5f0f\u3002\u53ef\u9009\u503c:   '' (\u7a7a\u5b57\u7b26\u4e32)  mm  identicon  monsterid  wavatar  retro  hide  ( v1.1.8-beta+  \u5f00\u59cb\u652f\u6301)   \u66f4\u591a\u4fe1\u606f\uff0c\u8bf7\u67e5\u770b \u5934\u50cf\u914d\u7f6e \u3002   Info  \u8be5\u914d\u7f6e\u4ece v1.1.7+  \u5f00\u59cb\u652f\u6301", 
+            "title": "avatar"
+        }, 
+        {
+            "location": "/configuration/#avatar_cdn", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: https://gravatar.loli.net/avatar/  \u5fc5\u8981\u6027: false   Gravatar\u5934\u50cf\u955c\u50cf\uff0c\u9ed8\u8ba4\u7528\u7684 gravatar.loli.net   Info  \u8be5\u914d\u7f6e\u4ece v1.1.9-beta5+  \u5f00\u59cb\u652f\u6301", 
+            "title": "avatar_cdn"
+        }, 
+        {
+            "location": "/configuration/#guest_info", 
+            "text": "\u7c7b\u578b: Array  \u9ed8\u8ba4\u503c: ['nick','mail','link']  \u5fc5\u8981\u6027: false   \u8bc4\u8bba\u8005\u76f8\u5173\u5c5e\u6027\u3002   Info  \u8be5\u914d\u7f6e\u4ece v1.1.8-beta+  \u5f00\u59cb\u652f\u6301", 
+            "title": "guest_info"
+        }, 
+        {
+            "location": "/configuration/#pagesize", 
+            "text": "\u7c7b\u578b: Number  \u9ed8\u8ba4\u503c: 10  \u5fc5\u8981\u6027: false   \u8bc4\u8bba\u5217\u8868\u5206\u9875\uff0c\u6bcf\u9875\u6761\u6570\u3002   Info  \u8be5\u914d\u7f6e\u4ece v1.1.8-beta2+ \u5f00\u59cb\u652f\u6301", 
+            "title": "pageSize"
+        }, 
+        {
+            "location": "/configuration/#lang", 
+            "text": "\u7c7b\u578b: String  \u9ed8\u8ba4\u503c: zh-cn  \u5fc5\u8981\u6027: false   \u591a\u8bed\u8a00\u652f\u6301\uff0c\u76ee\u524d\u53ef\u9009\uff1a   zh-cn  en    Info  \u8be5\u914d\u7f6e\u4ece v1.1.8-beta9+ \u5f00\u59cb\u652f\u6301", 
+            "title": "lang"
+        }, 
+        {
+            "location": "/avatar/", 
+            "text": "\u5934\u50cf\u8bbe\u7f6e\n\n\nValine \u4f7f\u7528\u7684\u662f**Gravatar** \u4f5c\u4e3a\u8bc4\u8bba\u5217\u8868\u5934\u50cf(\u611f\u8c22\ngravatar.loli.net\n\u63d0\u4f9b\u7684\u955c\u50cf\u670d\u52a1)\u3002\n\n\u76ee\u524d\u6709\u4ee5\u4e0b7\u79cd\u53ef\u9009\u503c:  \n\n\n\n\n\n\n\n\n\u53c2\u6570\u503c\n\n\n\u8868\u73b0\u5f62\u5f0f\n\n\n\u5907\u6ce8\n\n\n\n\n\n\n\n\n\n\n\u7a7a\u5b57\u7b26\u4e32\n''\n\n\n\n\nGravatar\u5b98\u65b9\u56fe\u5f62\n\n\n\n\n\n\nmm\n\n\n\n\n\u795e\u79d8\u4eba(\u4e00\u4e2a\u7070\u767d\u5934\u50cf)\n\n\n\n\n\n\nidenticon\n\n\n\n\n\u62bd\u8c61\u51e0\u4f55\u56fe\u5f62(\u6839\u636e\u90ae\u7bb1\u6216\u6635\u79f0\u751f\u6210)\n\n\n\n\n\n\nmonsterid\n\n\n\n\n\u5c0f\u602a\u7269\n\n\n\n\n\n\nwavatar\n\n\n\n\n\u7528\u4e0d\u540c\u9762\u5b54\u548c\u80cc\u666f\u7ec4\u5408\u751f\u6210\u7684\u5934\u50cf(\u6839\u636e\u90ae\u7bb1\u6216\u6635\u79f0\u751f\u6210)\n\n\n\n\n\n\nretro\n\n\n\n\n\u516b\u4f4d\u50cf\u7d20\u590d\u53e4\u5934\u50cf(\u6839\u636e\u90ae\u7bb1\u6216\u6635\u79f0\u751f\u6210)\n\n\n\n\n\n\nhide\n\n\n\n\n\u4e0d\u663e\u793a\u5934\u50cf\n\n\n\n\n\n\n\n\n\n\nInfo\n\n\n\u53c2\u6570\u503c\nhide\n\u5728\u7248\u672c\nv1.1.8-beta\n\u5f00\u59cb\u652f\u6301\u3002\n\n\n\u5982\u679c\u53c2\u6570\navatar\n\u7684\u503c\u4e0d\u7b49\u4e8e\u5217\u8868\u4e2d\u7684\u4efb\u610f\u4e00\u79cd\uff0c\u5219\u9ed8\u8ba4\u4e3a\nmm\n\u3002\n\n\n\n\nnew\n \nValine\n({\n\n    \n...\n\n    \navatar\n:\n \n// (\n/mm/identicon/monsterid/wavatar/retro/hide)\n\n\n});", 
+            "title": "\u5934\u50cf\u8bbe\u7f6e"
+        }, 
+        {
+            "location": "/avatar/#_1", 
+            "text": "Valine \u4f7f\u7528\u7684\u662f**Gravatar** \u4f5c\u4e3a\u8bc4\u8bba\u5217\u8868\u5934\u50cf(\u611f\u8c22 gravatar.loli.net \u63d0\u4f9b\u7684\u955c\u50cf\u670d\u52a1)\u3002 \n\u76ee\u524d\u6709\u4ee5\u4e0b7\u79cd\u53ef\u9009\u503c:       \u53c2\u6570\u503c  \u8868\u73b0\u5f62\u5f0f  \u5907\u6ce8      \u7a7a\u5b57\u7b26\u4e32 ''   Gravatar\u5b98\u65b9\u56fe\u5f62    mm   \u795e\u79d8\u4eba(\u4e00\u4e2a\u7070\u767d\u5934\u50cf)    identicon   \u62bd\u8c61\u51e0\u4f55\u56fe\u5f62(\u6839\u636e\u90ae\u7bb1\u6216\u6635\u79f0\u751f\u6210)    monsterid   \u5c0f\u602a\u7269    wavatar   \u7528\u4e0d\u540c\u9762\u5b54\u548c\u80cc\u666f\u7ec4\u5408\u751f\u6210\u7684\u5934\u50cf(\u6839\u636e\u90ae\u7bb1\u6216\u6635\u79f0\u751f\u6210)    retro   \u516b\u4f4d\u50cf\u7d20\u590d\u53e4\u5934\u50cf(\u6839\u636e\u90ae\u7bb1\u6216\u6635\u79f0\u751f\u6210)    hide   \u4e0d\u663e\u793a\u5934\u50cf      Info  \u53c2\u6570\u503c hide \u5728\u7248\u672c v1.1.8-beta \u5f00\u59cb\u652f\u6301\u3002  \u5982\u679c\u53c2\u6570 avatar \u7684\u503c\u4e0d\u7b49\u4e8e\u5217\u8868\u4e2d\u7684\u4efb\u610f\u4e00\u79cd\uff0c\u5219\u9ed8\u8ba4\u4e3a mm \u3002   new   Valine ({ \n     ... \n     avatar :   // ( /mm/identicon/monsterid/wavatar/retro/hide)  });", 
+            "title": "\u5934\u50cf\u8bbe\u7f6e"
+        }, 
+        {
+            "location": "/notify/", 
+            "text": "Valine \u8bc4\u8bba\u7cfb\u7edf\u4e2d\u7684\u90ae\u4ef6\u63d0\u9192\u8bbe\u7f6e\n\n\n\u8bbe\u7f6e\nLeancloud\n\n\n\u8fdb\u5165\nLeancloud\n\u9009\u62e9\u4f60\u7684\u8bc4\u8bba\u6240\u5b58\u653e\u7684\n\u5e94\u7528\n\u8bbe\u7f6e\n\u90ae\u4ef6\u6a21\u677f\n\uff0c\u6309\u4e0b\u56fe\u8bbe\u7f6e\u597d\n\u7528\u4e8e\u91cd\u7f6e\u5bc6\u7801\u7684\u90ae\u4ef6\u4e3b\u9898\n\u7136\u540e\n\u4fdd\u5b58\n:\n\n\n\n\n\n\nWarning\n\n\n\u6ce8\n\uff1a\u8bf7\u6ce8\u610f\u4fee\u6539\u94fe\u63a5\u4e3a\u4f60\u7684\n\u535a\u5ba2\n\u6216\u8005\n\u7f51\u7ad9\u9996\u9875\n\u3002\n\n\n\n\np\nHi, {{username}}\n/\np\n\n\np\n\n\u4f60\u5728 {{appname}} \u7684\u8bc4\u8bba\u6536\u5230\u4e86\u65b0\u7684\u56de\u590d\uff0c\u8bf7\u70b9\u51fb\u67e5\u770b\uff1a\n\n/\np\n\n\np\na\n \nhref\n=\n\u4f60\u7684\u7f51\u5740\u9996\u9875\u94fe\u63a5\n \nstyle\n=\ndisplay: inline-block; padding: 10px 20px; border-radius: 4px; background-color: #3090e4; color: #fff; text-decoration: none;\n\u9a6c\u4e0a\u67e5\u770b\n/\na\n/\np\n\n\n\n\n\n\u521d\u59cb\u5316\nValine\n\n\n\n\nWarning\n\n\n\u53d1\u9001\u6b21\u6570\u8fc7\u591a\uff0c\u53ef\u80fd\u4f1a\u6682\u65f6\u88abLeancloud \u5c4f\u853d\u90ae\u4ef6\u53d1\u9001\u529f\u80fd\n\n\n\u7531\u4e8e\u90ae\u4ef6\u63d0\u9192\u529f\u80fd\u4f7f\u7528\u7684\nLeancloud\n\u7684\u5bc6\u7801\u91cd\u7f6e\u90ae\u4ef6\u63d0\u9192\uff0c\u53ea\u80fd\u4f20\u9012\n\u6635\u79f0\n\u3001\n\u90ae\u7bb1\n\u4e24\u4e2a\u5c5e\u6027\uff0c\u6240\u4ee5\u90ae\u4ef6\u63d0\u9192\u94fe\u63a5\n\u65e0\u6cd5\u76f4\u8fbe\u6307\u5b9a\u6587\u7ae0\u9875\n\u3002\n\u8bf7\u6089\u77e5\n\u3002\n\n\n\u8be5\u529f\u80fd\u76ee\u524d\u8fd8\u5728\u6d4b\u8bd5\u9636\u6bb5\uff0c\u8c28\u614e\u4f7f\u7528\u3002\n\n\n\u5f00\u542f\n\u90ae\u4ef6\u63d0\u9192\n\u4f1a\u9ed8\u8ba4\u5f00\u542f\n\u9a8c\u8bc1\u7801\n\u9009\u9879\u3002\n\n\n\n\n\u597d\u4e86\uff0c\u8d76\u7d27\u53bb\u8bd5\u8bd5\u5427\u3002", 
+            "title": "\u90ae\u4ef6\u63d0\u9192"
+        }, 
+        {
+            "location": "/notify/#valine", 
+            "text": "", 
+            "title": "Valine \u8bc4\u8bba\u7cfb\u7edf\u4e2d\u7684\u90ae\u4ef6\u63d0\u9192\u8bbe\u7f6e"
+        }, 
+        {
+            "location": "/notify/#leancloud", 
+            "text": "\u8fdb\u5165 Leancloud \u9009\u62e9\u4f60\u7684\u8bc4\u8bba\u6240\u5b58\u653e\u7684 \u5e94\u7528 \u8bbe\u7f6e \u90ae\u4ef6\u6a21\u677f \uff0c\u6309\u4e0b\u56fe\u8bbe\u7f6e\u597d \u7528\u4e8e\u91cd\u7f6e\u5bc6\u7801\u7684\u90ae\u4ef6\u4e3b\u9898 \u7136\u540e \u4fdd\u5b58 :    Warning  \u6ce8 \uff1a\u8bf7\u6ce8\u610f\u4fee\u6539\u94fe\u63a5\u4e3a\u4f60\u7684 \u535a\u5ba2 \u6216\u8005 \u7f51\u7ad9\u9996\u9875 \u3002   p Hi, {{username}} / p  p \n\u4f60\u5728 {{appname}} \u7684\u8bc4\u8bba\u6536\u5230\u4e86\u65b0\u7684\u56de\u590d\uff0c\u8bf7\u70b9\u51fb\u67e5\u770b\uff1a / p  p a   href = \u4f60\u7684\u7f51\u5740\u9996\u9875\u94fe\u63a5   style = display: inline-block; padding: 10px 20px; border-radius: 4px; background-color: #3090e4; color: #fff; text-decoration: none; \u9a6c\u4e0a\u67e5\u770b / a / p", 
+            "title": "\u8bbe\u7f6eLeancloud"
+        }, 
+        {
+            "location": "/notify/#valine_1", 
+            "text": "Warning  \u53d1\u9001\u6b21\u6570\u8fc7\u591a\uff0c\u53ef\u80fd\u4f1a\u6682\u65f6\u88abLeancloud \u5c4f\u853d\u90ae\u4ef6\u53d1\u9001\u529f\u80fd  \u7531\u4e8e\u90ae\u4ef6\u63d0\u9192\u529f\u80fd\u4f7f\u7528\u7684 Leancloud \u7684\u5bc6\u7801\u91cd\u7f6e\u90ae\u4ef6\u63d0\u9192\uff0c\u53ea\u80fd\u4f20\u9012 \u6635\u79f0 \u3001 \u90ae\u7bb1 \u4e24\u4e2a\u5c5e\u6027\uff0c\u6240\u4ee5\u90ae\u4ef6\u63d0\u9192\u94fe\u63a5 \u65e0\u6cd5\u76f4\u8fbe\u6307\u5b9a\u6587\u7ae0\u9875 \u3002 \u8bf7\u6089\u77e5 \u3002  \u8be5\u529f\u80fd\u76ee\u524d\u8fd8\u5728\u6d4b\u8bd5\u9636\u6bb5\uff0c\u8c28\u614e\u4f7f\u7528\u3002  \u5f00\u542f \u90ae\u4ef6\u63d0\u9192 \u4f1a\u9ed8\u8ba4\u5f00\u542f \u9a8c\u8bc1\u7801 \u9009\u9879\u3002   \u597d\u4e86\uff0c\u8d76\u7d27\u53bb\u8bd5\u8bd5\u5427\u3002", 
+            "title": "\u521d\u59cb\u5316Valine"
+        }, 
+        {
+            "location": "/i18n/", 
+            "text": "\u591a\u8bed\u8a00\u652f\u6301\n\n\n\u57fa\u672c\u7528\u6cd5\n\n\n\u73b0\u5728\uff0c\nValine\n\u5f00\u59cb\u652f\u6301\u591a\u8bed\u8a00\u3002\u9ed8\u8ba4\u5185\u7f6e\uff1a\n\n\n\n\nzh-cn\n\n\nen\n\n\n\n\nvar\n \nvaline\n \n=\n \nnew\n \nValine\n();\n\n\nvaline\n.\ninit\n({\n\n    \nel\n:\n.comment\n,\n\n    \nappId\n:\nyour leancloud appid\n,\n\n    \nappKey\n:\nyour leancloud appkey\n,\n\n    \nlang\n:\nen\n \n// \u8bbe\u7f6e\u8fd9\u91cc\u5c31ok\n\n\n})\n\n\n\n\n\n\n\nWarning\n\n\n\u5982\u679c\u6709\u9700\u8981\u652f\u6301\n\u5176\u4ed6\u8bed\u8a00\n\uff0c\u8bf7\u4e25\u683c\u6309\u7167\u4e0b\u9762\u7684\nlocaleMode\n\u683c\u5f0f\u4e66\u5199\u5185\u5bb9:\n\n\n\n\n\n\nInfo\n\n\n\u8be5\u914d\u7f6e\u4ece\nv1.1.8-beta9\n\u5f00\u59cb\u652f\u6301\u3002", 
+            "title": "\u591a\u8bed\u8a00\u652f\u6301"
+        }, 
+        {
+            "location": "/i18n/#_1", 
+            "text": "", 
+            "title": "\u591a\u8bed\u8a00\u652f\u6301"
+        }, 
+        {
+            "location": "/i18n/#_2", 
+            "text": "\u73b0\u5728\uff0c Valine \u5f00\u59cb\u652f\u6301\u591a\u8bed\u8a00\u3002\u9ed8\u8ba4\u5185\u7f6e\uff1a   zh-cn  en   var   valine   =   new   Valine ();  valine . init ({ \n     el : .comment , \n     appId : your leancloud appid , \n     appKey : your leancloud appkey , \n     lang : en   // \u8bbe\u7f6e\u8fd9\u91cc\u5c31ok  })    Warning  \u5982\u679c\u6709\u9700\u8981\u652f\u6301 \u5176\u4ed6\u8bed\u8a00 \uff0c\u8bf7\u4e25\u683c\u6309\u7167\u4e0b\u9762\u7684 localeMode \u683c\u5f0f\u4e66\u5199\u5185\u5bb9:    Info  \u8be5\u914d\u7f6e\u4ece v1.1.8-beta9 \u5f00\u59cb\u652f\u6301\u3002", 
+            "title": "\u57fa\u672c\u7528\u6cd5"
+        }, 
+        {
+            "location": "/hexo/", 
+            "text": "\u5728Hexo \u4e2d\u4f7f\u7528Valine\n\n\n\u76ee\u524d\uff0c\u5df2\u6709\u90e8\u5206\nHexo\n\u4e3b\u9898\u5185\u7f6e\u4e86Valine \u8bc4\u8bba\u7cfb\u7edf\uff0c\u66f4\u591a\u7684\u4e3b\u9898\u6b63\u5728\u9010\u6b65\u589e\u52a0\u4e2d(\u7531\u4e8e\u4e2a\u4eba\u7cbe\u529b\u6709\u9650\uff0c\u5185\u7f6eValine\u7684PR\u5c06\u4e0d\u5b9a\u65f6\u63d0\u4ea4)\u3002\n\n\n\n\nInfo\n\n\n\u5982\u679c\u5982\u4e0b\u5217\u8868\u4e2d\u6ca1\u6709\u4f60\u5f53\u524d\u4f7f\u7528\u7684\u4e3b\u9898\uff0c\u8bf7\u5728\u672c\u9875\u5e95\u90e8\u7559\u8a00\u3002\u6211\u4f1a\u5c3d\u5feb\u63d0\u4ea4PR\u3002\n\n\n\n\nhexo-theme-raytaylorism\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-spfk\n\n\n\n\nOpen\n \nlatest\n\n\n\n\ncactus-dark\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-yilia\n\n\n\n\nOpen\n \nlatest\n\n\n\n\nhexo-theme-even\n\n\n\n\nOpen\n \nv1.1.7\n\n\n\n\nhexo-theme-typing\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-pln\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-landscape\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nfexo\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-indigo\n\n\n\n\nMerge\n \nlatest\n\n\n\n\nhexo-theme-Anatole\n\n\n\n\nMerged\n \nv1.1.7\n\n\n\n\nmaupassant-hexo\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-mdui\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-next\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-material\n\n\n\n\nMerged\n \nlatest\n\n\n\n\nhexo-theme-hueman\n\n\n\n\nMerged\n \nv1.1.7-rc3\n\n\n\n\nhexo-theme-magnetic\n\n\n\n\nMerged\n \nv1.1.7", 
+            "title": "Hexo\u4e2d\u7684\u4f7f\u7528"
+        }, 
+        {
+            "location": "/hexo/#hexo-valine", 
+            "text": "\u76ee\u524d\uff0c\u5df2\u6709\u90e8\u5206 Hexo \u4e3b\u9898\u5185\u7f6e\u4e86Valine \u8bc4\u8bba\u7cfb\u7edf\uff0c\u66f4\u591a\u7684\u4e3b\u9898\u6b63\u5728\u9010\u6b65\u589e\u52a0\u4e2d(\u7531\u4e8e\u4e2a\u4eba\u7cbe\u529b\u6709\u9650\uff0c\u5185\u7f6eValine\u7684PR\u5c06\u4e0d\u5b9a\u65f6\u63d0\u4ea4)\u3002   Info  \u5982\u679c\u5982\u4e0b\u5217\u8868\u4e2d\u6ca1\u6709\u4f60\u5f53\u524d\u4f7f\u7528\u7684\u4e3b\u9898\uff0c\u8bf7\u5728\u672c\u9875\u5e95\u90e8\u7559\u8a00\u3002\u6211\u4f1a\u5c3d\u5feb\u63d0\u4ea4PR\u3002", 
+            "title": "\u5728Hexo \u4e2d\u4f7f\u7528Valine"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-raytaylorism", 
+            "text": "Open   latest", 
+            "title": "hexo-theme-raytaylorism"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-spfk", 
+            "text": "Open   latest", 
+            "title": "hexo-theme-spfk"
+        }, 
+        {
+            "location": "/hexo/#cactus-dark", 
+            "text": "Open   latest", 
+            "title": "cactus-dark"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-yilia", 
+            "text": "Open   latest", 
+            "title": "hexo-theme-yilia"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-even", 
+            "text": "Open   v1.1.7", 
+            "title": "hexo-theme-even"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-typing", 
+            "text": "Merge   latest", 
+            "title": "hexo-theme-typing"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-pln", 
+            "text": "Merge   latest", 
+            "title": "hexo-theme-pln"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-landscape", 
+            "text": "Merge   latest", 
+            "title": "hexo-theme-landscape"
+        }, 
+        {
+            "location": "/hexo/#fexo", 
+            "text": "Merge   latest", 
+            "title": "fexo"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-indigo", 
+            "text": "Merge   latest", 
+            "title": "hexo-theme-indigo"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-anatole", 
+            "text": "Merged   v1.1.7", 
+            "title": "hexo-theme-Anatole"
+        }, 
+        {
+            "location": "/hexo/#maupassant-hexo", 
+            "text": "Merged   latest", 
+            "title": "maupassant-hexo"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-mdui", 
+            "text": "Merged   latest", 
+            "title": "hexo-theme-mdui"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-next", 
+            "text": "Merged   latest", 
+            "title": "hexo-theme-next"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-material", 
+            "text": "Merged   latest", 
+            "title": "hexo-theme-material"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-hueman", 
+            "text": "Merged   v1.1.7-rc3", 
+            "title": "hexo-theme-hueman"
+        }, 
+        {
+            "location": "/hexo/#hexo-theme-magnetic", 
+            "text": "Merged   v1.1.7", 
+            "title": "hexo-theme-magnetic"
+        }, 
+        {
+            "location": "/cdn/", 
+            "text": "CDN\n\n\n\u63a8\u8350\u4f7f\u7528 \nunpkg\n \u2014\u2014 \u80fd\u53ca\u65f6\u83b7\u53d6\u5230\u6700\u65b0\u7248\u3002\n\n\n\u83b7\u53d6\u6700\u65b0\u7248\u672c\n\n\n\u6839\u636e UNPKG \u7684\u89c4\u5219\uff0c\u4e0d\u6307\u5b9a\u7279\u5b9a\u7248\u672c\u53f7\u65f6\u5c06\u5f15\u5165\u6700\u65b0\u7248\u3002\n\n\nscript\n \nsrc\n=\n//unpkg.com/valine/dist/Valine.min.js\n/\nscript\n\n\n\n\n\n\u83b7\u53d6\u6307\u5b9a\u7248\u672c\n\n\n\u5982\u679c\u62c5\u5fc3\u9891\u7e41\u5730\u7248\u672c\u66f4\u65b0\u53c8\u53ef\u80fd\u5f15\u5165\u672a\u77e5 Bug\uff0c\u6211\u4eec\u4e5f\u53ef\u4ee5\u4f7f\u7528\u5177\u4f53\u7684\u7248\u672c\u3002\u89c4\u5219\u662f \n//unpkg.com/valine@VERSION/dist/Valine.min.js\n\n\n\n\nInfo\n\n\n\u6307\u5b9a \nVERSION\n \u4e3a \nlatest\n \u53ef\u4ee5\u5f3a\u5236\u6bcf\u6b21\u90fd\u8bf7\u6c42\u6700\u65b0\u7248\u672c\u3002\n\n\n\n\n\u5176\u4ed6 CDN\n\n\n\n\nhttps://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js\n (\u56fd\u5185\u5916\u90fd\u652f\u6301)", 
+            "title": "CDN"
+        }, 
+        {
+            "location": "/cdn/#cdn", 
+            "text": "\u63a8\u8350\u4f7f\u7528  unpkg  \u2014\u2014 \u80fd\u53ca\u65f6\u83b7\u53d6\u5230\u6700\u65b0\u7248\u3002", 
+            "title": "CDN"
+        }, 
+        {
+            "location": "/cdn/#_1", 
+            "text": "\u6839\u636e UNPKG \u7684\u89c4\u5219\uff0c\u4e0d\u6307\u5b9a\u7279\u5b9a\u7248\u672c\u53f7\u65f6\u5c06\u5f15\u5165\u6700\u65b0\u7248\u3002  script   src = //unpkg.com/valine/dist/Valine.min.js / script", 
+            "title": "\u83b7\u53d6\u6700\u65b0\u7248\u672c"
+        }, 
+        {
+            "location": "/cdn/#_2", 
+            "text": "\u5982\u679c\u62c5\u5fc3\u9891\u7e41\u5730\u7248\u672c\u66f4\u65b0\u53c8\u53ef\u80fd\u5f15\u5165\u672a\u77e5 Bug\uff0c\u6211\u4eec\u4e5f\u53ef\u4ee5\u4f7f\u7528\u5177\u4f53\u7684\u7248\u672c\u3002\u89c4\u5219\u662f  //unpkg.com/valine@VERSION/dist/Valine.min.js   Info  \u6307\u5b9a  VERSION  \u4e3a  latest  \u53ef\u4ee5\u5f3a\u5236\u6bcf\u6b21\u90fd\u8bf7\u6c42\u6700\u65b0\u7248\u672c\u3002", 
+            "title": "\u83b7\u53d6\u6307\u5b9a\u7248\u672c"
+        }, 
+        {
+            "location": "/cdn/#cdn_1", 
+            "text": "https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js  (\u56fd\u5185\u5916\u90fd\u652f\u6301)", 
+            "title": "\u5176\u4ed6 CDN"
+        }, 
+        {
+            "location": "/faq/", 
+            "text": "FAQ\n\n\nValine\n \u8bde\u751f\u4e4b\u521d\u5c31\u5df2\u7ecf\u4f5c\u4e86\u5f88\u660e\u786e\u7684\u5b9a\u4f4d\uff1a\n\n\n\n\n\u4e00\u6b3e\n\u65e0\u540e\u7aef\n\u7684\n\u6781\u7b80\u98ce\n\u8bc4\u8bba\u7cfb\u7edf\u3002\n\n\n\n\n\u800c\u540e\u53d1\u5e03\u7684\u6240\u6709\u7248\u672c\u90fd\u662f\u56f4\u7ed5\u8fd9\u4e2a\u5b9a\u4f4d\u4e0a\u6765\u505a\u7684\u4fee\u6539\u3002\n\n\n\u4e3a\u4ec0\u4e48\u4e0d\u52a0\u5165 Akismet?\n\n\n\u6211\u7b80\u5355\u4e86\u89e3\u4e86\u4e0b\nAkismet\n\uff0c\u53d1\u73b0\u9700\u8981\u540e\u7aef\u6280\u672f\u652f\u6301\uff0c\u6240\u4ee5\u4e5f\u5c31\u4e0d\u51c6\u5907\u505a\u4e86\u3002\n\n\n\u4e3a\u4ec0\u4e48\u63d0\u9192\u90ae\u4ef6\u529f\u80fd\u4e0d\u80fd\u76f4\u8fbe\u6307\u5b9a\u94fe\u63a5?\n\n\n\u7531\u4e8e\u76ee\u524d\u7528\u7684\u662fLeancloud\u7684\n\u5bc6\u7801\u91cd\u7f6e\n\u53d1\u9001\u7684\u90ae\u4ef6\uff0c\u9650\u5236\u6bd4\u8f83\u5927\uff0c\u53ea\u6709\n\u6635\u79f0\n\u548c\n\u90ae\u7bb1\n\u4e24\u4e2a\u5b57\u6bb5\u53ef\u4f20\u9012\u3002\n\n\n\u9a8c\u8bc1\u7801\u4e3a\u4f55\u5982\u6b64'\u53cd\u4eba\u7c7b'?\n\n\n\u7531\u4e8e\u662f\n\u65e0\u540e\u7aef\n\u7684\u8bc4\u8bba\u7cfb\u7edf\uff0c\u9a8c\u8bc1\u5de5\u4f5c\u4e5f\u5c31\u53ea\u80fd\u5728\u524d\u7aef\u505a\uff0c\u4f53\u9a8c\u4e0a\u53ef\u80fd\u4e0d\u4f1a\u592a\u4f18\u96c5\u3002\n\n\n\u9a8c\u8bc1\u7801\u9ed8\u8ba4\u662f\u5173\u95ed\u7684\uff0c\u5982\u679c\u4f60\u89c9\u5f97\u592a\u70e6\u4eba\u6216\u8005\u592a\u53cd\u4eba\u7c7b\uff0c\u90a3\u5c31\u8bf7\u4e0d\u8981\u6253\u5f00\u3002\n\n\n\u6700\u540e\n\n\n\u4ee5\u540e\nValine\n\u53ef\u80fd\u4f1a\u6709\u6240\u53d8\u5316\uff0c\u4f46\u4e0d\u7ba1\u5982\u4f55\u53d8\uff0c\u4e0d\u4f1a\u6539\u53d8\n\u65e0\u540e\u7aef\n\u8fd9\u4e2a\u521d\u8877\u3002\n\n\nenjoy it \ud83d\ude09.\n\n\n\n\n\n\nInfo\n\n\n\u5982\u679c\u4f60\u6709\u66f4\u4f18\u96c5\u7684\u89e3\u51b3\u65b9\u6848\uff0c\u53ef\u4ee5**\u76f4\u63a5\u7559\u8a00**\u6216\u8005\n\u70b9\u8fd9\u91cc\n\u3002", 
+            "title": "FAQ"
+        }, 
+        {
+            "location": "/faq/#faq", 
+            "text": "Valine  \u8bde\u751f\u4e4b\u521d\u5c31\u5df2\u7ecf\u4f5c\u4e86\u5f88\u660e\u786e\u7684\u5b9a\u4f4d\uff1a   \u4e00\u6b3e \u65e0\u540e\u7aef \u7684 \u6781\u7b80\u98ce \u8bc4\u8bba\u7cfb\u7edf\u3002   \u800c\u540e\u53d1\u5e03\u7684\u6240\u6709\u7248\u672c\u90fd\u662f\u56f4\u7ed5\u8fd9\u4e2a\u5b9a\u4f4d\u4e0a\u6765\u505a\u7684\u4fee\u6539\u3002", 
+            "title": "FAQ"
+        }, 
+        {
+            "location": "/faq/#akismet", 
+            "text": "\u6211\u7b80\u5355\u4e86\u89e3\u4e86\u4e0b Akismet \uff0c\u53d1\u73b0\u9700\u8981\u540e\u7aef\u6280\u672f\u652f\u6301\uff0c\u6240\u4ee5\u4e5f\u5c31\u4e0d\u51c6\u5907\u505a\u4e86\u3002", 
+            "title": "\u4e3a\u4ec0\u4e48\u4e0d\u52a0\u5165 Akismet?"
+        }, 
+        {
+            "location": "/faq/#_1", 
+            "text": "\u7531\u4e8e\u76ee\u524d\u7528\u7684\u662fLeancloud\u7684 \u5bc6\u7801\u91cd\u7f6e \u53d1\u9001\u7684\u90ae\u4ef6\uff0c\u9650\u5236\u6bd4\u8f83\u5927\uff0c\u53ea\u6709 \u6635\u79f0 \u548c \u90ae\u7bb1 \u4e24\u4e2a\u5b57\u6bb5\u53ef\u4f20\u9012\u3002", 
+            "title": "\u4e3a\u4ec0\u4e48\u63d0\u9192\u90ae\u4ef6\u529f\u80fd\u4e0d\u80fd\u76f4\u8fbe\u6307\u5b9a\u94fe\u63a5?"
+        }, 
+        {
+            "location": "/faq/#_2", 
+            "text": "\u7531\u4e8e\u662f \u65e0\u540e\u7aef \u7684\u8bc4\u8bba\u7cfb\u7edf\uff0c\u9a8c\u8bc1\u5de5\u4f5c\u4e5f\u5c31\u53ea\u80fd\u5728\u524d\u7aef\u505a\uff0c\u4f53\u9a8c\u4e0a\u53ef\u80fd\u4e0d\u4f1a\u592a\u4f18\u96c5\u3002  \u9a8c\u8bc1\u7801\u9ed8\u8ba4\u662f\u5173\u95ed\u7684\uff0c\u5982\u679c\u4f60\u89c9\u5f97\u592a\u70e6\u4eba\u6216\u8005\u592a\u53cd\u4eba\u7c7b\uff0c\u90a3\u5c31\u8bf7\u4e0d\u8981\u6253\u5f00\u3002", 
+            "title": "\u9a8c\u8bc1\u7801\u4e3a\u4f55\u5982\u6b64'\u53cd\u4eba\u7c7b'?"
+        }, 
+        {
+            "location": "/faq/#_3", 
+            "text": "\u4ee5\u540e Valine \u53ef\u80fd\u4f1a\u6709\u6240\u53d8\u5316\uff0c\u4f46\u4e0d\u7ba1\u5982\u4f55\u53d8\uff0c\u4e0d\u4f1a\u6539\u53d8 \u65e0\u540e\u7aef \u8fd9\u4e2a\u521d\u8877\u3002  enjoy it \ud83d\ude09.    Info  \u5982\u679c\u4f60\u6709\u66f4\u4f18\u96c5\u7684\u89e3\u51b3\u65b9\u6848\uff0c\u53ef\u4ee5**\u76f4\u63a5\u7559\u8a00**\u6216\u8005 \u70b9\u8fd9\u91cc \u3002", 
+            "title": "\u6700\u540e"
+        }, 
+        {
+            "location": "/contact/", 
+            "text": "\u8054\u7cfb\u6211\n\n\n\u5728\u4ee5\u4e0b\u5730\u65b9\u53ef\u4ee5\u627e\u5230\u6211\uff1a\n\n\n\n\nGithub\uff1a\nhttps://github.com/xCss\n \n\n\nE-Mail\uff1amail#xone.me (\n\u8bf7\u5c06#\u6362\u6210@\n)\n\n\nWeiBo\uff1a\nhttp://weibo.com/BingPictures\n \n\n\nQQ \u7fa4\uff1a\n\n\n\n\n\n\n\u7528\n\u624b\u673aQQ\n\u6216\nTim\n\u626b\u7801\u52a0\u5165\nValine\u4ea4\u6d41\u7fa4\n:", 
+            "title": "\u8054\u7cfb\u6211"
+        }, 
+        {
+            "location": "/contact/#_1", 
+            "text": "\u5728\u4ee5\u4e0b\u5730\u65b9\u53ef\u4ee5\u627e\u5230\u6211\uff1a   Github\uff1a https://github.com/xCss    E-Mail\uff1amail#xone.me ( \u8bf7\u5c06#\u6362\u6210@ )  WeiBo\uff1a http://weibo.com/BingPictures    QQ \u7fa4\uff1a    \u7528 \u624b\u673aQQ \u6216 Tim \u626b\u7801\u52a0\u5165 Valine\u4ea4\u6d41\u7fa4 :", 
+            "title": "\u8054\u7cfb\u6211"
+        }
+    ]
+}

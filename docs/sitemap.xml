@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>https://valine.js.org//</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>https://valine.js.org//quickstart/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//configuration/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//avatar/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//notify/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//i18n/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://valine.js.org//hexo/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//cdn/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//faq/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://valine.js.org//contact/</loc>
+     <lastmod>2018-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+</urlset>
