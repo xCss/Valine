@@ -6,9 +6,10 @@
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
   "scripts": {
     "test": "webpack",
-    "build": "webpack",
+    "prebuild":"npm run clean",
+    "build":"webpack",
     "dev": "webpack-dev-server --env.dev",
-    "clear": "rm -rf dist/* "
+    "clean": "rm -rf dist/* "
   },
   "keywords": [
     "simple",
