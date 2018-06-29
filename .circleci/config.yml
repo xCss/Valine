@@ -1,6 +1,10 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - master
+        - dev
     docker:
       - image: circleci/node:8.6.0
     working_directory: ~/repo
