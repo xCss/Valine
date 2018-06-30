@@ -1,5 +1,6 @@
 .DS_Store
 .idea
+.github
 .gitignore
 .npmignore
 .babelrc
@@ -8,10 +9,12 @@
 
 node_modules
 package-lock.json
+*.lock
 
 src
 test
 docs
 index.html
+postcss.config.js
 webpack.config.js
 webpack.dev.config.js
