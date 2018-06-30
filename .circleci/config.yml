@@ -5,6 +5,8 @@ jobs:
       only:
         - master
         - dev
+      ignore:
+        - gh-pages
     docker:
       - image: circleci/node:8.6.0
     working_directory: ~/repo
