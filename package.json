@@ -1,6 +1,6 @@
 {
   "name": "valine",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A simple comment system based on Leancloud.",
   "main": "/dist/Valine.min.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
@@ -34,8 +34,9 @@
     "css-loader": "^0.28.4",
     "exports-loader": "^0.6.3",
     "file-loader": "^0.11.2",
+    "hanabi": "^0.4.0",
     "marked": "^0.4.0",
-    "node-sass": "^4.9.1",
+    "node-sass": "^4.9.2",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.18.2",
