@@ -155,11 +155,15 @@ class Valine {
                 let _vbtns = _mark.querySelector('.vbtns');
                 let _cBtn = `<button class="vcancel vbtn">${o && o.ctxt || '我再看看'}</button>`;
                 let _oBtn = `<button class="vsure vbtn">${o && o.otxt || '继续提交'}</button>`;
-                _vbtns.innerHTML = `${_cBtn}${o.type && _oBtn}`;
+                let _eBtn = (o && o.button); // extra button
+                _vbtns.innerHTML = `${_cBtn}${o.type && _oBtn}${o.button && _eBtn}`;
                 _mark.querySelector('.vcancel').addEventListener('click', function (e) {
                     _root.alert.hide();
                 });
                 _mark.setAttribute('style', 'display:block;');
+                if (o && o.pp) { // preprocess
+                    o.pp();
+                }
                 if (o && o.type) {
                     let _ok = _mark.querySelector('.vsure');
                     Event.on('click', _ok, (e) => {
@@ -450,36 +454,36 @@ class Valine {
         }
 
         let verifyEvt = (fn) => {
-            let x = Math.floor((Math.random() * 10) + 1);
-            let y = Math.floor((Math.random() * 10) + 1);
-            let z = Math.floor((Math.random() * 10) + 1);
-            let opt = ['+', '-', 'x'];
-            let o1 = opt[Math.floor(Math.random() * 3)];
-            let o2 = opt[Math.floor(Math.random() * 3)];
-            let expre = `${x}${o1}${y}${o2}${z}`;
-            let subject = `${expre} = <input class='vcode vinput' >`;
+            let captcha = _root.v.Captcha;
+            let subject = "请输入验证码，点击图片刷新<br>" +
+                "<img width='85' height='30' id='vverifyimg' style='vertical-align: middle;'> <input id='vverifycode' class='vcode vinput' >";
             _root.alert.show({
-                type: 1,
+                type: 0,
                 text: subject,
                 ctxt: '取消',
-                otxt: '确认',
-                cb() {
-                    let code = +_root.el.querySelector('.vcode').value;
-                    let ret = (new Function(`return ${expre.replace(/x/g, '*')}`))();
-                    if (ret === code) {
-                        fn && fn();
-                    } else {
-                        _root.alert.show({
-                            type: 1,
-                            text: '(T＿T)这么简单都算错，也是没谁了',
-                            ctxt: '伤心了，不回了',
-                            otxt: '再试试?',
-                            cb() {
-                                verifyEvt(fn);
-                                return;
+                button: '<button id="vverifybtn" class="vsure vbtn">确认</button>',
+                pp() {
+                    captcha.request().then((c) => {
+                        c.bind({
+                            textInput: "vverifycode",
+                            image: "vverifyimg",
+                            verifyButton: "vverifybtn"
+                        }, {
+                            success: () => {
+                                _root.alert.hide();
+                                fn && fn();
+                            },
+                            error: () => {
+                                _root.alert.show({
+                                    type: 1,
+                                    text: '(T＿T)噢！输入的验证码跟图片不匹配呐',
+                                    ctxt: '伤心了，不回了',
+                                    otxt: '再试试?',
+                                    cb() { verifyEvt(fn); }
+                                })
                             }
                         })
-                    }
+                    })
                 }
             })
         }
