@@ -155,7 +155,7 @@ ValineFactory.prototype.init = function (option) {
         
         _avatarSetting['params'] = `?d=${(ds.indexOf(avatar) > -1 ? avatar : 'mp')}&v=${VERSION}${force}`;
         _avatarSetting['hide'] = avatar === 'hide' ? true : false;
-        _avatarSetting['cdn'] = /^https?\:\/\//.test(avatar_cdn) ? avatar_cdn : _avatarSetting['cdn']
+        _avatarSetting['cdn'] = LINKREG.test(avatar_cdn) ? avatar_cdn : _avatarSetting['cdn']
 
         _path = option.path || _path;
 
@@ -819,12 +819,6 @@ ValineFactory.prototype.bind = function (option) {
         }
         defaultComment['nick'] = defaultComment['nick'] || 'Anonymous';
 
-        // veirfy
-        let mailRet = check.mail(defaultComment.mail);
-        let linkRet = check.link(defaultComment.link);
-        defaultComment['mail'] = mailRet.k ? mailRet.v : '';
-        defaultComment['link'] = linkRet.k ? linkRet.v : '';
-        // console.log(defaultComment)
         // return;
         if (root.notify || root.verify) {
             verifyEvt(commitEvt)
@@ -984,22 +978,6 @@ ValineFactory.prototype.bind = function (option) {
             }
         }
     })
-}
-
-const check = {
-    mail(m) {
-        return {
-            k: /[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(m),
-            v: m
-        };
-    },
-    link(l) {
-        l = l.length > 0 && (/^https?/.test(l) ? l : `http://${l}`);
-        return {
-            k: /^https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(l),
-            v: l
-        };
-    }
 }
 
 function Valine(options) {
