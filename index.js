@@ -539,7 +539,7 @@ ValineFactory.prototype.bind = function (option) {
         Utils.each(ns, (idx, n) => {
             if (n.nodeType !== 1) return;
             if (rejectNodes.indexOf(n.nodeName) > -1) {
-                console.log(n.nodeName)
+                // console.log(n.nodeName)
                 if (n.nodeName === 'INPUT' && Utils.attr(n, 'type') === 'checkbox') Utils.attr(n, 'disabled', 'disabled');
                 else Utils.remove(n);
             }
@@ -772,7 +772,7 @@ ValineFactory.prototype.bind = function (option) {
                 'pid': rt.id,
                 'rmail': rt.get('mail'),
             }
-            console.log(atData)
+            // console.log(atData)
             Utils.attr(inputs['comment'], 'placeholder', at);
             inputs['comment'].focus();
         })
