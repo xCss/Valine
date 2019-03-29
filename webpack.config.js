@@ -11,7 +11,8 @@ const plugins = [];
 const banner =
   'Valine v' + version + '\n' +
   '(c) 2017-' + new Date().getFullYear() + ' xCss\n' +
-  'Released under the GPL-2.0 License.' ;
+  'Released under the GPL-2.0 License.' +
+  'Update: ' + new Date();
 
 const TARGET = process.env
 if(TARGET.NODE_ENV == 'production'){
