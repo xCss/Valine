@@ -1,144 +1,268 @@
-﻿/**
- * @Valine
- * Author: xCss
- * Github: https://github.com/xCss/Valine
- * Website: https://valine.js.org
- */
-import md5 from 'blueimp-md5';
-import marked from 'marked';
-const gravatar = {
-    cdn: 'https://gravatar.cat.net/avatar/',
-    ds: ['mm', 'identicon', 'monsterid', 'wavatar', 'retro', ''],
-    params: '?s=40',
-    hide: !1 
-};
+const VERSION = require('../package.json').version;
+const md5 = require('blueimp-md5');
+const marked = require('marked');
+const autosize = require('autosize');
+const timeAgo = require('./utils/timeago');
+const detect = require('./utils/detect');
+const Utils = require('./utils/htmlUtils');
+const Emoji = require('./plugins/emojis');
+const hanabi = require('hanabi');
+const LINKREG = /^https?\:\/\//;
+
 const defaultComment = {
     comment: '',
-    rid: '',
-    nick: 'Guest',
+    nick: 'Anonymous',
     mail: '',
     link: '',
     ua: navigator.userAgent,
-    url: '',
-    pin: 0,
-    like: 0
+    url: ''
 };
-const GUEST_INFO = ['nick', 'mail', 'link'];
-
-const store = localStorage;
-class Valine {
-    /**
-     * Valine constructor function
-     * @param {Object} option
-     * @constructor
-     */
-    constructor(option) {
-        let _root = this;
-        // version
-        _root.version = '1.1.8-beta';
-
-        _root.md5 = md5;
-        // Valine init
-        !!option && _root.init(option);
+const locales = {
+    'zh-cn': {
+        head: {
+            nick: '昵称',
+            mail: '邮箱',
+            link: '网址(http://)',
+        },
+        tips: {
+            comments: '评论',
+            sofa: '快来做第一个评论的人吧~',
+            busy: '还在提交中，请稍候...',
+            again: '这么简单也能错，也是没谁了.'
+        },
+        ctrl: {
+            reply: '回复',
+            ok: '好的',
+            sure: '确认',
+            cancel: '取消',
+            confirm: '确认',
+            continue: '继续',
+            more: '查看更多...',
+            try: '再试试?',
+            preview: '预览',
+            emoji: '表情'
+        },
+        error: {
+            99: '初始化失败，请检查init中的`el`元素.',
+            100: '初始化失败，请检查你的AppId和AppKey.',
+            401: '未经授权的操作，请检查你的AppId和AppKey.',
+            403: '访问被api域名白名单拒绝，请检查你的安全域名设置.',
+        },
+        timeago: {
+            seconds: '秒前',
+            minutes: '分钟前',
+            hours: '小时前',
+            days: '天前',
+            now: '刚刚'
+        }
+    },
+    en: {
+        head: {
+            nick: 'NickName',
+            mail: 'E-Mail',
+            link: 'Website(http://)',
+        },
+        tips: {
+            comments: 'Comments',
+            sofa: 'No comments yet.',
+            busy: 'Submit is busy, please wait...',
+            again: 'Sorry, this is a wrong calculation.'
+        },
+        ctrl: {
+            reply: 'Reply',
+            ok: 'Ok',
+            sure: 'Sure',
+            cancel: 'Cancel',
+            confirm: 'Confirm',
+            continue: 'Continue',
+            more: 'Load More...',
+            try: 'Once More?',
+            preview: 'Preview',
+            emoji: 'Emoji'
+        },
+        error: {
+            99: 'Initialization failed, Please check the `el` element in the init method.',
+            100: 'Initialization failed, Please check your appId and appKey.',
+            401: 'Unauthorized operation, Please check your appId and appKey.',
+            403: 'Access denied by api domain white list, Please check your security domain.',
+        },
+        timeago: {
+            seconds: 'seconds ago',
+            minutes: 'minutes ago',
+            hours: 'hours ago',
+            days: 'days ago',
+            now: 'just now'
+        }
     }
+}
 
-    /**
-     * Valine Init
-     * @param {Object} option
-     */
-    init(option) {
-        let _root = this;
-        try {
-            let el = ({}).toString.call(option.el) === "[object HTMLDivElement]" ? option.el : document.querySelectorAll(option.el)[0];
-            if (({}).toString.call(el) != '[object HTMLDivElement]') {
-                throw `The target element was not found.`;
+let _avatarSetting = {
+        cdn: 'https://gravatar.loli.net/avatar/',
+        ds: ['mp', 'identicon', 'monsterid', 'wavatar', 'robohash', 'retro', ''],
+        params: '',
+        hide: false
+    },
+    META = ['nick', 'mail', 'link'],
+    _store = Storage && localStorage && localStorage instanceof Storage && localStorage,
+    _path = location.pathname.replace(/index\.html?$/, '');
+
+function ValineFactory(option) {
+    let root = this
+        // Valine init
+        !!option && root.init(option);
+    return root;
+}
+
+/**
+ * Valine Init
+ * @param {Object} option
+ */
+ValineFactory.prototype.init = function (option) {
+    if (typeof document === 'undefined') {
+        console && console.warn('Sorry, Valine does not support Server-side rendering.')
+        return;
+    }
+    let root = this;
+    try {
+        let {
+            lang,
+            langMode,
+            avatar,
+            avatarForce,
+            avatar_cdn,
+            notify,
+            verify,
+            visitor,
+            pageSize,
+            recordIP
+        } = option;
+        let ds = _avatarSetting['ds'];
+        let force = avatarForce ? '&q=' + Math.random().toString(32).substring(2) : '';
+
+        lang && langMode && root.installLocale(lang, langMode);
+        root.locale = root.locale || locales[lang || 'zh-cn'];
+        root.notify = notify || false;
+        root.verify = verify || false;
+
+        if (recordIP) {
+            let ipScript = Utils.create('script', 'src', '//api.ip.sb/jsonip?callback=getIP');
+            let s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(ipScript, s);
+            // 获取IP
+            window.getIP = function (json) {
+                defaultComment['ip'] = json.ip;
             }
-            _root.el = el;
-            _root.el.classList.add('valine');
-
-            const guest_info = option.guest_info || GUEST_INFO;
-            const inputEl = guest_info.map(item => {
-                switch (item) {
-                    case 'nick':
-                        return '<input name="nick" placeholder="称呼" class="vnick vinput" type="text">';
-                        break;
-                    case 'mail':
-                        return '<input name="mail" placeholder="邮箱" class="vmail vinput" type="email">';
-                        break;
-                    case 'link':
-                        return '<input name="link" placeholder="网址(http://)" class="vlink vinput" type="text">';
-                        break;
-                    default:
-                        return '';
-                        break;
-                }
-            });
-
-            let placeholder = option.placeholder || '';
-            let eleHTML = `<div class="vwrap"><div class="${`vheader item${inputEl.length}`}">${inputEl.join('')}</div><div class="vedit"><textarea class="veditor vinput" placeholder="${placeholder}"></textarea></div><div class="vcontrol"><div class="col col-60" title="MarkDown is Support"><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg> MarkDown is Support</div><div class="col col-40 text-right"><button type="button" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="info"><div class="count col"></div></div><div class="vloading"></div><div class="vempty" style="display:none;"></div><ul class="vlist"></ul><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="http://valine.js.org" target="_blank">Valine-v${_root.version}</a></div></div>`;
-            _root.el.innerHTML = eleHTML;
-
-            // Empty Data
-            let vempty = _root.el.querySelector('.vempty');
-            _root.nodata = {
-                show(txt) {
-                    vempty.innerHTML = txt || `还没有评论哦，快来抢沙发吧!`;
-                    vempty.setAttribute('style', 'display:block;');
-                },
-                hide() {
-                    vempty.setAttribute('style', 'display:none;');
-                }
-            }
-
-            // loading
-            let _spinner = `<div class="spinner"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div></div>`;
-            let vloading = _root.el.querySelector('.vloading');
-            vloading.innerHTML = _spinner;
-            // loading control
-            _root.loading = {
-                show() {
-                    vloading.setAttribute('style', 'display:block;');
-                    _root.nodata.hide();
-                },
-                hide() {
-                    vloading.setAttribute('style', 'display:none;');
-                    _root.el.querySelectorAll('.vcard').length === 0 && _root.nodata.show();
-                }
-            };
-            //_root.nodata.show();
-
-            _root.notify = option.notify || !1;
-            _root.verify = option.verify || !1;
-
-            gravatar['params'] = '?d=' + (gravatar['ds'].indexOf(option.avatar) > -1 ? option.avatar : 'mm');
-            gravatar['hide'] = option.avatar === 'hide' ? !0 : !1;
-
-            let av = option.av || AV;
-            let appId = option.app_id || option.appId;
-            let appKey = option.app_key || option.appKey;
-            if (!appId || !appKey) {
-                _root.loading.hide();
-                throw '初始化失败，请检查你的appid或者appkey.';
-                return;
-            }
-            av.applicationId = null;
-            av.init({
-                appId: appId,
-                appKey: appKey
-            });
-            _root.v = av;
-            defaultComment.url = (option.path || location.pathname).replace(/index\.(html|htm)/, '');
-
-        } catch (ex) {
-            let issue = 'https://github.com/xCss/Valine/issues';
-            if (_root.el) _root.nodata.show(`<pre style="color:red;text-align:left;">${ex}<br>Valine:<b>${_root.version}</b><br>反馈：${issue}</pre>`);
-            else console && console.log(`%c${ex}\n%cValine%c${_root.version} ${issue}`, 'color:red;', 'background:#000;padding:5px;line-height:30px;color:#fff;', 'background:#456;line-height:30px;padding:5px;color:#fff;');
-            return;
         }
 
-        let _mark = _root.el.querySelector('.vmark');
+        _avatarSetting['params'] = `?d=${(ds.indexOf(avatar) > -1 ? avatar : 'mp')}&v=${VERSION}${force}`;
+        _avatarSetting['hide'] = avatar === 'hide' ? true : false;
+        _avatarSetting['cdn'] = LINKREG.test(avatar_cdn) ? avatar_cdn : _avatarSetting['cdn']
+
+        _path = option.path || _path;
+
+        let size = Number(pageSize || 10);
+        option.pageSize = !isNaN(size) ? (size < 1 ? 10 : size) : 10;
+
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            highlight: option.highlight === false ? null : hanabi,
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: true
+        });
+
+        if (!AV) {
+            setTimeout(() => {
+                root.init(option)
+            }, 20)
+            return;
+        }
+        let id = option.app_id || option.appId;
+        let key = option.app_key || option.appKey;
+        if (!id || !key) throw 99;
+        AV.applicationId && delete AV._config.applicationId || (AV.applicationId = null);
+        AV.applicationKey && delete AV._config.applicationKey || (AV.applicationKey = null);
+        AV.init({
+            appId: id,
+            appKey: key
+        });
+
+        // get comment count
+        let els = Utils.findAll(document, '.valine-comment-count');
+        for (let i = 0, len = els.length; i < len; i++) {
+            let el = els[i];
+            if (el) {
+                let k = Utils.attr(el, 'data-xid');
+                if (k) {
+                    root.Q(k).count().then(n => {
+                        el.innerText = n
+                    }).catch(ex => {
+                        el.innerText = 0
+                    })
+                }
+            }
+        }
+
+        // Counter
+        visitor && CounterFactory.add(AV.Object.extend('Counter'));
+
+        let el = option.el || null;
+        let _el = Utils.findAll(document, el);
+        el = el instanceof HTMLElement ? el : (_el[_el.length - 1] || null);
+        if (!el) return;
+        root.el = el;
+        root.el.classList.add('v');
+
+        _avatarSetting['hide'] && root.el.classList.add('hide-avatar');
+        option.meta = (option.guest_info || option.meta || META).filter(item => META.indexOf(item) > -1);
+        let inputEl = (option.meta.length == 0 ? META : option.meta).map(item => {
+            let _t = item == 'mail' ? 'email' : 'text';
+            return META.indexOf(item) > -1 ? `<input name="${item}" placeholder="${root.locale['head'][item]}" class="v${item} vinput" type="${_t}">` : ''
+        });
+        root.placeholder = option.placeholder || 'Just Go Go';
+
+        root.el.innerHTML = `<div class="vwrap"><div class="${`vheader item${inputEl.length}`}">${inputEl.join('')}</div><div class="vedit"><textarea id="veditor" class="veditor vinput" placeholder="${root.placeholder}"></textarea><div class="vctrl"><span class="vemoji-btn">${root.locale['ctrl']['emoji']}</span> | <span class="vpreview-btn">${root.locale['ctrl']['preview']}</span></div><div class="vemojis" style="display:none;"></div><div class="vinput vpreview" style="display:none;"></div></div><div class="vcontrol"><div class="col col-20" title="Markdown is supported"><a href="https://segmentfault.com/markdown" target="_blank"><svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a></div><div class="col col-80 text-right"><button type="button" title="Cmd|Ctrl+Enter" class="vsubmit vbtn">${root.locale['ctrl']['reply']}</button></div></div><div style="display:none;" class="vmark"></div></div><div class="vinfo" style="display:none;"><div class="vcount col"></div></div><div class="vlist"></div><div class="vempty" style="display:none;"></div><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://valine.js.org" target="_blank">Valine</a><br>v${VERSION}</div></div>`;
+
+        // Empty Data
+        let vempty = Utils.find(root.el, '.vempty');
+        root.nodata = {
+            show(txt) {
+                vempty.innerHTML = txt || root.locale['tips']['sofa'];
+                Utils.attr(vempty, 'style', 'display:block;');
+                return root;
+            },
+            hide() {
+                Utils.attr(vempty, 'style', 'display:none;');
+                return root;
+            }
+        }
+
+        // loading
+        let _spinner = Utils.create('div', 'class', 'vloading');
+        // loading control
+        let _vlist = Utils.find(root.el, '.vlist');
+        root.loading = {
+            show(mt) {
+                let _vlis = Utils.findAll(_vlist, '.vcard');
+                if (mt) _vlist.insertBefore(_spinner, _vlis[0]);
+                else _vlist.appendChild(_spinner);
+                root.nodata.hide();
+                return root;
+            },
+            hide() {
+                let _loading = Utils.find(_vlist, '.vloading');
+                if (_loading) Utils.remove(_loading);
+                Utils.findAll(_vlist, '.vcard').length === 0 && root.nodata.show()
+                return root;
+            }
+        };
         // alert
-        _root.alert = {
+        let _mark = Utils.find(root.el, '.vmark');
+        root.alert = {
             /**
              * {
              *  type:0/1,
@@ -151,541 +275,732 @@ class Valine {
              * @param {Object} o
              */
             show(o) {
-                _mark.innerHTML = `<div class="valert txt-center"><div class="vtext">${o.text}</div><div class="vbtns"></div></div>`;
-                let _vbtns = _mark.querySelector('.vbtns');
-                let _cBtn = `<button class="vcancel vbtn">${o && o.ctxt || '我再看看'}</button>`;
-                let _oBtn = `<button class="vsure vbtn">${o && o.otxt || '继续提交'}</button>`;
-                _vbtns.innerHTML = `${_cBtn}${o.type && _oBtn}`;
-                _mark.querySelector('.vcancel').addEventListener('click', function (e) {
-                    _root.alert.hide();
-                });
-                _mark.setAttribute('style', 'display:block;');
+                _mark.innerHTML = `<div class="valert txt-center"><div class="vtext">${o && o.text || 1}</div><div class="vbtns"></div></div>`;
+                let _vbtns = Utils.find(_mark, '.vbtns');
+                let _cBtn = `<button class="vcancel vbtn">${ o && o.ctxt || root.locale['ctrl']['cancel'] }</button>`;
+                let _oBtn = `<button class="vsure vbtn">${ o && o.otxt || root.locale['ctrl']['sure'] }</button>`;
+                _vbtns.innerHTML = `${_cBtn}${o && o.type && _oBtn}`;
+                Utils.on('click', Utils.find(_mark, '.vcancel'), (e) => {
+                    root.alert.hide();
+                })
+                Utils.attr(_mark, 'style', 'display:block;');
                 if (o && o.type) {
-                    let _ok = _mark.querySelector('.vsure');
-                    Event.on('click', _ok, (e) => {
-                        _root.alert.hide();
+                    let _ok = Utils.find(_mark, '.vsure');
+                    Utils.on('click', _ok, (e) => {
+                        root.alert.hide();
                         o.cb && o.cb();
                     });
                 }
+                return root;
             },
             hide() {
-                _mark.setAttribute('style', 'display:none;');
+                Utils.attr(_mark, 'style', 'display:none;');
+                return root;
             }
         }
 
         // Bind Event
-        _root.bind(option);
+        root.bind(option);
+
+    } catch (ex) {
+        root.ErrorHandler(ex)
+    }
+    return root;
+}
+
+// 新建Counter对象
+let createCounter = function (Counter, o) {
+    let newCounter = new Counter();
+    let acl = new AV.ACL();
+    acl.setPublicReadAccess(true);
+    acl.setPublicWriteAccess(true);
+    newCounter.setACL(acl);
+    newCounter.set('url', o.url)
+    newCounter.set('xid', o.xid)
+    newCounter.set('title', o.title)
+    newCounter.set('time', 1)
+    newCounter.save().then(ret => {
+        Utils.find(o.el, '.leancloud-visitors-count').innerText = 1
+    }).catch(ex => {
+        console.log(ex)
+    });
+}
+let CounterFactory = {
+    add(Counter) {
+        let lvs = Utils.findAll(document, '.leancloud_visitors,.leancloud-visitors');
+        if (lvs.length) {
+            let lv = lvs[0];
+            let url = Utils.attr(lv, 'id');
+            let title = Utils.attr(lv, 'data-flag-title');
+            let xid = encodeURI(url);
+            let o = {
+                el: lv,
+                url: url,
+                xid: xid,
+                title: title
+            }
+            // 判断是否需要+1
+            if (decodeURI(url) === decodeURI(_path)) {
+                let query = new AV.Query(Counter);
+                query.equalTo('url', url);
+                query.find().then(ret => {
+                    if (ret.length > 0) {
+                        let v = ret[0];
+                        v.increment("time");
+                        v.save().then(rt => {
+                            Utils.find(lv, '.leancloud-visitors-count').innerText = rt.get('time')
+                        }).catch(ex => {
+                            console.log(ex)
+                        });
+                    } else {
+                        createCounter(Counter, o)
+                    }
+                }).catch(ex => {
+                    ex.code == 101 && createCounter(Counter, o)
+                })
+            } else CounterFactory.show(Counter, lvs)
+        }
+    },
+    show(Counter, lvs) {
+        let COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+        // 重置所有计数
+        Utils.each(lvs, function (idx, el) {
+            let cel = Utils.find(el, COUNT_CONTAINER_REF);
+            if (cel) cel.innerText = 0
+        })
+        let urls = [];
+        for (let i in lvs) {
+            if (lvs.hasOwnProperty(i)) urls.push(Utils.attr(lvs[i], 'id'))
+        }
+        if (urls.length) {
+            let query = new AV.Query(Counter);
+            query.containedIn('url', urls);
+            query.find().then(ret => {
+                if (ret.length > 0) {
+                    Utils.each(ret, function (idx, item) {
+                        let url = item.get('url');
+                        let time = item.get('time');
+                        let el = Utils.find(document, `.leancloud_visitors[id="${url}"]`) || Utils.find(document, `.leancloud-visitors[id="${url}"]`);
+                        let cel = Utils.find(el, COUNT_CONTAINER_REF);
+                        if (cel) cel.innerText = time
+                    });
+                }
+            }).catch(ex => {
+                console.error(ex)
+            })
+        }
+    }
+}
+
+/**
+ * LeanCloud SDK Query Util
+ * @param {String} url 
+ * @param {String} id
+ */
+ValineFactory.prototype.Q = function (k) {
+    let len = arguments.length
+    if (len == 1) {
+        let notExist = new AV.Query('Comment');
+        notExist.doesNotExist('rid');
+        let isEmpty = new AV.Query('Comment');
+        isEmpty.equalTo('rid', '');
+        let q = AV.Query.or(notExist, isEmpty);
+        q.equalTo('url', decodeURI(k));
+        q.addDescending('createdAt');
+        q.addDescending('insertedAt');
+        return q;
+    } else {
+        let ids = JSON.stringify(arguments[1]).replace(/(\[|\])/g, '');
+        let cql = `select * from Comment where rid in (${ids}) order by -createdAt,-createdAt`;
+        return AV.Query.doCloudQuery(cql)
+    }
+}
+
+ValineFactory.prototype.ErrorHandler = function (ex) {
+    // console.log(ex.code,ex.message)
+    let root = this;
+    root.el && root.loading.hide().nodata.hide()
+    if (({}).toString.call(ex) === "[object Error]") {
+        let code = ex.code || '',
+            t = root.locale['error'][code],
+            msg = t || ex.message || ex.error || '';
+        if (code == 101) {
+            root.nodata.show()
+        } else root.el && root.nodata.show(`<pre style="text-align:left;">Code ${code}: ${msg}</pre>`) ||
+            console && console.error(`Code ${code}: ${msg}`)
+    } else {
+        root.el && root.nodata.show(`<pre style="text-align:left;">${JSON.stringify(ex)}</pre>`) ||
+            console && console.error(JSON.stringify(ex))
+    }
+    return;
+}
+
+/**
+ * install Multi language support
+ * @param {String} locale langName
+ * @param {Object} mode langSource
+ */
+ValineFactory.prototype.installLocale = function (locale, mode) {
+    let root = this;
+    mode = mode || {};
+    if (locale) {
+        // locales[locale] = JSON.stringify(Object.keys(locales['zh-cn']))==JSON.stringify(Object.keys(mode)) ? mode : undefined;
+        locales[locale] = mode;
+        root.locale = locales[locale] || locales['zh-cn'];
+    }
+    return root;
+}
+
+/**
+ * 
+ * @param {String} path 
+ */
+ValineFactory.prototype.setPath = function (path) {
+    _path = path || _path;
+    return this
+}
+
+/**
+ * Bind Event
+ */
+ValineFactory.prototype.bind = function (option) {
+    let root = this;
+
+    // load emojis
+    let _vemojis = Utils.find(root.el, '.vemojis');
+    let _vpreview = Utils.find(root.el, '.vpreview');
+    // emoji 操作
+    let _emojiCtrl = Utils.find(root.el, '.vemoji-btn');
+    // 评论内容预览
+    let _vpreviewCtrl = Utils.find(root.el, `.vpreview-btn`);
+    let emojiData = Emoji.data;
+    for (let key in emojiData) {
+        if (emojiData.hasOwnProperty(key)) {
+            (function (name, val) {
+                let _i = Utils.create('i', {
+                    'name': name,
+                    'title': name
+                });
+                _i.innerHTML = val;
+                _vemojis.appendChild(_i);
+                Utils.on('click', _i, (e) => {
+                    let _veditor = Utils.find(root.el, '.veditor');
+                    _insertAtCaret(_veditor, val)
+                    syncContentEvt(_veditor)
+                });
+            })(key, emojiData[key])
+        }
+    }
+    root.emoji = {
+        show() {
+            root.preview.hide();
+            Utils.attr(_emojiCtrl, 'v', 1);
+            Utils.removeAttr(_vpreviewCtrl, 'v');
+            Utils.attr(_vemojis, 'style', 'display:block');
+            return root.emoji
+        },
+        hide() {
+            Utils.removeAttr(_emojiCtrl, 'v');
+            Utils.attr(_vemojis, 'style', 'display:hide');
+            return root.emoji
+        }
+    }
+    root.preview = {
+        show() {
+            if (defaultComment['comment']) {
+                root.emoji.hide();
+                Utils.attr(_vpreviewCtrl, 'v', 1);
+                Utils.removeAttr(_emojiCtrl, 'v');
+                _vpreview.innerHTML = defaultComment['comment'];
+                Utils.attr(_vpreview, 'style', 'display:block');
+                _activeOtherFn()
+            }
+            return root.preview
+        },
+        hide() {
+            Utils.removeAttr(_vpreviewCtrl, 'v');
+            Utils.attr(_vpreview, 'style', 'display:none');
+            return root.preview
+        },
+        empty() {
+            _vpreview.innerHtml = '';
+            return root.preview
+        }
     }
 
     /**
-     * Bind Event
+     * XSS filter
+     * @param {String} content Html String
      */
-    bind(option) {
-        let _root = this;
-        let guest_info = (option.guest_info || GUEST_INFO).filter(item => GUEST_INFO.indexOf(item) > -1);
+    let xssFilter = (content) => {
+        let vNode = Utils.create('div');
+        vNode.insertAdjacentHTML('afterbegin', content);
+        let ns = Utils.findAll(vNode, "*");
+        let rejectNodes = ['INPUT', 'STYLE', 'SCRIPT', 'IFRAME', 'FRAME', 'AUDIO', 'VIDEO', 'EMBED', 'META', 'TITLE', 'LINK'];
+        let __replaceVal = (node, attr) => {
+            let val = Utils.attr(node, attr);
+            val && Utils.attr(node, attr, val.replace(/(javascript|eval)/ig, ''));
+        }
+        Utils.each(ns, (idx, n) => {
+            if (n.nodeType !== 1) return;
+            if (rejectNodes.indexOf(n.nodeName) > -1) {
+                // console.log(n.nodeName)
+                if (n.nodeName === 'INPUT' && Utils.attr(n, 'type') === 'checkbox') Utils.attr(n, 'disabled', 'disabled');
+                else Utils.remove(n);
+            }
+            if (n.nodeName === 'A') __replaceVal(n, 'href')
+            Utils.clearAttr(n)
+        })
 
-        let expandEvt = (el) => {
-            if (el.offsetHeight > 180) {
-                el.classList.add('expand');
-                Event.on('click', el, (e) => {
-                    el.setAttribute('class', 'vcontent');
+        return vNode.innerHTML
+    }
+
+    /**
+     * 评论框内容变化事件
+     * @param {HTMLElement} el 
+     */
+    let syncContentEvt = (_el) => {
+        let _v = 'comment';
+        let _val = (_el.value || '');
+        _val = Emoji.parse(_val);
+        _el.value = _val;
+        let ret = xssFilter(marked(_val));
+        defaultComment[_v] = ret;
+        _vpreview.innerHTML = ret;
+        if (_val) autosize(_el);
+        else autosize.destroy(_el)
+    }
+
+    // 显示/隐藏 Emojis
+    Utils.on('click', _emojiCtrl, (e) => {
+        let _vi = Utils.attr(_emojiCtrl, 'v');
+        if (_vi) {
+            root.emoji.hide()
+        } else {
+            root.emoji.show();
+        }
+    });
+
+    Utils.on('click', _vpreviewCtrl, function (e) {
+        let _vi = Utils.attr(_vpreviewCtrl, 'v');
+        if (_vi) {
+            root.preview.hide();
+        } else {
+            root.preview.show();
+        }
+    });
+
+    let meta = option.meta;
+    let inputs = {};
+
+    // 同步操作
+    let mapping = {
+        veditor: "comment"
+    }
+    for (let i = 0, len = meta.length; i < len; i++) {
+        mapping[`v${meta[i]}`] = meta[i];
+    }
+    for (let i in mapping) {
+        if (mapping.hasOwnProperty(i)) {
+            let _v = mapping[i];
+            let _el = Utils.find(root.el, `.${i}`);
+            inputs[_v] = _el;
+            _el && Utils.on('input change blur', _el, (e) => {
+                if (_v === 'comment') {
+                    syncContentEvt(_el)
+                } else {
+                    defaultComment[_v] = Utils.escape(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
+                }
+            });
+        }
+    }
+
+    let _insertAtCaret = (field, val) => {
+        if (document.selection) {
+            //For browsers like Internet Explorer
+            field.focus();
+            let sel = document.selection.createRange();
+            sel.text = val;
+            field.focus();
+        } else if (field.selectionStart || field.selectionStart == '0') {
+            //For browsers like Firefox and Webkit based
+            let startPos = field.selectionStart;
+            let endPos = field.selectionEnd;
+            let scrollTop = field.scrollTop;
+            field.value = field.value.substring(0, startPos) + val + field.value.substring(endPos, field.value.length);
+            field.focus();
+            field.selectionStart = startPos + val.length;
+            field.selectionEnd = startPos + val.length;
+            field.scrollTop = scrollTop;
+        } else {
+            field.focus();
+            field.value += val;
+        }
+    }
+    let createVquote = id => {
+        let vcontent = Utils.find(root.el, ".vh[rootid='" + id + "']");
+        let vquote = Utils.find(vcontent, '.vquote');
+        if (!vquote) {
+            vquote = Utils.create('div', 'class', 'vquote');
+            vcontent.appendChild(vquote);
+        }
+        return vquote
+    }
+
+    let query = (no = 1) => {
+        let size = option.pageSize;
+        let count = Number(Utils.find(root.el, '.vnum').innerText);
+        root.loading.show();
+        let cq = root.Q(_path);
+        cq.limit(size);
+        cq.skip((no - 1) * size);
+        cq.find().then(rets => {
+            let len = rets.length;
+            let rids = []
+            for (let i = 0; i < len; i++) {
+                let ret = rets[i];
+                rids.push(ret.id)
+                insertDom(ret, Utils.find(root.el, '.vlist'), !0)
+            }
+            // load children comment
+            root.Q(_path, rids).then(ret => {
+                let childs = ret && ret.results || []
+                for (let k = 0; k < childs.length; k++) {
+                    let child = childs[k];
+                    insertDom(child, createVquote(child.get('rid')))
+                }
+            })
+            let _vpage = Utils.find(root.el, '.vpage');
+            _vpage.innerHTML = size * no < count ? `<button type="button" class="vmore vbtn">${root.locale['ctrl']['more']}</button>` : '';
+            let _vmore = Utils.find(_vpage, '.vmore');
+            if (_vmore) {
+                Utils.on('click', _vmore, (e) => {
+                    _vpage.innerHTML = '';
+                    query(++no);
                 })
             }
-        }
+            root.loading.hide();
+        }).catch(ex => {
+            root.loading.hide().ErrorHandler(ex)
+        })
+    }
 
-        let commonQuery = (cb) => {
-            let query = new _root.v.Query('Comment');
-            query.equalTo('url', defaultComment['url']);
-            query.descending('createdAt');
-            return query;
+    root.Q(_path).count().then(num => {
+        if (num > 0) {
+            Utils.attr(Utils.find(root.el, '.vinfo'), 'style', 'display:block;');
+            Utils.find(root.el, '.vcount').innerHTML = `<span class="vnum">${num}</span> ${root.locale['tips']['comments']}`;
+            query();
+        } else {
+            root.loading.hide();
         }
-        // let initPages = (cb) => {
-        //     commonQuery().count().then(count => {
-        //         if (count > 0) {
-        //             let _vpage = _root.el.querySelector('.vpage');
-        //             _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${count}</span>)`;
-        //         }
-        //     }).catch(ex => {
-        //         console.log(ex);
-        //     })
-        // }
-        let query = (pageNo = 1) => {
-            _root.loading.show();
-            let cq = commonQuery();
-            cq.limit('1000');
-            cq.find().then(rets => {
-                let len = rets.length;
-                if (len) {
-                    _root.el.querySelector('.vlist').innerHTML = '';
-                    for (let i = 0; i < len; i++) {
-                        insertDom(rets[i], !0)
-                    }
-                    _root.el.querySelector('.count').innerHTML = `评论(<span class="num">${len}</span>)`;
-                }
-                _root.loading.hide();
-            }).catch(ex => {
-                //err(ex)
-                _root.loading.hide();
-            })
+    }).catch(ex => {
+        root.ErrorHandler(ex)
+    });
+
+    let insertDom = (rt, node, mt) => {
+
+        let _vcard = Utils.create('div', {
+            'class': 'vcard',
+            'id': rt.id
+        });
+        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="${_avatarSetting['cdn']+md5(rt.get('mail'))+_avatarSetting['params']}">`;
+        let ua = rt.get('ua') || '';
+        let uaMeta = '';
+        if (ua) {
+            ua = detect(ua);
+            let browser = `<span class="vsys">${ua.browser} ${ua.version}</span>`;
+            let os = `<span class="vsys">${ua.os} ${ua.osVersion}</span>`;
+            uaMeta = `${browser} ${os}`;
         }
-        query();
-
-        let insertDom = (ret, mt) => {
-
-            let _vcard = document.createElement('li');
-            _vcard.setAttribute('class', 'vcard');
-            _vcard.setAttribute('id', ret.id);
-            let _img = gravatar['hide'] ? '' : `<img class="vimg" src='${gravatar.cdn + md5(ret.get('mail') || ret.get('nick')) + gravatar.params}'>`;
-            _vcard.innerHTML = `${_img}<section><div class="vhead"><a rel="nofollow" href="${getLink({ link: ret.get('link'), mail: ret.get('mail') })}" target="_blank" >${ret.get("nick")}</a></div><div class="vcontent">${ret.get("comment")}</div><div class="vfooter"><span class="vtime">${timeAgo(ret.get("createdAt"))}</span><span rid='${ret.id}' at='@${ret.get('nick')}' mail='${ret.get('mail')}' class="vat">回复</span><div></section>`;
-            let _vlist = _root.el.querySelector('.vlist');
-            let _vlis = _vlist.querySelectorAll('li');
-            let _vat = _vcard.querySelector('.vat');
-            let _as = _vcard.querySelectorAll('a');
-            for (let i = 0, len = _as.length; i < len; i++) {
-                let item = _as[i];
-                if (item && item.getAttribute('class') != 'at') {
-                    item.setAttribute('target', '_blank');
-                    item.setAttribute('rel', 'nofollow');
-                }
-            }
-            if (mt) _vlist.appendChild(_vcard);
-            else _vlist.insertBefore(_vcard, _vlis[0]);
-            let _vcontent = _vcard.querySelector('.vcontent');
-            expandEvt(_vcontent);
-            bindAtEvt(_vat);
-
-        }
-
-        let mapping = {
-            veditor: "comment"
-        }
-        for (let i = 0, length = guest_info.length; i < length; i++) {
-            mapping[`v${guest_info[i]}`] = guest_info[i];
-        }
-
-        let inputs = {};
-        for (let i in mapping) {
-            if (mapping.hasOwnProperty(i)) {
-                let _v = mapping[i];
-                let _el = _root.el.querySelector(`.${i}`);
-                inputs[_v] = _el;
-                Event.on('input', _el, (e) => {
-                    defaultComment[_v] = _v === 'comment' ? marked(_el.value, { sanitize: !0 }) : HtmlUtil.encode(_el.value);
+        let _nick = '';
+        let _t = rt.get('link') || '';
+        _nick = _t ? `<a class="vnick" rel="nofollow" href="${_t}" target="_blank" >${rt.get("nick")}</a>` : `<span class="vnick">${rt.get('nick')}</span>`;
+        _vcard.innerHTML = `${_img}
+            <div class="vh" rootid=${rt.get('rid') || rt.id}>
+                <div class="vhead">${_nick} ${uaMeta}</div>
+                <div class="vmeta">
+                    <span class="vtime">${timeAgo(rt.get('insertedAt') || rt.createdAt,root.locale)}</span>
+                    <span class="vat">${root.locale['ctrl']['reply']}</span>
+                </div>
+                <div class="vcontent">
+                    ${xssFilter(rt.get("comment"))}
+                </div>
+            </div>`;
+        let _vat = Utils.find(_vcard, '.vat');
+        let _as = Utils.findAll(_vcard, 'a');
+        for (let i = 0, len = _as.length; i < len; i++) {
+            let _a = _as[i];
+            if (_a && (Utils.attr(_a, 'class') || '').indexOf('at') == -1) {
+                Utils.attr(_a, {
+                    'target': '_blank',
+                    'rel': 'nofollow'
                 });
             }
         }
+        let _vlis = Utils.findAll(node, '.vcard');
+        if (mt) node.appendChild(_vcard);
+        else node.insertBefore(_vcard, _vlis[0]);
+        let _vcontent = Utils.find(_vcard, '.vcontent');
+        if (_vcontent) expandEvt(_vcontent);
+        if (_vat) bindAtEvt(_vat, rt);
+        _activeOtherFn()
+    }
 
-        // cache
-        let getCache = () => {
-            let s = store && store.ValineCache;
-            if (s) {
-                s = JSON.parse(s);
-                let m = guest_info;
-                for (let i in m) {
-                    let k = m[i];
-                    _root.el.querySelector(`.v${k}`).value = s[k];
-                    defaultComment[k] = s[k];
-                }
+
+    let _activeOtherFn = () => {
+        setTimeout(function () {
+            try {
+                let MathJax = MathJax || '';
+                MathJax && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                $('pre code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                })
+                $('code.hljs').each(function (i, block) {
+                    hljs.lineNumbersBlock(block);
+                });
+            } catch (error) {
+
+            }
+        }, 20)
+    }
+
+    let _activeHLJS = () => {}
+
+    // expand event
+    let expandEvt = (el) => {
+        setTimeout(function () {
+            if (el.offsetHeight > 180) {
+                el.classList.add('expand');
+                Utils.on('click', el, (e) => {
+                    Utils.attr(el, 'class', 'vcontent');
+                })
+            }
+        })
+    }
+
+    let atData = {}
+    // at event
+    let bindAtEvt = (el, rt) => {
+        Utils.on('click', el, (e) => {
+            let at = `@${Utils.escape(rt.get('nick'))}`;
+            atData = {
+                'at': Utils.escape(at) + ' ',
+                'rid': rt.get('rid') || rt.id,
+                'pid': rt.id,
+                'rmail': rt.get('mail'),
+            }
+            // console.log(atData)
+            Utils.attr(inputs['comment'], 'placeholder', at);
+            inputs['comment'].focus();
+        })
+    }
+
+    // cache
+    let getCache = () => {
+        let s = _store && _store.ValineCache;
+        if (s) {
+            s = JSON.parse(s);
+            let m = meta;
+            for (let i in m) {
+                let k = m[i];
+                Utils.find(root.el, `.v${k}`).value = Utils.unescape(s[k]);
+                defaultComment[k] = s[k];
             }
         }
-        getCache();
+    }
+    getCache();
+    // reset form
+    let reset = () => {
+        defaultComment['comment'] = "";
+        inputs['comment'].value = "";
+        syncContentEvt(inputs['comment'])
+        Utils.attr(inputs['comment'], 'placeholder', root.placeholder);
+        atData = {};
+        root.preview.empty().hide();
+    }
 
-
-
-        let atData = {
-            rmail: '',
-            at: ''
+    // submitsubmit
+    let submitBtn = Utils.find(root.el, '.vsubmit');
+    let submitEvt = (e) => {
+        if (Utils.attr(submitBtn, 'disabled')) {
+            root.alert.show({
+                type: 0,
+                text: `${root.locale['tips']['busy']}ヾ(๑╹◡╹)ﾉ"`,
+                ctxt: root.locale['ctrl']['ok']
+            })
+            return;
         }
-
-        // reset form
-        let reset = () => {
-            for (let i in mapping) {
-                if (mapping.hasOwnProperty(i)) {
-                    let _v = mapping[i];
-                    let _el = _root.el.querySelector(`.${i}`);
-                    _el.value = "";
-                    defaultComment[_v] = "";
-                }
-            }
-            atData['at'] = '';
-            atData['rmail'] = '';
-            defaultComment['rid'] = '';
-            defaultComment['nick'] = 'Guest';
-            getCache();
+        if (defaultComment['comment'] == '') {
+            inputs['comment'].focus();
+            return;
         }
+        defaultComment['nick'] = defaultComment['nick'] || 'Anonymous';
 
-        // submit
-        let submitBtn = _root.el.querySelector('.vsubmit');
-        let submitEvt = (e) => {
-            // console.log(defaultComment)
-            // return;
-            if (submitBtn.getAttribute('disabled')) {
-                _root.alert.show({
-                    type: 0,
-                    text: '再等等，评论正在提交中ヾ(๑╹◡╹)ﾉ"',
-                    ctxt: '好的'
-                })
-                return;
+        // return;
+        if (root.notify || root.verify) {
+            verifyEvt(commitEvt)
+        } else {
+            commitEvt();
+        }
+    }
+
+    // setting access
+    let getAcl = () => {
+        let acl = new AV.ACL();
+        acl.setPublicReadAccess(!0);
+        acl.setPublicWriteAccess(false);
+        return acl;
+    }
+
+    let commitEvt = () => {
+        Utils.attr(submitBtn, 'disabled', !0);
+        root.loading.show(!0);
+        // 声明类型
+        let Ct = AV.Object.extend('Comment');
+        // 新建对象
+        let comment = new Ct();
+        defaultComment['url'] = decodeURI(_path);
+        defaultComment['insertedAt'] = new Date();
+        if (atData['rid']) {
+            let pid = atData['pid'] || atData['rid'];
+            comment.set('rid', atData['rid']);
+            comment.set('pid', pid);
+            defaultComment['comment'] = defaultComment['comment'].replace('<p>', `<p><a class="at" href="#${pid}">${atData['at']}</a> , `);
+        }
+        for (let i in defaultComment) {
+            if (defaultComment.hasOwnProperty(i)) {
+                let _v = defaultComment[i];
+                comment.set(i, _v);
             }
-            if (defaultComment.comment == '') {
-                inputs['comment'].focus();
-                return;
-            }
-            if (defaultComment.nick == '') {
-                defaultComment['nick'] = '小调皮';
-            }
-            let idx = defaultComment.comment.indexOf(atData.at);
-            if (idx > -1 && atData.at != '') {
-                let at = `<a class="at" href='#${defaultComment.rid}'>${atData.at}</a>`;
-                defaultComment.comment = defaultComment.comment.replace(atData.at, at);
-            }
-            // veirfy
-            let mailRet = check.mail(defaultComment.mail);
-            let linkRet = check.link(defaultComment.link);
-            defaultComment['mail'] = mailRet.k ? mailRet.v : '';
-            defaultComment['link'] = linkRet.k ? linkRet.v : '';
-            if (!mailRet.k && !linkRet.k && guest_info.indexOf('mail') > -1 && guest_info.indexOf('link') > -1) {
-                _root.alert.show({
-                    type: 1,
-                    text: '您的网址和邮箱格式不正确, 是否继续提交?',
-                    cb() {
-                        if (_root.notify || _root.verify) {
-                            verifyEvt(commitEvt)
-                        } else {
-                            commitEvt();
-                        }
-                    }
-                })
-            } else if (!mailRet.k && guest_info.indexOf('mail') > -1) {
-                _root.alert.show({
-                    type: 1,
-                    text: '您的邮箱格式不正确, 是否继续提交?',
-                    cb() {
-                        if (_root.notify || _root.verify) {
-                            verifyEvt(commitEvt)
-                        } else {
-                            commitEvt();
-                        }
-                    }
-                })
-            } else if (!linkRet.k && guest_info.indexOf('link') > -1) {
-                _root.alert.show({
-                    type: 1,
-                    text: '您的网址格式不正确, 是否继续提交?',
-                    cb() {
-                        if (_root.notify || _root.verify) {
-                            verifyEvt(commitEvt)
-                        } else {
-                            commitEvt();
-                        }
-                    }
-                })
-            } else {
-                if (_root.notify || _root.verify) {
-                    verifyEvt(commitEvt)
+        }
+        comment.setACL(getAcl());
+        comment.save().then(ret => {
+            defaultComment['nick'] != 'Anonymous' && _store && _store.setItem('ValineCache', JSON.stringify({
+                nick: defaultComment['nick'],
+                link: defaultComment['link'],
+                mail: defaultComment['mail']
+            }));
+            let _count = Utils.find(root.el, '.vnum');
+            let num = 1;
+            try {
+                if (atData['rid']) {
+                    let vquote = Utils.find(root.el, '.vquote[rid="' + atData['rid'] + '"]') || createVquote(atData['rid']);
+                    insertDom(ret, vquote, !0)
                 } else {
-                    commitEvt();
-                }
-            }
-        }
-
-        // setting access
-        let getAcl = () => {
-            let acl = new _root.v.ACL();
-            acl.setPublicReadAccess(!0);
-            acl.setPublicWriteAccess(!1);
-            return acl;
-        }
-
-        let commitEvt = () => {
-            submitBtn.setAttribute('disabled', !0);
-            _root.loading.show();
-            // 声明类型
-            let Ct = _root.v.Object.extend('Comment');
-            // 新建对象
-            let comment = new Ct();
-            for (let i in defaultComment) {
-                if (defaultComment.hasOwnProperty(i)) {
-                    let _v = defaultComment[i];
-                    comment.set(i, _v);
-                }
-            }
-            comment.setACL(getAcl());
-            comment.save().then((ret) => {
-                defaultComment['nick'] != 'Guest' && store && store.setItem('ValineCache', JSON.stringify({
-                    nick: defaultComment['nick'],
-                    link: defaultComment['link'],
-                    mail: defaultComment['mail']
-                }));
-                let _count = _root.el.querySelector('.num');
-                let num = 1;
-                try {
-
                     if (_count) {
                         num = Number(_count.innerText) + 1;
                         _count.innerText = num;
                     } else {
-                        _root.el.querySelector('.count').innerHTML = '评论(<span class="num">1</span>)'
+                        Utils.find(root.el, '.vcount').innerHTML = '<span class="num">1</span> ' + root.locale['tips']['comments']
                     }
-                    insertDom(ret);
-
-                    defaultComment['mail'] && signUp({
-                        username: defaultComment['nick'],
-                        mail: defaultComment['mail']
-                    });
-
-                    atData['at'] && atData['rmail'] && _root.notify && mailEvt({
-                        username: atData['at'].replace('@', ''),
-                        mail: atData['rmail']
-                    });
-                    submitBtn.removeAttribute('disabled');
-                    _root.loading.hide();
-                    reset();
-                } catch (error) {
-                    console.log(error)
+                    insertDom(ret, Utils.find(root.el, '.vlist'));
                 }
-            }).catch(ex => {
-                _root.loading.hide();
-            })
-        }
 
-        let verifyEvt = (fn) => {
-            let x = Math.floor((Math.random() * 10) + 1);
-            let y = Math.floor((Math.random() * 10) + 1);
-            let z = Math.floor((Math.random() * 10) + 1);
-            let opt = ['+', '-', 'x'];
-            let o1 = opt[Math.floor(Math.random() * 3)];
-            let o2 = opt[Math.floor(Math.random() * 3)];
-            let expre = `${x}${o1}${y}${o2}${z}`;
-            let subject = `${expre} = <input class='vcode vinput' >`;
-            _root.alert.show({
-                type: 1,
-                text: subject,
-                ctxt: '取消',
-                otxt: '确认',
-                cb() {
-                    let code = +_root.el.querySelector('.vcode').value;
-                    let ret = (new Function(`return ${expre.replace(/x/g, '*')}`))();
-                    if (ret === code) {
-                        fn && fn();
-                    } else {
-                        _root.alert.show({
-                            type: 1,
-                            text: '(T＿T)这么简单都算错，也是没谁了',
-                            ctxt: '伤心了，不回了',
-                            otxt: '再试试?',
-                            cb() {
-                                verifyEvt(fn);
-                                return;
-                            }
-                        })
-                    }
-                }
-            })
-        }
+                defaultComment['mail'] && signUp({
+                    username: defaultComment['nick'],
+                    mail: defaultComment['mail']
+                });
 
-        let signUp = (o) => {
-            let u = new _root.v.User();
-            u.setUsername(o.username);
-            u.setPassword(o.mail);
-            u.setEmail(o.mail);
-            u.setACL(getAcl());
-            return u.signUp();
-        }
-
-        let mailEvt = (o) => {
-            _root.v.User.requestPasswordReset(o.mail).then(ret => { }).catch(e => {
-                if (e.code == 1) {
-                    _root.alert.show({
-                        type: 0,
-                        text: `ヾ(ｏ･ω･)ﾉ At太频繁啦，提醒功能暂时宕机。<br>${e.error}`,
-                        ctxt: '好的'
-                    })
-                } else {
-                    signUp(o).then(ret => {
-                        mailEvt(o);
-                    }).catch(x => {
-                        //err(x)
-                    })
-                }
-            })
-        }
-
-        // at event
-        let bindAtEvt = (el) => {
-            Event.on('click', el, (e) => {
-                let at = el.getAttribute('at');
-                let rid = el.getAttribute('rid');
-                let rmail = el.getAttribute('mail');
-                atData['at'] = at;
-                atData['rmail'] = rmail;
-                defaultComment['rid'] = rid;
-                inputs['comment'].value = `${at} ，`;
-                inputs['comment'].focus();
-            })
-        }
-
-        Event.off('click', submitBtn, submitEvt);
-        Event.on('click', submitBtn, submitEvt);
-
-
-    }
-
-}
-// const loadAV = (cb) => {
-//     let avjs = document.createElement('script');　　　
-//     let _doc = document.querySelector('head');　
-//     avjs.type = 'text/javascript';　　　　
-//     avjs.async = 'async';　　　　
-//     avjs.src = '//cdn1.lncld.net/static/js/3.0.4/av-min.js';　　　　
-//     _doc.appendChild(avjs);　　　　
-//     if (avjs.readyState) { //IE　　　　　　
-//         avjs.onreadystatechange = function() {　　　　　　　　
-//             if (avjs.readyState == 'complete' || avjs.readyState == 'loaded') {　　　　　　　　　　
-//                 avjs.onreadystatechange = null;　　　　　　　　　　
-//                 cb && cb();　　　　　　　　
-//             }　　　　　　
-//         }　　　　
-//     } else { //非IE　　　　　　
-//         avjs.onload = function() { cb && cb(); }　　　　
-//     }
-// }
-
-const Event = {
-    on(type, el, handler, capture) {
-        if (el.addEventListener) el.addEventListener(type, handler, capture || false);
-        else if (el.attachEvent) el.attachEvent(`on${type}`, handler);
-        else el[`on${type}`] = handler;
-    },
-    off(type, el, handler, capture) {
-        if (el.removeEventListener) el.removeEventListener(type, handler, capture || false);
-        else if (el.detachEvent) el.detachEvent(`on${type}`, handler);
-        else el[`on${type}`] = null;
-    },
-    // getEvent(e) {
-    //     return e || window.event;
-    // },
-    // getTarget(e) {
-    //     return e.target || e.srcElement;
-    // },
-    // preventDefault(e) {
-    //     e = e || window.event;
-    //     e.preventDefault && e.preventDefault() || (e.returnValue = false);
-    // },
-    // stopPropagation(e) {
-    //     e = e || window.event;
-    //     e.stopPropagation && e.stopPropagation() || (e.cancelBubble = !0);
-    // }
-}
-
-
-
-
-const getLink = (target) => {
-    return target.link || (target.mail && `mailto:${target.mail}`) || 'javascript:void(0);';
-}
-
-const check = {
-    mail(m) {
-        return {
-            k: /[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(m),
-            v: m
-        };
-    },
-    link(l) {
-        l = l.length > 0 && (/^(http|https)/.test(l) ? l : `http://${l}`);
-        return {
-            k: /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(l),
-            v: l
-        };
-    }
-}
-
-const HtmlUtil = {
-
-    // /**
-    //  *
-    //  * 将str中的链接转换成a标签形式
-    //  * @param {String} str
-    //  * @returns
-    //  */
-    // transUrl(str) {
-    //     let reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-    //     return str.replace(reg, '<a target="_blank" href="$1$2">$1$2</a>');
-    // },
-    /**
-     * HTML转码
-     * @param {String} str
-     * @return {String} result
-     */
-    encode(str) {
-        return !!str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/ /g, "&nbsp;").replace(/\'/g, "&#39;").replace(/\"/g, "&quot;") : '';
-    },
-    /**
-     * HTML解码
-     * @param {String} str
-     * @return {String} result
-     */
-    decode(str) {
-        return !!str ? str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#39;/g, "\'").replace(/&quot;/g, "\"") : '';
-    }
-};
-
-const dateFormat = (date) => {
-    var vDay = padWithZeros(date.getDate(), 2);
-    var vMonth = padWithZeros(date.getMonth() + 1, 2);
-    var vYear = padWithZeros(date.getFullYear(), 2);
-    // var vHour = padWithZeros(date.getHours(), 2);
-    // var vMinute = padWithZeros(date.getMinutes(), 2);
-    // var vSecond = padWithZeros(date.getSeconds(), 2);
-    return `${vYear}-${vMonth}-${vDay}`;
-}
-
-const timeAgo = (date) => {
-    try {
-        var oldTime = date.getTime();
-        var currTime = new Date().getTime();
-        var diffValue = currTime - oldTime;
-
-        var days = Math.floor(diffValue / (24 * 3600 * 1000));
-        if (days === 0) {
-            //计算相差小时数
-            var leave1 = diffValue % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
-            var hours = Math.floor(leave1 / (3600 * 1000));
-            if (hours === 0) {
-                //计算相差分钟数
-                var leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
-                var minutes = Math.floor(leave2 / (60 * 1000));
-                if (minutes === 0) {
-                    //计算相差秒数
-                    var leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
-                    var seconds = Math.round(leave3 / 1000);
-                    return seconds + ' 秒前';
-                }
-                return minutes + ' 分钟前';
+                atData['at'] && atData['rmail'] && root.notify && mailEvt({
+                    username: atData['at'].replace('@', ''),
+                    mail: atData['rmail']
+                });
+                Utils.removeAttr(submitBtn, 'disabled');
+                root.loading.hide();
+                reset();
+            } catch (ex) {
+                root.ErrorHandler(ex);
             }
-            return hours + ' 小时前';
-        }
-        if (days < 0) return '刚刚';
-
-        if (days < 8) {
-            return days + ' 天前';
-        } else {
-            return dateFormat(date)
-        }
-    } catch (error) {
-        console.log(error)
+        }).catch(ex => {
+            root.ErrorHandler(ex);
+        })
     }
 
+    let verifyEvt = (fn) => {
+        let x = Math.floor((Math.random() * 10) + 1);
+        let y = Math.floor((Math.random() * 10) + 1);
+        let z = Math.floor((Math.random() * 10) + 1);
+        let opt = ['+', '-', 'x'];
+        let o1 = opt[Math.floor(Math.random() * 3)];
+        let o2 = opt[Math.floor(Math.random() * 3)];
+        let expre = `${x}${o1}${y}${o2}${z}`;
+        let subject = `${expre} = <input class='vcode vinput' >`;
+        root.alert.show({
+            type: 1,
+            text: subject,
+            ctxt: root.locale['ctrl']['cancel'],
+            otxt: root.locale['ctrl']['ok'],
+            cb() {
+                let code = +Utils.find(root.el, '.vcode').value;
+                let ret = (new Function(`return ${expre.replace(/x/g, '*')}`))();
+                if (ret === code) {
+                    fn && fn();
+                } else {
+                    root.alert.show({
+                        type: 1,
+                        text: `(T＿T)${root.locale['tips']['again']}`,
+                        ctxt: root.locale['ctrl']['cancel'],
+                        otxt: root.locale['ctrl']['try'],
+                        cb() {
+                            verifyEvt(fn);
+                            return;
+                        }
+                    })
+                }
+            }
+        })
+    }
 
+    let signUp = (o) => {
+        let u = new AV.User();
+        u.setUsername(o.username);
+        u.setPassword(o.mail);
+        u.setEmail(o.mail);
+        u.setACL(getAcl());
+        return u.signUp();
+    }
+
+    let mailEvt = (o) => {
+        AV.User.requestPasswordReset(o.mail).then(ret => {}).catch(e => {
+            if (e.code == 1) {
+                root.alert.show({
+                    type: 0,
+                    text: `ヾ(ｏ･ω･)ﾉ At太频繁啦，提醒功能暂时宕机。<br>${e.error}`,
+                    ctxt: root.locale['ctrl']['ok']
+                })
+            } else {
+                signUp(o).then(ret => {
+                    mailEvt(o);
+                }).catch(x => {
+                    //err(x)
+                })
+            }
+        })
+    }
+
+    Utils.on('click', submitBtn, submitEvt);
+    Utils.on('keydown', document, function (e) {
+        e = event || e;
+        let keyCode = e.keyCode || e.which || e.charCode;
+        let ctrlKey = e.ctrlKey || e.metaKey;
+        // Shortcut key
+        ctrlKey && keyCode === 13 && submitEvt()
+        // tab key
+        if (keyCode === 9) {
+            let focus = document.activeElement.id || ''
+            if (focus == 'veditor') {
+                e.preventDefault();
+                let _veditor = Utils.find(root.el, '.veditor');
+                _insertAtCaret(_veditor, '    ');
+            }
+        }
+    })
 }
 
-const padWithZeros = (vNumber, width) => {
-    var numAsString = vNumber.toString();
-    while (numAsString.length < width) {
-        numAsString = '0' + numAsString;
-    }
-    return numAsString;
+function Valine(options) {
+    return new ValineFactory(options)
 }
 
 module.exports = Valine;
+module.exports.default = Valine;
