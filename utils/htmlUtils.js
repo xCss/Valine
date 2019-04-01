@@ -20,9 +20,9 @@ const reHasEscapedHtml = RegExp(reEscapedHtml.source)
 
 const utils = {
     on(type, el, handler, capture) {
-        type=type.split(' ')
-        for(let i=0,len=type.length;i<len;i++){
-            utils.off(type[i],el,handler,capture)
+        type = type.split(' ')
+        for (let i = 0, len = type.length; i < len; i++) {
+            utils.off(type[i], el, handler, capture)
             if (el.addEventListener) el.addEventListener(type[i], handler, capture || false);
             else if (el.attachEvent) el.attachEvent(`on${type[i]}`, handler);
             else el[`on${type[i]}`] = handler;
@@ -51,9 +51,9 @@ const utils = {
      * @param {Object} attrName 
      * @param {Object} attrVal 
      */
-    create(name,attrName,attrVal){
+    create(name, attrName, attrVal) {
         let el = document.createElement(name)
-        utils.attr(el,attrName,attrVal)
+        utils.attr(el, attrName, attrVal)
         return el
     },
     /**
@@ -85,11 +85,11 @@ const utils = {
         if (value !== undefined) {
             if (value === null) utils.removeAttr(el, name)
             else el.setAttribute(name, value)
-        }else if(({}).toString.call(name) === '[object Object]' ){
-            utils.each(name,(k,v)=>{
-                el.setAttribute(k,v)
+        } else if (({}).toString.call(name) === '[object Object]') {
+            utils.each(name, (k, v) => {
+                el.setAttribute(k, v)
             })
-        }else return el.getAttribute(name)
+        } else return el.getAttribute(name)
     },
     /**
      * get prop or set prop
@@ -98,13 +98,13 @@ const utils = {
      * @param {String} value 
      */
     prop(el, name, value) {
-        if(value !== undefined){
+        if (value !== undefined) {
             return el[name] = value
-        }else if(({}).toString.call(name) === '[object Object]' ){
-            utils.each(name,(k,v)=>{
+        } else if (({}).toString.call(name) === '[object Object]') {
+            utils.each(name, (k, v) => {
                 el[k] = v
             })
-        }else return el[name]
+        } else return el[name]
     },
     /**
      * Remove el attribute
@@ -129,23 +129,37 @@ const utils = {
      * Clear element attributes
      * @param {HTMLElement} el 
      */
-    clearAttr(el){
+    clearAttr(el) {
         let attrs = el.attributes
-        let ignoreAttrs = ['align','alt','disabled','href','id','target','title','type','src']
-        utils.each(attrs,(idx,attr)=>{
+        let ignoreAttrs = ['align', 'alt', 'disabled', 'href', 'id', 'target', 'title', 'type', 'src', 'class', 'style']
+        utils.each(attrs, (idx, attr) => {
             let name = attr.name
-            if('style' === name){
-                let style = attr.value
-                utils.each(style.split(';'),(idx,item)=>{
-                    if(item.indexOf('color') > -1) {
-                        utils.attr(el,'style',item);
+            switch (attr.name.toLowerCase()) {
+                case 'style':
+                    let style = attr.value
+                    utils.each(style.split(';'), (idx, item) => {
+                        if (item.indexOf('color') > -1) {
+                            utils.attr(el, 'style', item);
+                            return false
+                        } else utils.removeAttr(el, 'style');
+                    })
+                    break;
+                case 'class':
+                    if (el.nodeName == 'CODE') return false
+                    let clazz = attr.value
+                    if (clazz.indexOf('at') > -1) {
+                        utils.attr(el, 'class', 'at');
                         return false
-                    }else utils.removeAttr(el,'style');
-                })
+                    }
+                    break;
+                default:
+                    // utils.removeAttr(el,'class');
+                    break;
+
             }
 
-            if(ignoreAttrs.indexOf(name)>-1) return
-            else utils.removeAttr(el,name)
+            if (ignoreAttrs.indexOf(name) > -1) return
+            else utils.removeAttr(el, name)
         })
         return el
     },
@@ -155,9 +169,8 @@ const utils = {
      */
     remove(child) {
         try {
-            if(child.parentNode) child.parentNode.removeChild(child)
-        } catch (error) {
-        }
+            if (child.parentNode) child.parentNode.removeChild(child)
+        } catch (error) {}
     },
 
     /**
@@ -171,17 +184,17 @@ const utils = {
         let value,
             i = 0,
             length = collection.length,
-            likeArray = ["[object Array]","[object NodeList]"],
+            likeArray = ["[object Array]", "[object NodeList]"],
             type = ({}).toString.call(collection)
         if (likeArray.indexOf(type) > -1) {
             for (; i < length; i++) {
-                value = callback && callback.call(collection[i],i, collection[i])
+                value = callback && callback.call(collection[i], i, collection[i])
                 if (value === false) break
             }
         } else {
             for (i in collection) {
                 if (collection.hasOwnProperty(i)) {
-                    value = callback && callback.call(collection[i],i, collection[i])
+                    value = callback && callback.call(collection[i], i, collection[i])
                     if (value === false) break
                 }
             }

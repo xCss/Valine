@@ -132,6 +132,7 @@ ValineFactory.prototype.init = function (option) {
             avatar_cdn,
             notify,
             verify,
+            visitor,
             pageSize,
             recordIP
         } = option;
@@ -143,16 +144,16 @@ ValineFactory.prototype.init = function (option) {
         root.notify = notify || false;
         root.verify = verify || false;
 
-        if(recordIP){
-            let ipScript = Utils.create('script','src','//api.ip.sb/jsonip?callback=getIP');
-            let s = document.getElementsByTagName("script")[0]; 
+        if (recordIP) {
+            let ipScript = Utils.create('script', 'src', '//api.ip.sb/jsonip?callback=getIP');
+            let s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(ipScript, s);
             // 获取IP
-            window.getIP = function(json){
+            window.getIP = function (json) {
                 defaultComment['ip'] = json.ip;
             }
         }
-        
+
         _avatarSetting['params'] = `?d=${(ds.indexOf(avatar) > -1 ? avatar : 'mp')}&v=${VERSION}${force}`;
         _avatarSetting['hide'] = avatar === 'hide' ? true : false;
         _avatarSetting['cdn'] = LINKREG.test(avatar_cdn) ? avatar_cdn : _avatarSetting['cdn']
@@ -182,6 +183,9 @@ ValineFactory.prototype.init = function (option) {
         }
         let id = option.app_id || option.appId;
         let key = option.app_key || option.appKey;
+        if (!id || !key) throw 99;
+        AV.applicationId && delete AV._config.applicationId || (AV.applicationId = null);
+        AV.applicationKey && delete AV._config.applicationKey || (AV.applicationKey = null);
         AV.init({
             appId: id,
             appKey: key
@@ -204,7 +208,7 @@ ValineFactory.prototype.init = function (option) {
         }
 
         // Counter
-        option.visitor && CounterFactory.add(AV.Object.extend('Counter'));
+        visitor && CounterFactory.add(AV.Object.extend('Counter'));
 
         let el = option.el || null;
         let _el = Utils.findAll(document, el);
@@ -504,12 +508,14 @@ ValineFactory.prototype.bind = function (option) {
     }
     root.preview = {
         show() {
-            root.emoji.hide();
-            Utils.attr(_vpreviewCtrl, 'v', 1);
-            Utils.removeAttr(_emojiCtrl, 'v');
-            _vpreview.innerHTML = defaultComment['comment'];
-            Utils.attr(_vpreview, 'style', 'display:block');
-            _activeMathJax()
+            if (defaultComment['comment']) {
+                root.emoji.hide();
+                Utils.attr(_vpreviewCtrl, 'v', 1);
+                Utils.removeAttr(_emojiCtrl, 'v');
+                _vpreview.innerHTML = defaultComment['comment'];
+                Utils.attr(_vpreview, 'style', 'display:block');
+                _activeOtherFn()
+            }
             return root.preview
         },
         hide() {
@@ -725,7 +731,7 @@ ValineFactory.prototype.bind = function (option) {
         let _as = Utils.findAll(_vcard, 'a');
         for (let i = 0, len = _as.length; i < len; i++) {
             let _a = _as[i];
-            if (_a && (Utils.attr(_a, 'data-at') || '').indexOf('at') == -1) {
+            if (_a && (Utils.attr(_a, 'class') || '').indexOf('at') == -1) {
                 Utils.attr(_a, {
                     'target': '_blank',
                     'rel': 'nofollow'
@@ -737,17 +743,29 @@ ValineFactory.prototype.bind = function (option) {
         else node.insertBefore(_vcard, _vlis[0]);
         let _vcontent = Utils.find(_vcard, '.vcontent');
         if (_vcontent) expandEvt(_vcontent);
-        if (_vat) bindAtEvt(_vat,rt);
-        _activeMathJax()
+        if (_vat) bindAtEvt(_vat, rt);
+        _activeOtherFn()
     }
 
 
-    let _activeMathJax = () => {
+    let _activeOtherFn = () => {
         setTimeout(function () {
-            let MathJax = MathJax || '';
-            MathJax && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            try {
+                let MathJax = MathJax || '';
+                MathJax && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                $('pre code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                })
+                $('code.hljs').each(function (i, block) {
+                    hljs.lineNumbersBlock(block);
+                });
+            } catch (error) {
+
+            }
         }, 20)
     }
+
+    let _activeHLJS = () => {}
 
     // expand event
     let expandEvt = (el) => {
@@ -763,7 +781,7 @@ ValineFactory.prototype.bind = function (option) {
 
     let atData = {}
     // at event
-    let bindAtEvt = (el,rt) => {
+    let bindAtEvt = (el, rt) => {
         Utils.on('click', el, (e) => {
             let at = `@${Utils.escape(rt.get('nick'))}`;
             atData = {
@@ -848,7 +866,7 @@ ValineFactory.prototype.bind = function (option) {
             let pid = atData['pid'] || atData['rid'];
             comment.set('rid', atData['rid']);
             comment.set('pid', pid);
-            defaultComment['comment'] = defaultComment['comment'].replace('<p>',`<p><a href="#${pid}">${atData['at']}</a> , `);
+            defaultComment['comment'] = defaultComment['comment'].replace('<p>', `<p><a class="at" href="#${pid}">${atData['at']}</a> , `);
         }
         for (let i in defaultComment) {
             if (defaultComment.hasOwnProperty(i)) {
