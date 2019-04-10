@@ -406,7 +406,8 @@ ValineFactory.prototype.Q = function (k) {
         let isEmpty = new AV.Query('Comment');
         isEmpty.equalTo('rid', '');
         let q = AV.Query.or(notExist, isEmpty);
-        q.equalTo('url', decodeURI(k));
+        if(k == '*') q.exists('url');
+        else q.equalTo('url', decodeURI(k));
         q.addDescending('createdAt');
         q.addDescending('insertedAt');
         return q;
