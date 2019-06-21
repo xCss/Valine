@@ -8,7 +8,7 @@ const Utils = require('./utils/htmlUtils');
 const Emoji = require('./plugins/emojis');
 const hanabi = require('hanabi');
 const LINKREG = /^https?\:\/\//;
-
+window.AV = undefined;
 const defaultComment = {
     comment: '',
     nick: 'Anonymous',
@@ -113,6 +113,16 @@ function ValineFactory(option) {
     return root;
 }
 
+
+/**
+ * 动态加载SDK
+ */
+(function(){
+    let avSDK = Utils.create('script', 'src', '//cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js');
+    let s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(avSDK, s);
+})();
+
 /**
  * Valine Init
  * @param {Object} option
@@ -123,6 +133,7 @@ ValineFactory.prototype.init = function (option) {
         return;
     }
     let root = this;
+    root['config'] = {};
     try {
         let {
             lang,
@@ -134,8 +145,11 @@ ValineFactory.prototype.init = function (option) {
             verify,
             visitor,
             pageSize,
-            recordIP
+            recordIP,
+            serverURLs = 'https://avoscloud.com',
+            clazzName = 'Comment'
         } = option;
+        root['config']['clazzName'] = clazzName;
         let ds = _avatarSetting['ds'];
         let force = avatarForce ? '&q=' + Math.random().toString(32).substring(2) : '';
 
@@ -174,13 +188,13 @@ ValineFactory.prototype.init = function (option) {
             smartLists: true,
             smartypants: true
         });
-
         if (!AV) {
             setTimeout(() => {
                 root.init(option)
             }, 20)
             return;
         }
+        console.log(1)
         let id = option.app_id || option.appId;
         let key = option.app_key || option.appKey;
         if (!id || !key) throw 99;
@@ -188,7 +202,8 @@ ValineFactory.prototype.init = function (option) {
         AV.applicationKey && delete AV._config.applicationKey || (AV.applicationKey = null);
         AV.init({
             appId: id,
-            appKey: key
+            appKey: key,
+            serverURLs: serverURLs,
         });
 
         // get comment count
@@ -399,11 +414,12 @@ let CounterFactory = {
  * @param {String} id
  */
 ValineFactory.prototype.Q = function (k) {
-    let len = arguments.length
+    let root = this;
+    let len = arguments.length;
     if (len == 1) {
-        let notExist = new AV.Query('Comment');
+        let notExist = new AV.Query(root['config']['clazzName']);
         notExist.doesNotExist('rid');
-        let isEmpty = new AV.Query('Comment');
+        let isEmpty = new AV.Query(root['config']['clazzName']);
         isEmpty.equalTo('rid', '');
         let q = AV.Query.or(notExist, isEmpty);
         q.equalTo('url', decodeURI(k));
@@ -412,7 +428,7 @@ ValineFactory.prototype.Q = function (k) {
         return q;
     } else {
         let ids = JSON.stringify(arguments[1]).replace(/(\[|\])/g, '');
-        let cql = `select * from Comment where rid in (${ids}) order by -createdAt,-createdAt`;
+        let cql = `select * from ${root['config']['clazzName']} where rid in (${ids}) order by -createdAt,-createdAt`;
         return AV.Query.doCloudQuery(cql)
     }
 }

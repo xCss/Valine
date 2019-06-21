@@ -131,7 +131,7 @@ const utils = {
      */
     clearAttr(el) {
         let attrs = el.attributes
-        let ignoreAttrs = ['align', 'alt', 'disabled', 'href', 'id', 'target', 'title', 'type', 'src', 'class', 'style']
+        let ignoreAttrs = ['align', 'alt', 'checked', 'class', 'disabled', 'href', 'id', 'target', 'title', 'type', 'src', 'style']
         utils.each(attrs, (idx, attr) => {
             let name = attr.name
             switch (attr.name.toLowerCase()) {
