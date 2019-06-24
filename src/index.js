@@ -146,7 +146,6 @@ ValineFactory.prototype.init = function (option) {
             visitor,
             pageSize,
             recordIP,
-            serverURLs = 'https://avoscloud.com',
             clazzName = 'Comment'
         } = option;
         root['config']['clazzName'] = clazzName;
@@ -200,11 +199,27 @@ ValineFactory.prototype.init = function (option) {
         if (!id || !key) throw 99;
         AV.applicationId && delete AV._config.applicationId || (AV.applicationId = null);
         AV.applicationKey && delete AV._config.applicationKey || (AV.applicationKey = null);
-        AV.init({
-            appId: id,
-            appKey: key,
-            serverURLs: serverURLs,
-        });
+
+        let avInitOptions = {} 
+        if (id.endsWith("-MdYXbMMI")) { // international
+            avInitOptions = {
+                appId: id,
+                appKey: key,
+            }
+        } else if (id.endsWith("-9Nh9j0Va")) { // CN East
+            avInitOptions = {
+                appId: id,
+                appKey: key,
+            }
+        } else { // CN North
+            avInitOptions = {
+                appId: id,
+                appKey: key,
+                serverURLs: "https://avoscloud.com",
+            }
+        }
+
+        AV.init(avInitOptions);
 
         // get comment count
         let els = Utils.findAll(document, '.valine-comment-count');
