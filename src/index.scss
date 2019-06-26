@@ -7,7 +7,6 @@
 
 .v {
     font-size:16px;
-    
     * {
         box-sizing: border-box; //font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", Arial, sans-serif;
         line-height:2;
@@ -16,7 +15,7 @@
     }
     
     hr{
-        margin: .825rem 0;
+        margin: .825em 0;
         border-color:#f6f6f6;
         border-style: dashed;
     }
@@ -70,8 +69,8 @@
     }
     blockquote{
         color: #666;
-        margin: .5rem 0;
-        padding: 0 0 0 1rem ;
+        margin: .5em 0;
+        padding: 0 0 0 1em ;
         border-left: 8px solid rgba(238, 238, 238, 0.5);
     }
     .vinput {
@@ -80,7 +79,7 @@
         outline: none;
         padding: 10px 5px;
         max-width: 100%;
-        font-size: .775rem;
+        font-size: .775em;
     }
     input[type='checkbox'],input[type='radio']{
         display:inline-block;
@@ -166,7 +165,7 @@
             padding-top: 15px;
             .col {
                 display: inline-block;
-                font-size: .725rem;
+                font-size: .725em;
                 vertical-align: middle;
                 color: #ccc;
                 &.text-right {
@@ -203,15 +202,15 @@
             left: 0;
             top: 0;
             .valert {
-                padding-top: 3rem;
+                padding-top: 3em;
                 .vtext {
                     color: #fff;
-                    padding: 1rem 0;
+                    padding: 1em 0;
                 }
                 .vcode {
-                    width: 4.6875rem;
-                    border-radius: .3125rem;
-                    padding: .5rem;
+                    width: 4.6875em;
+                    border-radius: .3125em;
+                    padding: .5em;
                     background: #dedede;
                     &:focus {
                         border-color: #3090e4;
@@ -221,10 +220,10 @@
             }
             @media screen and(max-width:720px) {
                 .valert {
-                    padding-top: 5.5rem;
+                    padding-top: 5.5em;
                     .vtext {
                         color: #fff;
-                        padding: 1rem 0;
+                        padding: 1em 0;
                     }
                 }
             }
@@ -232,17 +231,17 @@
     }
     .power {
         color: #999;
-        font-size: .75rem;
-        padding:.5rem 0;
+        font-size: .75em;
+        padding:.5em 0;
         a {
-            font-size: .75rem;
+            font-size: .75em;
         }
     }
     .vinfo {
         font-size: 0;
         padding: 5px;
         .col {
-            font-size: .875rem;
+            font-size: .875em;
             display: inline-block;
             width: 50%;
             vertical-align: middle;
@@ -250,7 +249,7 @@
         .vcount {
             .vnum {
                 font-weight: 600;
-                font-size: 1.25rem;
+                font-size: 1.25em;
             }
         }
     }
@@ -264,7 +263,7 @@
     }
     ul,ol {    
         padding: 0;
-        margin-left: 1.25rem;
+        margin-left: 1.25em;
     }
     .txt-center {
         text-align: center;
@@ -280,8 +279,8 @@
     }
     .veditor {
         width: 100%;
-        min-height: 8.75rem;
-        font-size: .875rem;
+        min-height: 8.75em;
+        font-size: .875em;
         background: transparent;
         resize: vertical;
         transition:all .25s ease;
@@ -291,7 +290,7 @@
         text-align: center;
         color: #313131;
         border: 1px solid #ededed;
-        border-radius: .3rem;
+        border-radius: .3em;
         display: inline-block;
         background: #ededed;
         margin-bottom: 0;
@@ -300,13 +299,13 @@
         touch-action: manipulation;
         cursor: pointer;
         white-space: nowrap;
-        padding: .5rem 1.25rem;
-        font-size: .875rem;
+        padding: .5em 1.25em;
+        font-size: .875em;
         line-height: 1.42857143;
         user-select: none;
         outline: none;
         &+.vbtn {
-            margin-left: 1.25rem;
+            margin-left: 1.25em;
         }
     }
     .vbtn:active,
@@ -316,14 +315,14 @@
         background-color: #fff;
     }
     .vempty {
-        padding: 1.25rem;
+        padding: 1.25em;
         text-align: center;
         color: #999;
     }
     .vlist {
         width: 100%;
         .vcard {
-            padding-top: 1.5rem;
+            padding-top: 1.5em;
             position: relative;
             display: block;
             &:after {
@@ -332,19 +331,19 @@
                 display: block;
             }
             .vimg {
-                width: 3.125rem;
-                height: 3.125rem;
+                width: 3.125em;
+                height: 3.125em;
                 float: left;
                 border-radius: 50%;
-                margin-right: .7525rem;
+                margin-right: .7525em;
                 border:1px solid #f5f5f5;
-                padding:.125rem;
+                padding:.125em;
             }
             
             @media screen and (max-width:720px) {
                 .vimg {
-                    width: 2.5rem;
-                    height: 2.5rem;
+                    width: 2.5em;
+                    height: 2.5em;
                 }
             }
             .vhead {
@@ -352,9 +351,9 @@
                 margin-top: 0;
                 .vnick {
                     position:relative;
-                    font-size: .875rem;
+                    font-size: .875em;
                     font-weight: 500;
-                    margin-right: .875rem;
+                    margin-right: .875em;
                     cursor: pointer;
                     color: #1abc9c;
                     text-decoration:none;
@@ -380,12 +379,12 @@
                 }
                 .vsys {
                     display: inline-block;
-                    padding: .2rem .5rem;
+                    padding: .2em .5em;
                     background: #ededed;
                     color: #b3b1b1;
-                    font-size: .75rem;
-                    border-radius: .2rem;
-                    margin-right: .3rem;
+                    font-size: .75em;
+                    border-radius: .2em;
+                    margin-right: .3em;
                 }
                 @media screen and (max-width:520px) {
                     .vsys {
@@ -396,18 +395,18 @@
             
             .vh {
                 overflow: hidden;
-                padding-bottom: .5rem;
+                padding-bottom: .5em;
                 border-bottom: 1px dashed #f5f5f5;
                 .vtime {
                     color: #b3b3b3;
-                    font-size: .75rem;
-                    margin-right: .875rem;
+                    font-size: .75em;
+                    margin-right: .875em;
                 }
                 .vmeta {
                     line-height:1;
                     position: relative;
                     .vat {
-                        font-size: .8125rem;
+                        font-size: .8125em;
                         color: #ef2f11;
                         cursor: pointer;
                         float:right;
@@ -424,18 +423,18 @@
                 word-break: break-all;
                 text-align: justify;
                 color: #4A4A4A;
-                font-size: .875rem;
+                font-size: .875em;
                 line-height: 2;
                 position: relative;
-                margin-bottom: .75rem;
-                padding-top: .625rem;
+                margin-bottom: .75em;
+                padding-top: .625em;
                 img,iframe,frame {
                     max-width: 100%;
                     border:none;
                 }
                 &.expand {
                     cursor: pointer;
-                    max-height: 11.25rem;
+                    max-height: 11.25em;
                     overflow: hidden;
                     &:before {
                         display: block;
@@ -444,7 +443,7 @@
                         width: 100%;
                         left: 0;
                         top: 0;
-                        bottom: 3.15rem;
+                        bottom: 3.15em;
                         pointer-events: none;
                         background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
                     }
@@ -455,8 +454,8 @@
                         color: #828586;
                         position: absolute;
                         width: 100%;
-                        height: 3.15rem;
-                        line-height: 3.15rem;
+                        height: 3.15em;
+                        line-height: 3.15em;
                         left: 0;
                         bottom: 0;
                         pointer-events: none;
@@ -467,12 +466,12 @@
             
             .vquote {
                 color: #666;
-                margin-top: 1rem;
-                padding-left: 1rem;
+                margin-top: 1em;
+                padding-left: 1em;
                 border-left: 1px dashed rgba(238, 238, 238, 0.5);
                 .vimg{
-                    width: 2.225rem;
-                    height: 2.225rem;
+                    width: 2.225em;
+                    height: 2.225em;
                 }
             }
             
@@ -480,7 +479,7 @@
     }
     .vpage {
         .vmore{
-            margin:1rem 0;
+            margin:1em 0;
         }
     }
     .clear {

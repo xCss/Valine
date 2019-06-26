@@ -1,3 +1,6 @@
+const win = window,
+    doc = document
+
 const unescapeMap = {};
 const escapeMap = {
     '&': '&amp;',
@@ -19,6 +22,47 @@ const reHasEscapedHtml = RegExp(reEscapedHtml.source)
 
 
 const utils = {
+    /**
+     * 检测DOM是否加载完毕
+     * @param {Function} callback 
+     */
+    domReady(callback) {
+        if (doc.readyState === "complete" || (doc.readyState !== "loading" && !doc.documentElement.doScroll))
+            setTimeout(() => callback && callback(), 0)
+        else {
+            let handler = () => {
+                doc.removeEventListener("DOMContentLoaded", handler, false)
+                win.removeEventListener("load", handler, false)
+                callback && callback()
+            }
+            doc.addEventListener("DOMContentLoaded", handler, false)
+            win.addEventListener("load", handler, false)
+        }
+    },
+    /**
+     * 动态加载资源库 
+     * @param {String} sourceName 资源名 script/link
+     * @param {String} sourceURI 需要加载的资源库链接
+     * @param {Function} callback 回调函数
+     */
+    dynamicLoadSource(sourceName, sourceURI, callback) {
+        let attrNameMap = {'script':'src','link':'href'};
+        let attr = attrNameMap[sourceName]
+        if (utils.find(doc, `${sourceName}[${attr}="${sourceURI}"]`)) {
+            typeof (callback) === 'function' && callback()
+        } else {
+            let s = utils.create(sourceName, attr, sourceURI);
+            let h = doc.getElementsByTagName("head")[0];
+            h.appendChild(s);
+            s.onload = s.onreadystatechange = function () {
+                let vm = this;
+                if (! /*@cc_on!@*/ 0 || vm.readyState === 'loaded' || vm.readyState === 'complete') {
+                    vm.onload = vm.onreadystatechange = null;
+                    typeof (callback) === 'function' && callback()
+                }
+            }
+        }
+    },
     on(type, el, handler, capture) {
         type = type.split(' ')
         for (let i = 0, len = type.length; i < len; i++) {
@@ -29,9 +73,12 @@ const utils = {
         }
     },
     off(type, el, handler, capture) {
-        if (el.removeEventListener) el.removeEventListener(type, handler, capture || false);
-        else if (el.detachEvent) el.detachEvent(`on${type}`, handler);
-        else el[`on${type}`] = null;
+        type = type.split(' ')
+        for (let i = 0, len = type.length; i < len; i++) {
+            if (el.removeEventListener) el.removeEventListener(type, handler, capture || false);
+            else if (el.detachEvent) el.detachEvent(`on${type}`, handler);
+            else el[`on${type}`] = null;
+        }
     },
 
     escape(s) {
@@ -75,7 +122,7 @@ const utils = {
     },
 
     /**
-     * get attribute or set attribute
+     * get/set attributes
      * @param {HTMLElement} el 
      * @param {String | Object} name 
      * @param {String} value 
@@ -92,15 +139,14 @@ const utils = {
         } else return el.getAttribute(name)
     },
     /**
-     * get prop or set prop
+     * get/set props
      * @param {HTMLElement} el 
      * @param {String} name 
      * @param {String} value 
      */
     prop(el, name, value) {
-        if (value !== undefined) {
-            return el[name] = value
-        } else if (({}).toString.call(name) === '[object Object]') {
+        if (value !== undefined) return el[name] = value
+        else if (({}).toString.call(name) === '[object Object]') {
             utils.each(name, (k, v) => {
                 el[k] = v
             })
@@ -134,32 +180,28 @@ const utils = {
         let ignoreAttrs = ['align', 'alt', 'checked', 'class', 'disabled', 'href', 'id', 'target', 'title', 'type', 'src', 'style']
         utils.each(attrs, (idx, attr) => {
             let name = attr.name
-            switch (attr.name.toLowerCase()) {
+            switch (name.toLowerCase()) {
                 case 'style':
                     let style = attr.value
                     utils.each(style.split(';'), (idx, item) => {
-                        if (item.indexOf('color') > -1) {
-                            utils.attr(el, 'style', item);
-                            return false
-                        } else utils.removeAttr(el, 'style');
+                        if (item.indexOf('color') > -1) utils.attr(el, 'style', item);
+                        else utils.removeAttr(el, 'style');
                     })
                     break;
                 case 'class':
                     if (el.nodeName == 'CODE') return false
                     let clazz = attr.value
-                    if (clazz.indexOf('at') > -1) {
-                        utils.attr(el, 'class', 'at');
-                        return false
-                    }
+                    if (clazz.indexOf('at') > -1) utils.attr(el, 'class', 'at');
+                    if (clazz.indexOf('vemoji') > -1) utils.attr(el,'class','vemoji');
+                    else utils.removeAttr(el, 'class')
                     break;
                 default:
-                    // utils.removeAttr(el,'class');
+                    if (ignoreAttrs.indexOf(name) > -1) return true
+                    else utils.removeAttr(el, name)
                     break;
 
             }
 
-            if (ignoreAttrs.indexOf(name) > -1) return
-            else utils.removeAttr(el, name)
         })
         return el
     },
@@ -178,7 +220,7 @@ const utils = {
      * collection, callback(indexInArray, valueOfElement)
      * @param {Object} collection 
      * @param {Function} callback 
-     * @return {*} collection
+     * @return {Object} collection
      */
     each(collection, callback) {
         let value,
@@ -188,14 +230,12 @@ const utils = {
             type = ({}).toString.call(collection)
         if (likeArray.indexOf(type) > -1) {
             for (; i < length; i++) {
-                value = callback && callback.call(collection[i], i, collection[i])
-                if (value === false) break
+                if (callback && callback.call(collection[i], i, collection[i]) === false) break
             }
         } else {
             for (i in collection) {
                 if (collection.hasOwnProperty(i)) {
-                    value = callback && callback.call(collection[i], i, collection[i])
-                    if (value === false) break
+                    if (callback && callback.call(collection[i], i, collection[i]) === false) break
                 }
             }
         }

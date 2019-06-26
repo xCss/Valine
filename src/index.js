@@ -4,11 +4,11 @@ const marked = require('marked');
 const autosize = require('autosize');
 const timeAgo = require('./utils/timeago');
 const detect = require('./utils/detect');
-const Utils = require('./utils/htmlUtils');
+const Utils = require('./utils/domUtils');
 const Emoji = require('./plugins/emojis');
 const hanabi = require('hanabi');
 const LINKREG = /^https?\:\/\//;
-window.AV = undefined;
+const AVSdkUri = '//cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js';
 const defaultComment = {
     comment: '',
     nick: 'Anonymous',
@@ -107,33 +107,37 @@ let _avatarSetting = {
     _path = location.pathname.replace(/index\.html?$/, '');
 
 function ValineFactory(option) {
-    let root = this
-        // Valine init
-        !!option && root.init(option);
+    let root = this;
+    root.init(option);
+    // Valine init
     return root;
 }
 
-
-/**
- * 动态加载SDK
- */
-(function(){
-    let avSDK = Utils.create('script', 'src', '//cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js');
-    let s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(avSDK, s);
-})();
-
 /**
  * Valine Init
- * @param {Object} option
  */
 ValineFactory.prototype.init = function (option) {
+    let root = this;
+    root['config'] = option
     if (typeof document === 'undefined') {
         console && console.warn('Sorry, Valine does not support Server-side rendering.')
         return;
     }
+    if(typeof AV === 'undefined') {
+        Utils.dynamicLoadSource('script', AVSdkUri, () => {
+            if (typeof AV === 'undefined') {
+                setTimeout(() => {
+                    root.init(option)
+                }, 300)
+                return;
+            } else !!option && root._init();
+        })
+    } else !!option && root._init();
+    return root;
+}
+
+ValineFactory.prototype._init = function(){
     let root = this;
-    root['config'] = {};
     try {
         let {
             lang,
@@ -146,17 +150,35 @@ ValineFactory.prototype.init = function (option) {
             visitor,
             pageSize,
             recordIP,
-            serverURLs = 'https://avoscloud.com',
             clazzName = 'Comment'
-        } = option;
+        } = root.config;
         root['config']['clazzName'] = clazzName;
         let ds = _avatarSetting['ds'];
         let force = avatarForce ? '&q=' + Math.random().toString(32).substring(2) : '';
-
         lang && langMode && root.installLocale(lang, langMode);
         root.locale = root.locale || locales[lang || 'zh-cn'];
         root.notify = notify || false;
         root.verify = verify || false;
+        _avatarSetting['params'] = `?d=${(ds.indexOf(avatar) > -1 ? avatar : 'mp')}&v=${VERSION}${force}`;
+        _avatarSetting['hide'] = avatar === 'hide' ? true : false;
+        _avatarSetting['cdn'] = LINKREG.test(avatar_cdn) ? avatar_cdn : _avatarSetting['cdn']
+
+        _path = root.config.path || _path;
+
+        let size = Number(pageSize || 10);
+        root.config.pageSize = !isNaN(size) ? (size < 1 ? 10 : size) : 10;
+
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            highlight: root.config.highlight === false ? null : hanabi,
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: true
+        });
 
         if (recordIP) {
             let ipScript = Utils.create('script', 'src', '//api.ip.sb/jsonip?callback=getIP');
@@ -168,38 +190,14 @@ ValineFactory.prototype.init = function (option) {
             }
         }
 
-        _avatarSetting['params'] = `?d=${(ds.indexOf(avatar) > -1 ? avatar : 'mp')}&v=${VERSION}${force}`;
-        _avatarSetting['hide'] = avatar === 'hide' ? true : false;
-        _avatarSetting['cdn'] = LINKREG.test(avatar_cdn) ? avatar_cdn : _avatarSetting['cdn']
-
-        _path = option.path || _path;
-
-        let size = Number(pageSize || 10);
-        option.pageSize = !isNaN(size) ? (size < 1 ? 10 : size) : 10;
-
-        marked.setOptions({
-            renderer: new marked.Renderer(),
-            highlight: option.highlight === false ? null : hanabi,
-            gfm: true,
-            tables: true,
-            breaks: true,
-            pedantic: false,
-            sanitize: false,
-            smartLists: true,
-            smartypants: true
-        });
-        if (!AV) {
-            setTimeout(() => {
-                root.init(option)
-            }, 20)
-            return;
-        }
-        console.log(1)
-        let id = option.app_id || option.appId;
-        let key = option.app_key || option.appKey;
+        let id = root.config.app_id || root.config.appId;
+        let key = root.config.app_key || root.config.appKey;
         if (!id || !key) throw 99;
-        AV.applicationId && delete AV._config.applicationId || (AV.applicationId = null);
-        AV.applicationKey && delete AV._config.applicationKey || (AV.applicationKey = null);
+        AV.applicationId && delete AV._config.applicationId || (AV.applicationId = void 0);
+        AV.applicationKey && delete AV._config.applicationKey || (AV.applicationKey = void 0);
+
+        let serverURLs = id.slice(-9) === '-MdYXbMMI' ? 'https://us.avoscloud.com' : 'https://avoscloud.com'
+        
         AV.init({
             appId: id,
             appKey: key,
@@ -208,8 +206,7 @@ ValineFactory.prototype.init = function (option) {
 
         // get comment count
         let els = Utils.findAll(document, '.valine-comment-count');
-        for (let i = 0, len = els.length; i < len; i++) {
-            let el = els[i];
+        Utils.each(els, (idx, el) => {
             if (el) {
                 let k = Utils.attr(el, 'data-xid');
                 if (k) {
@@ -220,12 +217,12 @@ ValineFactory.prototype.init = function (option) {
                     })
                 }
             }
-        }
+        })
 
         // Counter
         visitor && CounterFactory.add(AV.Object.extend('Counter'));
 
-        let el = option.el || null;
+        let el = root.config.el || null;
         let _el = Utils.findAll(document, el);
         el = el instanceof HTMLElement ? el : (_el[_el.length - 1] || null);
         if (!el) return;
@@ -233,12 +230,12 @@ ValineFactory.prototype.init = function (option) {
         root.el.classList.add('v');
 
         _avatarSetting['hide'] && root.el.classList.add('hide-avatar');
-        option.meta = (option.guest_info || option.meta || META).filter(item => META.indexOf(item) > -1);
-        let inputEl = (option.meta.length == 0 ? META : option.meta).map(item => {
+        root.config.meta = (root.config.guest_info || root.config.meta || META).filter(item => META.indexOf(item) > -1);
+        let inputEl = (root.config.meta.length == 0 ? META : root.config.meta).map(item => {
             let _t = item == 'mail' ? 'email' : 'text';
             return META.indexOf(item) > -1 ? `<input name="${item}" placeholder="${root.locale['head'][item]}" class="v${item} vinput" type="${_t}">` : ''
         });
-        root.placeholder = option.placeholder || 'Just Go Go';
+        root.placeholder = root.config.placeholder || 'Just Go Go';
 
         root.el.innerHTML = `<div class="vwrap"><div class="${`vheader item${inputEl.length}`}">${inputEl.join('')}</div><div class="vedit"><textarea id="veditor" class="veditor vinput" placeholder="${root.placeholder}"></textarea><div class="vctrl"><span class="vemoji-btn">${root.locale['ctrl']['emoji']}</span> | <span class="vpreview-btn">${root.locale['ctrl']['preview']}</span></div><div class="vemojis" style="display:none;"></div><div class="vinput vpreview" style="display:none;"></div></div><div class="vcontrol"><div class="col col-20" title="Markdown is supported"><a href="https://segmentfault.com/markdown" target="_blank"><svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a></div><div class="col col-80 text-right"><button type="button" title="Cmd|Ctrl+Enter" class="vsubmit vbtn">${root.locale['ctrl']['reply']}</button></div></div><div style="display:none;" class="vmark"></div></div><div class="vinfo" style="display:none;"><div class="vcount col"></div></div><div class="vlist"></div><div class="vempty" style="display:none;"></div><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://valine.js.org" target="_blank">Valine</a><br>v${VERSION}</div></div>`;
 
@@ -313,14 +310,12 @@ ValineFactory.prototype.init = function (option) {
                 return root;
             }
         }
-
         // Bind Event
-        root.bind(option);
+        root.bind();
 
     } catch (ex) {
         root.ErrorHandler(ex)
     }
-    return root;
 }
 
 // 新建Counter对象
@@ -380,7 +375,7 @@ let CounterFactory = {
         let COUNT_CONTAINER_REF = '.leancloud-visitors-count';
 
         // 重置所有计数
-        Utils.each(lvs, function (idx, el) {
+        Utils.each(lvs, (idx, el) => {
             let cel = Utils.find(el, COUNT_CONTAINER_REF);
             if (cel) cel.innerText = 0
         })
@@ -393,12 +388,14 @@ let CounterFactory = {
             query.containedIn('url', urls);
             query.find().then(ret => {
                 if (ret.length > 0) {
-                    Utils.each(ret, function (idx, item) {
+                    Utils.each(ret, (idx, item) => {
                         let url = item.get('url');
                         let time = item.get('time');
-                        let el = Utils.find(document, `.leancloud_visitors[id="${url}"]`) || Utils.find(document, `.leancloud-visitors[id="${url}"]`);
-                        let cel = Utils.find(el, COUNT_CONTAINER_REF);
-                        if (cel) cel.innerText = time
+                        let els = Utils.findAll(document, `.leancloud_visitors[id="${url}"]`) || Utils.findAll(document, `.leancloud-visitors[id="${url}"]`);
+                        Utils.each(els, (idx, el) => {
+                            let cel = Utils.find(el, COUNT_CONTAINER_REF);
+                            if (cel) cel.innerText = time
+                        })
                     });
                 }
             }).catch(ex => {
@@ -422,7 +419,8 @@ ValineFactory.prototype.Q = function (k) {
         let isEmpty = new AV.Query(root['config']['clazzName']);
         isEmpty.equalTo('rid', '');
         let q = AV.Query.or(notExist, isEmpty);
-        q.equalTo('url', decodeURI(k));
+        if (k === '*') q.exists('url');
+        else q.equalTo('url', decodeURI(k));
         q.addDescending('createdAt');
         q.addDescending('insertedAt');
         return q;
@@ -490,6 +488,7 @@ ValineFactory.prototype.bind = function (option) {
     let _emojiCtrl = Utils.find(root.el, '.vemoji-btn');
     // 评论内容预览
     let _vpreviewCtrl = Utils.find(root.el, `.vpreview-btn`);
+    let _veditor = Utils.find(root.el, '.veditor');
     let emojiData = Emoji.data;
     for (let key in emojiData) {
         if (emojiData.hasOwnProperty(key)) {
@@ -501,7 +500,6 @@ ValineFactory.prototype.bind = function (option) {
                 _i.innerHTML = val;
                 _vemojis.appendChild(_i);
                 Utils.on('click', _i, (e) => {
-                    let _veditor = Utils.find(root.el, '.veditor');
                     _insertAtCaret(_veditor, val)
                     syncContentEvt(_veditor)
                 });
@@ -580,6 +578,7 @@ ValineFactory.prototype.bind = function (option) {
         let _v = 'comment';
         let _val = (_el.value || '');
         _val = Emoji.parse(_val);
+        // _el.value = _val.replace(/\n(\n)*( )*(\n)*\n/g,'');
         _el.value = _val;
         let ret = xssFilter(marked(_val));
         defaultComment[_v] = ret;
@@ -607,7 +606,7 @@ ValineFactory.prototype.bind = function (option) {
         }
     });
 
-    let meta = option.meta;
+    let meta = root.config.meta;
     let inputs = {};
 
     // 同步操作
@@ -665,7 +664,7 @@ ValineFactory.prototype.bind = function (option) {
     }
 
     let query = (no = 1) => {
-        let size = option.pageSize;
+        let size = root.config.pageSize;
         let count = Number(Utils.find(root.el, '.vnum').innerText);
         root.loading.show();
         let cq = root.Q(_path);
@@ -767,14 +766,16 @@ ValineFactory.prototype.bind = function (option) {
     let _activeOtherFn = () => {
         setTimeout(function () {
             try {
-                let MathJax = MathJax || '';
-                MathJax && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-                $('pre code').each(function (i, block) {
-                    hljs.highlightBlock(block);
-                })
-                $('code.hljs').each(function (i, block) {
-                    hljs.lineNumbersBlock(block);
-                });
+                // let MathJax = MathJax || '';
+                typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                if (typeof hljs !== 'undefined') {
+                    Utils.each(Utils.findAll('pre code'), function (i, block) {
+                        hljs.highlightBlock(block);
+                    })
+                    Utils.each(Utils.findAll('code.hljs'), function (i, block) {
+                        hljs.lineNumbersBlock(block);
+                    });
+                }
             } catch (error) {
 
             }
@@ -789,6 +790,7 @@ ValineFactory.prototype.bind = function (option) {
             if (el.offsetHeight > 180) {
                 el.classList.add('expand');
                 Utils.on('click', el, (e) => {
+                    e.preventDefault();
                     Utils.attr(el, 'class', 'vcontent');
                 })
             }
@@ -994,7 +996,6 @@ ValineFactory.prototype.bind = function (option) {
             }
         })
     }
-
     Utils.on('click', submitBtn, submitEvt);
     Utils.on('keydown', document, function (e) {
         e = event || e;
@@ -1007,11 +1008,52 @@ ValineFactory.prototype.bind = function (option) {
             let focus = document.activeElement.id || ''
             if (focus == 'veditor') {
                 e.preventDefault();
-                let _veditor = Utils.find(root.el, '.veditor');
                 _insertAtCaret(_veditor, '    ');
             }
         }
-    })
+    });
+    // Utils.on('paste',document,(e)=>{
+    //     let clipboardData = "clipboardData" in e ? e.clipboardData : window.clipboardData
+    //     let items = clipboardData && clipboardData.items;
+    //     let file = null;
+    //     if (items && items.length) {
+    //         // 检索剪切板items
+    //         for (let i = 0; i < items.length; i++) {
+    //             if (items[i].type.indexOf('image') !== -1) {
+    //                 file = items[i].getAsFile();
+    //                 break;
+    //             }
+    //         }
+    //         if(file) {
+    //             console.log(file)
+    //             uploadImage(file,function(err,ret){
+    //                 console.log(ret)
+    //             })
+    //         }
+    //     }
+    // })
+
+
+    // let uploadImage = (file,callback)=>{
+    //     let formData = new FormData();
+    //     formData.append('smfile', file);
+    //     // formData.append('test','test')
+    //     let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState == 4 && xhr.status == 200) {
+    //             let json = JSON.parse(xhr.responseText);
+    //             callback && callback(null,json)
+    //         } else {
+    //             callback && callback(xhr.status)
+    //         }
+    //     }
+    //     xhr.onerror = function(e){
+    //         console.log(e)
+    //     }
+    //     xhr.open('POST', 'https://sm.ms/api/upload',true);
+    //     // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    //     xhr.send(formData);
+    // }
 }
 
 function Valine(options) {
