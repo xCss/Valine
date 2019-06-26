@@ -7,6 +7,7 @@
 
 .v {
     font-size:16px;
+    text-align: left;
     * {
         box-sizing: border-box; //font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", Arial, sans-serif;
         line-height:2;
@@ -165,7 +166,7 @@
             padding-top: 15px;
             .col {
                 display: inline-block;
-                font-size: .725em;
+                font-size: 16px;
                 vertical-align: middle;
                 color: #ccc;
                 &.text-right {
@@ -241,7 +242,7 @@
         font-size: 0;
         padding: 5px;
         .col {
-            font-size: .875em;
+            font-size: 16px;
             display: inline-block;
             width: 50%;
             vertical-align: middle;
