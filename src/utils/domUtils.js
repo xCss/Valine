@@ -42,16 +42,16 @@ const utils = {
     /**
      * 动态加载资源库 
      * @param {String} sourceName 资源名 script/link
-     * @param {String} sourceURI 需要加载的资源库链接
+     * @param {Object} attrs 需要加载属性/值
      * @param {Function} callback 回调函数
      */
-    dynamicLoadSource(sourceName, sourceURI, callback) {
+    dynamicLoadSource(sourceName, attrs, callback) {
         let attrNameMap = {'script':'src','link':'href'};
-        let attr = attrNameMap[sourceName]
-        if (utils.find(doc, `${sourceName}[${attr}="${sourceURI}"]`)) {
+        let attr = attrNameMap[sourceName];
+        if (utils.find(doc, `${sourceName}[${attr}="${attrs[attr]}"]`)) {
             typeof (callback) === 'function' && callback()
         } else {
-            let s = utils.create(sourceName, attr, sourceURI);
+            let s = utils.create(sourceName, attrs);
             let h = doc.getElementsByTagName("head")[0];
             h.appendChild(s);
             s.onload = s.onreadystatechange = function () {
@@ -192,7 +192,7 @@ const utils = {
                     if (el.nodeName == 'CODE') return false
                     let clazz = attr.value
                     if (clazz.indexOf('at') > -1) utils.attr(el, 'class', 'at');
-                    if (clazz.indexOf('vemoji') > -1) utils.attr(el,'class','vemoji');
+                    else if (clazz.indexOf('vemoji') > -1) utils.attr(el,'class','vemoji');
                     else utils.removeAttr(el, 'class')
                     break;
                 default:

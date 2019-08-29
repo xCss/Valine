@@ -28,7 +28,7 @@ function isCyclic (data) {
             seenObjects.push(data);
 
             // Begin iterating through the data passed to the method
-            for (var key in data) {
+            for (let key in data) {
                 // Recall this method with the objects key
                 if (data.hasOwnProperty(key) === true && detect(data[key])) {
                     return true;
@@ -75,7 +75,7 @@ const deepClone = function (data) {
             // Create a new array that will have no references to the one we want to copy
             let copiedArray = [];
             // Iterate over the arrays elements
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 // Push the arrays elements to this new array
                 // First recall this method with the elements
                 // This is so arrays of objects and other nested data structures get correctly cloned.

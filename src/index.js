@@ -459,9 +459,8 @@ ValineFactory.prototype.ErrorHandler = function (ex) {
         let code = ex.code || '',
             t = root.locale['error'][code],
             msg = t || ex.message || ex.error || '';
-        if (code == 101) {
-            root.nodata.show()
-        } else root.el && root.nodata.show(`<pre style="text-align:left;">Code ${code}: ${msg}</pre>`) ||
+        if (code == 101) root.nodata.show()
+        else root.el && root.nodata.show(`<pre style="text-align:left;">Code ${code}: ${msg}</pre>`) ||
             console && console.error(`Code ${code}: ${msg}`)
     } else {
         root.el && root.nodata.show(`<pre style="text-align:left;">${JSON.stringify(ex)}</pre>`) ||
@@ -610,20 +609,14 @@ ValineFactory.prototype.bind = function (option) {
     // 显示/隐藏 Emojis
     Utils.on('click', _emojiCtrl, (e) => {
         let _vi = Utils.attr(_emojiCtrl, 'v');
-        if (_vi) {
-            root.emoji.hide()
-        } else {
-            root.emoji.show();
-        }
+        if (_vi) root.emoji.hide()
+        else root.emoji.show();
     });
 
     Utils.on('click', _vpreviewCtrl, function (e) {
         let _vi = Utils.attr(_vpreviewCtrl, 'v');
-        if (_vi) {
-            root.preview.hide();
-        } else {
-            root.preview.show();
-        }
+        if (_vi) root.preview.hide();
+        else root.preview.show();
     });
 
     let meta = root.config.meta;
@@ -642,11 +635,8 @@ ValineFactory.prototype.bind = function (option) {
             let _el = Utils.find(root.el, `.${i}`);
             inputs[_v] = _el;
             _el && Utils.on('input change blur', _el, (e) => {
-                if (_v === 'comment') {
-                    syncContentEvt(_el)
-                } else {
-                    defaultComment[_v] = Utils.escape(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
-                }
+                if (_v === 'comment') syncContentEvt(_el)
+                else defaultComment[_v] = Utils.escape(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
             });
         }
     }
@@ -800,7 +790,7 @@ ValineFactory.prototype.bind = function (option) {
             } catch (error) {
 
             }
-        }, 20)
+        }, 200)
     }
 
     let _activeHLJS = () => {}
