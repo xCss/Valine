@@ -141,7 +141,6 @@ ValineFactory.prototype.init = function (option) {
 }
 
 ValineFactory.prototype._init = function(){
-        _path = location.pathname.replace(/index\.html?$/, '');
     let root = this;
     try {
         let {
