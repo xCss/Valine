@@ -117,6 +117,7 @@ function ValineFactory(option) {
  * Valine Init
  */
 ValineFactory.prototype.init = function (option) {
+    _path = location.pathname.replace(/index\.html?$/, '');
     let root = this;
     root['config'] = option
     if (typeof document === 'undefined') {
@@ -140,6 +141,7 @@ ValineFactory.prototype.init = function (option) {
 }
 
 ValineFactory.prototype._init = function(){
+        _path = location.pathname.replace(/index\.html?$/, '');
     let root = this;
     try {
         let {
