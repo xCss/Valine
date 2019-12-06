@@ -133,9 +133,13 @@ ValineFactory.prototype.init = function (option) {
             } else !!option && root._init();
         })
     } else !!option && root._init();
-    let FunDebugSDK = '//js.fundebug.cn/fundebug.1.9.0.min.js',
-    ApiKey = '2c7e5b30c7cf402cb7fb35d14b62e7f778babbb70d054160af750065a180fdcd';
-    Utils.dynamicLoadSource('script', {'src':FunDebugSDK,'apikey':ApiKey,async:true});
+    
+    if (option.fundebug){
+        let FunDebugSDK = '//js.fundebug.cn/fundebug.1.9.0.min.js',
+        ApiKey = '2c7e5b30c7cf402cb7fb35d14b62e7f778babbb70d054160af750065a180fdcd';
+        Utils.dynamicLoadSource('script', {'src':FunDebugSDK,'apikey':ApiKey,async:true});
+    }
+    
     return root;
 }
 
