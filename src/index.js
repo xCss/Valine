@@ -123,8 +123,10 @@ ValineFactory.prototype.init = function (option) {
         console && console.warn('Sorry, Valine does not support Server-side rendering.')
         return;
     }
-    if(typeof AV === 'undefined') {
-        Utils.dynamicLoadSource('script', {'src':AVSdkUri}, () => {
+    if (typeof AV === 'undefined') {
+        Utils.dynamicLoadSource('script', {
+            'src': AVSdkUri
+        }, () => {
             if (typeof AV === 'undefined') {
                 setTimeout(() => {
                     root.init(option)
@@ -133,13 +135,10 @@ ValineFactory.prototype.init = function (option) {
             } else !!option && root._init();
         })
     } else !!option && root._init();
-    let FunDebugSDK = '//js.fundebug.cn/fundebug.1.9.0.min.js',
-    ApiKey = '2c7e5b30c7cf402cb7fb35d14b62e7f778babbb70d054160af750065a180fdcd';
-    Utils.dynamicLoadSource('script', {'src':FunDebugSDK,'apikey':ApiKey,async:true});
     return root;
 }
 
-ValineFactory.prototype._init = function(){
+ValineFactory.prototype._init = function () {
     let root = this;
     try {
         let {
@@ -201,13 +200,13 @@ ValineFactory.prototype._init = function(){
 
         let prefix = 'https://';
         let serverURLs = '';
-        if(!root.config['serverURLs']){
+        if (!root.config['serverURLs']) {
             switch (id.slice(-9)) {
                 // TAB 
                 case '-9Nh9j0Va':
                     prefix += 'tab.';
                     break;
-                // US
+                    // US
                 case '-MdYXbMMI':
                     prefix += 'us.';
                     break;
@@ -257,7 +256,41 @@ ValineFactory.prototype._init = function(){
         });
         root.placeholder = root.config.placeholder || 'Just Go Go';
 
-        root.el.innerHTML = `<div class="vwrap"><div class="${`vheader item${inputEl.length}`}">${inputEl.join('')}</div><div class="vedit"><textarea id="veditor" class="veditor vinput" placeholder="${root.placeholder}"></textarea><div class="vctrl"><span class="vemoji-btn">${root.locale['ctrl']['emoji']}</span> | <span class="vpreview-btn">${root.locale['ctrl']['preview']}</span></div><div class="vemojis" style="display:none;"></div><div class="vinput vpreview" style="display:none;"></div></div><div class="vcontrol"><div class="col col-20" title="Markdown is supported"><a href="https://segmentfault.com/markdown" target="_blank"><svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a></div><div class="col col-80 text-right"><button type="button" title="Cmd|Ctrl+Enter" class="vsubmit vbtn">${root.locale['ctrl']['reply']}</button></div></div><div style="display:none;" class="vmark"></div></div><div class="vinfo" style="display:none;"><div class="vcount col"></div></div><div class="vlist"></div><div class="vempty" style="display:none;"></div><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://valine.js.org" target="_blank">Valine</a><br>v${VERSION}</div></div>`;
+        root.el.innerHTML = `
+        <div class="vwrap">
+        <div class="${`vheader item${inputEl.length}`}">${inputEl.join('')}</div>
+        <div class="vedit"><textarea id="veditor" class="veditor vinput" placeholder="${root.placeholder}"></textarea>
+            <div class="vctrl"><span class="vemoji-btn">${root.locale['ctrl']['emoji']}</span> | <span
+                    class="vpreview-btn">${root.locale['ctrl']['preview']}</span></div>
+            <div class="vemojis" style="display:none;"></div>
+            <div class="vinput vpreview" style="display:none;"></div>
+        </div>
+        <div class="vcontrol">
+            <div class="col col-20" title="Markdown is supported"><a href="https://segmentfault.com/markdown"
+                    target="_blank"><svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z">
+                        </path>
+                    </svg></a></div>
+            <div class="col col-80 text-right">
+                ${root.config.verify||root.config.notify? `<img id="captcha-image" /><input id="captcha-code" class="vcode vinput" maxlength="4" oninput="this.value=this.value.replace(/[^a-z0-9]/g,'');" placeHolder="验证码" >`:''}                
+                <button id="captcha-btn" type="button" title="快捷键:Ctrl+Enter" class="vsubmit vbtn">${root.locale['ctrl']['reply']}</button>
+            </div>
+        </div>
+        <div style="display:none;" class="vmark"></div>
+        </div>
+        <div class="vinfo" style="display:none;">
+            <div class="vcount col"></div>
+        </div>
+        <div class="vlist"></div>
+        <div class="vempty" style="display:none;"></div>
+        <div class="vpage txt-center"></div>
+        <div class="info">
+            <div class="power txt-right">Powered By <a href="https://valine.js.org" target="_blank">Valine</a><br>v${VERSION}
+            </div>
+        </div>
+        `
 
         // Empty Data
         let vempty = Utils.find(root.el, '.vempty');
@@ -637,6 +670,7 @@ ValineFactory.prototype.bind = function (option) {
             _el && Utils.on('input change blur', _el, (e) => {
                 if (_v === 'comment') syncContentEvt(_el)
                 else defaultComment[_v] = Utils.escape(_el.value.replace(/(^\s*)|(\s*$)/g, ""));
+                // console.log(defaultComment)
             });
         }
     }
@@ -724,7 +758,6 @@ ValineFactory.prototype.bind = function (option) {
     });
 
     let insertDom = (rt, node, mt) => {
-
         let _vcard = Utils.create('div', {
             'class': 'vcard',
             'id': rt.id
@@ -738,7 +771,7 @@ ValineFactory.prototype.bind = function (option) {
             let os = `<span class="vsys">${ua.os} ${ua.osVersion}</span>`;
             uaMeta = `${browser} ${os}`;
         }
-        if(_path === '*') uaMeta = `<a href="${rt.get('url')}" class="vsys">${rt.get('url')}</a>`
+        if (_path === '*') uaMeta = `<a href="${rt.get('url')}" class="vsys">${rt.get('url')}</a>`
         let _nick = '';
         let _t = rt.get('link') || '';
         _nick = _t ? `<a class="vnick" rel="nofollow" href="${_t}" target="_blank" >${rt.get("nick")}</a>` : `<span class="vnick">${rt.get('nick')}</span>`;
@@ -864,13 +897,7 @@ ValineFactory.prototype.bind = function (option) {
             return;
         }
         defaultComment['nick'] = defaultComment['nick'] || 'Anonymous';
-
-        // return;
-        if (root.notify || root.verify) {
-            verifyEvt(commitEvt)
-        } else {
-            commitEvt();
-        }
+        commitEvt();
     }
 
     // setting access
@@ -946,46 +973,40 @@ ValineFactory.prototype.bind = function (option) {
         })
     }
 
-    let verifyEvt = (fn) => {
-        let x = Math.floor((Math.random() * 10) + 1);
-        let y = Math.floor((Math.random() * 10) + 1);
-        let z = Math.floor((Math.random() * 10) + 1);
-        let opt = ['+', '-', 'x'];
-        let o1 = opt[Math.floor(Math.random() * 3)];
-        let o2 = opt[Math.floor(Math.random() * 3)];
-        let expre = `${x}${o1}${y}${o2}${z}`;
-        let subject = `${expre} = <input class='vcode vinput' >`;
-        root.alert.show({
-            type: 1,
-            text: subject,
-            ctxt: root.locale['ctrl']['cancel'],
-            otxt: root.locale['ctrl']['ok'],
-            cb() {
-                let code = +Utils.find(root.el, '.vcode').value;
-                let ret = (new Function(`return ${expre.replace(/x/g, '*')}`))();
-                if (ret === code) {
-                    fn && fn();
-                } else {
+    let initVerify = () => {
+        AV.Captcha.request().then(captcha => {
+            captcha.bind({
+                textInput: 'captcha-code',
+                image: 'captcha-image',
+                verifyButton: 'captcha-btn'
+            }, {
+                success: validateCode => {
+                    // console.log('VALIDATE SUCCESS', validateCode)
+                    submitEvt()
+                    // 验证成功后也刷新验证码并清空输入框
+                    Utils.find(root.el,'#captcha-image').click()
+                },
+                error: error => {
+                    // 验证失败则从头再来
                     root.alert.show({
                         type: 1,
                         text: `(T＿T)${root.locale['tips']['again']}`,
-                        ctxt: root.locale['ctrl']['cancel'],
                         otxt: root.locale['ctrl']['try'],
+                        ctxt: root.locale['ctrl']['cancel'],
                         cb() {
-                            verifyEvt(fn);
                             return;
                         }
                     })
                 }
-            }
-        })
+            })
+        }).catch(err => console.error(err))
     }
 
     let signUp = (o) => {
         let u = new AV.User();
-        u.setUsername(o.username);
+        u.setUsername(o.mail);
         u.setPassword(o.mail);
-        u.setEmail(o.mail);
+        u.setEmail(o.mail + '@wechat.com');
         u.setACL(getAcl());
         return u.signUp();
     }
@@ -1007,65 +1028,29 @@ ValineFactory.prototype.bind = function (option) {
             }
         })
     }
-    Utils.on('click', submitBtn, submitEvt);
-    Utils.on('keydown', document, function (e) {
-        e = event || e;
-        let keyCode = e.keyCode || e.which || e.charCode;
-        let ctrlKey = e.ctrlKey || e.metaKey;
-        // Shortcut key
-        ctrlKey && keyCode === 13 && submitEvt()
-        // tab key
-        if (keyCode === 9) {
-            let focus = document.activeElement.id || ''
-            if (focus == 'veditor') {
-                e.preventDefault();
-                _insertAtCaret(_veditor, '    ');
+
+    if (root.notify || root.verify) {
+        // 开启验证码模式，则submitEvt由verify成功后回调
+        initVerify()
+    } else {
+        // 普通事件模式
+        Utils.on('click', submitBtn, submitEvt);
+        Utils.on('keydown', document, function (e) {
+            e = event || e;
+            let keyCode = e.keyCode || e.which || e.charCode;
+            let ctrlKey = e.ctrlKey || e.metaKey;
+            // Shortcut key
+            ctrlKey && keyCode === 13 && submitEvt()
+            // tab key
+            if (keyCode === 9) {
+                let focus = document.activeElement.id || ''
+                if (focus == 'veditor') {
+                    e.preventDefault();
+                    _insertAtCaret(_veditor, '    ');
+                }
             }
-        }
-    });
-    // Utils.on('paste',document,(e)=>{
-    //     let clipboardData = "clipboardData" in e ? e.clipboardData : window.clipboardData
-    //     let items = clipboardData && clipboardData.items;
-    //     let file = null;
-    //     if (items && items.length) {
-    //         // 检索剪切板items
-    //         for (let i = 0; i < items.length; i++) {
-    //             if (items[i].type.indexOf('image') !== -1) {
-    //                 file = items[i].getAsFile();
-    //                 break;
-    //             }
-    //         }
-    //         if(file) {
-    //             console.log(file)
-    //             uploadImage(file,function(err,ret){
-    //                 console.log(ret)
-    //             })
-    //         }
-    //     }
-    // })
-
-
-    // let uploadImage = (file,callback)=>{
-    //     let formData = new FormData();
-    //     formData.append('smfile', file);
-    //     // formData.append('test','test')
-    //     let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-    //     xhr.onreadystatechange = function () {
-    //         if (xhr.readyState == 4 && xhr.status == 200) {
-    //             let json = JSON.parse(xhr.responseText);
-    //             callback && callback(null,json)
-    //         } else {
-    //             callback && callback(xhr.status)
-    //         }
-    //     }
-    //     xhr.onerror = function(e){
-    //         console.log(e)
-    //     }
-    //     xhr.open('POST', 'https://sm.ms/api/upload',true);
-    //     // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    //     xhr.send(formData);
-    // }
-
+        });
+    }
 }
 
 function Valine(options) {

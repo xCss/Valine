@@ -137,10 +137,10 @@
         <div class="placeholder"></div>
         <div class="content">
             <div id="github">
-                <iframe allowtransparency="true" frameborder="0" scrolling="0" width="98" height="20"></iframe>
-                <iframe allowtransparency="true" frameborder="0" scrolling="0" width="156" height="20"></iframe>
+                <!-- <iframe allowtransparency="true" frameborder="0" scrolling="0" width="98" height="20"></iframe>
+                <iframe allowtransparency="true" frameborder="0" scrolling="0" width="156" height="20"></iframe> -->
             </div>
-            <div class="comment"></div>
+            <div class="comment" id='valine-container'></div>
         </div>
     </div>
     <div class="copy">
@@ -149,12 +149,14 @@
     <script>
         var valine = new Valine();
         valine.init({
-            el: '.comment',
+            el: '#valine-container',
             app_id: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
             app_key: 'iuneD4hXPQImdHQSRE0aOcRF',
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
             path: window.location.pathname,
-            avatar:'mm', // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
+            avatar:'robohash', // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
+            avatar_cdn:'https://sdn.geekzu.org/avatar/',
+            verify: true
             // guest_info: ['nick'] // 默认 ['nick', 'mail', 'link']
         })
 
@@ -167,9 +169,9 @@
         }
 
         window.onload = function() {
-            var iframes = document.querySelectorAll('iframe');
-            iframes[0].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&repo=valine&type=watch&count=true');
-            iframes[1].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&type=follow&count=true');
+            // var iframes = document.querySelectorAll('iframe');
+            // iframes[0].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&repo=valine&type=watch&count=true');
+            // iframes[1].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&type=follow&count=true');
         }
     </script>
 </body>

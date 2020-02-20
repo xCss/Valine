@@ -35,7 +35,7 @@
     "exports-loader": "^0.6.3",
     "file-loader": "^0.11.2",
     "hanabi": "^0.4.0",
-    "marked": "^0.4.0",
+    "marked": "^0.8.0",
     "node-sass": "^4.9.2",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.3",

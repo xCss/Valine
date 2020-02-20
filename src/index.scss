@@ -88,7 +88,7 @@
         margin-top:-2px;
     }
     .vwrap {
-        border: 1px solid #f0f0f0;
+        border: 1px solid #e0e0e0;
         border-radius: 4px;
         margin-bottom: 10px;
         overflow: hidden;
@@ -529,4 +529,18 @@
         border-radius: 50%;
         animation: spin $spin-duration infinite linear;
     } 
+    #captcha-image{
+        vertical-align: middle;
+        margin-right: 5px;;
+    }
+    .vcode {
+        width: 4.6875em;
+        border-radius: .3125em;
+        padding: .5em;
+        border: 1px solid #a0a0a0;
+        &:focus {
+            border-color: #3090e4;
+            background-color: #fff;
+        }
+    }
 }
