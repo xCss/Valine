@@ -29,7 +29,7 @@ const locales = {
             comments: '评论',
             sofa: '快来做第一个评论的人吧~',
             busy: '还在提交中，请稍候...',
-            again: '这么简单也能错，也是没谁了.'
+            again: '验证码错误，请重新输入.'
         },
         ctrl: {
             reply: '回复',
@@ -67,7 +67,7 @@ const locales = {
             comments: 'Comments',
             sofa: 'No comments yet.',
             busy: 'Submit is busy, please wait...',
-            again: 'Sorry, this is a wrong calculation.'
+            again: 'Sorry, this is a wrong captcha.'
         },
         ctrl: {
             reply: 'Reply',
@@ -989,8 +989,13 @@ ValineFactory.prototype.bind = function (option) {
                 success: validateCode => {
                     // console.log('VALIDATE SUCCESS', validateCode)
                     submitEvt()
-                    // 验证成功后也刷新验证码并清空输入框
+                    // 验证成功后刷新验证码，为了方式刷新图片后自动获取焦点导致手机键盘自动弹出，先禁用验证码输入框
+                    let code = Utils.find(root.el, "#captcha-code")
+                    Utils.attr(code,'disabled','disabled')
                     Utils.find(root.el, '#captcha-image').click()
+                    setTimeout(() => {
+                        Utils.removeAttr(code, 'disabled')
+                    }, 1000);
                 },
                 error: error => {
                     // 验证失败则从头再来
