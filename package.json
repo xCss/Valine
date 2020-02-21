@@ -31,7 +31,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "blueimp-md5": "^2.8.0",
-    "css-loader": "^0.28.4",
+    "css-loader": "^3.4.2",
     "exports-loader": "^0.6.3",
     "file-loader": "^0.11.2",
     "hanabi": "^0.4.0",
@@ -43,6 +43,7 @@
     "url-loader": "^0.6.2",
     "webpack": "^2.6.1",
     "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.9.1",
+    "xss": "^1.0.6"
   }
 }

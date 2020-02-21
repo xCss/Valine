@@ -1,6 +1,7 @@
 const VERSION = require('../package.json').version;
 const md5 = require('blueimp-md5');
 const marked = require('marked');
+const xss = require('xss');
 const autosize = require('autosize');
 const timeAgo = require('./utils/timeago');
 const detect = require('./utils/detect');
@@ -259,20 +260,26 @@ ValineFactory.prototype._init = function () {
         root.el.innerHTML = `
         <div class="vwrap">
         <div class="${`vheader item${inputEl.length}`}">${inputEl.join('')}</div>
-        <div class="vedit"><textarea id="veditor" class="veditor vinput" placeholder="${root.placeholder}"></textarea>
-            <div class="vctrl"><span class="vemoji-btn">${root.locale['ctrl']['emoji']}</span> | <span
-                    class="vpreview-btn">${root.locale['ctrl']['preview']}</span></div>
+        <div class="vedit">
+            <textarea id="veditor" class="veditor vinput" placeholder="${root.placeholder}"></textarea>
+            <div class="vctrl">
+                <span class="vemoji-btn">${root.locale['ctrl']['emoji']}</span> | <span
+                    class="vpreview-btn">${root.locale['ctrl']['preview']}</span>
+            </div>
             <div class="vemojis" style="display:none;"></div>
             <div class="vinput vpreview" style="display:none;"></div>
         </div>
         <div class="vcontrol">
-            <div class="col col-20" title="Markdown is supported"><a href="https://segmentfault.com/markdown"
-                    target="_blank"><svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+            <div class="col col-20" title="Markdown is supported">
+                <a href="https://segmentfault.com/markdown" target="_blank">
+                    <svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16"
                         aria-hidden="true">
                         <path fill-rule="evenodd"
                             d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z">
                         </path>
-                    </svg></a></div>
+                    </svg>
+                </a>
+            </div>
             <div class="col col-80 text-right">
                 ${root.config.verify||root.config.notify? `<img id="captcha-image" /><input id="captcha-code" class="vcode vinput" maxlength="4" oninput="this.value=this.value.replace(/[^a-z0-9]/g,'');" placeHolder="验证码" >`:''}                
                 <button id="captcha-btn" type="button" title="快捷键:Ctrl+Enter" class="vsubmit vbtn">${root.locale['ctrl']['reply']}</button>
@@ -601,7 +608,7 @@ ValineFactory.prototype.bind = function (option) {
      */
     let xssFilter = (content) => {
         let vNode = Utils.create('div');
-        vNode.insertAdjacentHTML('afterbegin', content);
+        vNode.insertAdjacentHTML('afterbegin', xss(content));
         let ns = Utils.findAll(vNode, "*");
         let rejectNodes = ['INPUT', 'STYLE', 'SCRIPT', 'IFRAME', 'FRAME', 'AUDIO', 'VIDEO', 'EMBED', 'META', 'TITLE', 'LINK'];
         let __replaceVal = (node, attr) => {
@@ -618,7 +625,6 @@ ValineFactory.prototype.bind = function (option) {
             if (n.nodeName === 'A') __replaceVal(n, 'href')
             Utils.clearAttr(n)
         })
-
         return vNode.innerHTML
     }
 
@@ -984,7 +990,7 @@ ValineFactory.prototype.bind = function (option) {
                     // console.log('VALIDATE SUCCESS', validateCode)
                     submitEvt()
                     // 验证成功后也刷新验证码并清空输入框
-                    Utils.find(root.el,'#captcha-image').click()
+                    Utils.find(root.el, '#captcha-image').click()
                 },
                 error: error => {
                     // 验证失败则从头再来
