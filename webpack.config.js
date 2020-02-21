@@ -9,14 +9,14 @@ let BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
 const plugins = [];
 const banner =
-  'Valine v' + version + '\n' +
-  '(c) 2017-' + new Date().getFullYear() + ' xCss\n' +
-  'Released under the GPL-2.0 License.\n' +
-  'Last Update: ' + (new Date()).toLocaleString();
+    'Valine v' + version + '\n' +
+    '(c) 2017-' + new Date().getFullYear() + ' xCss\n' +
+    'Released under the GPL-2.0 License.\n' +
+    'Last Update: ' + (new Date()).toLocaleString();
 
 const TARGET = process.env
-if(TARGET.NODE_ENV == 'production'){
-    BUILD_PATH = path.resolve(ROOT_PATH, 'dist/'+version);
+if (TARGET.NODE_ENV == 'production') {
+    BUILD_PATH = path.resolve(ROOT_PATH, 'dist/' + version);
 }
 
 module.exports = env => {
@@ -28,8 +28,8 @@ module.exports = env => {
         }));
         plugins.push(
             new webpack.optimize.UglifyJsPlugin({
-                cache:true,
-                parallel:true,
+                cache: true,
+                parallel: true,
                 compress: {
                     warnings: false,
                     // 内嵌定义了但是只用到一次的变量
@@ -38,15 +38,15 @@ module.exports = env => {
                     reduce_vars: true,
                     drop_console: true
                 },
-                sourceMap:false,
-                uglifyOptions:{
-                    output:{
+                sourceMap: false,
+                uglifyOptions: {
+                    output: {
                         // 删除所有的注释
                         comments: false,
-                        beautify:false,
-                        ascii_only:true
+                        beautify: false,
+                        ascii_only: true
                     },
-                    safari10:true
+                    safari10: true
                 }
             })
         );
@@ -70,7 +70,7 @@ module.exports = env => {
             libraryTarget: 'umd'
         },
         resolve: {
-            extensions: ['.js','.json', '.jsx','.css','.scss']
+            extensions: ['.js', '.json', '.jsx', '.css', '.scss']
         },
         devtool: 'cheap-module-source-map',
 
@@ -79,7 +79,7 @@ module.exports = env => {
             port: 8088,
             inline: true,
             host: '127.0.0.1',
-            publicPath:'/dist/',
+            publicPath: '/dist/',
             compress: true,
             stats: 'errors-only', //只在发生错误时输出
             overlay: { //当有编译错误或者警告的时候显示一个全屏overlay
@@ -92,10 +92,10 @@ module.exports = env => {
             rules: [{
                 test: /\.js$/,
                 use: {
-                    loader:'babel-loader',
-                    options:{
-                        cacheDirectory:true,
-                        compact:true
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true,
+                        compact: true
                     }
                 },
                 exclude: /node_modules/
