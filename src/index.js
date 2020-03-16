@@ -729,7 +729,7 @@ ValineFactory.prototype.bind = function (option) {
             'class': 'vcard',
             'id': rt.id
         });
-        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="${_avatarSetting['cdn']+md5(rt.get('mail'))+_avatarSetting['params']}">`;
+        let _img = _avatarSetting['hide'] ? '' : `<img class="vimg" src="${_avatarSetting['cdn']+md5(rt.get('mail'))+_avatarSetting['params']}" alt="${rt.get('nick')}">`;
         let ua = rt.get('ua') || '';
         let uaMeta = '';
         if (ua) {
