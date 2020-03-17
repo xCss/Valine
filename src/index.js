@@ -96,6 +96,12 @@ const locales = {
     }
 }
 
+const getPath = function(){
+    if (typeof location == 'undefined') return '*';
+
+    return location.pathname.replace(/index\.html?$/, '').replace(/\/+$/,'');
+}
+
 let _avatarSetting = {
         cdn: 'https://gravatar.loli.net/avatar/',
         ds: ['mp', 'identicon', 'monsterid', 'wavatar', 'robohash', 'retro', ''],
@@ -104,12 +110,14 @@ let _avatarSetting = {
     },
     META = ['nick', 'mail', 'link'],
     _store = Storage && localStorage && localStorage instanceof Storage && localStorage,
-    _path = location.pathname.replace(/index\.html?$/, '');
+    _path = getPath()
+
+
 
 function ValineFactory(option) {
     let root = this;
     root.init(option);
-    // Valine init
+    console.log('--ValineFactory INIT')
     return root;
 }
 
@@ -431,6 +439,7 @@ let CounterFactory = {
  * @param {String} id
  */
 ValineFactory.prototype.Q = function (k) {
+    console.log('--Q:'+JSON.stringify(k))
     let root = this;
     let len = arguments.length;
     if (len == 1) {
@@ -498,6 +507,7 @@ ValineFactory.prototype.setPath = function (path) {
  * Bind Event
  */
 ValineFactory.prototype.bind = function (option) {
+    console.log('--ValineFactory BIND')
     let root = this;
 
     // load emojis
@@ -674,13 +684,18 @@ ValineFactory.prototype.bind = function (option) {
     }
 
     let query = (no = 1) => {
+        console.log('--ValineFactory query')
         let size = root.config.pageSize;
         let count = Number(Utils.find(root.el, '.vnum').innerText);
         root.loading.show();
+
+        //Refresh path for SPA
+        _path = getPath()
         let cq = root.Q(_path);
         cq.limit(size);
         cq.skip((no - 1) * size);
         cq.find().then(rets => {
+            console.log('--ValineFactory rets '+JSON.stringify(rets))
             let len = rets.length;
             let rids = []
             for (let i = 0; i < len; i++) {
@@ -710,8 +725,10 @@ ValineFactory.prototype.bind = function (option) {
             root.loading.hide().ErrorHandler(ex)
         })
     }
-
+    
+    _path = getPath()
     root.Q(_path).count().then(num => {
+        console.log('--ValineFactory root.Q')
         if (num > 0) {
             Utils.attr(Utils.find(root.el, '.vinfo'), 'style', 'display:block;');
             Utils.find(root.el, '.vcount').innerHTML = `<span class="vnum">${num}</span> ${root.locale['tips']['comments']}`;
@@ -889,7 +906,8 @@ ValineFactory.prototype.bind = function (option) {
         let Ct = AV.Object.extend(root.config.clazzName || 'Comment');
         // 新建对象
         let comment = new Ct();
-        let __path = '*' === _path ? location.pathname.replace(/index\.html?$/, '') : _path;
+        // let __path = '*' === _path ? location.pathname.replace(/index\.html?$/, '') : _path;
+        let __path = getPath()
         defaultComment['url'] = decodeURI(__path);
         defaultComment['insertedAt'] = new Date();
         if (atData['rid']) {
