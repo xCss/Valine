@@ -36,7 +36,7 @@ module.exports = env => {
                     collapse_vars: true,
                     // 提取出出现多次但是没有定义成变量去引用的静态值
                     reduce_vars: true,
-                    drop_console: false
+                    drop_console: true
                 },
                 sourceMap:false,
                 uglifyOptions:{
