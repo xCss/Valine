@@ -41,7 +41,7 @@ function detectFactory(u) {
         //系统或平台
         'Windows': u.indexOf('Windows') > -1,
         'Linux': u.indexOf('Linux') > -1 || u.indexOf('X11') > -1,
-        'Mac OS': u.indexOf('Macintosh') > -1,
+        'macOS': u.indexOf('Macintosh') > -1,
         'Android': u.indexOf('Android') > -1 || u.indexOf('Adr') > -1,
         'Ubuntu': u.indexOf('Ubuntu') > -1,
         'FreeBSD': u.indexOf('FreeBSD') > -1,
