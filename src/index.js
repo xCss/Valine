@@ -209,6 +209,9 @@ ValineFactory.prototype._init = function(){
             });
         } catch (ex) { }
 
+        // Counter
+        visitor && CounterFactory.add(AV.Object.extend('Counter'),root.config.path);
+
         // get comment count
         let els = Utils.findAll(document, '.valine-comment-count');
         Utils.each(els, (idx, el) => {
@@ -223,10 +226,6 @@ ValineFactory.prototype._init = function(){
                 }
             }
         })
-
-        // Counter
-        visitor && CounterFactory.add(AV.Object.extend('Counter'),root.config.path);
-
 
         let el = root.config.el || null;
         let _el = Utils.findAll(document, el);
@@ -337,13 +336,51 @@ let createCounter = function (Counter, o) {
     newCounter.set('title', o.title)
     newCounter.set('time', 1)
     newCounter.save().then(ret => {
-        Utils.find(o.el, '.leancloud-visitors-count').innerText = 1
+        if(o.el!=null){
+            //el为直接操作的对象，不做任何遍历取子项
+            o.el.innerText = 1
+        }
     }).catch(ex => {
         console.log(ex)
     });
 }
 let CounterFactory = {
     add(Counter,currPath) {
+        //站点访问量，为了避免首页也需要文章阅读量，url项取空（把'/'留出来）
+        let lvms = Utils.findAll(document, '.leancloud-visitors-sitecount');
+        let lvm = null;
+        let mtitle = 'WebSite';
+        if(lvms.length) {
+            lvm = lvms[0];
+            mtitle = Utils.attr(lvm, 'data-flag-title')?Utils.attr(lvm, 'data-flag-title'):'WebSite';
+        }
+        let om = {
+            el: lvm,
+            url: '',
+            xid: '',
+            title: mtitle
+        }
+        let mquery = new AV.Query(Counter);
+        mquery.equalTo('url', '');
+        mquery.find().then(ret => {
+            if (ret.length > 0) {
+                let v = ret[0];
+                v.increment("time");
+                v.save().then(rt => {
+                    if(lvm!=null){
+                        lvm.innerText = rt.get('time');
+                    }
+                }).catch(ex => {
+                    console.log(ex)
+                });
+            } else {
+                createCounter(Counter, om)
+            }
+        }).catch(ex => {
+            ex.code == 101 && createCounter(Counter, om)
+        })
+
+        //文章阅读量
         let root = this
         let lvs = Utils.findAll(document, '.leancloud_visitors,.leancloud-visitors');
         if (lvs.length) {
@@ -351,8 +388,9 @@ let CounterFactory = {
             let url = Utils.attr(lv, 'id');
             let title = Utils.attr(lv, 'data-flag-title');
             let xid = encodeURI(url);
+            let lvel = Utils.find(lv, '.leancloud-visitors-count');
             let o = {
-                el: lv,
+                el: lvel,
                 url: url,
                 xid: xid,
                 title: title
@@ -366,7 +404,7 @@ let CounterFactory = {
                         let v = ret[0];
                         v.increment("time");
                         v.save().then(rt => {
-                            Utils.find(lv, '.leancloud-visitors-count').innerText = rt.get('time')
+                            lvel.innerText = rt.get('time')
                         }).catch(ex => {
                             console.log(ex)
                         });
