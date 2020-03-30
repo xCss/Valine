@@ -8,8 +8,6 @@ const Utils = require('./utils/domUtils');
 const Emoji = require('./plugins/emojis');
 const hanabi = require('hanabi');
 const AV = require('leancloud-storage');
-// console.log(AV.Promise)
-import './utils/pollify';
 const defaultComment = {
     comment: '',
     nick: 'Anonymous',
