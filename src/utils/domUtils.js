@@ -22,47 +22,6 @@ const reHasEscapedHtml = RegExp(reEscapedHtml.source)
 
 
 const utils = {
-    /**
-     * 检测DOM是否加载完毕
-     * @param {Function} callback 
-     */
-    domReady(callback) {
-        if (doc.readyState === "complete" || (doc.readyState !== "loading" && !doc.documentElement.doScroll))
-            setTimeout(() => callback && callback(), 0)
-        else {
-            let handler = () => {
-                doc.removeEventListener("DOMContentLoaded", handler, false)
-                win.removeEventListener("load", handler, false)
-                callback && callback()
-            }
-            doc.addEventListener("DOMContentLoaded", handler, false)
-            win.addEventListener("load", handler, false)
-        }
-    },
-    /**
-     * 动态加载资源库 
-     * @param {String} sourceName 资源名 script/link
-     * @param {Object} attrs 需要加载属性/值
-     * @param {Function} callback 回调函数
-     */
-    dynamicLoadSource(sourceName, attrs, callback) {
-        let attrNameMap = {'script':'src','link':'href'};
-        let attr = attrNameMap[sourceName];
-        if (utils.find(doc, `${sourceName}[${attr}="${attrs[attr]}"]`)) {
-            typeof (callback) === 'function' && callback()
-        } else {
-            let s = utils.create(sourceName, attrs);
-            let h = doc.getElementsByTagName("head")[0];
-            h.appendChild(s);
-            s.onload = s.onreadystatechange = function () {
-                let vm = this;
-                if (! /*@cc_on!@*/ 0 || vm.readyState === 'loaded' || vm.readyState === 'complete') {
-                    vm.onload = vm.onreadystatechange = null;
-                    typeof (callback) === 'function' && callback()
-                }
-            }
-        }
-    },
     on(type, el, handler, capture) {
         type = type.split(' ')
         for (let i = 0, len = type.length; i < len; i++) {
