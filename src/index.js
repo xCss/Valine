@@ -767,6 +767,7 @@ ValineFactory.prototype.bind = function (option) {
             try {
                 // let MathJax = MathJax || '';
                 typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                typeof MathJax !== 'undefined' && MathJax.typeset();
                 if (typeof hljs !== 'undefined') {
                     Utils.each(Utils.findAll('pre code'), function (i, block) {
                         hljs.highlightBlock(block);
