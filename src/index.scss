@@ -29,23 +29,8 @@
         color: #1abc9c;
         text-decoration:none;
         display:inline-block;
-        &::before{
-            content:'';
-            position:absolute;
-            width:0;
-            right:0;
-            bottom:0;
-            height:1px;
-            background:#1abc9c;
-            transition: width .3s ease;
-        }
         &:hover {
             color: #D7191A;
-            &::before{
-                width:100%;
-                left:0;
-                right:auto;
-            }
         }
     }
     pre,code{
@@ -359,23 +344,8 @@
                     color: #1abc9c;
                     text-decoration:none;
                     display:inline-block;
-                    &::before{
-                        content:'';
-                        position:absolute;
-                        width:0;
-                        right:0;
-                        bottom:0;
-                        height:1px;
-                        background:#1abc9c;
-                        transition: width .3s ease;
-                    }
                     &:hover {
                         color: #D7191A;
-                        &::before{
-                            width:100%;
-                            left:0;
-                            right:auto;
-                        }
                     }
                 }
                 .vsys {
