@@ -52,6 +52,7 @@
     "balalaika": "^1.0.1",
     "element-closest": "^3.0.2",
     "storejs": "^1.0.25",
-    "xss": "^1.0.6"
+    "xss": "^1.0.6",
+    "leancloud-storage":"^3.0.4"
   }
 }
