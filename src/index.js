@@ -7,7 +7,7 @@ const detect = require('./utils/detect');
 const Utils = require('./utils/domUtils');
 const Emoji = require('./plugins/emojis');
 const hanabi = require('hanabi');
-const AV = require('leancloud-storage');
+const AV = require('leancloud-storage')
 const defaultComment = {
     comment: '',
     nick: 'Anonymous',
