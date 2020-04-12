@@ -1,5 +1,5 @@
-> 由于某些原因，`src目录`将暂停更新.  
-  For some reason, the `src directory` will not be updated.
+> 由于某些原因，`src目录`将从`v1.4.0`后暂停更新.  
+  For some reason, the `src directory` will be suspended from updating after `v1.4.0`.
 
 <img src='./src/assets/valine.png' width='200' align="right" />
 
