@@ -16,7 +16,7 @@
 - Safe by default.
 - No server-side implementation.
 - Support for full markdown syntax.
-- Simple and lightweight (~15kB gzipped).
+- Simple and lightweight.
 
 See the [Quick start](https://valine.js.org) for more details.
 
