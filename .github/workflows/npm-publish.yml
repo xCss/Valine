@@ -1,0 +1,25 @@
+name: npm-publish
+on:
+  push:
+    branches:
+      - master
+jobs:
+  npm-publish:
+    name: npm-publish
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@master
+    - name: Set up Node.js
+      uses: actions/setup-node@master
+      with:
+        node-version: 10.0.0
+    - name: Publish if version has been updated
+      uses: MHuiG/npm-publish-action@master
+      with:
+        tag_name: "v%s"
+        tag_message: "v%s"
+        commit_pattern: "^Release\\:(.*)"
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
