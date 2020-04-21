@@ -843,6 +843,14 @@ ValineFactory.prototype.bind = function (option) {
             })
             return;
         }
+        if (defaultComment['nick'].length < 3) {
+            inputs['nick'].focus();
+            return;
+        }
+        if (defaultComment['mail'].length < 6 || defaultComment['mail'].indexOf('@') < 1 || defaultComment['mail'].indexOf('.') < 3) {
+            inputs['mail'].focus();
+            return;
+        }
         if (defaultComment['comment'] == '') {
             inputs['comment'].focus();
             return;
