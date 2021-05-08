@@ -843,7 +843,7 @@ ValineFactory.prototype.bind = function (option) {
             })
             return;
         }
-        if (defaultComment['nick'].length < 3) {
+        if (defaultComment['nick'].length < 1) {
             inputs['nick'].focus();
             return;
         }
