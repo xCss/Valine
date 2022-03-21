@@ -35,10 +35,9 @@
     "file-loader": "^0.11.2",
     "microbundle": "^0.11.0",
     "node-polyglot": "^2.4.0",
-    "node-sass": "^4.14.1",
     "object-assign": "^4.1.1",
     "postcss-loader": "^2.0.5",
-    "sass-loader": "^6.0.3",
+    "sass-loader": "7",
     "style-loader": "^0.18.2",
     "url-loader": "^0.6.2",
     "webpack": "^2.6.1",
@@ -55,6 +54,7 @@
     "insane": "^2.6.2",
     "leancloud-storage": "^3.0.4",
     "marked": "^4.0.8",
+    "sass": "^1.49.9",
     "storejs": "^1.0.25",
     "xss": "^1.0.6"
   }
