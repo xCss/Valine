@@ -335,6 +335,21 @@
             .vhead {
                 line-height: 1.5;
                 margin-top: 0;
+                .vpriority{
+                    &:after{
+                        min-width: 30px;
+                        display: inline-block;
+                        text-align: center;
+                        font-size: 12px;
+                        color: #ff81aa;
+                        font-weight: normal;
+                        line-height: 18px;
+                        height: 18px;
+                        border: 1px solid #ff81aa;
+                        border-radius: 3px;
+                        content: 'Pinned';
+                    }
+                }
                 .vnick {
                     position:relative;
                     font-size: .875em;
