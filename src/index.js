@@ -429,6 +429,7 @@ ValineFactory.prototype.Q = function (k) {
         let q = AV.Query.or(notExist, isEmpty);
         if (k === '*') q.exists('url');
         else q.equalTo('url', decodeURI(k));
+        q.addDescending('priority');
         q.addDescending('createdAt');
         q.addDescending('insertedAt');
         return q;
@@ -730,9 +731,11 @@ ValineFactory.prototype.bind = function (option) {
         let _nick = '';
         let _t = rt.get('link')?(/^https?\:\/\//.test(rt.get('link')) ? rt.get('link') : 'http://'+rt.get('link')) : '';
         _nick = _t ? `<a class="vnick" rel="nofollow" href="${_t}" target="_blank" >${rt.get("nick")}</a>` : `<span class="vnick">${rt.get('nick')}</span>`;
+        let _t1 = rt.get('priority') || 0;
+        let _priority = _t1?`<span class="vpriority vpriority-${_t1}"></span>` : '';
         _vcard.innerHTML = `${_img}
             <div class="vh" rootid=${rt.get('rid') || rt.id}>
-                <div class="vhead">${_nick} ${uaMeta}</div>
+                <div class="vhead">${_priority} ${_nick} ${uaMeta}</div>
                 <div class="vmeta">
                     <span class="vtime">${timeAgo(rt.get('insertedAt') || rt.createdAt,root.locale)}</span>
                     <span class="vat">${root.locale['ctrl']['reply']}</span>
