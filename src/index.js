@@ -55,6 +55,44 @@ const locales = {
             now: '刚刚'
         }
     },
+    'zh-tw': {
+        head: {
+            nick: '暱稱',
+            mail: '電郵信箱',
+            link: '網址 (http://)',
+        },
+        tips: {
+            comments: '留言',
+            sofa: '來搶頭香~',
+            busy: '仍在提交中，請稍候...',
+            again: '請再試一次。'
+        },
+        ctrl: {
+            reply: '回覆',
+            ok: '好的',
+            sure: '確定',
+            cancel: '取消',
+            confirm: '確定',
+            continue: '繼續',
+            more: '查看更多...',
+            try: '再試一次',
+            preview: '預覽',
+            emoji: '表情符號'
+        },
+        error: {
+            99: '初始化失敗，請檢查 init 中的`el`元素。',
+            100: '初始化失敗，請檢查你的 AppId 和 AppKey。',
+            401: '未授權的動作，請檢查你的 AppId 和 AppKey。',
+            403: '遭到 API 網域白名單模式拒絕存取，請檢查你的「安全網域」設定。',
+        },
+        timeago: {
+            seconds: '秒前',
+            minutes: '分前',
+            hours: '小時前',
+            days: '天前',
+            now: '剛剛'
+        }
+    },
     en: {
         head: {
             nick: 'NickName',
