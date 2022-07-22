@@ -26,7 +26,7 @@ See the [Quick start](https://valine.js.org) for more details.
 ## Donate
 If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
 
-| Alipay | Wechat | 
+| Alipay | WeChat | 
 | :------: | :------: | 
 | <img width="150" src="./src/assets/alipay.png"> | <img width="135" src="./src/assets/wechat.png"> | 
 
