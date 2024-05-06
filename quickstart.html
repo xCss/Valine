@@ -356,9 +356,9 @@
       <div class="content-wrapper">
         <div class="document-formatting">
           <p>如果你想在某个网页或者文章页中使用Valine，请参照以下步骤配置</p>
-<h2 id="获取APP-ID-和-APP-Key"><a href="#获取APP-ID-和-APP-Key" class="headerlink" title="获取APP ID 和 APP Key"></a>获取APP ID 和 APP Key</h2><p>请先<a href="https://leancloud.cn/dashboard/login.html#/signin" target="_blank" rel="noopener">登录</a>或<a href="https://leancloud.cn/dashboard/login.html#/signup" target="_blank" rel="noopener">注册</a> <code>LeanCloud</code>, 进入<a href="https://leancloud.cn/dashboard/applist.html#/apps" target="_blank" rel="noopener">控制台</a>后点击左下角<a href="https://leancloud.cn/dashboard/applist.html#/newapp" target="_blank" rel="noopener">创建应用</a>：</p>
+<h2 id="获取AppID-和-AppKey"><a href="#获取AppID-和-AppKey" class="headerlink" title="获取AppID 和 AppKey"></a>获取AppID 和 AppKey</h2><p>请先<a href="https://console.leancloud.cn/login" target="_blank" rel="noopener">登录</a>或<a href="https://console.leancloud.cn/register" target="_blank" rel="noopener">注册</a> <code>LeanCloud</code>, 进入<a href="https://console.leancloud.cn/apps" target="_blank" rel="noopener">控制台</a>后点击左上角<code>创建应用</code>：</p>
 <p><img src="https://i.loli.net/2019/06/21/5d0c995c86fac81746.jpg" alt></p>
-<p>应用创建好以后，进入刚刚创建的应用，选择左下角的<code>设置</code>&gt;<code>应用Key</code>，然后就能看到你的<code>APP ID</code>和<code>APP Key</code>了：</p>
+<p>应用创建好以后，进入刚刚创建的应用，选择左边的<code>设置</code>&gt;<code>应用凭证</code>，然后就能看到你的<code>AppID</code>和<code>AppKey</code>了：</p>
 <p><img src="https://i.loli.net/2019/06/21/5d0c997a60baa24436.jpg" alt></p>
 <h2 id="HTML-片段"><a href="#HTML-片段" class="headerlink" title="HTML 片段"></a>HTML 片段</h2><p>修改初始化对象中的<code>appId</code>和<code>appKey</code>的值为上面刚刚获取到的值即可(其他可以默认)。
 
@@ -408,7 +408,7 @@ new Valine({
 })
 </code></pre>
 <h2 id="评论数据管理"><a href="#评论数据管理" class="headerlink" title="评论数据管理"></a>评论数据管理</h2><p>由于Valine 是无后端评论系统，所以也就没有开发评论数据管理功能。请自行登录<code>Leancloud应用</code>管理。  </p>
-<p>具体步骤：<code>登录</code>&gt;<code>选择你创建的应用</code>&gt;<code>存储</code>&gt;选择Class <code>Comment</code>，然后就可以尽情的发挥你的权利啦(～￣▽￣)～</p>
+<p>具体步骤：<code>登录</code>&gt;<code>选择你创建的应用</code>&gt;<code>数据存储</code>&gt;<code>结构化数据</code>&gt;选择Class <code>Comment</code>，然后就可以尽情的发挥你的权利啦(～￣▽￣)～</p>
 <blockquote>
 <p>当然，你也可以配合 <a href="https://github.com/DesertsP" target="_blank" rel="noopener">@DesertsP</a> 开发的 <a href="https://github.com/DesertsP/Valine-Admin" target="_blank" rel="noopener">Valine-Admin</a> 进行<code>评论数据管理</code></p>
 </blockquote>
