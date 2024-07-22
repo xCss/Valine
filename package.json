@@ -1,6 +1,6 @@
 {
   "name": "valine",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A simple comment system based on Leancloud.",
   "main": "dist/Valine.min.js",
   "author": "xCss <xioveliu@gmail.com> (https://github.com/xCss)",
@@ -49,7 +49,6 @@
     "balajs": "^1.0.7",
     "balalaika": "^1.0.1",
     "blueimp-md5": "^2.8.0",
-    "dompurify": "^2.3.8",
     "element-closest": "^3.0.2",
     "hanabi": "^0.4.0",
     "insane": "^2.6.2",
