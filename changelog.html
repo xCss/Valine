@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- Basic -->
+    <title>更新日志 | Valine 一款快速、简洁且高效的无后端评论系统。</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//valine.js.org">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//fonts.loli.net">
+    <link rel="dns-prefetch" href="//cravatar.cn">
+    <link rel="dns-prefetch" href="//gstatic.loli.net">
+    <meta name="description" content="A fast, simple & powerful comment system.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/script/manifest.json">
+    <meta name="theme-color" content="#02467E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon-152x152.png">
+    <meta name="msapplication-TileImage" content="/images/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+      <link rel="shortcut icon" href="/images/favicon.ico">
+      <link rel="icon" href="/images/favicon.ico">
+    
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://valine.js.org">
+    <meta property="og:title" content="更新日志 | Valine">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta name="twitter:site" content="@xCss">
+    <meta name="twitter:title" content="更新日志 | Valine">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="">
+    
+    <meta name="description" content="Valine - 一款快速、简洁且高效的无后端社会化评论系统。" />
+    <meta name="keywords" content="评论系统,Valine,Valine Comment System,Valine Comment,Comment System,Valine评论系统, 社会化评论系统, 快速,简洁,高效,快速简洁高效的评论系统,无后端评论系统" />
+    <!-- Misc -->
+    <meta name="google-site-verification" content="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    
+      <link rel="stylesheet" href="/style/bundle-meteor.css">
+    
+    
+    <script src='//unpkg.com/hanabi@0.4.0/dist/hanabi.min.js' ></script>
+
+    
+  </head>
+  <body class="">
+      
+
+  <div class="nav dark">
+    <div class="nav-group left">
+      <div class="nav-item mobile-button js-sidebar-toggle show-mobile">
+        <span class="icon-menu"></span>
+      </div>
+      <div class="nav-item">
+        
+        <a class="logo-wrapper" href="/" title="A fast, simple & powerful comment system. Valine"  >
+          <img src="/images/valine.png" alt="A fast, simple & powerful comment system." class="logo"/>
+          
+            <span>Valine</span>
+          
+        </a>
+      </div>
+    </div>
+
+
+    <div class="nav-group right">
+      <div class="nav-item show-desktop">
+        
+        <a class="link" href="/en/changelog.html" >
+          <span>English Docs</span>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class="" href="/valine.js.org" title="A fast, simple & powerful comment system."  >
+        <span>A fast, simple & powerful comment system. Valine</span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap"></div>
+    
+    <div class="wrapper-search">
+      <div class="input-area">
+        <div class="input-symbol small round">
+          <input type="text" placeholder="Search" id="desktop-search-input" />
+          <span class="icon-search"></span>
+        </div>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+
+    <ul class="toc">
+      
+
+        <li>
+          <ul class="list-toc">
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="."
+                  class="sidebar-link "
+                >
+                  <span>介绍</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="quickstart.html"
+                  class="sidebar-link "
+                >
+                  <span>快速开始</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc current">
+                <a
+                  href=""
+                  class="sidebar-link current"
+                >
+                  <span>更新日志</span>
+                </a>
+              </li>
+              
+            
+          </ul>
+        </li>
+        <hr />
+      
+
+        <li>
+          <ul class="list-toc">
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="configuration.html"
+                  class="sidebar-link "
+                >
+                  <span>配置项</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="avatar.html"
+                  class="sidebar-link "
+                >
+                  <span>头像配置</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="notify.html"
+                  class="sidebar-link "
+                >
+                  <span>邮件提醒</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="i18n.html"
+                  class="sidebar-link "
+                >
+                  <span>多语言支持</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="visitor.html"
+                  class="sidebar-link "
+                >
+                  <span>文章阅读量统计</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="emoji.html"
+                  class="sidebar-link "
+                >
+                  <span>自定义表情</span>
+                </a>
+              </li>
+              
+            
+          </ul>
+        </li>
+        <hr />
+      
+
+        <li>
+          <ul class="list-toc">
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="jekyll.html"
+                  class="sidebar-link "
+                >
+                  <span>在 Jekyll 中使用</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="hexo.html"
+                  class="sidebar-link "
+                >
+                  <span>在 Hexo 中使用</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="hugo.html"
+                  class="sidebar-link "
+                >
+                  <span>在 Hugo 中使用</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="vuepress.html"
+                  class="sidebar-link "
+                >
+                  <span>在 VuePress 中使用</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="gatsby.html"
+                  class="sidebar-link "
+                >
+                  <span>在 Gatsby 中使用</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="cdn.html"
+                  class="sidebar-link "
+                >
+                  <span>使用 CDN</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="contact.html"
+                  class="sidebar-link "
+                >
+                  <span>联系方式</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="faq.html"
+                  class="sidebar-link "
+                >
+                  <span>FAQ</span>
+                </a>
+              </li>
+              
+            
+          </ul>
+        </li>
+        <hr />
+      
+    </ul>
+  </div>
+</div>
+
+    <div class="content">
+
+      <div class="header-content">
+        <div class="header-wrapper">
+          <div class="title-wrapper">
+            <h1 class="title-page">
+              更新日志
+            </h1>
+            
+          </div>
+
+          <div class="page-actions">
+            <div class="actions-group">
+              <a class="btn tertiary small round lowercase" href="https://github.com/xcss/Valine-docs/tree/master/source/changelog.md" target="_blank">
+                <span class="icon-github"></span>
+                <span>在Github上编辑此页</span>
+              </a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="document-formatting">
+          <h2 id="v1-5-2-2024-07-22"><a href="#v1-5-2-2024-07-22" class="headerlink" title="v1.5.2, 2024-07-22"></a>v1.5.2, 2024-07-22</h2><ul>
+<li><code>A</code> 新增<code>onCommentSubmmited</code>回调，用于自定义提交评论后的操作 <a href="https://github.com/xCss/Valine/issues/431" target="_blank" rel="noopener">#431</a></li>
+<li><code>U</code> 优化CDN地址 <code>unpkg</code>-&gt;<code>elemecdn</code> <a href="https://github.com/xCss/Valine-Docs/issues/404" target="_blank" rel="noopener">#404</a> </li>
+<li><code>U</code> 优化当昵称为必填时的字数限制 <a href="https://github.com/xCss/Valine/issues/361" target="_blank" rel="noopener">#361</a></li>
+<li><code>F</code> 修复IP地址获取失败</li>
+</ul>
+<h2 id="v1-5-0-2022-06-24"><a href="#v1-5-0-2022-06-24" class="headerlink" title="v1.5.0, 2022-06-24"></a>v1.5.0, 2022-06-24</h2><ul>
+<li><code>U</code> 优化UA判断，增加对<code>Windows 11</code>的支持  </li>
+<li><code>F</code> 修复可能存在的xss漏洞 <a href="https://github.com/xCss/Valine/issues/400" target="_blank" rel="noopener">#400</a>  </li>
+<li><code>F</code> 修复图片无法上传的问题 <a href="https://github.com/xCss/Valine/issues/396" target="_blank" rel="noopener">#396</a>  <a href="https://github.com/xCss/Valine/issues/380" target="_blank" rel="noopener">#380</a>  </li>
+</ul>
+<h2 id="v1-4-17-v1-4-18-2022-03-21"><a href="#v1-4-17-v1-4-18-2022-03-21" class="headerlink" title="v1.4.17~v1.4.18, 2022-03-21"></a>v1.4.17~v1.4.18, 2022-03-21</h2><ul>
+<li><code>F</code> 修复可能的xss漏洞 <a href="https://github.com/xCss/Valine-Docs/issues/65" target="_blank" rel="noopener">#65</a> </li>
+<li><code>U</code> 更新CDN地址 <code>jsdelivr</code>-&gt;<code>unpkg</code></li>
+</ul>
+<h2 id="v1-4-16-2021-10-19"><a href="#v1-4-16-2021-10-19" class="headerlink" title="v1.4.16, 2021-10-19"></a>v1.4.16, 2021-10-19</h2><ul>
+<li><code>F</code> 修复昵称的xss漏洞 <a href="https://github.com/xCss/Valine/issues/368" target="_blank" rel="noopener">#368</a> <a href="https://github.com/xCss/Valine/issues/363" target="_blank" rel="noopener">#363</a> <a href="https://github.com/xCss/Valine/issues/352" target="_blank" rel="noopener">#352</a> <a href="https://github.com/xCss/Valine/issues/348" target="_blank" rel="noopener">#348</a> </li>
+<li><code>F</code> 修复遍历<code>Array</code>问题 <a href="https://github.com/xCss/Valine/issues/358" target="_blank" rel="noopener">#358</a> </li>
+<li><code>F</code> 修复评论内容中超链接<code>target</code>定向错误问题 <a href="https://github.com/xCss/Valine/issues/318" target="_blank" rel="noopener">#318</a> </li>
+<li><code>F</code> 更新Leancloud域名 <a href="https://github.com/xCss/Valine/issues/320" target="_blank" rel="noopener">#320</a> </li>
+<li><code>F</code> 修复某些异常未正常捕获的Bug <a href="https://github.com/xCss/Valine/issues/344" target="_blank" rel="noopener">#344</a> </li>
+<li><code>F</code> 修复QQ昵称获取失败的问题 <a href="https://github.com/xCss/Valine/issues/354" target="_blank" rel="noopener">#354</a> </li>
+</ul>
+<h2 id="v1-4-11-v1-4-14-2020-04-26"><a href="#v1-4-11-v1-4-14-2020-04-26" class="headerlink" title="v1.4.11~v1.4.14, 2020-04-26"></a>v1.4.11~v1.4.14, 2020-04-26</h2><ul>
+<li><code>F</code> 紧急重新修复可能存在的xss漏洞 <a href="https://github.com/xCss/Valine/issues/298" target="_blank" rel="noopener">#298</a> <a href="https://github.com/xCss/Valine/issues/294" target="_blank" rel="noopener">#294</a> <a href="https://github.com/xCss/Valine/issues/293" target="_blank" rel="noopener">#293</a></li>
+<li><code>F</code> 再次修复阅读数回填失败的Bug</li>
+<li><code>F</code> 修复某些异常未正常捕获的Bug</li>
+</ul>
+<h2 id="v1-4-10-2020-04-25"><a href="#v1-4-10-2020-04-25" class="headerlink" title="v1.4.10, 2020-04-25"></a>v1.4.10, 2020-04-25</h2><ul>
+<li><code>F</code> 修复表情判断失败的Bug <a href="https://github.com/xCss/Valine/issues/286" target="_blank" rel="noopener">#286</a> <a href="https://github.com/xCss/Valine/issues/296" target="_blank" rel="noopener">#296</a> </li>
+<li><code>F</code> 修复可能存在的xss漏洞 <a href="https://github.com/xCss/Valine/issues/294" target="_blank" rel="noopener">#294</a> <a href="https://github.com/xCss/Valine/issues/293" target="_blank" rel="noopener">#293</a> </li>
+<li><code>F</code> 修复阅读数回填失败的Bug</li>
+<li><code>F</code> 修复获取QQ信息时的缓存Bug</li>
+<li><code>F</code> 表情size适配修复 <a href="https://github.com/xCss/Valine/issues/295" target="_blank" rel="noopener">#295</a> </li>
+<li><code>U</code> 一些样式修改</li>
+<li><code>U</code> 代码逻辑优化</li>
+</ul>
+<h2 id="v1-4-8-v1-4-9-2020-04-23"><a href="#v1-4-8-v1-4-9-2020-04-23" class="headerlink" title="v1.4.8~v1.4.9, 2020-04-23"></a>v1.4.8~v1.4.9, 2020-04-23</h2><ul>
+<li><code>F</code> 优化SDK加载逻辑，修复<code>Code 98</code>错误 <a href="https://github.com/xCss/Valine/issues/289" target="_blank" rel="noopener">#289</a> <a href="https://github.com/xCss/Valine/issues/288" target="_blank" rel="noopener">#288</a> <a href="https://github.com/xCss/Valine/issues/285" target="_blank" rel="noopener">#285</a></li>
+<li><code>F</code> 修复文章列表<code>阅读次数</code>回填失败的Bug <a href="https://github.com/xCss/Valine/issues/287" target="_blank" rel="noopener">#287</a> <a href="https://github.com/xCss/Valine/issues/272" target="_blank" rel="noopener">#272</a> </li>
+<li><code>U</code> 一些样式优化 <a href="https://github.com/xCss/Valine/issues/283" target="_blank" rel="noopener">#283</a></li>
+<li><code>U</code> 代码逻辑优化</li>
+</ul>
+<h2 id="v1-4-6-v1-4-7-2020-04-22"><a href="#v1-4-6-v1-4-7-2020-04-22" class="headerlink" title="v1.4.6~v1.4.7, 2020-04-22"></a>v1.4.6~v1.4.7, 2020-04-22</h2><ul>
+<li><code>A</code> 新增<code>必填项</code>设置 <a href="https://github.com/xCss/Valine/issues/281" target="_blank" rel="noopener">#281</a> <a href="https://github.com/xCss/Valine/issues/59" target="_blank" rel="noopener">#59</a></li>
+<li><code>A</code> 新增<code>评论框</code>获取<code>QQ头像</code>和<code>QQ昵称</code>启用属性<code>enableQQ</code>，需主动启用 <a href="https://github.com/xCss/Valine/issues/277" target="_blank" rel="noopener">#277</a></li>
+<li><code>F</code> 修复样式被覆盖的Bug <a href="https://github.com/xCss/Valine/issues/284" target="_blank" rel="noopener">#284</a> <a href="https://github.com/xCss/Valine/issues/270" target="_blank" rel="noopener">#270</a></li>
+<li><code>F</code> 修复使用了低版本的<code>av-min.js</code>造成的初始化错误</li>
+<li><code>U</code> 一些样式优化</li>
+<li><code>U</code> 代码逻辑优化</li>
+</ul>
+<h2 id="v1-4-5-2020-04-21"><a href="#v1-4-5-2020-04-21" class="headerlink" title="v1.4.5, 2020-04-21"></a>v1.4.5, 2020-04-21</h2><ul>
+<li><code>A</code> 新增QQ头像的支持(<code>昵称框</code>输入QQ号试试) <a href="https://github.com/xCss/Valine/issues/192" target="_blank" rel="noopener">#192</a></li>
+<li><code>A</code> 新增自定义表情 <a href="https://github.com/xCss/Valine/issues/261" target="_blank" rel="noopener">#261</a> <a href="https://github.com/xCss/Valine/issues/260" target="_blank" rel="noopener">#260</a> <a href="https://github.com/xCss/Valine/issues/150" target="_blank" rel="noopener">#150</a></li>
+<li><code>F</code> 修复marked渲染错误的Bug <a href="https://github.com/xCss/Valine/issues/275" target="_blank" rel="noopener">#275</a> <a href="https://github.com/xCss/Valine/issues/269" target="_blank" rel="noopener">#269</a></li>
+<li><code>F</code> 修复代码高亮样式被覆盖的Bug <a href="https://github.com/xCss/Valine/issues/270" target="_blank" rel="noopener">#270</a></li>
+<li><code>F</code> 修复阅读次数异常的Bug <a href="https://github.com/xCss/Valine/issues/272" target="_blank" rel="noopener">#272</a></li>
+<li><code>F</code> 修复在夜间模式下样式渲染异常的Bug</li>
+<li><code>U</code> 一些样式优化</li>
+<li><code>U</code> 代码逻辑优化</li>
+</ul>
+<h2 id="v1-4-0-1-4-4-2020-04-11"><a href="#v1-4-0-1-4-4-2020-04-11" class="headerlink" title="v1.4.0~1.4.4, 2020-04-11"></a>v1.4.0~1.4.4, 2020-04-11</h2><ul>
+<li><code>A</code> 新的SDK加载逻辑</li>
+<li><code>A</code> 新增图片<code>表情</code></li>
+<li><code>A</code> 新增<code>截图粘贴</code>上传</li>
+<li><code>A</code> 新增<code>图片拖拽至评论框</code>上传</li>
+<li><code>A</code> 新增对<code>MathJax</code>的支持</li>
+<li><code>A</code> 新增对<code>KaTex</code>的支持</li>
+<li><code>A</code> 新增评论框<code>楼内回复</code></li>
+<li><code>A</code> 新增对<code>夜间模式</code>的支持 <a href="https://github.com/xCss/Valine/issues/221" target="_blank" rel="noopener">#221</a></li>
+<li><code>A</code> 全新的评论区UI界面 </li>
+<li><code>A</code> 新增对<code>zh-CN/zh-TW/en/jp</code>等多国语言的支持</li>
+<li><code>F</code> 修复回复评论时评论数据需要刷新才会显示的<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/257" target="_blank" rel="noopener">#257</a></li>
+<li><code>F</code> 修复<code>表情</code>和<code>预览</code>只能点开不能收回的<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/254" target="_blank" rel="noopener">#254</a></li>
+<li><code>F</code> 修复<code>Edge浏览器</code>识别为<code>Chrome</code>的<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/250" target="_blank" rel="noopener">#250</a></li>
+<li><code>F</code> 修复<code>Storage is not defined</code>的<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/242" target="_blank" rel="noopener">#242</a></li>
+<li><code>F</code> 修复可能存在的<code>xss漏洞</code> <a href="https://github.com/xCss/Valine/issues/218" target="_blank" rel="noopener">#218</a></li>
+<li><code>F</code> 修复分页<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/196" target="_blank" rel="noopener">#196</a></li>
+<li><code>F</code> 修复点击<code>展开更多</code>击穿<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/180" target="_blank" rel="noopener">#180</a></li>
+<li><code>F</code> 修复个别UA识别失败的<code>Bug</code></li>
+<li><code>F</code> 修复回复评论后评论数变为1的<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/264" target="_blank" rel="noopener">#264</a> </li>
+<li><code>U</code> 表情图片懒加载 <a href="https://github.com/xCss/Valine/issues/261" target="_blank" rel="noopener">#261</a> </li>
+<li><code>U</code> 删除<code>验证码</code> <a href="https://github.com/xCss/Valine/issues/207" target="_blank" rel="noopener">#207</a></li>
+<li><code>U</code> 删除自带的<code>邮件提醒</code> <a href="https://github.com/xCss/Valine/issues/20" target="_blank" rel="noopener">#20</a></li>
+<li><code>U</code> 代码逻辑优化</li>
+</ul>
+<blockquote>
+<p><code>注</code>: <code>MathJax</code> 和 <code>KaTex</code> 需要当前页面已加载并配置好相关的资源文件.</p>
+</blockquote>
+<h2 id="v1-3-10-2019-08-29"><a href="#v1-3-10-2019-08-29" class="headerlink" title="v1.3.10, 2019-08-29"></a>v1.3.10, 2019-08-29</h2><ul>
+<li><code>A</code> 新的SDK加载逻辑</li>
+<li><code>A</code> 新增<strong>可选</strong>配置项<code>serverURLs</code>，默认<code>http://自动检测节点.avoscloud.com</code> <a href="https://github.com/xCss/Valine/issues/206" target="_blank" rel="noopener">#206</a> <a href="https://github.com/xCss/Valine/issues/203" target="_blank" rel="noopener">#203</a> <a href="https://github.com/xCss/Valine/issues/194" target="_blank" rel="noopener">#194</a></li>
+<li><code>F</code> 修复列表页阅读量统计失效BUG <a href="https://github.com/xCss/Valine/issues/136" target="_blank" rel="noopener">#136</a> </li>
+<li><code>F</code> 其他BUG修复</li>
+</ul>
+<h2 id="v1-3-8-v1-3-9-2019-06-26"><a href="#v1-3-8-v1-3-9-2019-06-26" class="headerlink" title="v1.3.8,v1.3.9, 2019-06-26"></a>v1.3.8,v1.3.9, 2019-06-26</h2><ul>
+<li><code>A</code> 新的SDK加载逻辑</li>
+<li><code>F</code> 修复<code>字体样式</code>/<code>待办事项</code>渲染问题 <a href="https://github.com/xCss/Valine/issues/175" target="_blank" rel="noopener">#175</a> <a href="https://github.com/xCss/Valine/issues/182" target="_blank" rel="noopener">#182</a> </li>
+<li><code>F</code> 修复各节点无法访问的Bug <a href="https://github.com/xCss/Valine/issues/188" target="_blank" rel="noopener">#188</a> <a href="https://github.com/xCss/Valine/issues/189" target="_blank" rel="noopener">#189</a> <a href="https://github.com/xCss/Valine/issues/190" target="_blank" rel="noopener">#190</a> </li>
+<li><code>F</code> 紧急修复<code>无回复按钮</code> Bug</li>
+<li><code>F</code> 其他 Bug 修复</li>
+</ul>
+<h2 id="v1-3-7-2019-06-21"><a href="#v1-3-7-2019-06-21" class="headerlink" title="v1.3.7, 2019-06-21"></a>v1.3.7, 2019-06-21</h2><ul>
+<li><code>A</code> 新增<code>clazzName</code>字段，自定义配置LeanCloud表名 <a href="https://github.com/xCss/Valine/issues/162" target="_blank" rel="noopener">#162</a></li>
+<li><code>F</code> <strong>修复LeanCloud服务不可访问问题</strong></li>
+<li><code>F</code> 修复待办事项列表渲染<code>Bug</code> <a href="https://github.com/xCss/Valine/issues/182" target="_blank" rel="noopener">#182</a></li>
+<li><code>F</code> 尝试性修复字体大小问题 <a href="https://github.com/xCss/Valine/issues/175" target="_blank" rel="noopener">#175</a><h2 id="v1-3-6-2019-04-01"><a href="#v1-3-6-2019-04-01" class="headerlink" title="v1.3.6, 2019-04-01"></a>v1.3.6, 2019-04-01</h2></li>
+<li><code>F</code> 修复代码高亮失效的 <code>Bug</code></li>
+<li><code>F</code> 修复以前可以使用<code>Pjax</code>而<code>v1.3.5</code>版本失效的 <code>Bug</code> (感谢小伙伴 <a href="https://github.com/sxyugao" target="_blank" rel="noopener">@sxyugao</a> 提供的建议)</li>
+<li><code>F</code> 修复评论内容中点击 <code>@NickName</code> 跳转到新页面的 <code>Bug</code></li>
+<li><code>F</code> 其他 <code>Bug</code> 修复</li>
+</ul>
+<h2 id="v1-3-5-2019-03-29"><a href="#v1-3-5-2019-03-29" class="headerlink" title="v1.3.5, 2019-03-29"></a>v1.3.5, 2019-03-29</h2><ul>
+<li><code>A</code> 新增隐私保护：移除页面中的敏感(E-mail)数据 </li>
+<li><code>A</code> 新增<code>recordIP</code> 属性(<code>Boolean</code>)：增加IP统计 by <a href="https://github.com/Showfom" target="_blank" rel="noopener">@Showfom</a> <a href="https://github.com/xCss/Valine/issues/160" target="_blank" rel="noopener">#160</a> </li>
+<li><code>U</code> 一些样式修改</li>
+<li><code>U</code> 代码逻辑优化</li>
+</ul>
+<h2 id="v1-3-4-2018-11-24"><a href="#v1-3-4-2018-11-24" class="headerlink" title="v1.3.4, 2018-11-24"></a>v1.3.4, 2018-11-24</h2><ul>
+<li><code>F</code> 修复<code>img</code>的<code>xss</code>安全漏洞</li>
+<li><code>F</code> 修复<code>embed</code>的<code>xss</code>安全漏洞</li>
+<li><code>F</code> 修复评论框内容不重置的bug</li>
+</ul>
+<h2 id="v1-3-3-2018-09-26"><a href="#v1-3-3-2018-09-26" class="headerlink" title="v1.3.3, 2018-09-26"></a>v1.3.3, 2018-09-26</h2><ul>
+<li><code>F</code> 修复可以自定义<code>CSS</code>的 Bug</li>
+</ul>
+<h2 id="v1-3-1-2018-09-03"><a href="#v1-3-1-2018-09-03" class="headerlink" title="v1.3.1, 2018-09-03"></a>v1.3.1, 2018-09-03</h2><ul>
+<li><code>A</code> 新增 <code>avatarForce</code> 字段，每次访问强制拉取最新的<code>评论列表头像</code></li>
+<li><code>F</code> 修复提交评论后，评论框不重置的 Bug</li>
+</ul>
+<h2 id="v1-3-0-2018-07-29"><a href="#v1-3-0-2018-07-29" class="headerlink" title="v1.3.0, 2018-07-29"></a>v1.3.0, 2018-07-29</h2><ul>
+<li><code>A</code> 新增 <code>pid</code> 字段</li>
+<li><code>A</code> 新增<code>at</code>锚点定位</li>
+<li><code>U</code> 过滤掉 <code>iframe</code> 等HTML元素</li>
+<li><code>F</code> BUG 修复</li>
+</ul>
+<hr>
+<p>更多<a href="https://github.com/xCss/Valine/releases" target="_blank" rel="noopener">更新日志 &gt;</a></p>
+<hr>
+
+        </div>
+        <div class="pagination">
+          <div class="content-wrapper">
+            
+            
+              <a class="link primary prev" href="quickstart.html">
+                <span class="subtitle-pagination">
+                  上一篇
+                </span>
+                快速开始
+              </a>
+            
+            
+              <a class="link primary next" href="configuration.html">
+                <span class="subtitle-pagination">
+                  下一篇
+                </span>
+                配置项
+              </a>
+            
+          </div>
+        </div>
+        
+        
+          <div class="vcomment"></div>
+          <!-- <script src="https://cdn.jsdelivr.net/npm/valine"></script>   -->
+          
+          <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+          <script>
+            var path = window.location.pathname.replace('index.html',''),
+                isEN = path.indexOf('en') > -1,
+                valineConfig = {
+                  el: '.vcomment',
+                  appId: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
+                  appKey: 'iuneD4hXPQImdHQSRE0aOcRF',
+                  placeholder: 'Just Go Go.',
+                  avatar:'mp',
+                  avatar_cdn: 'https://cravatar.cn/avatar/',
+                  path: path,
+                  recordIP: true,
+                  lang: isEN ? 'en' : 'zh-cn',
+                  visitor: true,
+                  enableQQ: true,
+                  emojiCDN: path.indexOf('emoji') > -1 ? '//i0.hdslb.com/bfs/emote/' : '//img.t.sinajs.cn/t4/appstyle/expression/ext/normal/',
+                  emojiMaps: path.indexOf('emoji') > -1 ? {
+                    "tv_doge": "6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png",
+                    "tv_亲亲": "a8111ad55953ef5e3be3327ef94eb4a39d535d06.png",
+                    "tv_偷笑": "bb690d4107620f1c15cff29509db529a73aee261.png",
+                    "tv_再见": "180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png",
+                    "tv_冷漠": "b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png",
+                    "tv_发怒": "34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png",
+                    "tv_发财": "34db290afd2963723c6eb3c4560667db7253a21a.png",
+                    "tv_可爱": "9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png",
+                    "tv_吐血": "09dd16a7aa59b77baa1155d47484409624470c77.png",
+                    "tv_呆": "fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png",
+                    "tv_呕吐": "9f996894a39e282ccf5e66856af49483f81870f3.png",
+                    "tv_困": "241ee304e44c0af029adceb294399391e4737ef2.png",
+                    "tv_坏笑": "1f0b87f731a671079842116e0991c91c2c88645a.png",
+                    "tv_大佬": "093c1e2c490161aca397afc45573c877cdead616.png",
+                    "tv_大哭": "23269aeb35f99daee28dda129676f6e9ea87934f.png",
+                    "tv_委屈": "d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png",
+                    "tv_害羞": "a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png",
+                    "tv_尴尬": "7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png",
+                    "tv_微笑": "70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png",
+                    "tv_思考": "90cf159733e558137ed20aa04d09964436f618a1.png",
+                    "tv_惊吓": "0d15c7e2ee58e935adc6a7193ee042388adc22af.png",
+                    "tv_打脸": "56ab10b624063e966bfcb76ea5dc4794d87dfd47.png",
+                    "tv_抓狂": "fe31c08edad661d63762b04e17b8d5ae3c71a757.png",
+                    "tv_抠鼻": "c666f55e88d471e51bbd9fab9bb308110824a6eb.png",
+                    "tv_斜眼笑": "911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png",
+                    "tv_无奈": "ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png",
+                    "tv_晕": "5443c22b4d07fb1907ccc610c8e6db254f2461b7.png",
+                    "tv_流汗": "cead1c351ab8d79e9f369605beb90148db0fbed3.png",
+                    "tv_流泪": "7e71cde7858f0cd50d74b0264aa26db612a8a167.png",
+                    "tv_流鼻血": "c32d39db2737f89b904ca32700d140a9241b0767.png",
+                    "tv_点赞": "f85c354995bd99e28fc76c869bfe42ba6438eff4.png",
+                    "tv_生气": "26702dcafdab5e8225b43ffd23c94ac1ff932654.png",
+                    "tv_生病": "8b0ec90e6b86771092a498c54f09fc94621c1900.png",
+                    "tv_疑问": "0793d949b18d7be716078349c202c15ff166f314.png",
+                    "tv_白眼": "c1d59f439e379ee50eef488bcb5e5378e5044ea4.png",
+                    "tv_皱眉": "72ccad6679fea0d14cce648b4d818e09b8ffea2d.png",
+                    "tv_目瞪口呆": "0b8cb81a68de5d5365212c99375e7ace3e7891b7.png",
+                    "tv_睡着": "8b196675b53af58264f383c50ad0945048290b33.png",
+                    "tv_笑哭": "1abc628f6d4f4caf9d0e7800878f4697abbc8273.png",
+                    "tv_腼腆": "89712c0d4af73e67f89e35cbc518420380a7f6f4.png",
+                    "tv_色": "61822c7e9aae5da76475e7892534545336b23a6f.png",
+                    "tv_调侃": "4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png",
+                    "tv_调皮": "b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png",
+                    "tv_鄙视": "6e72339f346a692a495b123174b49e4e8e781303.png",
+                    "tv_闭嘴": "c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png",
+                    "tv_难过": "87f46748d3f142ebc6586ff58860d0e2fc8263ba.png",
+                    "tv_馋": "fc7e829b845c43c623c8b490ee3602b7f0e76a31.png",
+                    "tv_鬼脸": "0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png",
+                    "tv_黑人问号": "45821a01f51bc867da9edbaa2e070410819a95b2.png",
+                    "tv_鼓掌": "1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png"
+                      // ... 更多表情
+                  } : void 0
+                };
+            path = isEN ? path.replace('en/','') : path;
+            var loadValine = function(){
+              if('Valine' in window) new Valine(valineConfig);
+              else setTimeout(loadValine)
+            };
+            loadValine()
+          </script>
+        
+      </div>
+
+      
+
+      <div class="github">
+        
+        &copy; 2017 - 2024 <br> Powered By xCss.
+      </div>
+    </div>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/smooth-scroll@12.1.5/dist/js/smooth-scroll.min.js"></script>
+
+    <script>
+      // Used by the main.js script below.
+      docsConfigRoot = '/';
+    </script>
+    <script src="/script/main.js"></script>
+    <script src="/script/highlight.js"></script>
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+        
+    
+
+    
+    
+      <script defer src="//ut.src.im/ct.js" data-host-url="https://ut.src.im" data-website-id="0adc1236-d655-4dea-95c3-51578f71060f"></script>
+    
+
+    <!-- search box -->
+    
+      <script type="text/javascript" src="//cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    
+
+    
+      <script>
+        ['desktop'].forEach(function(type) {
+          var search = docsearch({
+            apiKey: 'c4ef5def993e015b66f3ea438e2be874',
+            
+            
+            indexName: 'valinejs',
+            inputSelector: '#' + type + '-search-input',
+            autocompleteOptions: {
+              dropdownMenuContainer: '.wrapper-' + type + '-search-results',
+              debug: true
+            },
+            algoliaOptions: {
+              hitsPerPage: 20
+            }
+          }).autocomplete;
+
+          var sidebar = document.querySelector('.sidebar-content');
+          search.on('autocomplete:opened', function() {
+            sidebar.classList.add('searching');
+          });
+          search.on('autocomplete:closed', function() {
+            sidebar.classList.remove('searching');
+          });
+          search.on('autocomplete:updated', function() {
+            if (search.val() === '') {
+              search.autocomplete.close();
+            }
+          });
+        });
+      </script>
+    
+
+    
+    <script async src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters:[{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <script>
+      window['MathJax'] = {
+          tex: {
+            inlineMath: [ ['$','$']],
+            autoload: {
+                verb: ['verb'],
+                color: [],
+                colorV2: ['color'],
+                require:['require']
+            },
+            packages: {'[+]': ['braket']}
+          },
+          loader: {load: ['[tex]/braket']},
+          svg: {
+            fontCache: 'global'
+          }
+      };
+      try {(new Function("'use strict'; let a; const b = 2;"))()} catch (e) {
+        var polyfill = document.createElement("script");
+          polyfill.src = "https://polyfill.io/v3/polyfill.min.js?features=es5%2Ces6%2Ces7%2CArray.prototype.forEach%2CElement.prototype.closest'";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(polyfill, s);
+      }
+    </script>
+  </body>
+</html>

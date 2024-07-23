@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- Basic -->
+    <title>Introduction | Valine 一款快速、简洁且高效的无后端评论系统。</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//valine.js.org">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//fonts.loli.net">
+    <link rel="dns-prefetch" href="//cravatar.cn">
+    <link rel="dns-prefetch" href="//gstatic.loli.net">
+    <meta name="description" content="A fast, simple & powerful comment system.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="/script/manifest.json">
+    <meta name="theme-color" content="#02467E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon-152x152.png">
+    <meta name="msapplication-TileImage" content="/images/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+      <link rel="shortcut icon" href="/images/favicon.ico">
+      <link rel="icon" href="/images/favicon.ico">
+    
+    <!-- Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://valine.js.org">
+    <meta property="og:title" content="Introduction | Valine">
+    <meta property="og:description" content="Valine - A fast, simple & powerful comment system.">
+    <meta property="og:image" content="">
+    <meta name="twitter:site" content="@xCss">
+    <meta name="twitter:title" content="Introduction | Valine">
+    <meta name="twitter:description" content="Valine - A fast, simple & powerful comment system.">
+    <meta name="twitter:image" content="">
+    
+    <meta name="description" content="Valine - 一款快速、简洁且高效的无后端社会化评论系统。" />
+    <meta name="keywords" content="评论系统,Valine,Valine Comment System,Valine Comment,Comment System,Valine评论系统, 社会化评论系统, 快速,简洁,高效,快速简洁高效的评论系统,无后端评论系统" />
+    <!-- Misc -->
+    <meta name="google-site-verification" content="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    
+      <link rel="stylesheet" href="../style/bundle-meteor.css">
+    
+    
+    <script src='//unpkg.com/hanabi@0.4.0/dist/hanabi.min.js' ></script>
+
+    
+  </head>
+  <body class="">
+      
+
+  <div class="nav dark">
+    <div class="nav-group left">
+      <div class="nav-item mobile-button js-sidebar-toggle show-mobile">
+        <span class="icon-menu"></span>
+      </div>
+      <div class="nav-item">
+        
+        <a class="logo-wrapper" href="/" title="A fast, simple & powerful comment system. Valine"  >
+          <img src="../images/valine.png" alt="A fast, simple & powerful comment system." class="logo"/>
+          
+            <span>Valine</span>
+          
+        </a>
+      </div>
+    </div>
+
+
+    <div class="nav-group right">
+      <div class="nav-item show-desktop">
+        
+        <a class="link" href="/index.html" >
+          <span>中文文档</span>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+
+<div class="sidebar">
+  <div class="panel">
+    <div class="panel-item">
+      <a class="" href="../valine.js.org" title="A fast, simple & powerful comment system."  >
+        <span>A fast, simple & powerful comment system. Valine</span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="sidebar-content">
+    <div class="topcap"></div>
+    
+    <div class="wrapper-search">
+      <div class="input-area">
+        <div class="input-symbol small round">
+          <input type="text" placeholder="Search" id="desktop-search-input" />
+          <span class="icon-search"></span>
+        </div>
+      </div>
+      <div class="wrapper-desktop-search-results"></div>
+    </div>
+
+    
+
+    <ul class="toc">
+      
+
+        <li>
+          <ul class="list-toc">
+            
+              
+              
+              <li class="item-toc current">
+                <a
+                  href=""
+                  class="sidebar-link current"
+                >
+                  <span>Introduction</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="quickstart.html"
+                  class="sidebar-link "
+                >
+                  <span>Quick start</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="changelog.html"
+                  class="sidebar-link "
+                >
+                  <span>Change Log</span>
+                </a>
+              </li>
+              
+            
+          </ul>
+        </li>
+        <hr />
+      
+
+        <li>
+          <ul class="list-toc">
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="configuration.html"
+                  class="sidebar-link "
+                >
+                  <span>Config Reference</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="avatar.html"
+                  class="sidebar-link "
+                >
+                  <span>Avatar Setting</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="notify.html"
+                  class="sidebar-link "
+                >
+                  <span>Mail notify setting</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="i18n.html"
+                  class="sidebar-link "
+                >
+                  <span>Multilingual support</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="visitor.html"
+                  class="sidebar-link "
+                >
+                  <span>Article reading statistics</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="emoji.html"
+                  class="sidebar-link "
+                >
+                  <span>Custom Emoji</span>
+                </a>
+              </li>
+              
+            
+          </ul>
+        </li>
+        <hr />
+      
+
+        <li>
+          <ul class="list-toc">
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="jekyll.html"
+                  class="sidebar-link "
+                >
+                  <span>Used in Jekyll</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="hexo.html"
+                  class="sidebar-link "
+                >
+                  <span>Used in Hexo</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="hugo.html"
+                  class="sidebar-link "
+                >
+                  <span>Used in Hugo</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="vuepress.html"
+                  class="sidebar-link "
+                >
+                  <span>Used in Vuepress</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="gatsby.html"
+                  class="sidebar-link "
+                >
+                  <span>Used in Gatsby</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="cdn.html"
+                  class="sidebar-link "
+                >
+                  <span>Use CDN</span>
+                </a>
+              </li>
+              
+            
+              
+              
+            
+              
+              
+            
+          </ul>
+        </li>
+        <hr />
+      
+    </ul>
+  </div>
+</div>
+
+    <div class="content">
+
+      <div class="header-content">
+        <div class="header-wrapper">
+          <div class="title-wrapper">
+            <h1 class="title-page">
+              Introduction
+            </h1>
+            
+              <div class="subtitle-page">
+                Valine - A fast, simple & powerful comment system.
+              </div>
+              
+          </div>
+
+          <div class="page-actions">
+            <div class="actions-group">
+              <a class="btn tertiary small round lowercase" href="https://github.com/xcss/Valine-docs/tree/master/source/en/index.md" target="_blank">
+                <span class="icon-github"></span>
+                <span>Edit On Github</span>
+              </a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="document-formatting">
+          <blockquote>
+<p>For some reason, the <code>src directory</code> will be suspended from updating after <code>v1.4.0</code>.</p>
+</blockquote>
+<p><a href="https://github.com/xCss/Valine/releases" target="_blank" rel="noopener"><img src="https://img.shields.io/github/v/release/xCss/Valine?style=plastic" alt="GitHub release (latest by date)"></a> 
+<a href="https://cdnjs.com/libraries/valine" target="_blank" rel="noopener"><img src="https://img.shields.io/cdnjs/v/valine?style=plastic" alt="Cdnjs"></a> 
+<a href="https://www.npmjs.com/package/valine" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/dm/valine.svg?style=plastic&amp;logo=npm" alt="npm downloads"></a> 
+<img src="https://img.shields.io/circleci/project/github/xCss/Valine/master.svg?style=plastic&amp;logo=circleci" alt="build"> 
+<img src="https://img.shields.io/github/workflow/status/xCss/Valine-docs/docs?logo=github&amp;style=plastic" alt="Docs"> </p>
+<p>Valine was born in August 7, 2017. It’s a fast, simple &amp; efficient Leancloud based no back end comment system.</p>
+<p>Theoretically, but not limited to static blog. <a href="/en/hexo.html">Hexo</a>, <a href="/em/jekyll.html">Jekyll</a>, <a href="http://typecho.org/" target="_blank" rel="noopener">Typecho</a>, <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>, <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>, <a href="https://github.com/daidi/docsify-valine/" target="_blank" rel="noopener">Docsify</a> and other blog or document programs are currently using Valine.</p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Emoji 😉</li>
+<li>High speed.</li>
+<li>Safe by default.</li>
+<li>No server-side implementation.</li>
+<li>Support for full markdown syntax.</li>
+<li>Simple and lightweight </li>
+<li>Article reading statistics <code>v1.2.0+</code></li>
+</ul>
+<h2 id="Todo"><a href="#Todo" class="headerlink" title="Todo"></a>Todo</h2><p>Valine is still in the development phase. Here are some features that are not currently supported but are already planned:</p>
+<ul>
+<li>Firebase-based comment store</li>
+<li>And more…</li>
+</ul>
+<h2 id="Donate"><a href="#Donate" class="headerlink" title="Donate"></a>Donate</h2><p>If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Alipay</th>
+<th style="text-align:center">Wechat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img width="150" src="/images/alipay.png"></td>
+<td style="text-align:center"><img width="135" src="/images/wechat.png"></td>
+</tr>
+</tbody>
+</table>
+<p>If you are not available for this, simply spreading the word for us would help too!</p>
+
+        </div>
+        <div class="pagination">
+          <div class="content-wrapper">
+            
+            
+            
+              <a class="link primary next" href="quickstart.html">
+                <span class="subtitle-pagination">
+                  Next
+                </span>
+                Quick start
+              </a>
+            
+          </div>
+        </div>
+        
+        
+          <div class="vcomment"></div>
+          <!-- <script src="https://cdn.jsdelivr.net/npm/valine"></script>   -->
+          
+          <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+          <script>
+            var path = window.location.pathname.replace('index.html',''),
+                isEN = path.indexOf('en') > -1,
+                valineConfig = {
+                  el: '.vcomment',
+                  appId: '3GiiCyXCrGbOIH3EelCfJ6yw-gzGzoHsz',
+                  appKey: 'iuneD4hXPQImdHQSRE0aOcRF',
+                  placeholder: 'Just Go Go.',
+                  avatar:'mp',
+                  avatar_cdn: 'https://cravatar.cn/avatar/',
+                  path: path,
+                  recordIP: true,
+                  lang: isEN ? 'en' : 'zh-cn',
+                  visitor: true,
+                  enableQQ: true,
+                  emojiCDN: path.indexOf('emoji') > -1 ? '//i0.hdslb.com/bfs/emote/' : '//img.t.sinajs.cn/t4/appstyle/expression/ext/normal/',
+                  emojiMaps: path.indexOf('emoji') > -1 ? {
+                    "tv_doge": "6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png",
+                    "tv_亲亲": "a8111ad55953ef5e3be3327ef94eb4a39d535d06.png",
+                    "tv_偷笑": "bb690d4107620f1c15cff29509db529a73aee261.png",
+                    "tv_再见": "180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png",
+                    "tv_冷漠": "b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png",
+                    "tv_发怒": "34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png",
+                    "tv_发财": "34db290afd2963723c6eb3c4560667db7253a21a.png",
+                    "tv_可爱": "9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png",
+                    "tv_吐血": "09dd16a7aa59b77baa1155d47484409624470c77.png",
+                    "tv_呆": "fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png",
+                    "tv_呕吐": "9f996894a39e282ccf5e66856af49483f81870f3.png",
+                    "tv_困": "241ee304e44c0af029adceb294399391e4737ef2.png",
+                    "tv_坏笑": "1f0b87f731a671079842116e0991c91c2c88645a.png",
+                    "tv_大佬": "093c1e2c490161aca397afc45573c877cdead616.png",
+                    "tv_大哭": "23269aeb35f99daee28dda129676f6e9ea87934f.png",
+                    "tv_委屈": "d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png",
+                    "tv_害羞": "a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png",
+                    "tv_尴尬": "7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png",
+                    "tv_微笑": "70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png",
+                    "tv_思考": "90cf159733e558137ed20aa04d09964436f618a1.png",
+                    "tv_惊吓": "0d15c7e2ee58e935adc6a7193ee042388adc22af.png",
+                    "tv_打脸": "56ab10b624063e966bfcb76ea5dc4794d87dfd47.png",
+                    "tv_抓狂": "fe31c08edad661d63762b04e17b8d5ae3c71a757.png",
+                    "tv_抠鼻": "c666f55e88d471e51bbd9fab9bb308110824a6eb.png",
+                    "tv_斜眼笑": "911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png",
+                    "tv_无奈": "ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png",
+                    "tv_晕": "5443c22b4d07fb1907ccc610c8e6db254f2461b7.png",
+                    "tv_流汗": "cead1c351ab8d79e9f369605beb90148db0fbed3.png",
+                    "tv_流泪": "7e71cde7858f0cd50d74b0264aa26db612a8a167.png",
+                    "tv_流鼻血": "c32d39db2737f89b904ca32700d140a9241b0767.png",
+                    "tv_点赞": "f85c354995bd99e28fc76c869bfe42ba6438eff4.png",
+                    "tv_生气": "26702dcafdab5e8225b43ffd23c94ac1ff932654.png",
+                    "tv_生病": "8b0ec90e6b86771092a498c54f09fc94621c1900.png",
+                    "tv_疑问": "0793d949b18d7be716078349c202c15ff166f314.png",
+                    "tv_白眼": "c1d59f439e379ee50eef488bcb5e5378e5044ea4.png",
+                    "tv_皱眉": "72ccad6679fea0d14cce648b4d818e09b8ffea2d.png",
+                    "tv_目瞪口呆": "0b8cb81a68de5d5365212c99375e7ace3e7891b7.png",
+                    "tv_睡着": "8b196675b53af58264f383c50ad0945048290b33.png",
+                    "tv_笑哭": "1abc628f6d4f4caf9d0e7800878f4697abbc8273.png",
+                    "tv_腼腆": "89712c0d4af73e67f89e35cbc518420380a7f6f4.png",
+                    "tv_色": "61822c7e9aae5da76475e7892534545336b23a6f.png",
+                    "tv_调侃": "4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png",
+                    "tv_调皮": "b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png",
+                    "tv_鄙视": "6e72339f346a692a495b123174b49e4e8e781303.png",
+                    "tv_闭嘴": "c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png",
+                    "tv_难过": "87f46748d3f142ebc6586ff58860d0e2fc8263ba.png",
+                    "tv_馋": "fc7e829b845c43c623c8b490ee3602b7f0e76a31.png",
+                    "tv_鬼脸": "0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png",
+                    "tv_黑人问号": "45821a01f51bc867da9edbaa2e070410819a95b2.png",
+                    "tv_鼓掌": "1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png"
+                      // ... 更多表情
+                  } : void 0
+                };
+            path = isEN ? path.replace('en/','') : path;
+            var loadValine = function(){
+              if('Valine' in window) new Valine(valineConfig);
+              else setTimeout(loadValine)
+            };
+            loadValine()
+          </script>
+        
+      </div>
+
+      
+
+      <div class="github">
+        
+        &copy; 2017 - 2024 <br> Powered By xCss.
+      </div>
+    </div>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/smooth-scroll@12.1.5/dist/js/smooth-scroll.min.js"></script>
+
+    <script>
+      // Used by the main.js script below.
+      docsConfigRoot = '/';
+    </script>
+    <script src="../script/main.js"></script>
+    <script src="../script/highlight.js"></script>
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+        
+    
+
+    
+    
+      <script defer src="//ut.src.im/ct.js" data-host-url="https://ut.src.im" data-website-id="0adc1236-d655-4dea-95c3-51578f71060f"></script>
+    
+
+    <!-- search box -->
+    
+      <script type="text/javascript" src="//cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    
+
+    
+      <script>
+        ['desktop'].forEach(function(type) {
+          var search = docsearch({
+            apiKey: 'c4ef5def993e015b66f3ea438e2be874',
+            
+            
+            indexName: 'valinejs',
+            inputSelector: '#' + type + '-search-input',
+            autocompleteOptions: {
+              dropdownMenuContainer: '.wrapper-' + type + '-search-results',
+              debug: true
+            },
+            algoliaOptions: {
+              hitsPerPage: 20
+            }
+          }).autocomplete;
+
+          var sidebar = document.querySelector('.sidebar-content');
+          search.on('autocomplete:opened', function() {
+            sidebar.classList.add('searching');
+          });
+          search.on('autocomplete:closed', function() {
+            sidebar.classList.remove('searching');
+          });
+          search.on('autocomplete:updated', function() {
+            if (search.val() === '') {
+              search.autocomplete.close();
+            }
+          });
+        });
+      </script>
+    
+
+    
+    <script async src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js" integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters:[{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <script>
+      window['MathJax'] = {
+          tex: {
+            inlineMath: [ ['$','$']],
+            autoload: {
+                verb: ['verb'],
+                color: [],
+                colorV2: ['color'],
+                require:['require']
+            },
+            packages: {'[+]': ['braket']}
+          },
+          loader: {load: ['[tex]/braket']},
+          svg: {
+            fontCache: 'global'
+          }
+      };
+      try {(new Function("'use strict'; let a; const b = 2;"))()} catch (e) {
+        var polyfill = document.createElement("script");
+          polyfill.src = "https://polyfill.io/v3/polyfill.min.js?features=es5%2Ces6%2Ces7%2CArray.prototype.forEach%2CElement.prototype.closest'";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(polyfill, s);
+      }
+    </script>
+  </body>
+</html>
