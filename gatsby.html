@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <!-- Basic -->
-    <title>在Gatsby中使用 | Valine 一款快速、简洁且高效的无后端评论系统。</title>
+    <title>在 Gatsby 中使用 | Valine 一款快速、简洁且高效的无后端评论系统。</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link rel="dns-prefetch" href="//valine.js.org">
@@ -27,11 +27,11 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://valine.js.org">
-    <meta property="og:title" content="在Gatsby中使用 | Valine">
+    <meta property="og:title" content="在 Gatsby 中使用 | Valine">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:site" content="@xCss">
-    <meta name="twitter:title" content="在Gatsby中使用 | Valine">
+    <meta name="twitter:title" content="在 Gatsby 中使用 | Valine">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
     
@@ -245,7 +245,7 @@
                   href="jekyll.html"
                   class="sidebar-link "
                 >
-                  <span>在Jekyll中使用</span>
+                  <span>在 Jekyll 中使用</span>
                 </a>
               </li>
               
@@ -257,7 +257,19 @@
                   href="hexo.html"
                   class="sidebar-link "
                 >
-                  <span>在Hexo中使用</span>
+                  <span>在 Hexo 中使用</span>
+                </a>
+              </li>
+              
+            
+              
+              
+              <li class="item-toc ">
+                <a
+                  href="hugo.html"
+                  class="sidebar-link "
+                >
+                  <span>在 Hugo 中使用</span>
                 </a>
               </li>
               
@@ -269,7 +281,7 @@
                   href="vuepress.html"
                   class="sidebar-link "
                 >
-                  <span>在VuePress中使用</span>
+                  <span>在 VuePress 中使用</span>
                 </a>
               </li>
               
@@ -281,7 +293,7 @@
                   href=""
                   class="sidebar-link current"
                 >
-                  <span>在Gatsby中使用</span>
+                  <span>在 Gatsby 中使用</span>
                 </a>
               </li>
               
@@ -336,7 +348,7 @@
         <div class="header-wrapper">
           <div class="title-wrapper">
             <h1 class="title-page">
-              在Gatsby中使用
+              在 Gatsby 中使用
             </h1>
             
           </div>
@@ -355,10 +367,10 @@
       </div>
       <div class="content-wrapper">
         <div class="document-formatting">
-          <p>可以使用<a href="https://www.npmjs.com/package/gatsby-plugin-valine" target="_blank" rel="noopener"><code>gatsby-plugin-valine</code></a>插件在 Gatsby 站点中嵌入 Valine 组件。</p>
+          <p>可以使用 <a href="https://www.npmjs.com/package/gatsby-plugin-valine" target="_blank" rel="noopener"><code>gatsby-plugin-valine</code></a> 插件在 Gatsby 站点中嵌入 Valine 组件。</p>
 <p>本插件支持 TypeScript（因为就是用 TypeScript 写的），目前仅支持 Gatsby v2。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
-<li><p>通过 <code>npm</code> 下载和安装本插件:</p>
+<li><p>通过 <code>npm</code> 下载和安装本插件：</p>
  
 <!-- Has Prism -->
 <pre class="line-numbers" style><code class="language-shell">    npm install --save gatsby-plugin-valine
@@ -370,7 +382,7 @@
 </li>
 </ol>
 <ol start="2">
-<li><p>在项目的 <code>gatsby-config.js</code> 文件中加入插件配置:</p>
+<li><p>在项目的 <code>gatsby-config.js</code> 文件中加入插件配置：</p>
  
 <!-- Has Prism -->
 <pre class="line-numbers" style><code class="language-js">    &#x2F;&#x2F; gatsby-config.js
@@ -383,7 +395,7 @@
 </li>
 </ol>
 <ol start="3">
-<li><p>在 <code>gatsby-config.js</code> 中配置插件时，也支持设置插件选项，比如这样:</p>
+<li><p>在 <code>gatsby-config.js</code> 中配置插件时，也支持设置插件选项，比如这样：</p>
  
 <!-- Has Prism -->
 <pre class="line-numbers" style><code class="language-js">    &#x2F;&#x2F; gatsby-config.js
@@ -417,7 +429,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) =&gt; {
   return (
     &lt;Layout location={location} title={siteTitle}&gt;
       ...
-      &lt;!-- 在页面框架最后添加Valine标签 --&gt;
+      &lt;!-- 在页面框架最后添加 Valine 标签 --&gt;
       &lt;Valine appId=&quot;LEANCLOUD_APP_ID&quot; appKey=&quot;LEANCLOUD_APP_KEY&quot;&#x2F;&gt;
     &lt;&#x2F;Layout&gt;
   )
@@ -429,7 +441,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) =&gt; {
 <p>标签里的<strong>局部选项</strong>会与<code>gatsby-config.js</code>提供的<strong>全局选项</strong>进行<strong>深度合并</strong>（<code>lodash</code>的<code>merge</code>行为），且局部选项会覆盖同名的全局选项。</p>
 </blockquote>
 <h2 id="Valine-选项"><a href="#Valine-选项" class="headerlink" title="Valine 选项"></a>Valine 选项</h2><p>如前文所述，Valine 选项可以通过<strong>插件选项</strong>或<strong>组件属性</strong>进行设置。<strong>除<code>el</code>以外</strong>，本插件支持 Valine <code>1.4.14</code>版本所提供的所有可用选项。<code>el</code>属性在插件中会被改写，因此设置了也没效果。</p>
-<p>关于 Valine 选项的更多详细描述，请参阅<a href="https://valine.js.org/configuration.html">配置项</a>。</p>
+<p>关于 Valine 选项的更多详细描述，请参阅 <a href="https://valine.js.org/configuration.html">配置项</a>。</p>
 <p><code>Valine</code>组件的各属性已经编写了详细的注释，TypeScript 开发者可以在支持的代码编辑器中直接查看。</p>
 <p>下面是插件支持的 Valine 选项列表，以便快速查阅。列表使用 TypeScript 的语法进行了类型描述。</p>
 
@@ -464,7 +476,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) =&gt; {
                 <span class="subtitle-pagination">
                   上一篇
                 </span>
-                在VuePress中使用
+                在 VuePress 中使用
               </a>
             
             

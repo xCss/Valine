@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <!-- Basic -->
-    <title>Used in Gatsby | Valine 一款快速、简洁且高效的无后端评论系统。</title>
+    <title>Used in Hugo | Valine 一款快速、简洁且高效的无后端评论系统。</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link rel="dns-prefetch" href="//valine.js.org">
@@ -27,11 +27,11 @@
     <!-- Social -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://valine.js.org">
-    <meta property="og:title" content="Used in Gatsby | Valine">
+    <meta property="og:title" content="Used in Hugo | Valine">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
     <meta name="twitter:site" content="@xCss">
-    <meta name="twitter:title" content="Used in Gatsby | Valine">
+    <meta name="twitter:title" content="Used in Hugo | Valine">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
     
@@ -73,7 +73,7 @@
     <div class="nav-group right">
       <div class="nav-item show-desktop">
         
-        <a class="link" href="/gatsby.html" >
+        <a class="link" href="/hugo.html" >
           <span>中文文档</span>
         </a>
       </div>
@@ -264,10 +264,10 @@
             
               
               
-              <li class="item-toc ">
+              <li class="item-toc current">
                 <a
-                  href="hugo.html"
-                  class="sidebar-link "
+                  href=""
+                  class="sidebar-link current"
                 >
                   <span>Used in Hugo</span>
                 </a>
@@ -288,10 +288,10 @@
             
               
               
-              <li class="item-toc current">
+              <li class="item-toc ">
                 <a
-                  href=""
-                  class="sidebar-link current"
+                  href="gatsby.html"
+                  class="sidebar-link "
                 >
                   <span>Used in Gatsby</span>
                 </a>
@@ -330,14 +330,14 @@
         <div class="header-wrapper">
           <div class="title-wrapper">
             <h1 class="title-page">
-              Used in Gatsby
+              Used in Hugo
             </h1>
             
           </div>
 
           <div class="page-actions">
             <div class="actions-group">
-              <a class="btn tertiary small round lowercase" href="https://github.com/xcss/Valine-docs/tree/master/source/en/gatsby.md" target="_blank">
+              <a class="btn tertiary small round lowercase" href="https://github.com/xcss/Valine-docs/tree/master/source/en/hugo.md" target="_blank">
                 <span class="icon-github"></span>
                 <span>Edit On Github</span>
               </a>
@@ -349,124 +349,29 @@
       </div>
       <div class="content-wrapper">
         <div class="document-formatting">
-          <p>Valine can be embedded to Gatsby pages with <a href="https://www.npmjs.com/package/gatsby-plugin-valine" target="_blank" rel="noopener"><code>gatsby-plugin-valine</code></a></p>
-<p>This plugin comes with TypeScript support (as written in TypeScript), and currently supports Gatsby v2 only.</p>
-<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ol>
-<li><p>Download &amp; install the npm package with:</p>
- 
-<!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-shell">    npm install --save gatsby-plugin-valine
-
-    # Or with yarn
-
-    yarn add gatsby-plugin-valine
-</code></pre>
-</li>
-</ol>
-<ol start="2">
-<li><p>Add the plugin into the <code>gatsby-config.js</code> script of your project:</p>
- 
-<!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-js">    &#x2F;&#x2F; gatsby-config.js
-    {
-        module.exports = {
-            plugins: [`gatsby-plugin-valine`],
-        };
-    }
-</code></pre>
-</li>
-</ol>
-<ol start="3">
-<li><p>The plugin supports options defined in <code>gatsby-config.js</code>, which looks like:</p>
- 
-<!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-js">    &#x2F;&#x2F; gatsby-config.js
-    {
-        module.exports = {
-            plugins: [
-                {
-                    resolve: `gatsby-plugin-valine`,
-                    options: {
-                        appId: `LEANCLOUD_APP_ID`,
-                        appKey: `LEANCLOUD_APP_KEY`,
-                        avatar: `robohash`,
-                    },
-                },
-            ],
-        };
-    }
-</code></pre>
-</li>
-</ol>
-<h2 id="How-To-Use"><a href="#How-To-Use" class="headerlink" title="How To Use"></a>How To Use</h2><p>After installing the plugin, just import and add the <code>&lt;Valine&gt;</code> component wherever it fits.</p>
-<p>For example, if you want to add the comment feature below every blog post in a Gatsby site built upon the <code>gatsby-starter-blog</code>[<a href="https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-blog/]" target="_blank" rel="noopener">https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-blog/]</a> template, just add the following codes into <code>src/templates/blog-post.js</code>:</p>
-
-<!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-js">import Valine from &#39;gatsby-plugin-valine&#39; &#x2F;&#x2F; import the module
-
-...
-
-const BlogPostTemplate = ({ data, pageContext, location }) =&gt; {
-  ...
-  return (
-    &lt;Layout location={location} title={siteTitle}&gt;
-      ...
-      &lt;!--Adds Valine component at the end of the page--&gt;
-      &lt;Valine appId=&quot;LEANCLOUD_APP_ID&quot; appKey=&quot;LEANCLOUD_APP_KEY&quot;&#x2F;&gt;
-    &lt;&#x2F;Layout&gt;
-  )
-}
-</code></pre>
-<p><strong>Note that</strong> in the example above, the values of <code>appId</code> &amp; <code>appKey</code> are assigned as props to the <code>&lt;Valine&gt;</code> tag. Other Valine Options can be set in this way as well.</p>
-<p>On the other hand, however, if the inline-style looks redundant and messy to you (say, Valine needs to be embedded into multiple unique pages), you can always set <strong>global</strong> Valine Options via plugin options.</p>
-<blockquote>
-<p>The <strong>local options</strong> (assigned as component props) will be deeply/recursively merged with the <strong>global options</strong> (those in <code>gatsby-config.js</code>), and override the global ones on property conflicts, which is essentially a <code>lodash merge</code> operation.</p>
+          <p>There are a number of hugo theme built-in valine comment system, more themes are gradually increasing.</p>
+<h2 id="FixIt"><a href="#FixIt" class="headerlink" title="FixIt"></a>FixIt</h2><blockquote>
+<p><a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="noopener">Supported</a> <code>latest</code></p>
 </blockquote>
-<h2 id="Valine-Options"><a href="#Valine-Options" class="headerlink" title="Valine Options"></a>Valine Options</h2><p>As stated in former sections, Valine Options can be assigned either by <em>plugin options</em> or by <em>component props</em>.</p>
-<p>All available options in Valine <code>1.4.14</code> are supported <strong>EXCEPT</strong> the <code>el</code>, which is overridden within the plugin. There is no use for setting the <code>el</code> option explicitly.</p>
-<p>For more information and detailed descriptions about the Valine Options, please check out <a href="https://valine.js.org/en/configuration.html">the official documentation</a>. For TypeScript developers, <code>Valine</code> component props are well-commented in Chinese, so that can be easily viewed in code editors.</p>
-<p>Below is a quick reference of supported Valine Options, described in a TypeScript style.</p>
-
-<!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-ts">  appId?: string
-  appKey?: string
-  placeholder?: string
-  path?: string
-  avatar?: &#39;&#39; | &#39;mp&#39; | &#39;identicon&#39; | &#39;monsterid&#39; | &#39;wavatar&#39; | &#39;retro&#39; | &#39;robohash&#39; | &#39;hide&#39;
-  meta?: (&#39;nick&#39; | &#39;mail&#39; | &#39;link&#39;)[]
-  pageSize?: number
-  lang?: string
-  visitor?: boolean
-  highlight?: boolean
-  avatarForce?: boolean
-  recordIP?: boolean
-  serverURLs?: string
-  emojiCDN?: string
-  emojiMaps?: Record&lt;string, string&gt;
-  enableQQ?: boolean
-  requiredFields?: [&#39;nick&#39;] | [&#39;nick&#39;, &#39;mail&#39;]
-</code></pre>
-<h2 id="Styling-Component"><a href="#Styling-Component" class="headerlink" title="Styling Component"></a>Styling Component</h2><p><code>&lt;Valine&gt;</code> supports <code>style</code> and <code>className</code> props for component styling.</p>
-<p>The custom CSS styles &amp; classes are applied to the Valine’s container element, i.e. to the very element with the <code>v</code> class. Custom classes will precede the <code>v</code> class.</p>
 
         </div>
         <div class="pagination">
           <div class="content-wrapper">
             
             
-              <a class="link primary prev" href="vuepress.html">
+              <a class="link primary prev" href="hexo.html">
                 <span class="subtitle-pagination">
                   Prev
                 </span>
-                Used in Vuepress
+                Used in Hexo
               </a>
             
             
-              <a class="link primary next" href="cdn.html">
+              <a class="link primary next" href="vuepress.html">
                 <span class="subtitle-pagination">
                   Next
                 </span>
-                Use CDN
+                Used in Vuepress
               </a>
             
           </div>
