@@ -23,14 +23,5 @@ See the [Quick start](https://valine.js.org) for more details.
 ## Contributors
 - [Contributors](https://github.com/xCss/Valine/graphs/contributors)
 
-## Donate
-If you are enjoying this app, please consider making a donation to keep it alive, I will try my best to dedicate more time or even full time to work on it. 😉
-
-| Alipay | WeChat | 
-| :------: | :------: | 
-| <img width="150" src="./src/assets/alipay.png"> | <img width="135" src="./src/assets/wechat.png"> | 
-
-If you are not available for this, simply spreading the word for us would help too!
-
 ## License
 [GPL-2.0](https://github.com/xCss/Valine/blob/master/LICENSE)
