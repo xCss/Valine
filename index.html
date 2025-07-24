@@ -121,6 +121,7 @@
             color: #9c9c9c;
         }
     </style>
+    <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
     <script src="./dist/Valine.min.js"></script>
 </head>
 
@@ -139,7 +140,6 @@
                 <iframe allowtransparency="true" frameborder="0" scrolling="0" width="98" height="20"></iframe>
                 <iframe allowtransparency="true" frameborder="0" scrolling="0" width="156" height="20"></iframe>
             </div>
-            <div class="leancloud_pvuvcounter leancloud-pv-count"></div>
             <div class="comment"></div>
         </div>
     </div>
@@ -155,9 +155,22 @@
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
             path: window.location.pathname,
             avatar:'mm', // 1.1.7 新增(mm/identicon/monsterid/wavatar/retro)
-            pvuv: true,
             // guest_info: ['nick'] // 默认 ['nick', 'mail', 'link']
         })
+
+        if (!/^http:\/\/localhost/.test(location.href)) {
+            var _hmt = _hmt || [];
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?fc2301b16d1a46c7899ef2b5afb651cc";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        }
+
+        window.onload = function() {
+            var iframes = document.querySelectorAll('iframe');
+            iframes[0].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&repo=valine&type=watch&count=true');
+            iframes[1].setAttribute('src', 'https://ghbtns.com/github-btn.html?user=xCss&type=follow&count=true');
+        }
     </script>
 </body>
 

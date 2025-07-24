@@ -416,7 +416,7 @@ let CounterFactory = {
 }
 
 
-// 新建Counter对象
+// 新建PVUVCounter对象
 let createPVUVCounter = function (PVUVCounter, o,el) {
     let newPVUVCounter = new PVUVCounter();
     let acl = new AV.ACL();
