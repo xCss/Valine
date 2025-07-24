@@ -137,6 +137,7 @@ ValineFactory.prototype._init = function(){
             notify,
             verify,
             visitor,
+            pvuv,
             path = location.pathname,
             pageSize,
             recordIP,
@@ -226,6 +227,7 @@ ValineFactory.prototype._init = function(){
 
         // Counter
         visitor && CounterFactory.add(AV.Object.extend('Counter'),root.config.path);
+        pvuv && PVUVCounterFactory.add(AV.Object.extend('PVUVCounter'),window.location.host);
 
 
         let el = root.config.el || null;
@@ -410,6 +412,91 @@ let CounterFactory = {
                 console.error(ex)
             })
         }
+    }
+}
+
+
+// 新建Counter对象
+let createPVUVCounter = function (PVUVCounter, o,el) {
+    let newPVUVCounter = new PVUVCounter();
+    let acl = new AV.ACL();
+    acl.setPublicReadAccess(true);
+    acl.setPublicWriteAccess(true);
+    newPVUVCounter.setACL(acl);
+    newPVUVCounter.set('domain', o.domain)
+    newPVUVCounter.set('type', o.type)
+    newPVUVCounter.set('title', o.title)
+    newPVUVCounter.set('time', 1)
+    newPVUVCounter.save().then(ret => {
+        Utils.find(o.el, el).innerText = 1
+    }).catch(ex => {
+        console.log(ex)
+    });
+}
+let PVUVCounterFactory = {
+    add(PVUVCounter, domain) {
+        let root = this
+        let lpvuvcs = Utils.findAll(document, '.leancloud_pvuvcounter,.leancloud-pvuvcounter');
+        if (lpvuvcs.length) {
+
+            let lpvuvc = lpvuvcs[0];
+            let title = Utils.attr(lpvuvc, 'data-flag-title');
+            let type = 'pv';
+            let o = {
+                el: lpvuvc,
+                domain: domain,
+                type: type,
+                title: title
+            }
+
+            let query = new AV.Query(PVUVCounter);
+            query.equalTo('domain', domain).equalTo('type', 'pv');
+            query.find().then(ret => {
+                if (ret.length > 0) {
+                    let v = ret[0];
+                    v.increment("time");
+                    v.save().then(rt => {
+                        Utils.find(lpvuvc, '.leancloud-pv-count').innerText = rt.get('time')
+                    }).catch(ex => {
+                        console.log(ex)
+                    });
+                } else {
+
+                    createPVUVCounter(PVUVCounter, o, '.leancloud-pv-count')
+                }
+            }).catch(ex => {
+                ex.code == 101 && createPVUVCounter(PVUVCounter, o, '.leancloud-pv-count')
+            })
+
+
+            PVUVCounterFactory.show(PVUVCounter, lpvuvcs, o, type, '.leancloud-pv-count')
+        }
+    },
+    show(PVUVCounter, lpvuvcs, o, type, el) {
+        let COUNT_CONTAINER_REF = el;
+
+        // 重置所有计数
+        Utils.each(lpvuvcs, (idx, eltemp) => {
+            let cel = Utils.find(eltemp, COUNT_CONTAINER_REF);
+            if (cel) cel.innerText = 0
+        })
+        let query = new AV.Query(PVUVCounter);
+
+        query.containedIn('domain', o.domains).equalTo('type', type);
+        query.find().then(ret => {
+            if (ret.length > 0) {
+                Utils.each(ret, (idx, item) => {
+                    let time = item.get('time');
+                    let els = Utils.findAll(document, el);
+                    Utils.each(els, (idx, el) => {
+                        let cel = Utils.find(el, COUNT_CONTAINER_REF);
+                        if (cel) cel.innerText = time
+                    })
+                });
+            }
+        }).catch(ex => {
+            console.error(ex)
+        })
     }
 }
 

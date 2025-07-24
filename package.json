@@ -49,6 +49,7 @@
     "balajs": "^1.0.7",
     "balalaika": "^1.0.1",
     "blueimp-md5": "^2.8.0",
+    "core-js": "^3.44.0",
     "element-closest": "^3.0.2",
     "hanabi": "^0.4.0",
     "insane": "^2.6.2",
